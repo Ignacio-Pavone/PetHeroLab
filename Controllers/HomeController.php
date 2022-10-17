@@ -12,7 +12,6 @@ use Utils\Session;
 
 		public function Logout()
 		{
-			Session::DeleteSession();
 			require_once (VIEWS_PATH . 'logout.php');
 		}
 	}

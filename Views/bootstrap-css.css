@@ -172,8 +172,9 @@ td {
   box-shadow: 0 0 10px #E8E8E8 inset;
   height: 40px;
   margin: 0 0 0 25px;
+  text-align: center;
   padding: 10px;
-  width: 110px;
+  width: 200px;
 }
 
 #dataUser {

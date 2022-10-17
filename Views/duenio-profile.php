@@ -19,7 +19,7 @@ include('nav-bar.php');
                             <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getFullName();  ?>">
                         </div>
 
-                        <div class="col-lg-2">
+                        <div class="col-lg-3">
                             <label for="">Edad</label>
                             <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getAge();  ?>">
                         </div>

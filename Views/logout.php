@@ -1,4 +1,4 @@
 <?php 
     session_destroy();
-    header('location:Index');
+    require_once(VIEWS_PATH . 'login.php');
 ?>

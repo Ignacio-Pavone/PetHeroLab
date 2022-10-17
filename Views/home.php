@@ -19,7 +19,7 @@ $value = null;
                               <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getFullName();  ?>">
                          </div>
 
-                         <div class="col-lg-2">
+                         <div class="col-lg-3">
                               <label for="">Edad</label>
                               <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getAge();  ?>">
                          </div>
@@ -48,15 +48,18 @@ $value = null;
                               <label for="">Disponibilidad</label>
                               <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="
                               <?php 
+                              var_dump($user);
+                              $string;
                               if (count($user->getDisponibilidad()) == 0) echo 'No hay dias elegidos.';
                               else {
-                              foreach($user->getDisponibilidad() as $dia){ 
-
-                                        $value.= ' - ' . $dia;
-                                   } 
-                                   echo $value;
+                              foreach($user->getDisponibilidad() as $key => $value){{ 
+                                   if($value != NULL){
+                                        $string.= ' - ' . $value;
+                                   }                                
+                           } 
+                                   echo $string;
                               
-                              } 
+                              } }
                               ?>">
                          </div>
                     </div> 
@@ -103,7 +106,7 @@ $value = null;
                               <label style="margin-left:353px" id="label" for="">Domingo</label>
                               <input style="margin-right:353px" type="checkbox" name="dia_domingo" class="form-control form-control-ml" value="domingo">
                          </div>
-                         <div class="col-lg-12" style="items-align:center">
+                         <div class="col-lg-12">
                               <button type="submit" class="btn btn-dark ml-auto d-block">Modificar</button>
                          </div>
                     </div> 
@@ -146,7 +149,7 @@ $value = null;
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-               <a class="btn btn-dark ml-auto " href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">CUIDAR</a>
+               <a class="btn btn-dark ml-auto " href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">Cuidar</a>
                </td>
               </tr>
             <?php

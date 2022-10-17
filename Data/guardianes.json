@@ -1,89 +1,22 @@
 [
     {
-        "email": "1@1.c",
-        "fullname": "1",
-        "dni": "1",
-        "age": "111",
-        "password": "1",
+        "email": "ignaciopavon@gmail.com",
+        "fullname": "Ignacio Pavone",
+        "dni": "34883612",
+        "age": "32",
+        "password": "1111",
         "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "1@1.c",
-        "fullname": "1",
-        "dni": "1",
-        "age": "111",
-        "password": "1",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "1@1.c",
-        "fullname": "1",
-        "dni": "1",
-        "age": "111",
-        "password": "1",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "1@1.c",
-        "fullname": "1",
-        "dni": "1",
-        "age": "111",
-        "password": "1",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "1@1.c",
-        "fullname": "1",
-        "dni": "1",
-        "age": "111",
-        "password": "1",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "a@a.a",
-        "fullname": "1a",
-        "dni": "a",
-        "age": "123",
-        "password": "a",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "a@a.a",
-        "fullname": "1a",
-        "dni": "a",
-        "age": "123",
-        "password": "a",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "a@a.a",
-        "fullname": "1a",
-        "dni": "a",
-        "age": "123",
-        "password": "a",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
+        "disponibilidad": [
+            [
+                "lunes",
+                "martes",
+                "miercoles",
+                null,
+                null,
+                null,
+                null
+            ]
+        ],
         "reputacion": 0,
         "remuneracionEsperada": "1"
     },

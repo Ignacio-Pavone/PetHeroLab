@@ -40,6 +40,9 @@ use Models\Guardian;
           foreach($array as $item) 
           {
             $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada']);
+            foreach ($item['disponibilidad'] as $key => $value) {
+              $user->setDisponibilidad($value);
+            }
             
             array_push($this->list, $user);
           }
