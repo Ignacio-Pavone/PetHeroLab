@@ -21,6 +21,22 @@
                 "foto": "notas.png",
                 "planVacunacion": "notas.png",
                 "video": "notas.png"
+            },
+            {
+                "nombre": "asd",
+                "raza": "asd",
+                "tamanio": "grande",
+                "foto": "notas.png",
+                "planVacunacion": "notas.png",
+                "video": "notas.png"
+            },
+            {
+                "nombre": "asd",
+                "raza": "asd",
+                "tamanio": "grande",
+                "foto": "notas.png",
+                "planVacunacion": "notas.png",
+                "video": "notas.png"
             }
         ]
     }

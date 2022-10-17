@@ -2,6 +2,7 @@
 namespace DAO;
 
 use Models\Duenio;
+use Models\Mascota;
 
 class duenioDAO{
     private $list = array();
@@ -39,20 +40,11 @@ class duenioDAO{
             
             foreach($array as $item) 
             {
-                var_dump($array);
                 $user = new Duenio($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password']);
                 foreach ($item['mascotas'] as $mascota) {
-                    $mascotas['nombre'] = $mascota->getNombre();
-                    $mascotas['raza'] = $mascota->getRaza();
-                    $mascotas['tamanio'] = $mascota->getTamanio();
-                    $mascotas['foto'] = $mascota->getFoto();
-                    $mascotas['planVacunacion'] = $mascota->getPlanVacunacion();
-                    $mascotas['video'] = $mascota->getVideo();
+                    $mascota = new Mascota($mascota['nombre'], $mascota['raza'], $mascota['tamanio'], $mascota['foto'], $mascota['planVacunacion'], $mascota['video']);
                     $user->addMascota($mascota);
-                }
-                
-
-                
+                }            
                 array_push($this->list, $user);
             }
         }
@@ -82,11 +74,8 @@ class duenioDAO{
         }
         
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-        var_dump($jsonContent);
         file_put_contents($this->filename, $jsonContent);
     }
-
-    
 
     public function addDuenio($user)
     {
