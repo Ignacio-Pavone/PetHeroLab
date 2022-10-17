@@ -10,7 +10,7 @@ $user = $_SESSION["loggedUser"];
             <a class="nav-link" href="#dataUser">Mis Datos</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#myPets">Ver Mascotas</a>
+            <a class="nav-link" href="#css-mine">Ver Mascotas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#addPets">Agregar Mascotas</a>
