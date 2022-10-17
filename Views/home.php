@@ -47,19 +47,19 @@ $value = null;
                          <div class="col-lg-5" >
                               <label for="">Disponibilidad</label>
                               <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="
-                              <?php 
-                              var_dump($user);
-                              $string;
+                              <?php   
                               if (count($user->getDisponibilidad()) == 0) echo 'No hay dias elegidos.';
                               else {
-                              foreach($user->getDisponibilidad() as $key => $value){{ 
-                                   if($value != NULL){
-                                        $string.= ' - ' . $value;
-                                   }                                
-                           } 
-                                   echo $string;
-                              
-                              } }
+                                   foreach ($user->getDisponibilidad() as $value) {
+                                        for ($i=0; $i < count($value); $i++) { 
+                                             if ($value[$i] != null) {
+                                             echo $value[$i];
+                                             if ($i != count($value)-1) echo ',';
+                                        }
+                                        }
+                                        
+                                   }
+                              }                             
                               ?>">
                          </div>
                     </div> 

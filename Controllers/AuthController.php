@@ -114,26 +114,20 @@
                 $user->reiniciarDisponibilidad();
                 if ($dia_lunes != null)
                     $user->setDisponibilidad($dia_lunes);
-                    array_push($disp, $dia_lunes);
                 if ($dia_martes != null)
                     $user->setDisponibilidad($dia_martes);
-                    array_push($disp, $dia_martes);
                 if ($dia_miercoles != null)
                     $user->setDisponibilidad($dia_miercoles);
-                    array_push($disp, $dia_miercoles);
                 if ($dia_jueves != null)
                     $user->setDisponibilidad($dia_jueves);
-                    array_push($disp, $dia_jueves);
                 if ($dia_viernes != null)
                     $user->setDisponibilidad($dia_viernes);
-                    array_push($disp, $dia_viernes);
                 if ($dia_sabado != null)
                     $user->setDisponibilidad($dia_sabado);
-                    array_push($disp, $dia_sabado);
                 if ($dia_domingo != null)
                     $user->setDisponibilidad($dia_domingo);
-                    array_push($disp, $dia_domingo);
-                $this->guardianDAO->modifyUser($user->getEmail(), $user->getFullName(), $user->getDni(), $user->getAge(), $user->getPassword(), $user->getTipoMascota(), $user->getRemuneracionEsperada(), $disp, $user->getReputacion());
+            
+                $this->guardianDAO->modifyUser($user->getEmail(), $user->getFullName(), $user->getDni(), $user->getAge(), $user->getPassword(), $user->getTipoMascota(), $user->getRemuneracionEsperada(), $user->getReputacion());
                 $this->showHome();
             }
         }

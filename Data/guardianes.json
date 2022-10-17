@@ -6,17 +6,6 @@
         "age": "32",
         "password": "1111",
         "tipoMascota": "mediano",
-        "disponibilidad": [
-            [
-                "lunes",
-                "martes",
-                "miercoles",
-                null,
-                null,
-                null,
-                null
-            ]
-        ],
         "reputacion": 0,
         "remuneracionEsperada": "1"
     },
@@ -27,7 +16,6 @@
         "age": "19",
         "password": "123",
         "tipoMascota": "mediano",
-        "disponibilidad": [],
         "reputacion": 0,
         "remuneracionEsperada": "11"
     },
@@ -38,7 +26,6 @@
         "age": "11254",
         "password": "231",
         "tipoMascota": "mediano",
-        "disponibilidad": [],
         "reputacion": 0,
         "remuneracionEsperada": "141"
     }

@@ -40,7 +40,7 @@ use Models\Guardian;
           foreach($array as $item) 
           {
             $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada']);
-            foreach ($item['disponibilidad'] as $key => $value) {
+            foreach ($item['disponibilidad'] as  $value) {
               $user->setDisponibilidad($value);
             }
             
@@ -67,13 +67,10 @@ use Models\Guardian;
             $valuesArray['age'] = $user->getAge();
             $valuesArray['password'] = $user->getPassword();
             $valuesArray['tipoMascota'] = $user->getTipoMascota();
-            $dias = array();
-            foreach($user->getDisponibilidad() as $dia){
-              array_push($dias,$dia);
-            }
-            $valuesArray['disponibilidad'] = $dias;
+            var_dump($user->getDisponibilidad());
             $valuesArray['reputacion'] = $user->getReputacion();
             $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
+           
             array_push($arrayToEncode, $valuesArray);
             }
 
@@ -81,7 +78,7 @@ use Models\Guardian;
             file_put_contents($this->filename, $jsonContent);
         }
         
-        public function modifyUser($email= null, $fullname= null, $dni= null, $age= null, $password= null, $tipoMascota= null, $remuneracionEsperada= null, $disponibilidad= null, $reputacion= null){
+        public function modifyUser($email= null, $fullname= null, $dni= null, $age= null, $password= null, $tipoMascota= null, $remuneracionEsperada= null, $reputacion= null){
             $this->LoadGuardianJson();
             foreach($this->list as $user){
               if ($user->getEmail() == $email){
@@ -97,14 +94,11 @@ use Models\Guardian;
                   $user->setTipoMascota($tipoMascota);
                 if ($remuneracionEsperada != null)
                   $user->setRemuneracionEsperada($remuneracionEsperada);
-                if ($disponibilidad != null)
-                  $user->setDisponibilidad($disponibilidad);
                 if ($reputacion != null)
                   $user->setReputacion($reputacion);
               }
             }
             $this->saveGuardianJson();
-
         }
       }
 
