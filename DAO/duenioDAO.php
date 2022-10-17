@@ -130,4 +130,27 @@ class duenioDAO{
         }
         Session::CreateSession($user);
     }
+
+    public function devolverTodaslasMascotas (){
+        $this->LoadDuenioJson();
+        $mascotas = array();
+        foreach($this->list as $user){
+            foreach ($user->getMascotas() as $mascota) {
+                array_push($mascotas, $mascota);
+            }
+        }
+        return $mascotas;
+    }
+
+    public function filtrarMascotasporTamanio($tamanio){
+        $this->LoadDuenioJson();
+        $mascotas = array();
+        $todaslasmascotas = $this->devolverTodaslasMascotas();
+        foreach ($todaslasmascotas as $mascota) {
+            if (strtolower($mascota->getTamanio()) == strtolower($tamanio)){
+                array_push($mascotas, $mascota);
+            }
+        }
+        return $mascotas;
+    }
 }

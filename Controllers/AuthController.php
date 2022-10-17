@@ -5,7 +5,7 @@
 
         use Models\Guardian as Guardian;
         use Models\Duenio as Duenio;
-use Utils\Session;
+        use Utils\Session;
 
         class AuthController
         {
@@ -17,27 +17,21 @@ use Utils\Session;
                 $this->duenioDAO = new duenioDAO();
             }
 
-            public function login($email, $password)
-            {
+            public function login($email, $password){
                 $guardianDAO = new guardianDAO();
+                $listaMascotas = array();
                 $user = $guardianDAO->getGuardianByEmail($email);
-                if($user != null && $user->getPassword() == $password)
-                {
+                if($user != null && $user->getPassword() == $password){
                     Session::CreateSession($user);
                     $_SESSION["userType"] = "guardian";
                     $this->showHome();
-                }
-                else
-                {
+                }else{
                     $user = $this->duenioDAO->getDuenioByEmail($email);
-                    if($user != null && $user->getPassword() == $password)
-                    {
+                    if($user != null && $user->getPassword() == $password){
                         Session::CreateSession($user);
                         $_SESSION["userType"] = "duenio";
                         $this->showDuenioProfile();
-                    }
-                    else
-                    {
+                    } else{
                         $this->showLogin("Usuario o contraseña incorrectos");
                     }
                 }

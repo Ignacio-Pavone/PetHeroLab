@@ -1,20 +1,33 @@
 <?php
-$user = $_SESSION["loggedUser"];
+use Utils\Session;
+$user = Session::GetLoggedUser();
 ?>
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <span class="navbar-text">
         <strong>TP FINAL Welcome - <?php echo $user->getFullName() ?></strong>
     </span>
     <ul class="navbar-nav ml-auto">
-    <li class="nav-item">
+        <?php if($_SESSION["userType"] == "duenio") { ?>
+        <li class="nav-item">
             <a class="nav-link" href="#dataUser">Mis Datos</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#css-mine">Ver Mascotas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#addPets">Agregar Mascotas</a>
+            <a class="nav-link" href="#addPetsDuenio">Agregar Mascotas</a>
         </li>
+        <?php }else{?>
+            <li class="nav-item">
+            <a class="nav-link" href="#dataUser">Mis Datos</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#css-mine">Ver Todas las Mascotas</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#modificar">Modificar Disponibilidad</a>
+        </li>
+        <?php } ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Cerrar Sesión</a>
         </li>

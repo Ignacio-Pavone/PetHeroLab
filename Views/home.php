@@ -11,7 +11,8 @@ $value = null;
 <main class="py-5">
      <section id="login-block" class="mb-5">
           <div class="container">   
-          <center><h3 class="mb">Datos del Usuario</h3></center>
+          <br>
+          <center><h3 class="mb" id = "dataUser">Datos del Usuario</h3></center>
                <div class="bg-light-alpha p-4">
                     <div class="row">
                          <div class="col-lg-3">
@@ -35,12 +36,12 @@ $value = null;
                          </div>
                          
                          <div class="col-lg-2">
-                              <label for="">TipoMascota</label>
+                              <label for="">Tipo de Mascotas a Cuidar</label>
                               <input type="text" name="tipoMascota" class="form-control form-control-ml" disabled value="<?php echo $user->getTipoMascota();  ?>">
                          </div>
 
                          <div class="col-lg-2">
-                              <label for="">RemuneracionEsperada</label>
+                              <label for="">Remuneracion Esperada</label>
                               <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="<?php echo $user->getRemuneracionEsperada();  ?>">
                          </div>
 
@@ -62,10 +63,10 @@ $value = null;
                     </div> 
           </div>
      </section>
-     <!-- Create a section with a POST form for the user to set the days of week in checkboxes with a send button. Make it modify the user -->
      <section id="login-block" class="mb-5">
           <div class="container">   
-          <center><h3 class="mb">Modificar Disponibilidad</h3></center>
+          <br>
+          <center><h3 class="mb" id = "modificar">Modificar Disponibilidad</h3></center>
                <div class="bg-light-alpha p-4">
                <form action="<?php echo FRONT_ROOT. "Auth/setDiaDisponible"?>" method="POST">
                     <div class="row">
@@ -104,10 +105,6 @@ $value = null;
                               <input type="checkbox" name="dia_domingo" class="form-control form-control-ml" value="domingo">
                          </div>
                     </div> 
-
-                    
-
-                    
                     <div class="row">
                          <div class="col-lg-12">
                               <button type="submit" class="btn btn-dark ml-auto d-block">Modificar</button>
@@ -116,12 +113,52 @@ $value = null;
                     </div>
                </div>
           </div>
-     
-     
-     
-     
-     
-     
 </section>
-<button type="submit" class="btn btn-login float-right">Submit</button>
+
+<div class="container" id = "css-mine">
+              <br>  
+            <center>
+                    <h3 class="mb">Todas las mascotas con tamaño <?php echo $user->getTipoMascota()?></h3>
+            </center>
+            <br>
+            <table style="text-align:center;">
+          <thead>
+            <tr>
+              <th style="width: 15%;">Nombre</th>
+              <th style="width: 15%;">Raza</th>
+              <th style="width: 15%;">Tamaño</th>
+              <th style="width: 20%;">Foto</th>
+              <th style="width: 10%;">Plan Vacunacion</th>
+              <th style="width: 10%;">Video</th>
+              <th style="width: 15%;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <?php
+            foreach ($this->duenioDAO->filtrarMascotasporTamanio($user->getTipoMascota()) as $mascota) {
+            ?>
+              <tr>
+                <td><?php echo $mascota->getNombre(); ?></td>
+                <td><?php echo $mascota->getRaza(); ?></td>
+                <td><?php echo $mascota->getTamanio(); ?></td>
+                <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="90px" height="70px"></td>
+                <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
+                <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
+
+                <td>
+               <a style="background-color:blue; color:white; padding:2px;" href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">CUIDAR</a>
+               </td>
+              </tr>
+            <?php
+            } 
+            ?>
+          </tbody>
+        </table>
+
+        
+        <br>
+
+        
 </main>
+
+
