@@ -1,8 +1,10 @@
 
 <?php
-$user = $_SESSION['loggedUser'];
-$type = $_SESSION['userType'];
 
+use Utils\Session;
+$user = Session::GetLoggedUser();
+$type = $_SESSION['userType'];
+include('nav-bar.php');
 $value = null;
 ?>
 <section class="login-block"> 

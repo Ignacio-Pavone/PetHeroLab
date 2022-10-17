@@ -5,6 +5,7 @@
 
         use Models\Guardian as Guardian;
         use Models\Duenio as Duenio;
+use Utils\Session;
 
         class AuthController
         {
@@ -22,7 +23,7 @@
                 $user = $guardianDAO->getGuardianByEmail($email);
                 if($user != null && $user->getPassword() == $password)
                 {
-                    $_SESSION['loggedUser'] = $user;
+                    Session::CreateSession($user);
                     $_SESSION["userType"] = "guardian";
                     $this->showHome();
                 }
@@ -31,7 +32,7 @@
                     $user = $this->duenioDAO->getDuenioByEmail($email);
                     if($user != null && $user->getPassword() == $password)
                     {
-                        $_SESSION['loggedUser'] = $user;
+                        Session::CreateSession($user);
                         $_SESSION["userType"] = "duenio";
                         $this->showDuenioProfile();
                     }
@@ -79,6 +80,11 @@
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 
+            public function Index ($message = "")
+            {
+                require_once(VIEWS_PATH . 'login.php');
+            }
+
 
             public function showLogin($message = "")
             {
@@ -108,7 +114,8 @@
             }
 
             public function setDiaDisponible ($dia_lunes = null, $dia_martes = null, $dia_miercoles = null, $dia_jueves = null, $dia_viernes = null, $dia_sabado = null, $dia_domingo = null){
-                $user = $_SESSION['loggedUser'];
+                $user = Session::GetLoggedUser();
+
                 $disp = array();
                 $user->reiniciarDisponibilidad();
                 if ($dia_lunes != null)

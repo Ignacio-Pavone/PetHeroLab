@@ -1,42 +1,26 @@
 [
     {
-        "email": "juan@marin.com",
-        "fullname": "carlos",
-        "dni": "2114213",
-        "age": "125",
-        "password": "12341",
-        "mascotas": []
-    },
-    {
-        "email": "1",
-        "fullname": "Robertito",
-        "dni": "43121213",
-        "age": "21",
+        "email": "ignaciopavone@gmail.com",
+        "fullname": "Ignacio Pavone",
+        "dni": "34883612",
+        "age": "32",
         "password": "1111",
         "mascotas": [
             {
-                "nombre": "asd",
-                "raza": "asd",
-                "tamanio": "grande",
-                "foto": "notas.png",
-                "planVacunacion": "notas.png",
-                "video": "notas.png"
+                "nombre": "Keyra",
+                "raza": "Pugs",
+                "tamanio": "Chico",
+                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
+                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
+                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
             },
             {
-                "nombre": "asd",
-                "raza": "asd",
-                "tamanio": "grande",
-                "foto": "notas.png",
-                "planVacunacion": "notas.png",
-                "video": "notas.png"
-            },
-            {
-                "nombre": "asd",
-                "raza": "asd",
-                "tamanio": "grande",
-                "foto": "notas.png",
-                "planVacunacion": "notas.png",
-                "video": "notas.png"
+                "nombre": "Sonia",
+                "raza": "Pugs",
+                "tamanio": "Chico",
+                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
+                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
+                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
             }
         ]
     }

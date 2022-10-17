@@ -1,3 +1,6 @@
+<?php
+ include('nav-bar.php'); 
+?>
 <section class="login-block">
 <div class="container">
     <div class="row">

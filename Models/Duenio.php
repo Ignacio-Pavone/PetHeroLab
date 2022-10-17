@@ -2,8 +2,6 @@
 namespace Models;
 class Duenio extends Usuario {
     private $mascotas;
-
-
     
     public function __construct($email,$fullname,$dni,$age,$password){
         parent::__construct($email,$fullname,$dni,$age,$password);

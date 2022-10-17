@@ -3,6 +3,7 @@ namespace DAO;
 
 use Models\Duenio;
 use Models\Mascota;
+use Utils\Session;
 
 class duenioDAO{
     private $list = array();
@@ -69,10 +70,10 @@ class duenioDAO{
                 $mascotas['video'] = $mascota->getVideo();
                 array_push($mascotasArray, $mascotas);
             }
+        
             $valuesArray['mascotas'] = $mascotasArray;
             array_push($arrayToEncode, $valuesArray);
         }
-        
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
         file_put_contents($this->filename, $jsonContent);
     }
@@ -91,6 +92,42 @@ class duenioDAO{
             $this->saveDuenioJson();
         }
     }
-    
 
+    public function searchPetByName ($name){
+        $this->LoadDuenioJson();
+        $pet = null;
+        foreach($this->list as $user){
+            foreach ($user->getMascotas() as $mascota) {
+                if ($mascota->getNombre() == $name)
+                    $pet = $mascota;
+            }
+        }
+        return $pet;
+    }
+
+
+    public function deleteMascota ($user,$nombre){
+        $this->LoadDuenioJson();
+        $userSearch = $this->getDuenioByEmail($user->getEmail());
+        $petSearch = $this->searchPetByName($nombre);
+        if ($userSearch!=null){
+            $this->deletePetbyName($userSearch,$petSearch);
+            $this->saveDuenioJson();
+        }
+    }
+
+    public function deletePetbyName ($user,$mascota){
+        $newarraPets = array();
+        foreach($this->list as $usersfromList){
+            if ($usersfromList->getEmail() == $user->getEmail()){
+                foreach ($usersfromList->getMascotas() as $pet) {
+                    if ($pet->getNombre() != $mascota->getNombre()){
+                        array_push($newarraPets, $pet);
+                    }
+                }
+                $usersfromList->setMascotas($newarraPets);
+            }
+        }
+        Session::CreateSession($user);
+    }
 }
