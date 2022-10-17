@@ -11,9 +11,8 @@ $value = null;
 <main class="py-5">
      <section id="login-block" class="mb-5">
           <div class="container">   
-          <br>
           <center><h3 class="mb" id = "dataUser">Datos del Usuario</h3></center>
-               <div class="bg-light-alpha p-4">
+               <div class="bg-light-alpha p-4" id = "dataUser">
                     <div class="row">
                          <div class="col-lg-3">
                               <label for="">Nombre</label>
@@ -34,18 +33,18 @@ $value = null;
                               <label for="">Email</label>
                               <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getEmail();  ?>">
                          </div>
-                         
-                         <div class="col-lg-2">
+                         <div class="col-lg-12" style="height:15px"></div>
+                         <div class="col-lg-3">
                               <label for="">Tipo de Mascotas a Cuidar</label>
                               <input type="text" name="tipoMascota" class="form-control form-control-ml" disabled value="<?php echo $user->getTipoMascota();  ?>">
                          </div>
 
-                         <div class="col-lg-2">
+                         <div class="col-lg-3">
                               <label for="">Remuneracion Esperada</label>
                               <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="<?php echo $user->getRemuneracionEsperada();  ?>">
                          </div>
 
-                         <div class="col-lg-5">
+                         <div class="col-lg-5" >
                               <label for="">Disponibilidad</label>
                               <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="
                               <?php 
@@ -66,49 +65,50 @@ $value = null;
      <section id="login-block" class="mb-5">
           <div class="container">   
           <br>
-          <center><h3 class="mb" id = "modificar">Modificar Disponibilidad</h3></center>
+          <center><h3 class="mb " id = "modificar">Modificar Disponibilidad</h3></center>
                <div class="bg-light-alpha p-4">
                <form action="<?php echo FRONT_ROOT. "Auth/setDiaDisponible"?>" method="POST">
-                    <div class="row">
-                         <div class="col-lg-3">
-                              <label for="">Lunes</label>
+                    <div class="row align-items-start mx-auto"  >
+                         <div class="input-group col-lg-4" >
+                              <label id="label" for="">Lunes</label>
                               <input type="checkbox" name="dia_lunes" class="form-control form-control-ml" value="lunes">
                          </div>
 
-                         <div class="col-lg-3">
-                              <label for="">Martes</label>
+                         <div class="input-group col-lg-4">
+                              <label id="label" for="">Martes</label>
                               <input type="checkbox" name="dia_martes" class="form-control form-control-ml" value="martes">
                          </div>
 
-                         <div class="col-lg-3">
-                              <label for="">Miercoles</label>
+                         <div class="input-group col-lg-4">
+                              <label id="label" for="">Miercoles</label>
                               <input type="checkbox" name="dia_miercoles" class="form-control form-control-ml" value="miercoles">
                          </div>
-
-                         <div class="col-lg-3">
-                              <label for="">Jueves</label>
+                         <div class="col-lg-12" style="height:15px"></div>
+                         <div class="input-group col-lg-4">
+                              <label id="label" for="">Jueves</label>
                               <input type="checkbox" name="dia_jueves" class="form-control form-control-ml" value="jueves">
                          </div>
 
-                         <div class="col-lg-3">
-                              <label for="">Viernes</label>
+                         <div class="input-group col-lg-4">
+                              <label id="label" for="">Viernes</label>
                               <input type="checkbox" name="dia_viernes" class="form-control form-control-ml" value="viernes">
                          </div>
 
-                         <div class="col-lg-3">
-                              <label for="">Sabado</label>
+                         <div class="input-group col-lg-4">
+                              <label id="label" for="">Sabado</label>
                               <input type="checkbox" name="dia_sabado" class="form-control form-control-ml" value="sabado">
                          </div>
-
-                         <div class="col-lg-3">
-                              <label for="">Domingo</label>
-                              <input type="checkbox" name="dia_domingo" class="form-control form-control-ml" value="domingo">
+                         <div class="col-lg-12" style="height:15px"></div>
+                         <div class="input-group col-lg-12">
+                              <label style="margin-left:353px" id="label" for="">Domingo</label>
+                              <input style="margin-right:353px" type="checkbox" name="dia_domingo" class="form-control form-control-ml" value="domingo">
+                         </div>
+                         <div class="col-lg-12" style="items-align:center">
+                              <button type="submit" class="btn btn-dark ml-auto d-block">Modificar</button>
                          </div>
                     </div> 
                     <div class="row">
-                         <div class="col-lg-12">
-                              <button type="submit" class="btn btn-dark ml-auto d-block">Modificar</button>
-                         </div>
+                         
                     </form>
                     </div>
                </div>
@@ -146,7 +146,7 @@ $value = null;
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-               <a style="background-color:blue; color:white; padding:2px;" href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">CUIDAR</a>
+               <a class="btn btn-dark ml-auto " href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">CUIDAR</a>
                </td>
               </tr>
             <?php

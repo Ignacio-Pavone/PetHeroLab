@@ -70,7 +70,7 @@ include('nav-bar.php');
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-                      <a style="background-color:blue; color:white; padding:2px;" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
+                      <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
                     
                     </td>
               </tr>
