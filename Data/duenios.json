@@ -1,0 +1,27 @@
+[
+    {
+        "email": "juan@marin.com",
+        "fullname": "carlos",
+        "dni": "2114213",
+        "age": "125",
+        "password": "12341",
+        "mascotas": []
+    },
+    {
+        "email": "1",
+        "fullname": "Robertito",
+        "dni": "43121213",
+        "age": "21",
+        "password": "1111",
+        "mascotas": [
+            {
+                "nombre": "asd",
+                "raza": "asd",
+                "tamanio": "grande",
+                "foto": "notas.png",
+                "planVacunacion": "notas.png",
+                "video": "notas.png"
+            }
+        ]
+    }
+]
