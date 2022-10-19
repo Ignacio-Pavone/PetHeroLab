@@ -71,6 +71,7 @@
 
             public function showDuenioProfile()
             {
+                $guardianes = $this->guardianDAO->GetAllGuardians();
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 

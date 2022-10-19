@@ -82,6 +82,48 @@ include('nav-bar.php');
         <br>
             </div>
             <br>
+            <div>
+            <div class="container" id = "css-mine">
+              <br>  
+            <center>
+                    <h3 class="mb">Guardianes</h3>
+            </center>
+            <br>
+            <table style="text-align:center;">
+          <thead>
+            <tr>
+              <th style="width: 10%;">Nombre</th>
+              <th style="width: 10%;">Edad</th>
+              <th style="width: 20%;">Tipo de Mascota a Cuidar</th>
+              <th style="width: 10%;">Reputacion</th>
+              <th style="width: 10%;">Disponibilidad</th>
+              <th style="width: 10%;">Remuneracion Esperada</th>
+              <th style="width: 20%;">Accion</th>
+            </tr>
+          </thead>
+          <tbody>
+              <?php
+              foreach ($guardianes as $guardian) {
+                ?>
+                    <tr>
+                    <td><?php echo $guardian->getFullName(); ?></td>
+                    <td><?php echo $guardian->getAge(); ?></td>
+                    <td><?php echo $guardian->getTipoMascota(); ?></td>
+                    <td><?php echo $guardian->getReputacion(); ?></td>                  
+                    <td><?php echo 'arreglar fecha'; ?></td>
+                    <td><?php echo $guardian->getRemuneracionEsperada(); ?></td>
+                    <td>
+                    <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>
+                    </td>
+                    </tr>
+                    <?php
+            } 
+            ?>
+          </tbody>
+        </table>
+        <br>
+            </div>
+            <br>
             <section id="login-block" class="mb-5">
             <div class="container" id = "addPetsDuenio">
             <br>  
