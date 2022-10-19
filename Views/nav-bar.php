@@ -17,6 +17,9 @@ $user = Session::GetLoggedUser();
         <li class="nav-item">
             <a class="nav-link" href="#addPetsDuenio">Agregar Mascotas</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#css-mine1">Ver Guardianes</a>
+        </li>
         <?php }else{?>
             <li class="nav-item">
             <a class="nav-link" href="#dataUser">Mis Datos</a>

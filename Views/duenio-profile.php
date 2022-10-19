@@ -83,7 +83,7 @@ include('nav-bar.php');
             </div>
             <br>
             <div>
-            <div class="container" id = "css-mine">
+            <div class="container" id = "css-mine1">
               <br>  
             <center>
                     <h3 class="mb">Guardianes</h3>
