@@ -66,7 +66,7 @@
 
             public function showHome()
             {
-                require_once(VIEWS_PATH . 'home.php');
+                require_once(VIEWS_PATH . 'guardian-profile.php');
             }
 
             public function showDuenioProfile()
