@@ -111,7 +111,7 @@ include('nav-bar.php');
                     <td><?php echo $guardian->getTipoMascota(); ?></td>
                     <td><?php echo $guardian->getReputacion(); ?></td>                  
                     <td><?php echo 'arreglar fecha'; ?></td>
-                    <td><?php echo $guardian->getRemuneracionEsperada(); ?></td>
+                    <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     <td>
                     <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>
                     </td>
