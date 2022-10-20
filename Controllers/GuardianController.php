@@ -11,11 +11,13 @@ class GuardianController{
 
     private $duenioDAO;
     private $guardianDAO;
+    private $authController;
 
     public function __construct()
     {
         $this->duenioDAO = new duenioDAO();
         $this->guardianDAO = new guardianDAO();
+        $this->authController = new AuthController();
     }
 
     public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada)
@@ -24,7 +26,7 @@ class GuardianController{
         if($this->guardianDAO->getGuardianByEmail($email) == null)
         {
             $this->guardianDAO->addGuardian($user);
-            require_once(VIEWS_PATH."login.php");
+            $this->authController->showLogin("Guardian registrado con exito");
         }
     }
 }

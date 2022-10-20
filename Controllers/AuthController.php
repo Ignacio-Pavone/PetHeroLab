@@ -48,23 +48,6 @@
                 require_once(VIEWS_PATH . 'login.php');
             }
 
-            public function showRegisterGuardian($message ="")
-            {
-                require_once(VIEWS_PATH . 'register-guardian.php');
-                if ($message!="")
-                {
-                    echo "<script> alert('$message'); </script>";
-                }
-            }
-
-            public function showRegisterDuenio($message ="")
-            {
-                require_once(VIEWS_PATH . 'register-owner.php');
-                if ($message!="")
-                {
-                    echo "<script> alert('$message'); </script>";
-                }
-            }
 
             public function setDiaDisponible ($dia_lunes = null, $dia_martes = null, $dia_miercoles = null, $dia_jueves = null, $dia_viernes = null, $dia_sabado = null, $dia_domingo = null){
                 $user = Session::GetLoggedUser();

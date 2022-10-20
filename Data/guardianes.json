@@ -38,5 +38,15 @@
         "tipoMascota": "mediano",
         "reputacion": 0,
         "remuneracionEsperada": "25"
+    },
+    {
+        "email": "asd@asd",
+        "fullname": "22",
+        "dni": "22",
+        "age": "22",
+        "password": "asd",
+        "tipoMascota": "mediano",
+        "reputacion": 0,
+        "remuneracionEsperada": "12"
     }
 ]
