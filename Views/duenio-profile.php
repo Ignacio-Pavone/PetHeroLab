@@ -168,7 +168,7 @@ include('nav-bar.php');
                     </form>
                     <div class="row" id = "buttonraro" style="border: 1px solid">
                              <div class="col-lg-1" style="text-align:center">
-                              <button type="submit" style = "text-align:center" class="btn btn-dark">Modificar</button>
+                              <button type="submit" style = "text-align:center" class="btn btn-dark">Agregar</button>
                     </div> 
                 </div>
             </div> 

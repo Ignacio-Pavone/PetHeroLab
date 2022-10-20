@@ -1,12 +1,9 @@
-<?php
- include('nav-bar.php'); 
-?>
 <section class="login-block">
 <div class="container">
     <div class="row">
         <div class="col-md-4 login-sec">
             <h2 class="text-center">Pet Hero</h2>
-            <form class="register-guardian-form" action="<?php echo FRONT_ROOT. "Auth/registerDuenio" ?>" method="POST">
+            <form class="register-guardian-form" action="<?php echo FRONT_ROOT. "Duenio/registerDuenio" ?>" method="POST">
                 <div class=" form-group">
                     <label for="email" class="text-uppercase">Mail</label>
                     <input type="email" name="email" class="form-control" placeholder="example@mail.com" required>

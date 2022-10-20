@@ -2,7 +2,6 @@
 
         use DAO\guardianDAO as guardianDAO;
         use DAO\duenioDAO as duenioDAO;
-
         use Models\Guardian as Guardian;
         use Models\Duenio as Duenio;
         use Utils\Session;
@@ -18,51 +17,15 @@
             }
 
             public function login($email, $password){
-                $guardianDAO = new guardianDAO();
-                $listaMascotas = array();
-                $user = $guardianDAO->getGuardianByEmail($email);
-                if($user != null && $user->getPassword() == $password){
-                    Session::CreateSession($user);
-                    $_SESSION["userType"] = "guardian";
+                if ($this->guardianDAO->LoginCheckGuardian($email, $password)){
                     $this->showHome();
+                }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
+                    $this->showDuenioProfile();
                 }else{
-                    $user = $this->duenioDAO->getDuenioByEmail($email);
-                    if($user != null && $user->getPassword() == $password){
-                        Session::CreateSession($user);
-                        $_SESSION["userType"] = "duenio";
-                        $this->showDuenioProfile();
-                    } else{
-                        $this->showLogin("Usuario o contraseña incorrectos");
-                    }
+                    Session::SetError("Usuario o contraseña incorrectos");
+                    $this->showLogin();
                 }
             }   
-
-            public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada)
-            {
-                $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada);
-                if($this->guardianDAO->getGuardianByEmail($email) == null)
-                {
-                    $this->guardianDAO->addGuardian($user);
-                    $this->showLogin("Guardian registered successfully");
-                }
-                else
-                {
-                    $this->showRegisterGuardian("Email already in use");
-                }
-            }
-
-            public function registerDuenio($fullname, $age, $dni, $email, $password){
-                $user = new Duenio($email, $fullname, $dni, $age, $password);
-                if($this->duenioDAO->getDuenioByEmail($email) == null)
-                {
-                    $this->duenioDAO->addDuenio($user);
-                    $this->showLogin("Duenio registered successfully");
-                }
-                else
-                {
-                    $this->showRegisterDuenio("Email already in use");
-                }
-            }
 
             public function showHome()
             {
@@ -84,10 +47,6 @@
             public function showLogin($message = "")
             {
                 require_once(VIEWS_PATH . 'login.php');
-                if ($message!="")
-                {
-                    echo "<script> alert('$message'); </script>";
-                }
             }
 
             public function showRegisterGuardian($message ="")

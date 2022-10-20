@@ -13,6 +13,14 @@
             }
         }
 
+        public static function SetTypeUser($type) {
+            $_SESSION["userType"] = $type;
+        }
+
+        public static function SetError ($error) {
+            $_SESSION["error"] = $error;
+        }
+
         public static function IsLogged() {
             return isset($_SESSION["loggedUser"]);
         }

@@ -1,5 +1,7 @@
 <?php namespace DAO;
 
+use Utils\Session;
+
 use Models\Guardian;
 
     class guardianDAO
@@ -100,10 +102,16 @@ use Models\Guardian;
             }
             $this->saveGuardianJson();
         }
+
+        public function LoginCheckGuardian ($email,$password){
+          $user = $this->getGuardianByEmail($email);
+          if($user != null && $user->getPassword() == $password){
+              Session::CreateSession($user);
+              Session::SetTypeUser("guardian");
+              return true;
+          }
+          return false;
       }
 
-  
-    
-
-
+      }
 ?>

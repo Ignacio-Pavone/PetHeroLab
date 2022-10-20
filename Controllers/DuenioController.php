@@ -28,5 +28,16 @@ class DuenioController{
         $this->duenioDAO->deleteMascota($user,$petName);
         require_once(VIEWS_PATH."duenio-profile.php");
     }
+
+    public function registerDuenio($fullname, $age, $dni, $email, $password){
+        $user = new Duenio($email, $fullname, $dni, $age, $password);
+        if($this->duenioDAO->getDuenioByEmail($email) == null)
+        {
+            $this->duenioDAO->addDuenio($user);
+            require_once(VIEWS_PATH."login.php");
+        }
+    }
+
+    
     
 }

@@ -32,4 +32,11 @@
     </div>
 </div>
 </form>
+
+<?php if (isset($_SESSION['error'])) { ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?php echo $_SESSION['error'];
+                unset($_SESSION['error']); ?>
+            </div>
+        <?php } ?>
 </section>

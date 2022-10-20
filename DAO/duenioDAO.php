@@ -153,4 +153,16 @@ class duenioDAO{
         }
         return $mascotas;
     }
+
+    public function LoginCheckDuenio ($email, $password){
+        $user = $this->getDuenioByEmail($email);
+        if($user != null && $user->getPassword() == $password){
+            Session::CreateSession($user);
+            Session::SetTypeUser("duenio");
+            return true;
+        } 
+        return false;
+    }
+
+    
 }

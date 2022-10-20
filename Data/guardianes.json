@@ -28,5 +28,15 @@
         "tipoMascota": "mediano",
         "reputacion": 0,
         "remuneracionEsperada": "141"
+    },
+    {
+        "email": "pavnoe@gmail.com",
+        "fullname": "asd",
+        "dni": "34883612",
+        "age": "22",
+        "password": "1111",
+        "tipoMascota": "mediano",
+        "reputacion": 0,
+        "remuneracionEsperada": "25"
     }
 ]
