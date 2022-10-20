@@ -9,7 +9,7 @@
 
         public static function VerifySession() {
             if(!isset($_SESSION["loggedUser"])) {
-                header("location: ".FRONT_ROOT."Home/Index");
+                include_once(VIEWS_PATH."login.php");
             }
         }
 
@@ -41,8 +41,9 @@
         }
 
         public static function DeleteSession() {
-            session_start();
+            unset($_SESSION['loggedUser']);
             session_destroy();
+            include_once(VIEWS_PATH."login.php");
         }
     }
 ?>

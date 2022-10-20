@@ -1,4 +1,4 @@
-<?php 
-    session_destroy();
-    require_once(VIEWS_PATH . 'login.php');
+<?php
+use Utils\Session;
+    Session::DeleteSession();
 ?>
