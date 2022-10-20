@@ -1,3 +1,6 @@
+<?php
+include_once 'back-bar.php';
+?>
 <section class="login-block">
 <div class="container">
     <div class="row">

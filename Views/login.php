@@ -1,6 +1,6 @@
 <?php
-
 use Utils\Session;
+include_once 'nav-bar.php';
 ?>
 <main class="login-block-real">
     <div class="content">
@@ -21,12 +21,9 @@ use Utils\Session;
     <input type="password" name = "password" class="form-control" placeholder="*******" required>
   </div>
   <div>
+    <br>
     <button type="submit" class="btn btn-login float-right">Submit</button>
-    <a href="<?php echo FRONT_ROOT. "Home/showguardianRegister" ?>">Register as Guardian</a> <br>
-    <a href="<?php echo FRONT_ROOT. "Home/showduenioRegister" ?>">Register as Duenio</a>
-
-    </div>
-  
+  </div>
 		</div>
 		<div class="col-md-8 banner-sec">
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

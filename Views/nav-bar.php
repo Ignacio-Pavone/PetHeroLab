@@ -4,10 +4,14 @@ $user = Session::GetLoggedUser();
 ?>
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <span class="navbar-text">
-        <strong>TP FINAL Welcome - <?php echo $user->getFullName() ?></strong>
+        <strong>TP FINAL Welcome - <?php 
+        if (Session::IsLogged())
+        echo $user->getFullName() ?></strong>
     </span>
     <ul class="navbar-nav ml-auto">
-        <?php if($_SESSION["userType"] == "duenio") { ?>
+        <?php
+        if (Session::IsLogged()) {
+        if(Session::getType() == "duenio") { ?>
         <li class="nav-item">
             <a class="nav-link" href="#dataUser">Mis Datos</a>
         </li>
@@ -21,7 +25,7 @@ $user = Session::GetLoggedUser();
             <a class="nav-link" href="#css-mine1">Ver Guardianes</a>
         </li>
         <?php }else{?>
-            <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="#dataUser">Mis Datos</a>
         </li>
         <li class="nav-item">
@@ -34,5 +38,13 @@ $user = Session::GetLoggedUser();
         <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Cerrar Sesión</a>
         </li>
+        <?php } else {?>
+            <li class="nav-item">
+            <a class="nav-link" href="<?php echo FRONT_ROOT. "Home/showduenioRegister" ?>">Registrarse como Dueño</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo FRONT_ROOT. "Home/showguardianRegister" ?>">Registrarse como Guardian</a>
+        </li>
+        <?php } ?>
     </ul>
 </nav>
