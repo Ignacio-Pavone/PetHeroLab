@@ -8,20 +8,46 @@ class Guardian extends Usuario {
     private $tipoMascota; //tamaño de mascota chica mediana grande
     private $remuneracionEsperada; //no sabemos si es por hora o no
     private $reputacion;
+    private $initDate;
+    private $finishDate;
     private $disponibilidad = array();
 
-    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad)
+    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad,$initDate,$finishDate)
     {
         parent::__construct($email, $fullname, $dni, $age, $password);
         $this->tipoMascota = $tipoMascota;
         $this->remuneracionEsperada = $remuneracionEsperada;
         $this->reputacion = 0;
         $this->disponibilidad = $disponibilidad;
+        $this->initDate = $initDate;
+        $this->finishDate = $finishDate;
+        
+
     }
 
     public function setTipoMascota($tipoMascota)
     {
         $this->tipoMascota = $tipoMascota;
+    }
+
+    public function setinitDate($initDate)
+    {
+        $this->initDate = $initDate;
+    }
+
+    public function setfinishDate($finishDate)
+    {
+        $this->finishDate = $finishDate;
+    }
+
+    public function getFinishDate()
+    {
+        return $this->finishDate;
+    }
+
+    public function getInitDate()
+    {
+        return $this->initDate;
     }
 
     public function getTipoMascota()

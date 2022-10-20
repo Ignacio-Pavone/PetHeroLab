@@ -39,7 +39,8 @@ use Models\Guardian;
           $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
           foreach($array as $item) 
           {
-            $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad']);
+            $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad'],$item['initDate'],$item['finishDate']);
+      
             array_push($this->list, $user);
           }
         }
@@ -67,6 +68,9 @@ use Models\Guardian;
           foreach ($user->getDisponibilidad() as $dia) {
             $search->setDisponibilidad($dia);
           }
+          $search->setInitDate($user->getInitDate());
+          $search->setFinishDate($user->getFinishDate());
+          
           $this->saveGuardianJson();
         }
       }
@@ -85,6 +89,8 @@ use Models\Guardian;
             $valuesArray['disponibilidad'] = $user->getDisponibilidad();
             $valuesArray['reputacion'] = $user->getReputacion();
             $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
+            $valuesArray['initDate'] = $user->getInitDate();
+            $valuesArray['finishDate'] = $user->getFinishDate();
            
             array_push($arrayToEncode, $valuesArray);
             }
@@ -114,5 +120,19 @@ use Models\Guardian;
           return false;
       }
 
+      public function updateGuardianDiponibility($user, $initDate, $lastDate, $daysToWork){
+        $this->LoadGuardianJson();
+        $search = $this->getGuardianByEmail($user);
+        $search->reiniciarDisponibilidad();
+        foreach($daysToWork as $value){
+          $search->setDisponibilidad($value);
+        }
+        $search->setfinishDate($lastDate);
+        $search->setinitDate($initDate);
+        $this->updateUser($search);
+        $this->saveGuardianJson();
+        Session::CreateSession($search);
+
       }
+    }
 ?>

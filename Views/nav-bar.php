@@ -28,7 +28,7 @@ $user = Session::GetLoggedUser();
             <a class="nav-link" href="#css-mine">Ver Todas las Mascotas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#modificar">Modificar Disponibilidad</a>
+            <a class="nav-link" href="<?php echo FRONT_ROOT.'Guardian/showdisponibilityView/'.$user->getFullName(); ?>">Modificar Disponibilidad</a>
         </li>
         <?php } ?>
         <li class="nav-item">

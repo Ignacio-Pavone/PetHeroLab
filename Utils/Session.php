@@ -20,6 +20,10 @@
             return false;
         }
 
+        public static function getType () {
+            return $_SESSION["userType"];
+        }
+
         public static function SetTypeUser($type) {
             $_SESSION["userType"] = $type;
         }

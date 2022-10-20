@@ -1,5 +1,8 @@
+<?php
+include ('nav-simple-bar.php');
+?>
 <section class="login-block">
-    <main class="py-5">
+    <main class="py-1">
         <section id="login-block" class="mb-5">
             <div class="container" id = "dataUser">
                 <center> 

@@ -6,7 +6,7 @@ include('nav-bar.php');
 ?>
 
 <section class="login-block">
-    <main class="py-5">
+    <main class="py-1">
         <section id="login-block" class="mb-5">
             <div class="container" id = "dataUser">
                 <center> 
@@ -95,10 +95,11 @@ include('nav-bar.php');
             <tr>
               <th style="width: 10%;">Nombre</th>
               <th style="width: 10%;">Edad</th>
-              <th style="width: 20%;">Tipo de Mascota a Cuidar</th>
-              <th style="width: 10%;">Reputacion</th>
+              <th style="width: 15%;">Preferencia</th>
+              <th style="width: 5%;">Reputacion</th>
               <th style="width: 10%;">Disponibilidad</th>
-              <th style="width: 10%;">Remuneracion Esperada</th>
+              <th style="width: 30%;">Fechas</th>
+              <th style="width: 5%;">Costo</th>
               <th style="width: 20%;">Accion</th>
             </tr>
           </thead>
@@ -120,6 +121,7 @@ include('nav-bar.php');
                         }
                     
                     } ?></td>
+                    <td><?php echo $guardian->getInitDate() . " | " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     <td>
                     <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>

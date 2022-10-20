@@ -1,61 +1,17 @@
 [
     {
-        "email": "igna@gmail.com",
-        "fullname": "Ignacio Pavone",
-        "dni": "34883612",
-        "age": "32",
+        "email": "guardian@gmail.com",
+        "fullname": "guardian",
+        "dni": "12313",
+        "age": "22",
         "password": "1111",
         "tipoMascota": "mediano",
         "disponibilidad": [
-            "lunes",
-            "jueves"
+            "viernes"
         ],
         "reputacion": 0,
-        "remuneracionEsperada": "1"
-    },
-    {
-        "email": "lui@gmail.com",
-        "fullname": "lui",
-        "dni": "4",
-        "age": "19",
-        "password": "123",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "11"
-    },
-    {
-        "email": "juan@marin.com",
-        "fullname": "carlos",
-        "dni": "12",
-        "age": "11254",
-        "password": "231",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "141"
-    },
-    {
-        "email": "pavnoe@gmail.com",
-        "fullname": "asd",
-        "dni": "34883612",
-        "age": "22",
-        "password": "1111",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "25"
-    },
-
-    {
-        "email": "11@11",
-        "fullname": "asd",
-        "dni": "11",
-        "age": "22",
-        "password": "1111",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "22"
+        "remuneracionEsperada": "22",
+        "initDate": "2022-10-20",
+        "finishDate": "2022-10-22"
     }
 ]
