@@ -113,10 +113,12 @@ class duenioDAO{
         $this->LoadDuenioJson();
         $userSearch = $this->getDuenioByEmail($user->getEmail());
         $petSearch = $this->searchPetByName($nombre);
-        if ($userSearch!=null){
+        if ($userSearch!=null && $petSearch!=null){
             $nuevousuario = $this->deletePetbyName($userSearch,$petSearch);
             Session::CreateSession($nuevousuario);
             $this->saveDuenioJson();
+        }else{
+            
         }
        
     }

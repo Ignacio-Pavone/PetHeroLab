@@ -29,7 +29,10 @@ class DuenioController{
 
     public function deletePet ($petName){
         $user = Session::GetLoggedUser();
-        $this->duenioDAO->deleteMascota($user,$petName);
+        if ($petName!=null){
+            $this->duenioDAO->deleteMascota($user,$petName);
+        }
+        $petName=null;
         require_once(VIEWS_PATH."duenio-profile.php");
     }
 
