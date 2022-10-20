@@ -114,25 +114,28 @@ class duenioDAO{
         $userSearch = $this->getDuenioByEmail($user->getEmail());
         $petSearch = $this->searchPetByName($nombre);
         if ($userSearch!=null){
-            $this->deletePetbyName($userSearch,$petSearch);
+            $nuevousuario = $this->deletePetbyName($userSearch,$petSearch);
+            Session::CreateSession($nuevousuario);
             $this->saveDuenioJson();
         }
+       
     }
 
     public function deletePetbyName ($user,$mascota){
         $newarraPets = array();
+        $flag = 0;
         foreach($this->list as $usersfromList){
-            if ($usersfromList->getEmail() == $user->getEmail()){
+            if ($usersfromList->getEmail() == $user->getEmail() && $flag == 0){
                 foreach ($usersfromList->getMascotas() as $pet) {
                     if ($pet->getNombre() != $mascota->getNombre()){
                         array_push($newarraPets, $pet);
                     }
                 }
                 $usersfromList->setMascotas($newarraPets);
+                return $usersfromList;
             }
         }
-        session_destroy();
-        Session::CreateSession($usersfromList);
+       
     }
 
     public function devolverTodaslasMascotas (){
