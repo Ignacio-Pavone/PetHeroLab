@@ -1,3 +1,8 @@
+<?php
+
+use Utils\Session;
+
+?>
 <form action = "<?php echo FRONT_ROOT. "Auth/login" ?>" method="POST">
 <section class="login-block">
     <div class="container">
@@ -16,8 +21,8 @@
   </div>
   <div>
     <button type="submit" class="btn btn-login float-right">Submit</button>
-    <a href="<?php echo FRONT_ROOT. "Auth/showRegisterGuardian" ?>">Register as Guardian</a> <br>
-    <a href="<?php echo FRONT_ROOT. "Auth/showRegisterDuenio" ?>">Register as Duenio</a>
+    <a href="<?php echo FRONT_ROOT. "Home/showguardianRegister" ?>">Register as Guardian</a> <br>
+    <a href="<?php echo FRONT_ROOT. "Home/showduenioRegister" ?>">Register as Duenio</a>
 
     </div>
   
@@ -32,7 +37,7 @@
     </div>
 </div>
 </form>
-<?php if (isset($_SESSION['message'])) { ?>
+<?php if (Session::VerifiyMessage()) { ?>
       <div class="alert alert-danger alert-dismissible fade show" role="alert">
            <?php echo $_SESSION['message'];
                  unset($_SESSION['message']); 

@@ -33,8 +33,6 @@ include('nav-bar.php');
                             <label for="">Email</label>
                             <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getEmail();  ?>">
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -54,7 +52,8 @@ include('nav-bar.php');
               <th style="width: 20%;">Foto</th>
               <th style="width: 10%;">Plan Vacunacion</th>
               <th style="width: 10%;">Video</th>
-              <th style="width: 15%;">Acciones</th>
+              <th style="width: 15%;">Borrar Mascota</th>
+              <th style="width: 15%;">Actualizar Mascota</th>
             </tr>
           </thead>
           <tbody>
@@ -70,9 +69,11 @@ include('nav-bar.php');
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-                      <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
-                    
-                    </td>
+                    <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
+                </td>
+                <td>
+                    <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/UpdatePet/'.$mascota->getNombre() ?>">Actualizar</a>
+                </td>
               </tr>
             <?php
             } 
@@ -110,7 +111,15 @@ include('nav-bar.php');
                     <td><?php echo $guardian->getAge(); ?></td>
                     <td><?php echo $guardian->getTipoMascota(); ?></td>
                     <td><?php echo $guardian->getReputacion(); ?></td>                  
-                    <td><?php echo 'arreglar fecha'; ?></td>
+                    <td><?php 
+                        if (count($guardian->getDisponibilidad()) == 0) {
+                            echo "No tiene disponibilidad";
+                        }else{
+                            foreach ($guardian->getDisponibilidad() as $disponibilidad){
+                                echo $disponibilidad . ' ';
+                        }
+                    
+                    } ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     <td>
                     <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>
@@ -162,14 +171,15 @@ include('nav-bar.php');
                                 <input type="url" name="video" class="form-control form-control-ml" placeholder="Url Only" required>
                             </div>
                             <br>
+                            <div class="row" id = "buttonraro" style="border: 1px solid">
+                             <div class="col-lg-1" style="text-align:center">
+                              <button type="submit" style = "text-align:center" class="btn btn-dark">Agregar</button>
+                    </div> 
                     </form>
                         </div>
                         <br>
                     </form>
-                    <div class="row" id = "buttonraro" style="border: 1px solid">
-                             <div class="col-lg-1" style="text-align:center">
-                              <button type="submit" style = "text-align:center" class="btn btn-dark">Agregar</button>
-                    </div> 
+
                 </div>
             </div> 
  </section>

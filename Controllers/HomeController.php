@@ -14,6 +14,14 @@ use Utils\Session;
 		{
 			require_once (VIEWS_PATH . 'logout.php');
 		}
+
+		public function showguardianRegister (){
+			require_once(VIEWS_PATH."register-guardian.php");
+		}
+
+		public function showduenioRegister(){
+			require_once(VIEWS_PATH."register-owner.php");
+		}
 	}
 
 ?>

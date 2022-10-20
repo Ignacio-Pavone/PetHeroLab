@@ -20,9 +20,11 @@ class DuenioController{
     }
 
     public function addPet($nombre,$raza,$tamanio,$foto,$planVacunacion,$video){
+        $string = str_replace(' ', '_', $nombre);
         $user = Session::GetLoggedUser();
-        $mascota = new Mascota($nombre,$raza,$tamanio,$foto,$planVacunacion,$video);
+        $mascota = new Mascota($string,$raza,$tamanio,$foto,$planVacunacion,$video);
         $this->duenioDAO->addMascota($user->getEmail(),$mascota);
+        require_once(VIEWS_PATH."duenio-profile.php");
     }
 
     public function deletePet ($petName){
@@ -37,7 +39,24 @@ class DuenioController{
         {
             $this->duenioDAO->addDuenio($user);
             $this->authController->showLogin("Duenio registrado con exito");
+        }else{
+            $this->authController->showLogin("El email ya esta en uso");
         }
+    }
+
+    public function UpdatePet ($nombre){
+        $user = Session::GetLoggedUser();
+        $search = $this->duenioDAO->searchPetByName($nombre);
+        require_once(VIEWS_PATH."update-mascota.php");
+    }
+
+    public function ModifyPet ($nombreviejo,$nombre,$raza,$tamanio,$foto,$planVacunacion,$video){
+        $user = Session::GetLoggedUser();
+        $viejamascota = $this->duenioDAO->searchPetByName($nombreviejo);
+        $string = str_replace(' ', '_', $nombre);
+        $nuevamascota = new Mascota($string,$raza,$tamanio,$foto,$planVacunacion,$video);
+        $this->duenioDAO->updateMascota($user,$viejamascota,$nuevamascota);
+        require_once(VIEWS_PATH."duenio-profile.php");
     }
 
 }

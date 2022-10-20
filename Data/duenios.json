@@ -7,29 +7,37 @@
         "password": "1111",
         "mascotas": [
             {
-                "nombre": "Keyra",
+                "nombre": "Keyraasd",
                 "raza": "Pugs",
-                "tamanio": "Chico",
+                "tamanio": "mediano",
                 "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
             },
             {
-                "nombre": "Sonia",
-                "raza": "Pugs",
-                "tamanio": "Mediano",
-                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
-            },
-            {
-                "nombre": "DinDown",
-                "raza": "Pugs",
-                "tamanio": "Grande",
+                "nombre": "Perrito",
+                "raza": "Pugss",
+                "tamanio": "chico",
                 "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
             }
         ]
+    },
+    {
+        "email": "nazareno@gmail.com",
+        "fullname": "Nazareno",
+        "dni": "32323",
+        "age": "22",
+        "password": "1111",
+        "mascotas": []
+    },
+    {
+        "email": "lucre@gmail.com",
+        "fullname": "Lucrecia Bazan",
+        "dni": "1111",
+        "age": "22",
+        "password": "1111",
+        "mascotas": []
     }
 ]

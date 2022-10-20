@@ -1,11 +1,15 @@
 [
     {
-        "email": "ignaciopavon@gmail.com",
+        "email": "igna@gmail.com",
         "fullname": "Ignacio Pavone",
         "dni": "34883612",
         "age": "32",
         "password": "1111",
         "tipoMascota": "mediano",
+        "disponibilidad": [
+            "lunes",
+            "jueves"
+        ],
         "reputacion": 0,
         "remuneracionEsperada": "1"
     },
@@ -16,6 +20,7 @@
         "age": "19",
         "password": "123",
         "tipoMascota": "mediano",
+        "disponibilidad": [],
         "reputacion": 0,
         "remuneracionEsperada": "11"
     },
@@ -26,6 +31,7 @@
         "age": "11254",
         "password": "231",
         "tipoMascota": "mediano",
+        "disponibilidad": [],
         "reputacion": 0,
         "remuneracionEsperada": "141"
     },
@@ -36,17 +42,19 @@
         "age": "22",
         "password": "1111",
         "tipoMascota": "mediano",
+        "disponibilidad": [],
         "reputacion": 0,
         "remuneracionEsperada": "25"
     },
     {
-        "email": "asd@asd",
-        "fullname": "22",
-        "dni": "22",
+        "email": "11@11",
+        "fullname": "asd",
+        "dni": "11",
         "age": "22",
-        "password": "asd",
+        "password": "1111",
         "tipoMascota": "mediano",
+        "disponibilidad": [],
         "reputacion": 0,
-        "remuneracionEsperada": "12"
+        "remuneracionEsperada": "22"
     }
 ]

@@ -22,11 +22,13 @@ class GuardianController{
 
     public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada)
     {
-        $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada);
+        $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada,$diponibilidad=array());
         if($this->guardianDAO->getGuardianByEmail($email) == null)
         {
             $this->guardianDAO->addGuardian($user);
             $this->authController->showLogin("Guardian registrado con exito");
+        }else{
+            $this->authController->showLogin("El email ya esta en uso");
         }
     }
 }

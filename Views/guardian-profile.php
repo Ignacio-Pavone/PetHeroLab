@@ -50,15 +50,10 @@ $value = null;
                               <?php   
                               if (count($user->getDisponibilidad()) == 0) echo 'No hay dias elegidos.';
                               else {
-                                   foreach ($user->getDisponibilidad() as $value) {
-                                        for ($i=0; $i < count($value); $i++) { 
-                                             if ($value[$i] != null) {
-                                             echo $value[$i];
-                                             if ($i != count($value)-1) echo ',';
-                                        }
-                                        }
-                                        
-                                   }
+                                  $array = $user->getDisponibilidad();
+                                     foreach ($array as $key => $value) {
+                                          echo $value . ' ';
+                                     }
                               }                             
                               ?>">
                          </div>

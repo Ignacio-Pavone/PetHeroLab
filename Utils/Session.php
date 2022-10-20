@@ -13,6 +13,13 @@
             }
         }
 
+        public static function VerifiyMessage () {
+            if(isset($_SESSION["message"])) {
+                return true;
+            }
+            return false;
+        }
+
         public static function SetTypeUser($type) {
             $_SESSION["userType"] = $type;
         }

@@ -33,19 +33,13 @@ use Models\Guardian;
       private function LoadGuardianJson() 
       {
         $this->list = array();
-
         if(file_exists($this->filename)) 
         {
           $jsonContent = file_get_contents($this->filename);
           $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
-          
           foreach($array as $item) 
           {
-            $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada']);
-            foreach ($item['disponibilidad'] as  $value) {
-              $user->setDisponibilidad($value);
-            }
-            
+            $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad']);
             array_push($this->list, $user);
           }
         }
@@ -56,6 +50,25 @@ use Models\Guardian;
         $this->LoadGuardianJson();
         array_push($this->list, $user);
         $this->saveGuardianJson();
+      }
+
+      public function updateUser ($user){
+        $this->LoadGuardianJson();
+        $search = $this->getGuardianByEmail($user->getEmail());
+        if($search != null){
+          $search->setFullname($user->getFullname());
+          $search->setDni($user->getDni());
+          $search->setAge($user->getAge());
+          $search->setPassword($user->getPassword());
+          $search->setTipoMascota($user->getTipoMascota());
+          $search->setRemuneracionEsperada($user->getRemuneracionEsperada());
+          $search->setReputacion($user->getReputacion());
+          $search->reiniciarDisponibilidad();
+          foreach ($user->getDisponibilidad() as $dia) {
+            $search->setDisponibilidad($dia);
+          }
+          $this->saveGuardianJson();
+        }
       }
 
 
@@ -69,7 +82,7 @@ use Models\Guardian;
             $valuesArray['age'] = $user->getAge();
             $valuesArray['password'] = $user->getPassword();
             $valuesArray['tipoMascota'] = $user->getTipoMascota();
-            var_dump($user->getDisponibilidad());
+            $valuesArray['disponibilidad'] = $user->getDisponibilidad();
             $valuesArray['reputacion'] = $user->getReputacion();
             $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
            
@@ -80,27 +93,15 @@ use Models\Guardian;
             file_put_contents($this->filename, $jsonContent);
         }
         
-        public function modifyUser($email= null, $fullname= null, $dni= null, $age= null, $password= null, $tipoMascota= null, $remuneracionEsperada= null, $reputacion= null){
-            $this->LoadGuardianJson();
-            foreach($this->list as $user){
-              if ($user->getEmail() == $email){
-                if ($fullname != null)
-                  $user->setFullName($fullname);
-                if ($dni != null)
-                  $user->setDni($dni);
-                if ($age != null)
-                  $user->setAge($age);
-                if ($password != null)
-                  $user->setPassword($password);
-                if ($tipoMascota != null)
-                  $user->setTipoMascota($tipoMascota);
-                if ($remuneracionEsperada != null)
-                  $user->setRemuneracionEsperada($remuneracionEsperada);
-                if ($reputacion != null)
-                  $user->setReputacion($reputacion);
-              }
-            }
-            $this->saveGuardianJson();
+        public function modifyDispobibilidad($user){
+          $this->LoadGuardianJson();
+          $search = $this->getGuardianByEmail($user->getEmail());
+          $search->reiniciarDisponibilidad();
+          foreach($search->getDisponibilidad() as $value){
+            $user->setDisponibilidad($value);
+          }
+          $this->updateUser($user);
+          $this->saveGuardianJson();
         }
 
         public function LoginCheckGuardian ($email,$password){

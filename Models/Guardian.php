@@ -8,15 +8,15 @@ class Guardian extends Usuario {
     private $tipoMascota; //tamaño de mascota chica mediana grande
     private $remuneracionEsperada; //no sabemos si es por hora o no
     private $reputacion;
-    private $disponibilidad;
+    private $disponibilidad = array();
 
-    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada)
+    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad)
     {
         parent::__construct($email, $fullname, $dni, $age, $password);
         $this->tipoMascota = $tipoMascota;
         $this->remuneracionEsperada = $remuneracionEsperada;
         $this->reputacion = 0;
-        $this->disponibilidad = array();
+        $this->disponibilidad = $disponibilidad;
     }
 
     public function setTipoMascota($tipoMascota)
@@ -65,14 +65,14 @@ class Guardian extends Usuario {
     
     public function checkDisponibilidad($dia){
         $flag=false;
-        foreach($this->disponibilidad as $value){
-            if ($value==$dia && $flag==false){
-                $flag=true;
+        if ($this->disponibilidad!=null){
+            foreach($this->disponibilidad as $value){
+                if ($value==$dia)
+                    $flag=true;
             }
         }
         return $flag;
     }
-
 }
 
 ?>

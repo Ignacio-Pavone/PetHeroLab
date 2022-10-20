@@ -33,6 +33,7 @@
 
             public function showDuenioProfile()
             {
+                $lista = $this->duenioDAO->GetAllDuenios();
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 
@@ -45,8 +46,6 @@
 
             public function setDiaDisponible ($dia_lunes = null, $dia_martes = null, $dia_miercoles = null, $dia_jueves = null, $dia_viernes = null, $dia_sabado = null, $dia_domingo = null){
                 $user = Session::GetLoggedUser();
-
-                $disp = array();
                 $user->reiniciarDisponibilidad();
                 if ($dia_lunes != null)
                     $user->setDisponibilidad($dia_lunes);
@@ -62,8 +61,7 @@
                     $user->setDisponibilidad($dia_sabado);
                 if ($dia_domingo != null)
                     $user->setDisponibilidad($dia_domingo);
-            
-                $this->guardianDAO->modifyUser($user->getEmail(), $user->getFullName(), $user->getDni(), $user->getAge(), $user->getPassword(), $user->getTipoMascota(), $user->getRemuneracionEsperada(), $user->getReputacion());
+                $this->guardianDAO->modifyDispobibilidad($user);
                 $this->showGuardianProfile();
             }
         }

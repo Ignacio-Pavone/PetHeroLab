@@ -53,7 +53,7 @@ class duenioDAO{
 
     public function saveDuenioJson (){
         $arrayToEncode = array();
-        $mascotasArray = array();
+       
         
         foreach($this->list as $user) {
             $valuesArray['email'] = $user->getEmail();
@@ -61,6 +61,7 @@ class duenioDAO{
             $valuesArray['dni'] = $user->getDni();
             $valuesArray['age'] = $user->getAge();
             $valuesArray['password'] = $user->getPassword();
+            $mascotasArray = array();
             foreach ($user->getMascotas() as $mascota) {
                 $mascotas['nombre'] = $mascota->getNombre();
                 $mascotas['raza'] = $mascota->getRaza();
@@ -91,6 +92,7 @@ class duenioDAO{
             $user->addMascota($mascota);
             $this->saveDuenioJson();
         }
+        Session::CreateSession($user);
     }
 
     public function searchPetByName ($name){
@@ -98,11 +100,12 @@ class duenioDAO{
         $pet = null;
         foreach($this->list as $user){
             foreach ($user->getMascotas() as $mascota) {
-                if ($mascota->getNombre() == $name)
+                if ($mascota->getNombre() == $name){
                     $pet = $mascota;
             }
         }
         return $pet;
+        }
     }
 
 
@@ -128,7 +131,8 @@ class duenioDAO{
                 $usersfromList->setMascotas($newarraPets);
             }
         }
-        Session::CreateSession($user);
+        session_destroy();
+        Session::CreateSession($usersfromList);
     }
 
     public function devolverTodaslasMascotas (){
@@ -163,6 +167,44 @@ class duenioDAO{
         } 
         return false;
     }
+
+    public function updateMascota ($user=NULL,$mascota=NULL,$nuevamascota=NULL){
+        if ($user != NULL && $mascota != NULL && $nuevamascota != NULL){
+            $this->LoadDuenioJson();
+            $userSearch = $this->getDuenioByEmail($user->getEmail());
+            $petSearch = $this->searchPetByName($mascota->getNombre());
+            if ($userSearch!=null){
+               $usernew= $this->updatePetbyName($userSearch,$petSearch,$nuevamascota);
+               $this->saveDuenioJson();
+               Session::CreateSession($usernew);
+            }
+        }
+    }
+
+    public function updatePetbyName ($userSearch,$petSearch,$search){
+        $newarraPets = array();
+        $flag = 0;
+        foreach($this->list as $usersfromList){
+            if ($usersfromList->getEmail() == $userSearch->getEmail() && $flag == 0){
+                foreach ($usersfromList->getMascotas() as $pet) {
+                    if ($pet->getNombre() == $petSearch->getNombre()){
+                        $pet->setNombre($search->getNombre());
+                        $pet->setRaza($search->getRaza());
+                        $pet->setTamanio($search->getTamanio());
+                        $pet->setFoto($search->getFoto());
+                        $pet->setPlanVacunacion($search->getPlanVacunacion());
+                        $pet->setVideo($search->getVideo());
+                        $flag = 1;
+                    }
+                    array_push($newarraPets, $pet);
+                }
+                $usersfromList->setMascotas($newarraPets);
+                return $usersfromList;
+            }
+        }
+    }
+
+
 
     
 }
