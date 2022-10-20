@@ -4,7 +4,7 @@ $user = Session::GetLoggedUser();
 ?>
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <span class="navbar-text">
-        <strong>TP FINAL Welcome - <?php 
+        <strong>TP FINAL Welcome  <?php 
         if (Session::IsLogged())
         echo $user->getFullName() ?></strong>
     </span>
