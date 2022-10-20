@@ -18,7 +18,7 @@
 
             public function login($email, $password){
                 if ($this->guardianDAO->LoginCheckGuardian($email, $password)){
-                    $this->showHome();
+                    $this->showGuardianProfile();
                 }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
                     $this->showDuenioProfile();
                 }else{
@@ -26,7 +26,7 @@
                 }
             }   
 
-            public function showHome()
+            public function showGuardianProfile()
             {
                 require_once(VIEWS_PATH . 'guardian-profile.php');
             }
@@ -35,12 +35,6 @@
             {
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
-
-            public function Index ($message = "")
-            {
-                require_once(VIEWS_PATH . 'login.php');
-            }
-
 
             public function showLogin($message = "")
             {
@@ -70,7 +64,7 @@
                     $user->setDisponibilidad($dia_domingo);
             
                 $this->guardianDAO->modifyUser($user->getEmail(), $user->getFullName(), $user->getDni(), $user->getAge(), $user->getPassword(), $user->getTipoMascota(), $user->getRemuneracionEsperada(), $user->getReputacion());
-                $this->showHome();
+                $this->showGuardianProfile();
             }
         }
     ?>
