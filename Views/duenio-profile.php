@@ -12,7 +12,7 @@ include('nav-bar.php');
                 <center> 
                     <h3 class="mb" id = "dataUser">Datos</h3>
                 </center>
-                <div class="bg-light-alpha p-4" id = "dataUser">
+                <div class="bg-light-alpha p-1" id = "dataUser">
                     <div class="row">
                         <div class="col-lg-3">
                             <label for="">Nombre</label>
@@ -121,7 +121,7 @@ include('nav-bar.php');
                         }
                     
                     } ?></td>
-                    <td><?php echo $guardian->getInitDate() . " | " . $guardian->getFinishDate(); ?></td>
+                    <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     <td>
                     <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>

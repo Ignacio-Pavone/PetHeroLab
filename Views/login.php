@@ -1,23 +1,24 @@
 <?php
 
 use Utils\Session;
-
 ?>
+<main class="login-block-real">
+    <div class="content">
 <form action = "<?php echo FRONT_ROOT. "Auth/login" ?>" method="POST">
-<section class="login-block">
+
     <div class="container">
 	<div class="row">
 		<div class="col-md-4 login-sec">
-		    <h2 class="text-center">Login Now</h2>
+		    <h2 class="text-center">Pet Hero</h2>
 		    <form class="login-form">
   <div class="form-group">
     <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-    <input type="text" name = "email" class="form-control" placeholder="">
+    <input type="text" name = "email" class="form-control" placeholder="pethero@gmail.com"required>
     
   </div>
   <div class="form-group">
     <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-    <input type="password" name = "password" class="form-control" placeholder="">
+    <input type="password" name = "password" class="form-control" placeholder="*******" required>
   </div>
   <div>
     <button type="submit" class="btn btn-login float-right">Submit</button>
@@ -44,4 +45,5 @@ use Utils\Session;
             ?>
      </div>
  <?php } ?>
-</section>
+</div>
+</main>

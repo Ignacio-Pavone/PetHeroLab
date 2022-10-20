@@ -12,6 +12,18 @@
   padding: 50px 0;
 }
 
+.login-block-real {
+  background: #DE6262;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom, #FFB88C, #DE6262);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  width: 100%;
+  padding: 50px 0;
+    
+}
+
 .banner-sec {
   background: url(https://d3mvlb3hz2g78.cloudfront.net/wp-content/uploads/2020/07/thumb_720_450_dreamstime_m_156181857.jpg) no-repeat left bottom;
   background-size: cover;
@@ -211,4 +223,17 @@ input[type="checkbox"]::before {
 
 input[type="checkbox"]:checked::before {
   transform: scale(1);
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+:-moz-placeholder {
+  font-style: italic;  
+}
+::-moz-placeholder {
+  font-style: italic;  
+}
+:-ms-input-placeholder {  
+  font-style: italic; 
 }
