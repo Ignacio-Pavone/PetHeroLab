@@ -22,8 +22,7 @@
                 }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
                     $this->showDuenioProfile();
                 }else{
-                    Session::SetError("Usuario o contraseña incorrectos");
-                    $this->showLogin();
+                    $this->showLogin("Usuario o contraseña incorrectos");
                 }
             }   
 
@@ -34,7 +33,6 @@
 
             public function showDuenioProfile()
             {
-                $guardianes = $this->guardianDAO->GetAllGuardians();
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 
@@ -46,6 +44,7 @@
 
             public function showLogin($message = "")
             {
+                Session::SetMessage($message);
                 require_once(VIEWS_PATH . 'login.php');
             }
 

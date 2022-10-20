@@ -17,8 +17,8 @@
             $_SESSION["userType"] = $type;
         }
 
-        public static function SetError ($error) {
-            $_SESSION["error"] = $error;
+        public static function SetMessage ($message) {
+            $_SESSION["message"] = $message;
         }
 
         public static function IsLogged() {

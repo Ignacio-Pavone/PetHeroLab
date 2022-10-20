@@ -103,7 +103,7 @@ include('nav-bar.php');
           </thead>
           <tbody>
               <?php
-              foreach ($guardianes as $guardian) {
+              foreach ($this->guardianDAO->GetAllGuardians() as $guardian) {
                 ?>
                     <tr>
                     <td><?php echo $guardian->getFullName(); ?></td>
