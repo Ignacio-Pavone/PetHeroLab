@@ -1,11 +1,11 @@
 [
     {
         "email": "guardian@gmail.com",
-        "fullname": "guardian",
-        "dni": "12313",
+        "fullname": "Fernando Jimenez",
+        "dni": "33122333",
         "age": "22",
         "password": "1111",
-        "tipoMascota": "chico",
+        "tipoMascota": "Chico",
         "disponibilidad": [
             "viernes"
         ],

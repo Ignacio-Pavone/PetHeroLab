@@ -33,7 +33,8 @@ include ('nav-simple-bar.php');
                 <input type="hidden" name="guardianname"  class="update-dispon" value = <?php echo $user->getEmail()?>>
                 <td><input type="date" name="initDate"  class="update-dispon" value ="<?php echo $user->getInitDate() ?>" id="initDate" min="<?php echo date('Y-m-d') ?>" select></td>
                 <td><input type="date" name="finishDate" class="update-dispon" value ="<?php echo $user->getFinishDate() ?>" id="finishDate" min="<?php echo date('Y-m-d') ?>"></td>
-                <td><select name="daysToWork[]" id="daysToWork" multiple="multiple" class="update-dispon" required>
+                <td>
+                <select name="daysToWork[]" id="daysToWork" multiple="multiple" class="update-dispon" required>
                 <option value="lunes">Lunes</option>
                 <option value="martes">Martes</option>
                 <option value="miercoles">Miercoles</option>
@@ -41,9 +42,8 @@ include ('nav-simple-bar.php');
                 <option value="viernes">Viernes</option>
                 <option value="sabado">Sabado</option>
                 <option value="domingo">Domingo</option>
-
-            </tr>
-             </tbody>
+                </tr>
+        </tbody>
          </table>
          <br>
             <div class="row-lg-1" style="text-align:center">

@@ -16,32 +16,32 @@ include('nav-bar.php');
                     <div class="row">
                          <div class="col-lg-3">
                               <label for="">Nombre</label>
-                              <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getFullName();  ?>">
+                              <input type="text" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getFullName();  ?>">
                          </div>
 
                          <div class="col-lg-3">
                               <label for="">Edad</label>
-                              <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getAge();  ?>">
+                              <input type="text" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getAge();  ?>">
                          </div>
 
                          <div class="col-lg-3">
                               <label for="">DNI</label>
-                              <input type="number" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getDni();  ?>">
+                              <input type="number" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getDni();  ?>">
                          </div>
 
                          <div class="col-lg-3">
                               <label for="">Email</label>
-                              <input type="text" name="" class="form-control form-control-ml" disabled value="<?php echo $user->getEmail();  ?>">
+                              <input type="text" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getEmail();  ?>">
                          </div>
                          <div class="col-lg-12" style="height:15px"></div>
                          <div class="col-lg-4">
                               <label for="">Tipo de Mascotas a Cuidar</label>
-                              <input type="text" name="tipoMascota" class="form-control form-control-ml" disabled value="<?php echo $user->getTipoMascota();  ?>">
+                              <input type="text" name="tipoMascota" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getTipoMascota();  ?>">
                          </div>
 
                          <div class="col-lg-4">
                               <label for="">Remuneracion Esperada</label>
-                              <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="<?php echo $user->getRemuneracionEsperada() . " $";  ?>">
+                              <input type="text" name="remuneracionEsperada" style="text-align:center" class="form-control form-control-ml" disabled value="<?php echo $user->getRemuneracionEsperada() . " $";  ?>">
                          </div>
 
                          <div class="col-lg-4" >
