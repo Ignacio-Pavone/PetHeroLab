@@ -34,4 +34,14 @@
             
         }
 
+        public function aceptarReservaGuardian($nroReserva){
+            $this->reservaDAO->aceptarReservaGuardian($nroReserva);
+            $this->authController->showGuardianProfile();
+        }
+
+        public function rechazarReservaGuardian($nroReserva){
+            $this->reservaDAO->rechazarReservaGuardian($nroReserva);
+            $this->authController->showGuardianProfile();
+        }
+
 }

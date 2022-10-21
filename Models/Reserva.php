@@ -25,11 +25,11 @@ use Utils\EReserva as EReserva;
 
     
 
-    public function getNroReseva(){
+    public function getNroReserva(){
         return $this->nroReseva;
     }
 
-    public function setNroReseva($nroReseva){
+    public function setNroReserva($nroReseva){
         $this->nroReseva = $nroReseva;
     }
 

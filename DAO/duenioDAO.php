@@ -43,7 +43,7 @@ class duenioDAO{
             {
                 $user = new Duenio($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password']);
                 foreach ($item['mascotas'] as $mascota) {
-                    $mascota = new Mascota($mascota['nombre'], $mascota['raza'], $mascota['tamanio'], $mascota['foto'], $mascota['planVacunacion'], $mascota['video']);
+                    $mascota = new Mascota($mascota['nombre'], $mascota['tipo'], $mascota['raza'], $mascota['tamanio'], $mascota['foto'], $mascota['planVacunacion'], $mascota['video']);
                     $user->addMascota($mascota);
                 }            
                 array_push($this->list, $user);
@@ -64,6 +64,7 @@ class duenioDAO{
             $mascotasArray = array();
             foreach ($user->getMascotas() as $mascota) {
                 $mascotas['nombre'] = $mascota->getNombre();
+                $mascotas['tipo'] = $mascota->getTipo();
                 $mascotas['raza'] = $mascota->getRaza();
                 $mascotas['tamanio'] = $mascota->getTamanio();
                 $mascotas['foto'] = $mascota->getFoto();
@@ -102,18 +103,21 @@ class duenioDAO{
             foreach ($user->getMascotas() as $mascota) {
                 if ($mascota->getNombre() == $name){
                     $pet = $mascota;
-            }
+                }
+            }  
         }
         return $pet;
-        }
     }
 
 
     public function deleteMascota ($user,$nombre){
         $this->LoadDuenioJson();
+        
         $userSearch = $this->getDuenioByEmail($user->getEmail());
         $petSearch = $this->searchPetByName($nombre);
+        //var_dump($petSearch);
         if ($userSearch!=null && $petSearch!=null){
+            var_dump($petSearch);
             $nuevousuario = $this->deletePetbyName($userSearch,$petSearch);
             Session::CreateSession($nuevousuario);
             $this->saveDuenioJson();
@@ -129,9 +133,9 @@ class duenioDAO{
         foreach($this->list as $usersfromList){
             if ($usersfromList->getEmail() == $user->getEmail() && $flag == 0){
                 foreach ($usersfromList->getMascotas() as $pet) {
-                    if ($pet->getNombre() != $mascota->getNombre()){
+                    if ($pet->getNombre() != $mascota->getNombre() || $flag==1){
                         array_push($newarraPets, $pet);
-                    }
+                    }else $flag=1;
                 }
                 $usersfromList->setMascotas($newarraPets);
                 return $usersfromList;

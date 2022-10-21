@@ -18,10 +18,10 @@ class DuenioController{
         $this->authController = new AuthController();
     }
 
-    public function addPet($nombre,$raza,$tamanio,$foto,$planVacunacion,$video){
+    public function addPet($nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video){
         $string = str_replace(' ', '_', $nombre);
         $user = Session::GetLoggedUser();
-        $mascota = new Mascota($string,$raza,$tamanio,$foto,$planVacunacion,$video);
+        $mascota = new Mascota($string,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video);
         $this->duenioDAO->addMascota($user->getEmail(),$mascota);
         require_once(VIEWS_PATH."duenio-profile.php");
     }
@@ -52,11 +52,11 @@ class DuenioController{
         require_once(VIEWS_PATH."update-mascota.php");
     }
 
-    public function ModifyPet ($nombreviejo,$nombre,$raza,$tamanio,$foto,$planVacunacion,$video){
+    public function ModifyPet ($nombreviejo,$nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video){
         $user = Session::GetLoggedUser();
         $viejamascota = $this->duenioDAO->searchPetByName($nombreviejo);
         $string = str_replace(' ', '_', $nombre);
-        $nuevamascota = new Mascota($string,$raza,$tamanio,$foto,$planVacunacion,$video);
+        $nuevamascota = new Mascota($string,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video);
         $this->duenioDAO->updateMascota($user,$viejamascota,$nuevamascota);
         require_once(VIEWS_PATH."duenio-profile.php");
     }

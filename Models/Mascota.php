@@ -2,15 +2,17 @@
 namespace Models;
 class Mascota {
      private $nombre;
+     private $tipo;
      private $raza;
      private $tamanio;
      private $foto;
      private $planVacunacion;
      private $video;
 
-     public function __construct($nombre,$raza,$tamanio,$foto,$planVacunacion,$video)
+     public function __construct($nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video)
      {
          $this->nombre=$nombre;
+         $this->tipo=$tipo;
          $this->raza=$raza;
          $this->tamanio=$tamanio;
          $this->foto=$foto;
@@ -20,6 +22,11 @@ class Mascota {
 
         public function getNombre(){
             return $this->nombre;
+        }
+
+        public function getTipo()
+        {
+            return $this->tipo;
         }
 
         public function getRaza(){
@@ -46,6 +53,11 @@ class Mascota {
             $this->nombre=$nombre;
         }
 
+        public function setTipo($tipo)
+        {
+            $this->tipo = $tipo;
+        }
+
         public function setRaza($raza){
             $this->raza=$raza;
         }
@@ -66,9 +78,6 @@ class Mascota {
             $this->video=$video;
         }
 
-        
-  
-    
 }
 
 ?>

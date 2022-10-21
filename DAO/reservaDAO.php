@@ -22,7 +22,7 @@ use Models\Guardian;
 
       foreach($this->list as $reserva)
       {
-        $valuesArray["nroReserva"] = $reserva->getNroReseva();
+        $valuesArray["nroReserva"] = $reserva->getNroReserva();
         $valuesArray["Mascota"] = $reserva->getMascota();
         $valuesArray["Duenio"] = $reserva->getDuenio();
         $valuesArray["Guardian"] = $reserva->getGuardian();
@@ -44,6 +44,17 @@ use Models\Guardian;
         return $this->list;
     }
 
+    public function getReservasByGuardian($guardianName){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $guardianName){
+          array_push($array,$reserva);
+        }
+      }
+      return $array;
+    }
+
     private function LoadReservaJson() {
         $this->list = array();
         if(file_exists($this->filename)) 
@@ -54,7 +65,7 @@ use Models\Guardian;
                 {
                     $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal']);
                     $reserva->setEstado($item['estado']);
-                    $reserva->setNroReseva($item['nroReserva']);
+                    $reserva->setNroReserva($item['nroReserva']);
                     array_push($this->list, $reserva);
                     if ($item["nroReserva"] > $this->id) {
                       $this->id = $item["nroReserva"];
@@ -65,9 +76,29 @@ use Models\Guardian;
 
     public function add ($reserva){
         $this->LoadReservaJson();
-        $reserva->setNroReseva($this->id + 1);
+        $reserva->setNroReserva($this->id + 1);
         array_push($this->list, $reserva);
         $this->SaveData();
+    }
+
+    public function aceptarReservaGuardian($nroReserva){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setEstado("Confirmado");
+        }
+      }
+      $this->SaveData();
+    }
+
+    public function rechazarReservaGuardian($nroReserva){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setEstado("Rechazado");
+        }
+      }
+      $this->SaveData();
     }
 }
 

@@ -73,45 +73,107 @@ include('nav-bar.php');
           </div>
      </section>
           <div class="container" id = "css-mine">
-              <br>  
-            <center>
-                    <h3 class="mb">Todas las mascotas con tamaño <?php echo $user->getTipoMascota()?></h3>
-            </center>
-            <br>
-            <table style="text-align:center;">
+          <br>  
+          <center>
+               <h3 class="mb">Todas las mascotas con tamaño <?php echo $user->getTipoMascota()?></h3>
+          </center>
+          <br>
+          <table style="text-align:center;">
           <thead>
-            <tr>
-              <th style="width: 15%;">Nombre</th>
-              <th style="width: 15%;">Raza</th>
-              <th style="width: 15%;">Tamaño</th>
-              <th style="width: 20%;">Foto</th>
-              <th style="width: 10%;">Plan Vacunacion</th>
-              <th style="width: 10%;">Video</th>
-              <th style="width: 15%;">Acciones</th>
-            </tr>
+          <tr>
+               <th style="width: 15%;">Nombre</th>
+               <th style="width: 15%;">Raza</th>
+               <th style="width: 15%;">Tamaño</th>
+               <th style="width: 20%;">Foto</th>
+               <th style="width: 10%;">Plan Vacunacion</th>
+               <th style="width: 10%;">Video</th>
+               <th style="width: 15%;">Acciones</th>
+          </tr>
           </thead>
           <tbody>
-            <?php
-            foreach ($this->duenioDAO->filtrarMascotasporTamanio($user->getTipoMascota()) as $mascota) {
-            ?>
-              <tr>
-                <td><?php echo $mascota->getNombre(); ?></td>
-                <td><?php echo $mascota->getRaza(); ?></td>
-                <td><?php echo $mascota->getTamanio(); ?></td>
-                <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="90px" height="70px"></td>
-                <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
-                <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
-
-                <td>
-               <a class="btn btn-dark ml-auto " href="<?php ?>">Cuidar</a>
-               </td>
-              </tr>
-            <?php
-            } 
-            ?>
+          <?php
+          foreach ($this->duenioDAO->filtrarMascotasporTamanio($user->getTipoMascota()) as $mascota) {
+          ?>
+          <tr>
+               <td><?php echo $mascota->getNombre(); ?></td>
+               <td><?php echo $mascota->getRaza(); ?></td>
+               <td><?php echo $mascota->getTamanio(); ?></td>
+               <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="90px" height="70px"></td>
+               <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
+               <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
+               <td><a class="btn btn-dark ml-auto" href="<?php ?>">Cuidar</a></td>
+          </tr>
+          <?php } ?>
           </tbody>
-        </table>
-        <br> 
+          </table>
+          <br> 
+          </div>
+          
+          <br> 
+
+          <div class="container" id = "css-mine">
+          <center><h3 class="mb">Peticiones Recibidas</h3></center>
+          <table style="text-align:center;">
+               <thead>
+               <tr>
+               <th style="width: 15%;">Dueño</th>
+               <th style="width: 15%;">Mascota</th>
+               <th style="width: 20%;">fechaInicio</th>
+               <th style="width: 20%;">fechaFin</th>
+               <th style="width: 20%;">Costo</th>
+               <th style="width: 20%;">Acciones</th>
+               </tr>
+               </thead>
+               <tbody>
+               <?php foreach($this->reservaDAO->getReservasByGuardian($user->getFullName()) as $reserva){
+                    if ($reserva->getEstado() == "Pendiente"){ ?>
+                    <tr>
+                         <td><?php echo $reserva->getDuenio(); ?></td>
+                         <td><?php echo $reserva->getMascota(); ?></td>
+                         <td><?php echo $reserva->getFechaInicio(); ?></td>
+                         <td><?php echo $reserva->getFechaFin(); ?></td>
+                         <td><?php echo $reserva->getCostoTotal(); ?></td>
+                         <td> 
+                         <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Reserva/aceptarReservaGuardian/'.$reserva->getNroReserva(); ?>">Aceptar</a>
+                         <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Reserva/rechazarReservaGuardian/'.$reserva->getNroReserva(); ?>">Rechazar</a>
+                         </td>
+                         
+                    </tr>
+
+               <?php }
+               } ?>
+               </tbody>
+          </table>
+          <br> 
+          </div>
+          
+          <br> 
+          <div class="container" id = "css-mine">
+          <center><h3 class="mb">Historial Recibidas</h3></center>
+          <table style="text-align:center;">
+               <thead>
+               <tr>
+               <th style="width: 15%;">Dueño</th>
+               <th style="width: 15%;">Mascota</th>
+               <th style="width: 20%;">fechaInicio</th>
+               <th style="width: 20%;">fechaFin</th>
+               <th style="width: 20%;">Estado</th>
+               </tr>
+               </thead>
+               <tbody>
+               <?php foreach($this->reservaDAO->getReservasByGuardian($user->getFullName()) as $reserva){ ?>
+                    <tr>
+                         <td><?php echo $reserva->getDuenio(); ?></td>
+                         <td><?php echo $reserva->getMascota(); ?></td>
+                         <td><?php echo $reserva->getFechaInicio(); ?></td>
+                         <td><?php echo $reserva->getFechaFin(); ?></td>
+                         <td><?php echo $reserva->getEstado(); ?></td>                      
+                    </tr>
+
+               <?php 
+               } ?>
+               </tbody>
+          </table>
+          <br> 
+          </div>
 </main>
-
-

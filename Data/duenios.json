@@ -8,6 +8,7 @@
         "mascotas": [
             {
                 "nombre": "Keyra",
+                "tipo": "Perro",
                 "raza": "Pugs",
                 "tamanio": "chico",
                 "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
@@ -16,8 +17,9 @@
             },
             {
                 "nombre": "Raro",
-                "raza": "Pugs",
-                "tamanio": "chico",
+                "tipo": "Perro",
+                "raza": "Pug",
+                "tamanio": "mediano",
                 "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
                 "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
@@ -39,5 +41,32 @@
         "age": "22",
         "password": "1111",
         "mascotas": []
+    },
+    {
+        "email": "luis@gmail.com",
+        "fullname": "Luis Taliercio",
+        "dni": "42424242",
+        "age": "21",
+        "password": "1111",
+        "mascotas": [
+            {
+                "nombre": "Chinche",
+                "tipo": "Perro",
+                "raza": "Callejero",
+                "tamanio": "chico",
+                "foto": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
+                "planVacunacion": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
+                "video": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1"
+            },
+            {
+                "nombre": "Rinho",
+                "tipo": "Gato",
+                "raza": "Siames",
+                "tamanio": "mediano",
+                "foto": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
+                "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
+                "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
+            }
+        ]
     }
 ]

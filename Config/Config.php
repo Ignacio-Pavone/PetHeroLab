@@ -1,8 +1,8 @@
 <?php namespace Config;
 
 define("ROOT", dirname(__DIR__) . "/");
-//Luis path: /Facu/petHero/PetHero/
-define("FRONT_ROOT", "/TP_FINAL/");
+//Luis path: /Facu/PetHeroLab/
+define("FRONT_ROOT", "/Facu/PetHeroLab/");
 define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "layout/styles/");
 define("JS_PATH", FRONT_ROOT.VIEWS_PATH . "layout/scripts/");

@@ -48,6 +48,7 @@ include('nav-bar.php');
           <thead>
             <tr>
               <th style="width: 15%;">Nombre</th>
+              <th style="width: 15%;">Especie</th>
               <th style="width: 15%;">Raza</th>
               <th style="width: 15%;">Tamaño</th>
               <th style="width: 20%;">Foto</th>
@@ -63,6 +64,7 @@ include('nav-bar.php');
             ?>
               <tr>
                 <td><?php echo $mascota->getNombre(); ?></td>
+                <td><?php echo $mascota->getTipo(); ?></td>
                 <td><?php echo $mascota->getRaza(); ?></td>
                 <td><?php echo $mascota->getTamanio(); ?></td>
                 <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="80px" height="60px"></td>
@@ -170,6 +172,10 @@ include('nav-bar.php');
                             <div class="col-lg-4">
                                 <label for="">Nombre</label>
                                 <input type="text" name="nombre" class="form-control form-control-ml" required>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="">Especie</label>
+                                <input type="text" name="tipo" class="form-control form-control-ml" required>
                             </div>
                             <div class="col-lg-4">
                                 <label for="">Raza</label>
