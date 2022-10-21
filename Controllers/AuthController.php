@@ -2,8 +2,6 @@
 
         use DAO\guardianDAO as guardianDAO;
         use DAO\duenioDAO as duenioDAO;
-        use Models\Guardian as Guardian;
-        use Models\Duenio as Duenio;
         use Utils\Session;
 
         class AuthController
@@ -43,26 +41,5 @@
                 require_once(VIEWS_PATH . 'login.php');
             }
 
-
-            public function setDiaDisponible ($dia_lunes = null, $dia_martes = null, $dia_miercoles = null, $dia_jueves = null, $dia_viernes = null, $dia_sabado = null, $dia_domingo = null){
-                $user = Session::GetLoggedUser();
-                $user->reiniciarDisponibilidad();
-                if ($dia_lunes != null)
-                    $user->setDisponibilidad($dia_lunes);
-                if ($dia_martes != null)
-                    $user->setDisponibilidad($dia_martes);
-                if ($dia_miercoles != null)
-                    $user->setDisponibilidad($dia_miercoles);
-                if ($dia_jueves != null)
-                    $user->setDisponibilidad($dia_jueves);
-                if ($dia_viernes != null)
-                    $user->setDisponibilidad($dia_viernes);
-                if ($dia_sabado != null)
-                    $user->setDisponibilidad($dia_sabado);
-                if ($dia_domingo != null)
-                    $user->setDisponibilidad($dia_domingo);
-                $this->guardianDAO->modifyDispobibilidad($user);
-                $this->showGuardianProfile();
-            }
         }
     ?>

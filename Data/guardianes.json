@@ -5,7 +5,7 @@
         "dni": "12313",
         "age": "22",
         "password": "1111",
-        "tipoMascota": "mediano",
+        "tipoMascota": "chico",
         "disponibilidad": [
             "viernes"
         ],

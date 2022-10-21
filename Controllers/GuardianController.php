@@ -3,8 +3,6 @@ namespace Controllers;
 use Models\Guardian as Guardian;
 use DAO\duenioDAO as duenioDAO;
 use DAO\guardianDAO as guardianDAO;
-use Models\Duenio as Duenio;
-use Models\Mascota as Mascota;
 use Utils\Session;
 
 class GuardianController{

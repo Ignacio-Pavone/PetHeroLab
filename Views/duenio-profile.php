@@ -112,14 +112,12 @@ include('nav-bar.php');
                     <td><?php echo $guardian->getAge(); ?></td>
                     <td><?php echo $guardian->getTipoMascota(); ?></td>
                     <td><?php echo $guardian->getReputacion(); ?></td>                  
-                    <td><?php 
-                        if (count($guardian->getDisponibilidad()) == 0) {
+                    <td><?php if (count($guardian->getDisponibilidad()) == 0) {
                             echo "No tiene disponibilidad";
                         }else{
                             foreach ($guardian->getDisponibilidad() as $disponibilidad){
                                 echo $disponibilidad . ' ';
                         }
-                    
                     } ?></td>
                     <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
@@ -143,16 +141,16 @@ include('nav-bar.php');
                     <br>
                 </center>
                     <form action="<?php echo FRONT_ROOT ?>Duenio/addPet" method="post">
-                        <div class="row" style="width:1000px">
-                            <div class="col-lg-3">
+                        <div class="row" >
+                            <div class="col-lg-4">
                                 <label for="">Nombre</label>
                                 <input type="text" name="nombre" class="form-control form-control-ml" required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Raza</label>
                                 <input type="text" name="raza" class="form-control form-control-ml" required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="" class="" id = "">Tamaño</label><br>
                                 <select name="tamanio" id = "tamanioSolapa">
                                     <option value="chico" selected>Chico</option>
@@ -160,15 +158,15 @@ include('nav-bar.php');
                                     <option value="grande">Grande</option>
                                 </select>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Foto</label>
                                 <input type="url" name="foto" class="form-control form-control-ml" placeholder="Url Only" reqiured>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Plan de Vacunacion</label>
                                 <input type="url" name="planVacunacion" class="form-control form-control-ml" placeholder="Url Only" required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Video</label>
                                 <input type="url" name="video" class="form-control form-control-ml" placeholder="Url Only" required>
                             </div>

@@ -35,7 +35,6 @@ include ('nav-simple-bar.php');
           <br>
         </section>
     </div>
-    <br>
             <section id="login-block" class="mb-5">
             <div class="container" id = "addPetsDuenio">
             <br>  
@@ -46,15 +45,15 @@ include ('nav-simple-bar.php');
                     <form action="<?php echo FRONT_ROOT ?>Duenio/ModifyPet" method="post">
                         <div class="row" style="width:1000px">
                             <input type="hidden" name="nombreviejo"  class="form-control form-control-ml" value = <?php echo $search->getNombre()?>>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Nombre</label>
                                 <input type="text" name="nombre" class="form-control form-control-ml" value = <?php echo $search->getNombre()?> required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Raza</label>
                                 <input type="text" name="raza" class="form-control form-control-ml"  value = <?php echo $search->getRaza()?> required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="" class="" id = "">Tamaño</label><br>
                                 <select name="tamanio" id = "tamanioSolapa">
                                     <option value="chico" <?php echo ($search->getTamanio() == 'Chico' ? 'selected' : '') ?>>Chico</option>
@@ -62,15 +61,15 @@ include ('nav-simple-bar.php');
                                     <option value="grande" <?php echo ($search->getTamanio() == 'Grande' ? 'selected' : '') ?>>Grande</option>
                                 </select>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Foto</label>
                                 <input type="url" name="foto" class="form-control form-control-ml" placeholder="Url Only"  value = <?php echo $search->getFoto()?> reqiured>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Plan de Vacunacion</label>
                                 <input type="url" name="planVacunacion" class="form-control form-control-ml" placeholder="Url Only" value = <?php echo $search->getPlanVacunacion()?> required>
                             </div>
-                            <div class="col-lg-3">
+                            <div class="col-lg-4">
                                 <label for="">Video</label>
                                 <input type="url" name="video" class="form-control form-control-ml" placeholder="Url Only" value = <?php echo $search->getVideo()?> required>
                             </div>

@@ -5,7 +5,7 @@ use Utils\Session;
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
 include('nav-bar.php');
-$value = null;
+
 ?>
 <section class="login-block"> 
 <main class="py-1">
@@ -46,8 +46,7 @@ $value = null;
 
                          <div class="col-lg-4" >
                               <label for="">Disponibilidad</label>
-                              <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="
-                              <?php   
+                              <input type="text" name="remuneracionEsperada" class="form-control form-control-ml" disabled value="<?php   
                               if (count($user->getDisponibilidad()) == 0) echo 'No hay dias elegidos.';
                               else {
                                   $array = $user->getDisponibilidad();
@@ -60,16 +59,13 @@ $value = null;
                          <div class="col-lg-12" style="height:15px"></div>
                          <div class="col-lg-6" >
                               <label for="">Fecha Incio</label>
-                              <input type="text" name="fechainicio" class="form-control form-control-ml" disabled value="
-                              <?php   
+                              <input type="text" name="fechainicio" style="text-align:center;" class="form-control form-control-ml" disabled value="<?php   
                                    echo $user->getInitDate();
                               ?>">
                          </div>
                          <div class="col-lg-6" >
                               <label for="">Fecha Fin</label>
-                              <input type="text" name="fechafin" class="form-control form-control-ml" disabled value="
-                              <?php   
-                                   echo $user->getFinishDate();
+                              <input type="text" name="fechafin" style="text-align:center;" class="form-control form-control-ml" disabled value="<?php echo $user->getFinishDate();
                               ?>">
                          </div>
                     </div> 
@@ -106,7 +102,7 @@ $value = null;
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-               <a class="btn btn-dark ml-auto " href="<?php echo FRONT_ROOT.'Duenio/Cuidar/'.$mascota->getNombre(); ?>">Cuidar</a>
+               <a class="btn btn-dark ml-auto " href="<?php ?>">Cuidar</a>
                </td>
               </tr>
             <?php
