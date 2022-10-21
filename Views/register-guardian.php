@@ -1,5 +1,6 @@
 <?php
 include_once 'back-bar.php';
+require_once VIEWS_PATH . 'header.php';
 ?>
 <section class="login-block">
 <div class="container">

@@ -5,6 +5,7 @@ use Models\Usuario;
 
 class Guardian extends Usuario {
 
+    //TODO triple validacion para reserva tipo mascota, tamanio, raza
     private $tipoMascota; //tamaño de mascota chica mediana grande
     private $remuneracionEsperada; //no sabemos si es por hora o no
     private $reputacion;
@@ -21,62 +22,49 @@ class Guardian extends Usuario {
         $this->disponibilidad = $disponibilidad;
         $this->initDate = $initDate;
         $this->finishDate = $finishDate;
-        
-
     }
 
-    public function setTipoMascota($tipoMascota)
-    {
+    public function setTipoMascota($tipoMascota){
         $this->tipoMascota = $tipoMascota;
     }
 
-    public function setinitDate($initDate)
-    {
+    public function setinitDate($initDate){
         $this->initDate = $initDate;
     }
 
-    public function setfinishDate($finishDate)
-    {
+    public function setfinishDate($finishDate){
         $this->finishDate = $finishDate;
     }
 
-    public function getFinishDate()
-    {
+    public function getFinishDate(){
         return $this->finishDate;
     }
 
-    public function getInitDate()
-    {
+    public function getInitDate(){
         return $this->initDate;
     }
 
-    public function getTipoMascota()
-    {
+    public function getTipoMascota(){
         return $this->tipoMascota;
     }
 
-    public function setRemuneracionEsperada($remuneracionEsperada)
-    {
+    public function setRemuneracionEsperada($remuneracionEsperada){
         $this->remuneracionEsperada = $remuneracionEsperada;
     }
 
-    public function getRemuneracionEsperada()
-    {
+    public function getRemuneracionEsperada(){
         return $this->remuneracionEsperada;
     }
 
-    public function setReputacion($reputacion)
-    {
+    public function setReputacion($reputacion){
         $this->reputacion = $reputacion;
     }
 
-    public function getReputacion()
-    {
+    public function getReputacion(){
         return $this->reputacion;
     }
 
-    public function getDisponibilidad()
-    {
+    public function getDisponibilidad(){
         return $this->disponibilidad;
     }
 

@@ -1,0 +1,12 @@
+[
+    {
+        "nroReserva": 1,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-20",
+        "fechaFin": "2022-10-22",
+        "estado": "Pendiente",
+        "costoTotal": 1500
+    }
+]

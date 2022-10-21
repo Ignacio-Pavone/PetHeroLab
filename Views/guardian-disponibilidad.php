@@ -1,6 +1,7 @@
 <?php
 use Utils\Session;
 $user = Session::GetLoggedUser();
+require_once VIEWS_PATH . 'header.php';
 $type = $_SESSION['userType'];
 include ('nav-simple-bar.php');
 ?>

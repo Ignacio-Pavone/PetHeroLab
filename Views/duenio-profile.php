@@ -1,7 +1,9 @@
 <?php
 use Utils\Session;
+require_once VIEWS_PATH . 'header.php';
 $user = Session::getLoggedUser();
 $type = $_SESSION['userType'];
+
 include('nav-bar.php');
 ?>
 
@@ -99,6 +101,7 @@ include('nav-bar.php');
               <th style="width: 10%;">Disponibilidad</th>
               <th style="width: 30%;">Fechas</th>
               <th style="width: 10%;">Costo</th>
+              <th style="width: 20%;">Mascotas</th>
               <th style="width: 20%;">Accion</th>
             </tr>
           </thead>
@@ -120,14 +123,37 @@ include('nav-bar.php');
                     } ?></td>
                     <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
+
+                    <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
+                    <td><div class="col-lg-2">
+                                <select name="mascota" id = "solapaDuenios">
+                                    <?php foreach ($user->getMascotas() as $mascota) { ?>
+                                        <option name = "mascota" value="<?php echo $mascota->getNombre(); ?>"><?php echo $mascota->getNombre(); ?></option>
+                                    <?php } ?>
+                                </select>
+                    </div></td>
                     <td>
-                    <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/NADA/'.$guardian->getFullName(); ?>">NADA</a>
+                        <input type="hidden" name="Duenio" value="<?php echo $user->getEmail(); ?>">
+                        <input type="hidden" name="Guardian" value="<?php echo $guardian->getEmail(); ?>">
+                        <input type="hidden" name="fechaInicio" value="<?php echo $guardian->getInitDate(); ?>">
+                        <input type="hidden" name="fechaFin" value="<?php echo $guardian->getFinishDate(); ?>">
+                        <input type="hidden" name="costoTotal" value="<?php echo $guardian->getRemuneracionEsperada(); ?>">
+                        <button type="submit" style = "text-align:center" class="btn btn-dark">Solicitar</button>
                     </td>
-                    </tr>
+                    </form>
                     <?php
             } 
             ?>
-          </tbody>
+
+        <?php if (Session::VerifiyMessage()) { ?>
+            <div class="alert alert-danger alert-dismissible fade show" style="text-align:center" role="alert">
+                <?php echo $_SESSION['message'];
+                        unset($_SESSION['message']); 
+                    ?>
+            </div>
+        <?php } ?>
+        </div>
+        </tbody>
         </table>
         <br>
             </div>

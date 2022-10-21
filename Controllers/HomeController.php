@@ -6,7 +6,7 @@ use Utils\Session;
 	class HomeController
 	{
 		public function Index(){
-			require_once(VIEWS_PATH . 'login.php');
+			require_once(VIEWS_PATH."login.php");
 		}
 
 		public function Logout(){

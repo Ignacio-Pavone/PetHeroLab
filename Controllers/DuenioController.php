@@ -12,8 +12,7 @@ class DuenioController{
     private $guardianDAO;
     private $authController;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->duenioDAO = new duenioDAO();
         $this->guardianDAO = new guardianDAO();
         $this->authController = new AuthController();

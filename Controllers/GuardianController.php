@@ -11,15 +11,13 @@ class GuardianController{
     private $guardianDAO;
     private $authController;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->duenioDAO = new duenioDAO();
         $this->guardianDAO = new guardianDAO();
         $this->authController = new AuthController();
     }
 
-    public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada)
-    {
+    public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada){
         $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada,$diponibilidad=array(),$initDate=null,$finishDate=null);
         if($this->guardianDAO->getGuardianByEmail($email) == null)
         {
@@ -56,7 +54,6 @@ class GuardianController{
     }
 
     public function showdisponibilityView ($guardianname){
-       
         $guardian = $this->guardianDAO->getGuardianByEmail($guardianname);
         require_once (VIEWS_PATH."guardian-disponibilidad.php");
     }

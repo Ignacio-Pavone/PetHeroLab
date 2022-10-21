@@ -1,5 +1,6 @@
 <?php
 use Utils\Session;
+require_once VIEWS_PATH . 'header.php';
 include_once 'nav-bar.php';
 ?>
 <main class="login-block-real">
@@ -36,7 +37,7 @@ include_once 'nav-bar.php';
 </div>
 </form>
 <?php if (Session::VerifiyMessage()) { ?>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <div class="alert alert-danger alert-dismissible fade show" style="text-align:center" role="alert">
            <?php echo $_SESSION['message'];
                  unset($_SESSION['message']); 
             ?>
