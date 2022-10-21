@@ -25,7 +25,7 @@ include ('nav-simple-bar.php');
                     <td><?php echo $search->getNombre(); ?></td>
                     <td><?php echo $search->getRaza(); ?></td>
                     <td><?php echo $search->getTamanio(); ?></td>
-                    <td><img src="<?php echo $search->getFoto(); ?>" alt="" width="90px" height="70px"></td>
+                    <td><img src="<?php echo $search->getFoto(); ?>" alt="" width="80px" height="60px"></td>
                     <td><a href="<?php echo $search->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
                     <td><a href="<?php echo $search->getVideo(); ?>" target="_blank">Ver Video</a></td>
                     <td><a href="<?php  ?>">Actualizar</a></td>

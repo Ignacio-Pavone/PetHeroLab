@@ -18,7 +18,6 @@ include('nav-bar.php');
                             <label for="">Nombre</label>
                             <input type="text" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getFullName();  ?>">
                         </div>
-
                         <div class="col-lg-3">
                             <label for="">Edad</label>
                             <input type="text" name="" class="form-control form-control-ml" style="text-align:center" disabled value="<?php echo $user->getAge();  ?>">
@@ -64,7 +63,7 @@ include('nav-bar.php');
                 <td><?php echo $mascota->getNombre(); ?></td>
                 <td><?php echo $mascota->getRaza(); ?></td>
                 <td><?php echo $mascota->getTamanio(); ?></td>
-                <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="90px" height="70px"></td>
+                <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="80px" height="60px"></td>
                 <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
@@ -95,11 +94,11 @@ include('nav-bar.php');
             <tr>
               <th style="width: 10%;">Nombre</th>
               <th style="width: 10%;">Edad</th>
-              <th style="width: 15%;">Preferencia</th>
+              <th style="width: 10%;">Preferencia</th>
               <th style="width: 5%;">Reputacion</th>
               <th style="width: 10%;">Disponibilidad</th>
               <th style="width: 30%;">Fechas</th>
-              <th style="width: 5%;">Costo</th>
+              <th style="width: 10%;">Costo</th>
               <th style="width: 20%;">Accion</th>
             </tr>
           </thead>
@@ -179,7 +178,6 @@ include('nav-bar.php');
                         </div>
                         <br>
                     </form>
-
                 </div>
             </div> 
  </section>
