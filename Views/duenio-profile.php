@@ -121,6 +121,9 @@ include('nav-bar.php');
               <th style="width: 10%;">Disponibilidad</th>
               <th style="width: 30%;">Fechas</th>
               <th style="width: 10%;">Costo</th>
+              <th style="width: 10%;">Fecha inicio</th>
+              <th style="width: 10%;">Fecha fin</th>
+
               <th style="width: 20%;">Mascotas</th>
               <th style="width: 20%;">Accion</th>
             </tr>
@@ -143,9 +146,11 @@ include('nav-bar.php');
                     } ?></td>
                     <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
-                    <!--<td><input type="date" name="date" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>       -->               
-
+                    
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
+                    <td><input type="date"  id="initDate"name="fechaInicio" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
+                    <td><input type="date" name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
+                    
                     <td><div class="col-lg-2">
                                 <select name="mascota" id = "solapaDuenios">
                                     <?php foreach ($user->getMascotas() as $mascota) { ?>
@@ -156,8 +161,8 @@ include('nav-bar.php');
                     <td>
                         <input type="hidden" name="Duenio" value="<?php echo $user->getEmail(); ?>">
                         <input type="hidden" name="Guardian" value="<?php echo $guardian->getEmail(); ?>">
-                        <input type="hidden" name="fechaInicio" value="<?php echo $guardian->getInitDate(); ?>">
-                        <input type="hidden" name="fechaFin" value="<?php echo $guardian->getFinishDate(); ?>">
+                        <!--<input type="hidden" name="fechaInicio" value="<?php echo $guardian->getInitDate(); ?>"> -->
+                        <!--<input type="hidden" name="fechaFin" value="<?php echo $guardian->getFinishDate(); ?>"> -->
                         <input type="hidden" name="costoTotal" value="<?php echo $guardian->getRemuneracionEsperada(); ?>">
                         <button type="submit" style = "text-align:center" class="btn btn-dark">Solicitar</button>
                     </td>

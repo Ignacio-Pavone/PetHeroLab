@@ -91,7 +91,6 @@ use Models\Guardian;
             $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
             $valuesArray['initDate'] = $user->getInitDate();
             $valuesArray['finishDate'] = $user->getFinishDate();
-           
             array_push($arrayToEncode, $valuesArray);
             }
 

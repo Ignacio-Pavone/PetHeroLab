@@ -20,5 +20,60 @@
         "estado": "Rechazado",
         "costoTotal": 1500,
         "tipo": "Perro"
+    },
+    {
+        "nroReserva": 3,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-21",
+        "fechaFin": "2022-10-24",
+        "estado": "Pendiente",
+        "costoTotal": 1500,
+        "tipo": "Perro"
+    },
+    {
+        "nroReserva": 4,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-21",
+        "fechaFin": "2022-10-24",
+        "estado": "Pendiente",
+        "costoTotal": 1500,
+        "tipo": "Perro"
+    },
+    {
+        "nroReserva": 5,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-21",
+        "fechaFin": "2022-10-24",
+        "estado": "Pendiente",
+        "costoTotal": 1500,
+        "tipo": "Perro"
+    },
+    {
+        "nroReserva": 6,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-23",
+        "fechaFin": "2022-10-24",
+        "estado": "Pendiente",
+        "costoTotal": 1500,
+        "tipo": "Perro"
+    },
+    {
+        "nroReserva": 7,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-22",
+        "fechaFin": "2022-10-22",
+        "estado": "Pendiente",
+        "costoTotal": 1500,
+        "tipo": "Perro"
     }
 ]
