@@ -32,6 +32,7 @@ use Models\Guardian;
         $valuesArray["estado"] = $reserva->getEstado();
         $valuesArray["costoTotal"] = $reserva->getCostoTotal();
         $valuesArray["tipo"] = $reserva->getTipo();
+        $valuesArray["raza"] = $reserva->getRaza();
         $valuesArray["cantidadDias"] = $reserva->getCantidadDias();
 
         array_push($arrayToEncode, $valuesArray);
@@ -77,7 +78,7 @@ use Models\Guardian;
                 $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($array as $item) 
                 {
-                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['cantidadDias']);
+                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
                     $reserva->setEstado($item['estado']);
                     $reserva->setNroReserva($item['nroReserva']);
                    
@@ -146,11 +147,17 @@ use Models\Guardian;
 
     //para hacer comprobacion de que sean todos de la misma raza en el guardian, devuelve verdadero sino coinciden
     //anda bien pero una vez que cuido un gato no se le puede volver a mandar otro gato chequear esto de alguna manera
-    public function checkfirstPetType ($guardian,$tipo){
+    public function checkfirstPetType ($guardian,$tipo,$raza){
       $reservas = $this->getReservasByGuardian($guardian);
+      if (empty($reservas)){
+        return true;
+      }
+
       if ($reservas!=null){
-        if ($reservas[0]->getTipo() != $tipo){
-          return true;
+        if (strcasecmp($reservas[0]->getTipo(),$tipo) == 0){
+          if (strcasecmp($reservas[0]->getTipo(),$raza) != 0){
+            return true;
+          }
         }
       }
       return false;
@@ -176,6 +183,13 @@ use Models\Guardian;
         $days = 1;
       }
       return $days;
+    }
+
+    public function chequeoDataReserva ($searchPet,$searchGuardian,$searchDuenio){
+      if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null)
+      return true;
+      else
+      return false;
     }
 }
 

@@ -117,14 +117,14 @@ include('nav-bar.php');
               <th style="width: 10%;">Nombre</th>
               <th style="width: 10%;">Edad</th>
               <th style="width: 10%;">Preferencia</th>
-              <th style="width: 10%;">Reputacion</th> 
+              <th style="width: 5%;">Reputacion</th> 
               <!--<th style="width: 10%;">Disponibilidad</th> -->
               <!--<th style="width: 30%;">Fechas</th> -->
-              <th style="width: 10%;">Costo por Dia</th>
-              <th style="width: 10%;">Fecha inicio</th>
-              <th style="width: 10%;">Fecha fin</th>
-              <th style="width: 10%;">Mascotas</th>
-              <th style="width: 10%;">Accion</th>
+              <th style="width: 25%;">Costo por Dia</th>
+              <th style="width: 5%;">Fecha inicio</th>
+              <th style="width: 5%;">Fecha fin</th>
+              <th style="width: 5%;">Mascotas</th>
+              <th style="width: 5%;">Accion</th>
             </tr>
           </thead>
           <tbody>
@@ -147,8 +147,8 @@ include('nav-bar.php');
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
-                    <td><input type="date"  id="initDate"name="fechaInicio" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
-                    <td><input type="date" id ="endDate"name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
+                    <td><input type="date"  id="initDate"name="fechaInicio" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select required></td>
+                    <td><input type="date" id ="endDate"name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select required></td>
                     
                     <td><div class="col-lg-2">
                                 <select name="mascota" id = "solapaDuenios">
