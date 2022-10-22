@@ -26,7 +26,7 @@ include('nav-bar.php');
         </div>
             <div class="container" id = "dataUser">
                 <center> 
-                    <h3 class="mb" id = "dataUser">Datos</h3>
+                    <h3 class="mb">Datos</h3>
                     <hr>
                 </center>
                 <div class="bg-light-alpha p-1" id = "dataUser">
@@ -51,6 +51,7 @@ include('nav-bar.php');
                         </div>
                     </div>
                 </div>
+                <br>
             </div>
             <br>
             <div class="container" id = "css-mine">

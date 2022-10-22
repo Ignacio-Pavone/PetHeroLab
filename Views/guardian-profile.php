@@ -25,10 +25,10 @@ include('nav-bar.php');
                <?php }
           } ?>
         </div>
-          <div class="container">   
-          <center><h3 class="mb" id = "dataUser">Datos del Usuario</h3></center>
+          <div class="container" id = "dataUser">   
+          <center><h3 class="mb">Datos del Usuario</h3></center>
           <hr>
-               <div class="bg-light-alpha p-4" id = "dataUser">
+               <div class="bg-light-alpha p-4">
                     <div class="row">
                          <div class="col-lg-3">
                               <label for="">Nombre</label>
