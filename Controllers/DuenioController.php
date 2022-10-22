@@ -9,13 +9,10 @@ use Utils\Session;
 
 class DuenioController{
     private $duenioDAO;
-    private $guardianDAO;
-    private $authController;
+
 
     public function __construct(){
         $this->duenioDAO = new duenioDAO();
-        $this->guardianDAO = new guardianDAO();
-        $this->authController = new AuthController();
     }
 
     public function addPet($nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video){

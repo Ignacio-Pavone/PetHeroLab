@@ -13,8 +13,7 @@
 
         public function __construct(){
                 $this->guardianDAO = new guardianDAO();
-                $this->duenioDAO = new duenioDAO();
-                $this->authController = new AuthController();   
+                $this->duenioDAO = new duenioDAO(); 
                 $this->reservaDAO = new reservaDAO();
         }
         
@@ -22,7 +21,6 @@
             $searchPet = $this->duenioDAO->searchPetByName($mascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
-            var_dump($searchPet->getTipo());
             if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null){
                 if (!$this->reservaDAO->checkfirstPetType($searchGuardian->getFullName(),$searchPet->getTipo())) {
                     $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo());

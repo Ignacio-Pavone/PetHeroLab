@@ -2,18 +2,15 @@
 
         use DAO\guardianDAO as guardianDAO;
         use DAO\duenioDAO as duenioDAO;
-        use DAO\reservaDAO as reservaDAO;
         use Utils\Session;
 
         class AuthController{
             private $guardianDAO;
             private $duenioDAO;
-            private $reservaDAO;
             
             public function __construct(){
                 $this->guardianDAO = new guardianDAO();
                 $this->duenioDAO = new duenioDAO();
-                $this->reservaDAO = new reservaDAO();
             }
 
             public function login($email, $password){

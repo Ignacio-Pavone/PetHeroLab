@@ -81,11 +81,14 @@ require_once VIEWS_PATH . 'header.php';
                             <br>
                             <div class="row" id = "buttonraro" style="border: 1px solid">
                              <div class="col-lg-1" style="text-align:center">
-                              <button type="submit" style = "text-align:center" class="btn btn-dark">Modificar</button>
+                              <button type="submit" onclick="return confirm('Are you sure?')" style = "text-align:center" class="btn btn-dark">Modificar</button>
                     </div> 
                     </form>
                         </div>
                         <br>
                 </div>
             </div> 
+    
   </main>
+
+<!-- ################################################################################################ -->
