@@ -148,8 +148,17 @@ include('nav-bar.php');
                     
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                     <td><input type="date"  id="initDate"name="fechaInicio" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
-                    <td><input type="date" name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
-                    
+                    <td><input type="date" id ="endDate"name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>
+                    <script>
+                        let initDate = document.getElementById("initDate");
+                        let endDate = document.getElementById("endDate");
+                        initDate.addEventListener("change", () => {
+                            endDate.min = initDate.value;
+                        });
+                        endDate.addEventListener("change", () => {
+                            initDate.max = endDate.value;
+                        });
+                    </script>
                     <td><div class="col-lg-2">
                                 <select name="mascota" id = "solapaDuenios">
                                     <?php foreach ($user->getMascotas() as $mascota) { ?>
