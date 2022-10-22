@@ -117,15 +117,14 @@ include('nav-bar.php');
               <th style="width: 10%;">Nombre</th>
               <th style="width: 10%;">Edad</th>
               <th style="width: 10%;">Preferencia</th>
-              <th style="width: 5%;">Reputacion</th>
-              <th style="width: 10%;">Disponibilidad</th>
-              <th style="width: 30%;">Fechas</th>
+              <th style="width: 10%;">Reputacion</th> 
+              <!--<th style="width: 10%;">Disponibilidad</th> -->
+              <!--<th style="width: 30%;">Fechas</th> -->
               <th style="width: 10%;">Costo</th>
               <th style="width: 10%;">Fecha inicio</th>
               <th style="width: 10%;">Fecha fin</th>
-
-              <th style="width: 20%;">Mascotas</th>
-              <th style="width: 20%;">Accion</th>
+              <th style="width: 10%;">Mascotas</th>
+              <th style="width: 10%;">Accion</th>
             </tr>
           </thead>
           <tbody>
@@ -136,15 +135,15 @@ include('nav-bar.php');
                     <td><?php echo $guardian->getFullName(); ?></td>
                     <td><?php echo $guardian->getAge(); ?></td>
                     <td><?php echo $guardian->getTipoMascota(); ?></td>
-                    <td><?php echo $guardian->getReputacion(); ?></td>                  
-                    <td><?php if (count($guardian->getDisponibilidad()) == 0) {
+                    <td><?php echo $guardian->getReputacion(); ?></td>                 
+                    <!-- <td><?php if (count($guardian->getDisponibilidad()) == 0) {
                             echo "No tiene disponibilidad";
                         }else{
                             foreach ($guardian->getDisponibilidad() as $disponibilidad){
                                 echo $disponibilidad . ' ';
                         }
-                    } ?></td>
-                    <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
+                    } ?></td> -->
+                    <!-- <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td> -->
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
