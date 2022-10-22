@@ -33,7 +33,7 @@ require_once VIEWS_PATH . 'header.php';
             <a class="nav-link" href="#css-mine">Ver Todas las Mascotas</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="<?php echo FRONT_ROOT.'Guardian/showdisponibilityView/'.$user->getFullName(); ?>">Modificar Disponibilidad</a>
+            <a class="nav-link" href="<?php echo FRONT_ROOT.'Auth/showdisponibilityView/'.$user->getFullName(); ?>">Modificar Disponibilidad</a>
         </li>
         <?php } ?>
         <li class="nav-item">

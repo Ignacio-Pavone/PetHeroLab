@@ -36,6 +36,10 @@
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 
+            public function showdisponibilityView(){
+                require_once(VIEWS_PATH . 'guardian-disponibilidad.php');
+            }
+
             public function showLogin($message = ""){
                 require_once(VIEWS_PATH . 'login.php');
             }
