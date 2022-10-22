@@ -32,6 +32,7 @@ use Models\Guardian;
         $valuesArray["estado"] = $reserva->getEstado();
         $valuesArray["costoTotal"] = $reserva->getCostoTotal();
         $valuesArray["tipo"] = $reserva->getTipo();
+        $valuesArray["cantidadDias"] = $reserva->getCantidadDias();
 
         array_push($arrayToEncode, $valuesArray);
       }
@@ -76,9 +77,10 @@ use Models\Guardian;
                 $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($array as $item) 
                 {
-                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo']);
+                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['cantidadDias']);
                     $reserva->setEstado($item['estado']);
                     $reserva->setNroReserva($item['nroReserva']);
+                   
                     array_push($this->list, $reserva);
                     if ($item["nroReserva"] > $this->id) {
                       $this->id = $item["nroReserva"];
@@ -157,10 +159,23 @@ use Models\Guardian;
     public function dateChecker($dateone, $datetwo){
       $date1 = strtotime($dateone);
       $date2 = strtotime($datetwo);
-      if ($date1 < $date2){
+      if ($date1 <= $date2){
         return false;
       }
       return true;
+    }
+
+    public function contarDias ($fechaInicio, $fechaFin){
+      $date1 = strtotime($fechaInicio);
+      $date2 = strtotime($fechaFin);
+      $diff = abs($date2 - $date1);
+      $years = floor($diff / (365*60*60*24));
+      $months = floor(($diff - $years * 365*60*60*24) / (30*60*60*24));
+      $days = floor(($diff - $years * 365*60*60*24 - $months*30*60*60*24)/ (60*60*24));
+      if ($days == 0){
+        $days = 1;
+      }
+      return $days;
     }
 }
 

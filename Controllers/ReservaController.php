@@ -18,12 +18,14 @@
         }
         
         public function solicitarReservaDuenio ($mascota,$Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal){
+            $dias = $this->reservaDAO->contarDias($fechaInicio,$fechaFin);
             $searchPet = $this->duenioDAO->searchPetByName($mascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
             if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null && !$this->reservaDAO->dateChecker($fechaInicio,$fechaFin)){
                 if (!$this->reservaDAO->checkfirstPetType($searchGuardian->getFullName(),$searchPet->getTipo())) {
-                    $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo());
+                    $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(), $dias);
+                    $reserva->calcularCostoTotal($costoTotal);
                     $this->reservaDAO->add($reserva);
                     Session::SetOkMessage("Guardian Solicitado con Exito");
                 }else{

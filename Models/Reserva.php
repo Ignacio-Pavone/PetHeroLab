@@ -13,8 +13,9 @@ use Utils\EReserva as EReserva;
         private $estado;
         private $costoTotal;
         private $tipo;
+        private $cantidadDias;
 
-    public function __construct($mascota,$duenio,$guardian,$fechaInicio,$fechaFin,$costoTotal,$tipo){
+    public function __construct($mascota,$duenio,$guardian,$fechaInicio,$fechaFin,$costoTotal,$tipo,$cantidadDias){
         $this->mascota = $mascota;
         $this->duenio = $duenio;
         $this->guardian = $guardian;
@@ -23,6 +24,19 @@ use Utils\EReserva as EReserva;
         $this->estado = EReserva::Pendiente;
         $this->costoTotal = $costoTotal;
         $this->tipo = $tipo;
+        $this->cantidadDias = $cantidadDias;
+    }
+
+    public function getCantidadDias(){
+        return $this->cantidadDias;
+    }
+
+    public function setCantidadDias($cantidadDias){
+        $this->cantidadDias = $cantidadDias;
+    }
+
+    public function calcularCostoTotal ($costo){
+        $this->costoTotal = $costo * $this->cantidadDias;
     }
 
     public function getTipo(){

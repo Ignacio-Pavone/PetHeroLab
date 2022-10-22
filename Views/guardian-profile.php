@@ -140,7 +140,7 @@ include('nav-bar.php');
                <th style="width: 15%;">Tipo</th>
                <th style="width: 20%;">fechaInicio</th>
                <th style="width: 20%;">fechaFin</th>
-               <th style="width: 20%;">Costo</th>
+               <th style="width: 20%;">Ganancia</th>
                <th style="width: 20%;">Aceptar</th>
                <th style="width: 20%;">Rechazar</th>
                </tr>
@@ -154,7 +154,7 @@ include('nav-bar.php');
                          <td><?php echo $reserva->getTipo(); ?></td>
                          <td><?php echo $reserva->getFechaInicio(); ?></td>
                          <td><?php echo $reserva->getFechaFin(); ?></td>
-                         <td><?php echo $reserva->getCostoTotal(); ?></td>
+                         <td><?php echo $reserva->getCostoTotal() . ' $'; ?></td>
                          <td> 
                          <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')" href="<?php echo FRONT_ROOT.'Reserva/aceptarReservaGuardian/'.$reserva->getNroReserva()?>">Aceptar</a>
                          </td>

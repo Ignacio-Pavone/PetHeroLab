@@ -120,7 +120,7 @@ include('nav-bar.php');
               <th style="width: 10%;">Reputacion</th> 
               <!--<th style="width: 10%;">Disponibilidad</th> -->
               <!--<th style="width: 30%;">Fechas</th> -->
-              <th style="width: 10%;">Costo</th>
+              <th style="width: 10%;">Costo por Dia</th>
               <th style="width: 10%;">Fecha inicio</th>
               <th style="width: 10%;">Fecha fin</th>
               <th style="width: 10%;">Mascotas</th>
@@ -184,10 +184,11 @@ include('nav-bar.php');
      <thead>
      <tr>
      <th style="width: 20%;">Guardian</th>
-     <th style="width: 20%;">Mascota</th>
-     <th style="width: 20%;">fechaInicio</th>
-     <th style="width: 20%;">fechaFin</th>
-     <th style="width: 20%;">Costo</th>
+     <th style="width: 10%;">Mascota</th>
+     <th style="width: 20%;">Fecha Inicio</th>
+     <th style="width: 20%;">Fecha Fin</th>
+     <th style="width: 10%;">Dias</th>
+     <th style="width: 20%;">Costo Total</th>
      <th style="width: 30%;">Estado</th>
      <th style="width: 30%;">Rechazar</th>
      </tr>
@@ -200,7 +201,8 @@ include('nav-bar.php');
                <td><?php echo $reserva->getMascota(); ?></td>
                <td><?php echo $reserva->getFechaInicio(); ?></td>
                <td><?php echo $reserva->getFechaFin(); ?></td>
-               <td><?php echo $reserva->getCostoTotal(); ?></td>
+                <td><?php echo $reserva->getCantidadDias(); ?></td>
+               <td><?php echo $reserva->getCostoTotal() . ' $' ?></td>
                <td><?php if ($reserva->getEstado() == 'Confirmado'){
                               echo "<p style=color:green>Confirmado</p>";      
                          }elseif ($reserva->getEstado() == 'Pendiente'){
