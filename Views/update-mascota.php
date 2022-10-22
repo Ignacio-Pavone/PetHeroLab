@@ -8,11 +8,13 @@ require_once VIEWS_PATH . 'header.php';
             <div class="container" id = "dataUser">
                 <center> 
                     <h3 class="mb" id = "dataUser">Modificar Mascota</h3>
+                    <hr>
                 </center>
         <table style="text-align:center;">
           <thead>
             <tr>
               <th style="width: 15%;">Nombre</th>
+              <th style="width: 15%;">Especie</th>
               <th style="width: 15%;">Raza</th>
               <th style="width: 15%;">Tamaño</th>
               <th style="width: 20%;">Foto</th>
@@ -24,6 +26,7 @@ require_once VIEWS_PATH . 'header.php';
             <tbody>
                 <tr>
                     <td><?php echo $search->getNombre(); ?></td>
+                    <td><?php echo $search->getTipo(); ?></td>
                     <td><?php echo $search->getRaza(); ?></td>
                     <td><?php echo $search->getTamanio(); ?></td>
                     <td><img src="<?php echo $search->getFoto(); ?>" alt="" width="80px" height="60px"></td>
@@ -41,6 +44,7 @@ require_once VIEWS_PATH . 'header.php';
             <br>  
                 <center>
                     <h3 class="mb">Modifique los datos de la mascota</h3>
+                    <hr>
                     <br>
                 </center>
                     <form action="<?php echo FRONT_ROOT ?>Duenio/ModifyPet" method="post">
@@ -84,7 +88,4 @@ require_once VIEWS_PATH . 'header.php';
                         <br>
                 </div>
             </div> 
-    
   </main>
-
-<!-- ################################################################################################ -->

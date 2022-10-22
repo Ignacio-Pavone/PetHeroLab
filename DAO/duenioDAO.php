@@ -112,19 +112,13 @@ class duenioDAO{
 
     public function deleteMascota ($user,$nombre){
         $this->LoadDuenioJson();
-        
         $userSearch = $this->getDuenioByEmail($user->getEmail());
         $petSearch = $this->searchPetByName($nombre);
-        //var_dump($petSearch);
         if ($userSearch!=null && $petSearch!=null){
-            var_dump($petSearch);
             $nuevousuario = $this->deletePetbyName($userSearch,$petSearch);
             Session::CreateSession($nuevousuario);
             $this->saveDuenioJson();
-        }else{
-            
-        }
-       
+        } 
     }
 
     public function deletePetbyName ($user,$mascota){
@@ -186,8 +180,10 @@ class duenioDAO{
                $usernew= $this->updatePetbyName($userSearch,$petSearch,$nuevamascota);
                $this->saveDuenioJson();
                Session::CreateSession($usernew);
+               return true;
             }
         }
+        return false;
     }
 
     public function updatePetbyName ($userSearch,$petSearch,$search){

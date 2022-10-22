@@ -9,7 +9,6 @@
         class ReservaController{
         private $guardianDAO;
         private $duenioDAO;
-        private $authController;
         private $reservaDAO;
 
         public function __construct(){
@@ -23,25 +22,43 @@
             $searchPet = $this->duenioDAO->searchPetByName($mascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
+            var_dump($searchPet->getTipo());
             if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null){
-                $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal));
-                $this->reservaDAO->add($reserva);
-                Session::SetMessage("Guardian Solicitado con Exito");
+                if (!$this->reservaDAO->checkfirstPetType($searchGuardian->getFullName(),$searchPet->getTipo())) {
+                    $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo());
+                    $this->reservaDAO->add($reserva);
+                    Session::SetOkMessage("Guardian Solicitado con Exito");
+                }else{
+                    Session::SetBadMessage("El guardian esta cuidando distinto tipo de mascotas");
+                }
             }else{
-                Session::SetMessage("No se pudo realizar la reserva");
+                Session::SetBadMessage("No se pudo realizar la reserva");
             }
-            $this->authController->ShowDuenioProfile();
-            
+            header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
         }
 
         public function aceptarReservaGuardian($nroReserva){
-            $this->reservaDAO->aceptarReservaGuardian($nroReserva);
-            $this->authController->showGuardianProfile();
+            if ($this->reservaDAO->aceptarReservaGuardiann($nroReserva)){
+                Session::SetOkMessage("Reserva Aceptada con Exito");
+            }else{
+                Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
+            }
+            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
         }
 
         public function rechazarReservaGuardian($nroReserva){
             $this->reservaDAO->rechazarReservaGuardian($nroReserva);
-            $this->authController->showGuardianProfile();
+            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
         }
+
+        public function cancelarReservaDuennio($nroReserva){
+            if($this->reservaDAO->cancelarcomoDuenio($nroReserva)){
+                Session::SetOkMessage("Reserva Cancelada con Exito");
+            }else{
+                Session::SetBadMessage("No se pudo cancelar la reserva");
+            };
+            header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
+        }
+        
 
 }

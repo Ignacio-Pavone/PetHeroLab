@@ -1,6 +1,7 @@
 <?php namespace DAO;
 
 use Models\Reserva as Reserva;
+use Utils\EReserva as EReserva;
 use Utils\Session;
 
 use Models\Guardian;
@@ -30,6 +31,7 @@ use Models\Guardian;
         $valuesArray["fechaFin"] = $reserva->getFechaFin();
         $valuesArray["estado"] = $reserva->getEstado();
         $valuesArray["costoTotal"] = $reserva->getCostoTotal();
+        $valuesArray["tipo"] = $reserva->getTipo();
 
         array_push($arrayToEncode, $valuesArray);
       }
@@ -55,6 +57,17 @@ use Models\Guardian;
       return $array;
     }
 
+    public function getReservasByDuenio ($duenioName){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getDuenio() == $duenioName){
+          array_push($array,$reserva);
+        }
+      }
+      return $array;
+    }
+
     private function LoadReservaJson() {
         $this->list = array();
         if(file_exists($this->filename)) 
@@ -63,7 +76,7 @@ use Models\Guardian;
                 $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($array as $item) 
                 {
-                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal']);
+                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo']);
                     $reserva->setEstado($item['estado']);
                     $reserva->setNroReserva($item['nroReserva']);
                     array_push($this->list, $reserva);
@@ -81,24 +94,64 @@ use Models\Guardian;
         $this->SaveData();
     }
 
-    public function aceptarReservaGuardian($nroReserva){
+    public function aceptarReservaGuardiann($nroReserva){
       $this->LoadReservaJson();
       foreach($this->list as $reserva){
         if ($reserva->getNroReserva() == $nroReserva){
-          $reserva->setEstado("Confirmado");
-        }
+            $reserva->setEstado(EReserva::Confirmado);
+            $this->SaveData();
+            return true;
+          }
       }
-      $this->SaveData();
+      return false;
     }
 
     public function rechazarReservaGuardian($nroReserva){
       $this->LoadReservaJson();
       foreach($this->list as $reserva){
         if ($reserva->getNroReserva() == $nroReserva){
-          $reserva->setEstado("Rechazado");
+          $reserva->setEstado(EReserva::Rechazado);
         }
       }
       $this->SaveData();
+    }
+
+    public function cancelarcomoDuenio ($nroReserva){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+      if ($reserva->getEstado() != "Confirmado" && $reserva->getEstado() != "Completo"){
+          if ($reserva->getNroReserva() == $nroReserva){
+            $this->borrarReserva($nroReserva);
+            return true;
+          }
+       }
+      }
+      $this->SaveData();
+      return false;
+    }
+
+    public function borrarReserva ($nroReserva){
+      $this->LoadReservaJson();
+      $newlist = array();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() != $nroReserva){
+          array_push($newlist, $reserva);
+        }
+      }
+      $this->list = $newlist;
+      $this->SaveData();
+    }
+
+    //para hacer comprobacion de que sean todos de la misma raza en el guardian, devuelve verdadero sino coinciden
+    //anda bien pero una vez que cuido un gato no se le puede volver a mandar otro gato chequear esto de alguna manera
+    public function checkfirstPetType ($guardian,$tipo){
+      $reservas = $this->getReservasByGuardian($guardian);
+      if ($reservas!=null){
+        if ($reservas[0]->getTipo() != $tipo){
+          return true;
+        }
+      }
+      return false;
     }
 }
 

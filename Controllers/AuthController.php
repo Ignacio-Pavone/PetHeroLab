@@ -22,7 +22,8 @@
                 }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
                     header("location: ".FRONT_ROOT."Auth/showDuenioProfile");
                 }else{
-                    $this->showLogin("Usuario o contraseña incorrectos");
+                    Session::SetBadMessage("Usuario o contraseña incorrectos");
+                    header ("location: ".FRONT_ROOT."Auth/showLogin");
                 }
             }   
 
@@ -36,7 +37,6 @@
             }
 
             public function showLogin($message = ""){
-                Session::SetMessage($message);
                 require_once(VIEWS_PATH . 'login.php');
             }
 

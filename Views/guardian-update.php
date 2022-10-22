@@ -11,6 +11,7 @@ $type = $_SESSION['userType'];
             <br>  
             <center>
                 <h3 class="mb">Modificar Disponibilidad</h3>
+                <hr>
             </center>
             <br>
         <table style="text-align:center;">
@@ -43,7 +44,7 @@ $type = $_SESSION['userType'];
         </tbody>
         </table>
             <div class="col-lg-1" style="text-align:center">
-             <button type="submit" style = "text-align:center" class="btn btn-dark">Modificar</button>
+             <button type="submit" onclick="return confirm('Are you sure?')" style = "text-align:center" class="btn btn-dark">Modificar</button>
              </div> 
             </section>
             </div>

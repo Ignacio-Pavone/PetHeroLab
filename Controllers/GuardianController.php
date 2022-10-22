@@ -22,10 +22,11 @@ class GuardianController{
         if($this->guardianDAO->getGuardianByEmail($email) == null)
         {
             $this->guardianDAO->addGuardian($user);
-            $this->authController->showLogin("Guardian registrado con exito");
+            Session::SetOkMessage("Guardian registrado con exito");
         }else{
-            $this->authController->showLogin("El email ya esta en uso");
+            Session::SetBadMessage("El email ya esta en uso");
         }
+        header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
     }
 
     public function checkingDates($startingDay, $finishDate, $daysToWork){
@@ -55,16 +56,16 @@ class GuardianController{
 
     public function showdisponibilityView ($guardianname){
         $guardian = $this->guardianDAO->getGuardianByEmail($guardianname);
-        require_once (VIEWS_PATH."guardian-disponibilidad.php");
+        header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
     }
 
     public function ModifyAvailability($guardianname,$initDate, $finishDate, $daysToWork){   
         $boolean = $this->checkingDates($initDate, $finishDate, $daysToWork);
         if($boolean){
             $this->guardianDAO->updateGuardianDiponibility ($guardianname,$initDate, $finishDate, $daysToWork);
-            require_once (VIEWS_PATH."guardian-profile.php");
+            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
         } else{
-            Session::SetMessage("No se puede modificar la disponibilidad");
+            Session::SetBadMessage("No se puede modificar la disponibilidad");
             require_once (VIEWS_PATH."guardian-disponibilidad.php");
         }
     }

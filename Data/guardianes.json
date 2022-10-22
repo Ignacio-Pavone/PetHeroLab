@@ -14,5 +14,21 @@
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-21",
         "finishDate": "2022-10-24"
+    },
+    {
+        "email": "guadnsito@gmail.com",
+        "fullname": "El cuidador",
+        "dni": "33122333",
+        "age": "22",
+        "password": "1111",
+        "tipoMascota": "Chico",
+        "disponibilidad": [
+            "sabado",
+            "domingo"
+        ],
+        "reputacion": 0,
+        "remuneracionEsperada": "1500",
+        "initDate": "2022-10-21",
+        "finishDate": "2022-10-24"
     }
 ]

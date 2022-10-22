@@ -194,6 +194,17 @@ td {
   font-style: italic; 
 }
 
+.alert {
+  left: 0;
+  margin: auto; 
+  position: absolute; 
+  right: 0;
+  text-align: center; 
+  top: 4em;
+  width: 50%;
+
+}
+
 #solapaDuenios {
   background: none repeat scroll 0 0 #FFFFFF;
   border: 1px solid #E5E5E5;

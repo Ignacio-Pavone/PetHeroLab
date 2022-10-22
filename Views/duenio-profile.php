@@ -3,16 +3,31 @@ use Utils\Session;
 require_once VIEWS_PATH . 'header.php';
 $user = Session::getLoggedUser();
 $type = $_SESSION['userType'];
-
 include('nav-bar.php');
 ?>
-
 <section class="login-block">
     <main class="py-1">
         <section id="login-block" class="mb-5">
+        <?php if (Session::VerifiyBadMessage()) { ?>
+            <div class="alert alert-danger alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                <?php echo $_SESSION['bad'];
+                        unset($_SESSION['bad']); 
+                    ?>
+            </div>
+        <?php } else {
+               if (Session::VerifiyGoodMessage()) { ?>
+                    <div class="alert alert-success alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                         <?php echo $_SESSION['good'];
+                              unset($_SESSION['good']); 
+                         ?>
+                    </div>
+               <?php }
+          } ?>
+        </div>
             <div class="container" id = "dataUser">
                 <center> 
                     <h3 class="mb" id = "dataUser">Datos</h3>
+                    <hr>
                 </center>
                 <div class="bg-light-alpha p-1" id = "dataUser">
                     <div class="row">
@@ -42,6 +57,7 @@ include('nav-bar.php');
               <br>  
             <center>
                     <h3 class="mb">Mis mascotas</h3>
+                    <hr>
             </center>
             <br>
             <table style="text-align:center;">
@@ -72,7 +88,7 @@ include('nav-bar.php');
                 <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
 
                 <td>
-                    <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
+                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')" href="<?php echo FRONT_ROOT.'Duenio/DeletePet/'.$mascota->getNombre(); ?>">Borrar</a>
                 </td>
                 <td>
                     <a class="btn btn-dark ml-auto" href="<?php echo FRONT_ROOT.'Duenio/UpdatePet/'.$mascota->getNombre() ?>">Actualizar</a>
@@ -91,6 +107,7 @@ include('nav-bar.php');
               <br>  
             <center>
                     <h3 class="mb">Guardianes</h3>
+                    <hr>
             </center>
             <br>
             <table style="text-align:center;">
@@ -125,6 +142,7 @@ include('nav-bar.php');
                     } ?></td>
                     <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td>
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
+                    <!--<td><input type="date" name="date" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select></td>       -->               
 
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                     <td><div class="col-lg-2">
@@ -146,25 +164,70 @@ include('nav-bar.php');
                     <?php
             } 
             ?>
-
-        <?php if (Session::VerifiyMessage()) { ?>
-            <div class="alert alert-danger alert-dismissible fade show" style="text-align:center" role="alert">
-                <?php echo $_SESSION['message'];
-                        unset($_SESSION['message']); 
-                    ?>
-            </div>
-        <?php } ?>
-        </div>
         </tbody>
         </table>
         <br>
+
+        
             </div>
+            <br> 
+
+<div class="container" id = "css-mine">
+<br>
+<center><h3 class="mb">Peticiones Hechas</h3></center>
+<hr>
+<br>
+<table style="text-align:center;">
+     <thead>
+     <tr>
+     <th style="width: 20%;">Guardian</th>
+     <th style="width: 20%;">Mascota</th>
+     <th style="width: 20%;">fechaInicio</th>
+     <th style="width: 20%;">fechaFin</th>
+     <th style="width: 20%;">Costo</th>
+     <th style="width: 30%;">Estado</th>
+     <th style="width: 30%;">Rechazar</th>
+     </tr>
+     </thead>
+     <tbody>
+     <?php foreach($this->reservaDAO->getReservasByDuenio($user->getFullName()) as $reserva){
+          ?>
+          <tr>
+               <td><?php echo $reserva->getGuardian(); ?></td>
+               <td><?php echo $reserva->getMascota(); ?></td>
+               <td><?php echo $reserva->getFechaInicio(); ?></td>
+               <td><?php echo $reserva->getFechaFin(); ?></td>
+               <td><?php echo $reserva->getCostoTotal(); ?></td>
+               <td><?php if ($reserva->getEstado() == 'Confirmado'){
+                              echo "<p style=color:green>Confirmado</p>";      
+                         }elseif ($reserva->getEstado() == 'Pendiente'){
+                              echo "<p style=color:orange>Pendiente</p>";
+                         }elseif ($reserva->getEstado() == 'Rechazado'){
+                              echo "<p style=color:red>Rechazado</p>";
+                         }elseif ($reserva->getEstado() == 'Completado'){
+                              echo "<p style=color:blue>Completado</p>";
+                         } ?></td>
+               
+               <td>
+               <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')" href="<?php echo FRONT_ROOT.'Reserva/cancelarReservaDuennio/'.$reserva->getNroReserva(); ?>">Borrar</a>
+               </td>
+               
+          </tr>
+
+     <?php 
+     } ?>
+          
+     </tbody>
+</table>
+<br> 
+</div>
             <br>
             <section id="login-block" class="mb-5">
             <div class="container" id = "addPetsDuenio">
             <br>  
                 <center>
                     <h3 class="mb">Agrega una nueva mascota</h3>
+                    <hr>
                     <br>
                 </center>
                     <form action="<?php echo FRONT_ROOT ?>Duenio/addPet" method="post">
@@ -174,13 +237,17 @@ include('nav-bar.php');
                                 <input type="text" name="nombre" class="form-control form-control-ml" required>
                             </div>
                             <div class="col-lg-4">
-                                <label for="">Especie</label>
-                                <input type="text" name="tipo" class="form-control form-control-ml" required>
+                                <label for="" class="" id = "">Tamaño</label><br>
+                                <select name="tipo" id = "tamanioSolapa">
+                                    <option value="Gato" selected>Gato</option>
+                                    <option value="Perro" >Perro</option>
+                                </select>
                             </div>
                             <div class="col-lg-4">
                                 <label for="">Raza</label>
                                 <input type="text" name="raza" class="form-control form-control-ml" required>
                             </div>
+                            <div class="col-lg-12" style="height:15px"></div>
                             <div class="col-lg-4">
                                 <label for="" class="" id = "">Tamaño</label><br>
                                 <select name="tamanio" id = "tamanioSolapa">
@@ -197,6 +264,7 @@ include('nav-bar.php');
                                 <label for="">Plan de Vacunacion</label>
                                 <input type="url" name="planVacunacion" class="form-control form-control-ml" placeholder="Url Only" required>
                             </div>
+                            <div class="col-lg-12" style="height:15px"></div>
                             <div class="col-lg-4">
                                 <label for="">Video</label>
                                 <input type="url" name="video" class="form-control form-control-ml" placeholder="Url Only" required>
@@ -204,7 +272,7 @@ include('nav-bar.php');
                             <br>
                             <div class="row" id = "buttonraro" style="border: 1px solid">
                              <div class="col-lg-1" style="text-align:center">
-                              <button type="submit" style = "text-align:center" class="btn btn-dark">Agregar</button>
+                              <button type="submit" onclick="return confirm('Are you sure?')" style = "text-align:center" class="btn btn-dark">Agregar</button>
                     </div> 
                     </form>
                         </div>

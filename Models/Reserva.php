@@ -12,8 +12,9 @@ use Utils\EReserva as EReserva;
         private $fechaFin;
         private $estado;
         private $costoTotal;
+        private $tipo;
 
-    public function __construct($mascota,$duenio,$guardian,$fechaInicio,$fechaFin,$costoTotal){
+    public function __construct($mascota,$duenio,$guardian,$fechaInicio,$fechaFin,$costoTotal,$tipo){
         $this->mascota = $mascota;
         $this->duenio = $duenio;
         $this->guardian = $guardian;
@@ -21,9 +22,17 @@ use Utils\EReserva as EReserva;
         $this->fechaFin = $fechaFin;
         $this->estado = EReserva::Pendiente;
         $this->costoTotal = $costoTotal;
+        $this->tipo = $tipo;
     }
 
-    
+    public function getTipo(){
+        return $this->tipo;
+    }
+
+    public function setTipo($tipo){
+        $this->tipo = $tipo;
+    }
+
 
     public function getNroReserva(){
         return $this->nroReseva;

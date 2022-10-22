@@ -13,8 +13,15 @@
             }
         }
 
-        public static function VerifiyMessage () {
-            if(isset($_SESSION["message"])) {
+        public static function VerifiyGoodMessage () {
+            if(isset($_SESSION["good"])) {
+                return true;
+            }
+            return false;
+        }
+
+        public static function VerifiyBadMessage () {
+            if(isset($_SESSION["bad"])) {
                 return true;
             }
             return false;
@@ -28,8 +35,12 @@
             $_SESSION["userType"] = $type;
         }
 
-        public static function SetMessage ($message) {
-            $_SESSION["message"] = $message;
+        public static function SetBadMessage ($message) {
+            $_SESSION["bad"] = $message;
+        }
+
+        public static function SetOkMessage ($message) {
+            $_SESSION["good"] = $message;
         }
 
         public static function IsLogged() {

@@ -13,15 +13,24 @@ include ('nav-simple-bar.php');
             <div class="container" id = "dataUser">
                 <center> 
                     <h3 class="mb" id = "dataUser">Modificar Disponibilidad Guardian</h3>
+                    <hr>
                 </center>
         <table style="text-align:center;">
-        <?php if (Session::VerifiyMessage()) { ?>
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-           <?php echo $_SESSION['message'];
-                 unset($_SESSION['message']); 
-            ?>
-     </div>
-    <?php } ?>
+        <?php if (Session::VerifiyBadMessage()) { ?>
+            <div class="alert alert-danger alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                <?php echo $_SESSION['bad'];
+                        unset($_SESSION['bad']); 
+                    ?>
+            </div>
+        <?php } else {
+               if (Session::VerifiyGoodMessage()) { ?>
+                    <div class="alert alert-success alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                         <?php echo $_SESSION['good'];
+                              unset($_SESSION['good']); 
+                         ?>
+                    </div>
+               <?php }
+          } ?>
         <thead>
             <tr>
                 <th style="width: 16%;">Fecha Inicio</th>
@@ -48,7 +57,7 @@ include ('nav-simple-bar.php');
          </table>
          <br>
             <div class="row-lg-1" style="text-align:center">
-             <button type="submit" style = "text-align:center" class="btn btn-dark">Modificar</button>
+             <button type="submit" onclick="return confirm('Are you sure?')" style = "text-align:center" class="btn btn-dark">Modificar</button>
              </div> 
             </section>
             </div>

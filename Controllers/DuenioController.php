@@ -23,16 +23,17 @@ class DuenioController{
         $user = Session::GetLoggedUser();
         $mascota = new Mascota($string,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video);
         $this->duenioDAO->addMascota($user->getEmail(),$mascota);
-        require_once(VIEWS_PATH."duenio-profile.php");
+        header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
     }
 
     public function deletePet ($petName){
         $user = Session::GetLoggedUser();
         if ($petName!=null){
             $this->duenioDAO->deleteMascota($user,$petName);
+            Session::SetOkMessage("Mascota eliminada con exito");
         }
         $petName=null;
-        require_once(VIEWS_PATH."duenio-profile.php");
+        header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
     }
 
     public function registerDuenio($fullname, $age, $dni, $email, $password){
@@ -40,10 +41,11 @@ class DuenioController{
         if($this->duenioDAO->getDuenioByEmail($email) == null)
         {
             $this->duenioDAO->addDuenio($user);
-            $this->authController->showLogin("Duenio registrado con exito");
+            Session::SetOkMessage("Duenio registrado con exito");
         }else{
-            $this->authController->showLogin("El email ya esta en uso");
+            Session::SetBadMessage("El email ya esta en uso");
         }
+        header ("location: ".FRONT_ROOT."Auth/showLogin");
     }
 
     public function UpdatePet ($nombre){
@@ -57,8 +59,12 @@ class DuenioController{
         $viejamascota = $this->duenioDAO->searchPetByName($nombreviejo);
         $string = str_replace(' ', '_', $nombre);
         $nuevamascota = new Mascota($string,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video);
-        $this->duenioDAO->updateMascota($user,$viejamascota,$nuevamascota);
-        require_once(VIEWS_PATH."duenio-profile.php");
+        if($this->duenioDAO->updateMascota($user,$viejamascota,$nuevamascota)){
+            Session::SetOkMessage("Mascota modificada con exito");
+        }else{
+            Session::SetBadMessage("No se pudo modificar la mascota");
+        }
+        header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
     }
 
 }

@@ -36,12 +36,20 @@ include_once 'nav-bar.php';
     </div>
 </div>
 </form>
-<?php if (Session::VerifiyMessage()) { ?>
-      <div class="alert alert-danger alert-dismissible fade show" style="text-align:center" role="alert">
-           <?php echo $_SESSION['message'];
-                 unset($_SESSION['message']); 
-            ?>
-     </div>
- <?php } ?>
+<?php if (Session::VerifiyBadMessage()) { ?>
+            <div class="alert alert-danger alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                <?php echo $_SESSION['bad'];
+                        unset($_SESSION['bad']); 
+                    ?>
+            </div>
+        <?php } else {
+               if (Session::VerifiyGoodMessage()) { ?>
+                    <div class="alert alert-success alert-dismissible fade show center-block" style="text-align:center" role="alert">
+                         <?php echo $_SESSION['good'];
+                              unset($_SESSION['good']); 
+                         ?>
+                    </div>
+               <?php }
+          } ?>
 </div>
 </main>
