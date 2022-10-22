@@ -21,7 +21,7 @@
             $searchPet = $this->duenioDAO->searchPetByName($mascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
-            if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null){
+            if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null && !$this->reservaDAO->dateChecker($fechaInicio,$fechaFin)){
                 if (!$this->reservaDAO->checkfirstPetType($searchGuardian->getFullName(),$searchPet->getTipo())) {
                     $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo());
                     $this->reservaDAO->add($reserva);
@@ -30,7 +30,7 @@
                     Session::SetBadMessage("El guardian esta cuidando distinto tipo de mascotas");
                 }
             }else{
-                Session::SetBadMessage("No se pudo realizar la reserva");
+                Session::SetBadMessage("No se pudo realizar la reserva. Compruebe las fechas y que los datos esten correctamente cargados");
             }
             header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
         }

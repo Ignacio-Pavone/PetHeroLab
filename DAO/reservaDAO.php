@@ -153,6 +153,15 @@ use Models\Guardian;
       }
       return false;
     }
+
+    public function dateChecker($dateone, $datetwo){
+      $date1 = strtotime($dateone);
+      $date2 = strtotime($datetwo);
+      if ($date1 < $date2){
+        return false;
+      }
+      return true;
+    }
 }
 
 
