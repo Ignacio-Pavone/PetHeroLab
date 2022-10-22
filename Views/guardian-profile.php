@@ -138,8 +138,8 @@ include('nav-bar.php');
                <th style="width: 15%;">Dueño</th>
                <th style="width: 15%;">Mascota</th>
                <th style="width: 15%;">Tipo</th>
-               <th style="width: 20%;">fechaInicio</th>
-               <th style="width: 20%;">fechaFin</th>
+               <th style="width: 20%;">Fecha Inicio</th>
+               <th style="width: 20%;">Fecha Fin</th>
                <th style="width: 20%;">Ganancia</th>
                <th style="width: 20%;">Aceptar</th>
                <th style="width: 20%;">Rechazar</th>
