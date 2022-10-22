@@ -81,7 +81,11 @@ use Models\Guardian;
                     $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
                     $reserva->setEstado($item['estado']);
                     $reserva->setNroReserva($item['nroReserva']);
-                   
+                    
+                    if (($reserva->getFechaFin() < date('Y-m-d')) && ($reserva->getEstado() == 'Confirmado')){
+                      $reserva->estado=EReserva::Completo;
+                    }
+                    
                     array_push($this->list, $reserva);
                     if ($item["nroReserva"] > $this->id) {
                       $this->id = $item["nroReserva"];

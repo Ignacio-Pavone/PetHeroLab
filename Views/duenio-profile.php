@@ -146,6 +146,7 @@ include('nav-bar.php');
                     <!-- <td><?php echo $guardian->getInitDate() . " to " . $guardian->getFinishDate(); ?></td> -->
                     <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                     
+                    <?php date_default_timezone_set('UTC'); ?>
                     <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                     <td><input type="date"  id="initDate"name="fechaInicio" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select required></td>
                     <td><input type="date" id ="endDate"name="fechaFin" multiple="multiple" max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon" value =""  min="<?php echo date('Y-m-d') ?>" select required></td>
