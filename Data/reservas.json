@@ -11,5 +11,18 @@
         "tipo": "Perro",
         "raza": "Pugs",
         "cantidadDias": 1
+    },
+    {
+        "nroReserva": 1,
+        "Mascota": "Keyra",
+        "Duenio": "Ignacio Pavone",
+        "Guardian": "Fernando Jimenez",
+        "fechaInicio": "2022-10-23",
+        "fechaFin": "2022-10-23",
+        "estado": "Completado",
+        "costoTotal": 1500,
+        "tipo": "Perro",
+        "raza": "Pugs",
+        "cantidadDias": 1
     }
 ]

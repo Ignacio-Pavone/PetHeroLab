@@ -60,6 +60,15 @@
             };
             header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
         }
+
+        public function calificarGuardian ($guardian, $calificacion){
+            $guardianBuscado = $this->guardianDAO->searchGuardianByName($guardian);
+            var_dump($guardianBuscado);
+            $guardianBuscado->calcularCalificacion($calificacion);
+            $this->guardianDAO->updateUser($guardianBuscado);
+            Session::SetOkMessage("Guardian Calificado con Exito");
+            header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");         
+        }
         
 
 }

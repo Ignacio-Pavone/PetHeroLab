@@ -40,10 +40,20 @@ use Models\Guardian;
           foreach($array as $item) 
           {
             $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad'],$item['initDate'],$item['finishDate']);
-      
+            $user->setReputacion($item['reputacion']);
             array_push($this->list, $user);
           }
         }
+      }
+
+      public function searchGuardianByName ($name){
+        $this->LoadGuardianJson();
+        $userAuth=null;
+        foreach($this->list as $user){
+          if ($user->getFullName() == $name)
+            $userAuth=$user;
+        }
+        return $userAuth;
       }
 
       public function addGuardian($user)

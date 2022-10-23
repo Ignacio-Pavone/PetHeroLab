@@ -118,8 +118,6 @@ include('nav-bar.php');
               <th style="width: 10%;">Edad</th>
               <th style="width: 10%;">Preferencia</th>
               <th style="width: 5%;">Reputacion</th> 
-              <!--<th style="width: 10%;">Disponibilidad</th> -->
-              <!--<th style="width: 30%;">Fechas</th> -->
               <th style="width: 25%;">Costo por Dia</th>
               <th style="width: 5%;">Fecha inicio</th>
               <th style="width: 5%;">Fecha fin</th>
@@ -182,14 +180,15 @@ include('nav-bar.php');
 <table style="text-align:center;">
      <thead>
      <tr>
-     <th style="width: 20%;">Guardian</th>
+     <th style="width: 10%;">Guardian</th>
      <th style="width: 10%;">Mascota</th>
-     <th style="width: 20%;">Fecha Inicio</th>
-     <th style="width: 20%;">Fecha Fin</th>
+     <th style="width: 10%;">Fecha Inicio</th>
+     <th style="width: 10%;">Fecha Fin</th>
      <th style="width: 10%;">Dias</th>
-     <th style="width: 20%;">Costo Total</th>
-     <th style="width: 30%;">Estado</th>
-     <th style="width: 30%;">Rechazar</th>
+     <th style="width: 10%;">Costo Total</th>
+     <th style="width: 10%;">Estado</th>
+     <th style="width: 10%;">Rechazar</th>
+     <th style="width: 15%;">Calificar</th>
      </tr>
      </thead>
      <tbody>
@@ -215,7 +214,24 @@ include('nav-bar.php');
                <td>
                <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')" href="<?php echo FRONT_ROOT.'Reserva/cancelarReservaDuennio/'.$reserva->getNroReserva(); ?>">Borrar</a>
                </td>
-               
+               <td>  
+               <form action="<?php echo FRONT_ROOT ?>Reserva/calificarGuardian" method="post">
+               <input type="hidden" name="guardian" value="<?php echo $reserva->getGuardian() ?>">
+                <?php if ($reserva->getEstado() == 'Completado'){ ?>
+                    <div class = "input-group">
+                    <input type="number" min = "0" max ="5" name="calificacion" class="form-control col-xs-2" style="text-align:center" placeholder="5">
+                    <span class="input-group-addon">-</span>
+                    <button class = "btn btn-info" type="submit" onclick="return confirm('Are you sure?')" style = "text-align:center" class="btn btn-dark">Calificar</button>
+                    </div>
+                <?php } else { ?>
+                    <div class = "input-group">
+                    <input type="number" min = "0" max ="5" name="" class="form-control col-xs-2" style="text-align:center" placeholder="5" disabled>
+                    <span class="input-group-addon">-</span>
+                    <a class="btn btn-secondary">Calificar</a> 
+                    </div>
+                <?php } ?>
+                </td>
+                </form>
           </tr>
 
      <?php 

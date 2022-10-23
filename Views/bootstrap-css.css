@@ -266,3 +266,12 @@ input[type="checkbox"]:checked::before {
 :-ms-input-placeholder {  
   font-style: italic; 
 }
+
+.linea
+{
+    display: inline-block;
+}
+
+.colu {
+  display:inline;
+}
