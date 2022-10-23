@@ -7,6 +7,7 @@ enum EReserva : string {
     case Confirmado = "Confirmado";
     case Rechazado  = "Rechazado";
     case Completo = "Completo";
+    case Calificada = "Calificada";
 }
 
 ?>

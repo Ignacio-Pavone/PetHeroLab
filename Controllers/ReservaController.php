@@ -5,6 +5,7 @@
         use Models\Reserva as Reserva;
         use Utils\Session;
         use DAO\reservaDAO as reservaDAO;
+use Utils\EReserva;
 
         class ReservaController{
         private $guardianDAO;
@@ -61,11 +62,15 @@
             header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
         }
 
-        public function calificarGuardian ($guardian, $calificacion){
+        public function calificarGuardian ($guardian, $calificacion, $reserva){
             $guardianBuscado = $this->guardianDAO->searchGuardianByName($guardian);
             var_dump($guardianBuscado);
             $guardianBuscado->calcularCalificacion($calificacion);
             $this->guardianDAO->updateUser($guardianBuscado);
+            $reservaBuscada = $this->reservaDAO->buscarReservaporNumero($reserva);
+            if ($reservaBuscada!=null){
+                $this->reservaDAO->cambiarEstado($reservaBuscada,EReserva::Calificada);
+            }
             Session::SetOkMessage("Guardian Calificado con Exito");
             header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");         
         }

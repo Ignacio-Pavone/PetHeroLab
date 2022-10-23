@@ -195,6 +195,26 @@ use Models\Guardian;
       else
       return false;
     }
+
+    public function buscarReservaporNumero ($nroReserva){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          return $reserva;
+        }
+      }
+      return null;
+    }
+
+    public function cambiarEstado ($nroReserva,$estado){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setEstado($estado);
+        }
+      }
+      $this->SaveData();
+    }
 }
 
 

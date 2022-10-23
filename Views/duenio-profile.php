@@ -207,8 +207,10 @@ include('nav-bar.php');
                               echo "<p style=color:orange>Pendiente</p>";
                          }elseif ($reserva->getEstado() == 'Rechazado'){
                               echo "<p style=color:red>Rechazado</p>";
-                         }elseif ($reserva->getEstado() == 'Completado'){
+                         }elseif ($reserva->getEstado() == 'Completo'){
                               echo "<p style=color:blue>Completado</p>";
+                            }elseif ($reserva->getEstado() == 'Calificada'){
+                                echo "<p style=color:purple>Calificada</p>";
                          } ?></td>
                
                <td>
@@ -217,7 +219,8 @@ include('nav-bar.php');
                <td>  
                <form action="<?php echo FRONT_ROOT ?>Reserva/calificarGuardian" method="post">
                <input type="hidden" name="guardian" value="<?php echo $reserva->getGuardian() ?>">
-                <?php if ($reserva->getEstado() == 'Completado'){ ?>
+                <input type="hidden" name="reserva" value="<?php echo $reserva->getNroReserva() ?>">
+                <?php if ($reserva->getEstado() == 'Completo' && $reserva->getEstado() != 'Calificado'){ ?>
                     <div class = "input-group">
                     <input type="number" min = "0" max ="5" name="calificacion" class="form-control col-xs-2" style="text-align:center" placeholder="5">
                     <span class="input-group-addon">-</span>
