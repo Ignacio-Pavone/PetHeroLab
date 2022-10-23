@@ -54,6 +54,7 @@ require_once VIEWS_PATH . 'header.php';
                                 <label for="">Nombre</label>
                                 <input type="text" name="nombre" class="form-control form-control-ml" value = <?php echo $search->getNombre()?> required>
                             </div>
+                            <input type="hidden" name="tipo"  class="form-control form-control-ml" value = <?php echo $search->getTipo()?>>
                             <div class="col-lg-4">
                                 <label for="">Raza</label>
                                 <input type="text" name="raza" class="form-control form-control-ml"  value = <?php echo $search->getRaza()?> required>
