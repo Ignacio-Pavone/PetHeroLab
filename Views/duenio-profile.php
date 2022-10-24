@@ -79,8 +79,8 @@ include('nav-bar.php');
                             <th style="width: 20%;">Foto</th>
                             <th style="width: 10%;">Plan Vacunacion</th>
                             <th style="width: 10%;">Video</th>
-                            <th style="width: 15%;">Borrar Mascota</th>
                             <th style="width: 15%;">Actualizar Mascota</th>
+                            <th style="width: 15%;">Borrar Mascota</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -96,13 +96,14 @@ include('nav-bar.php');
                             <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
                             <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
                             <td>
-                                <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                    href="<?php echo FRONT_ROOT . 'Mascota/DeletePet/' . $mascota->getIdMascota(); ?>">Borrar</a>
-                            </td>
-                            <td>
                                 <a class="btn btn-dark ml-auto"
                                     href="<?php echo FRONT_ROOT . 'Mascota/UpdatePet/' . $mascota->getIdMascota() ?>">Actualizar</a>
                             </td>
+                            <td>
+                                <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
+                                    href="<?php echo FRONT_ROOT . 'Mascota/DeletePet/' . $mascota->getIdMascota(); ?>">Borrar</a>
+                            </td>
+
                         </tr>
                         <?php
                         }
@@ -153,7 +154,7 @@ include('nav-bar.php');
                                 <td><?php echo $guardian->getFullName(); ?></td>
                                 <td><?php echo $guardian->getAge(); ?></td>
                                 <td><?php echo $guardian->getTipoMascota(); ?></td>
-                                <td><?php echo $guardian->getReputacion(); ?></td>
+                                <td><?php echo bcdiv($guardian->getReputacion(), '1', 1); ?></td>
                                 <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                                 <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                                     <td><input type="date" id="initDate" name="fechaInicio" multiple="multiple"
@@ -257,7 +258,7 @@ include('nav-bar.php');
                                             value="<?php echo $reserva->getNroReserva() ?>">
                                         <?php if ($reserva->getEstado() == 'Completo' && $reserva->getEstado() != 'Calificado') { ?>
                                         <div class="input-group">
-                                            <input type="number" min="0" max="5" name="calificacion"
+                                            <input type="number" min="1" max="5" name="calificacion"
                                                 class="form-control col-xs-2" style="text-align:center" placeholder="5" required>
                                             <span class="input-group-addon">-</span>
                                             <button class="btn btn-info" type="submit"
@@ -323,9 +324,9 @@ include('nav-bar.php');
                                 <div class="col-lg-4">
                                     <label for="" class="" id="">Tamaño</label><br>
                                     <select name="tamanio" id="tamanioSolapa">
-                                        <option value="chico" selected>Chico</option>
-                                        <option value="mediano">Mediano</option>
-                                        <option value="grande">Grande</option>
+                                        <option value="Chico" selected>Chico</option>
+                                        <option value="Mediano">Mediano</option>
+                                        <option value="Grande">Grande</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-4">

@@ -34,9 +34,9 @@ require_once VIEWS_PATH . 'header.php';
                         <div class="form-group">
                             <label for="tipoMascota" class="text-uppercase">Tamaño a Cuidar</label>
                             <select name="tipoMascota">
-                                <option value="chico">Chico</option>
-                                <option value="mediano" selected>Mediano</option>
-                                <option value="grande">Grande</option>
+                                <option value="Chico">Chico</option>
+                                <option value="Mediano" selected>Mediano</option>
+                                <option value="Grande">Grande</option>
                             </select>
                         </div>
                         <div class="form-group">

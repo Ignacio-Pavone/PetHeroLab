@@ -69,12 +69,12 @@ require_once VIEWS_PATH . 'header.php';
                         <div class="col-lg-4">
                             <label for="" class="" id="">Tamaño</label><br>
                             <select name="tamanio" id="tamanioSolapa">
-                                <option value="chico"
+                                <option value="Chico"
                                     <?php echo ($search->getTamanio() == 'Chico' ? 'selected' : '') ?>>Chico</option>
-                                <option value="mediano"
+                                <option value="Mediano"
                                     <?php echo ($search->getTamanio() == 'Mediano' ? 'selected' : '') ?>>Mediano
                                 </option>
-                                <option value="grande"
+                                <option value="Grande"
                                     <?php echo ($search->getTamanio() == 'Grande' ? 'selected' : '') ?>>Grande</option>
                             </select>
                         </div>
