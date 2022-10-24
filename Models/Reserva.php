@@ -121,8 +121,6 @@ use Utils\EReserva as EReserva;
     public function setCostoTotal($costoTotal){
         $this->costoTotal = $costoTotal;
     }
-
-
 }
 
 ?>

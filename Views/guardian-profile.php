@@ -200,11 +200,12 @@ include('nav-bar.php');
                               echo "<p style=color:orange>Pendiente</p>";
                          }elseif ($reserva->getEstado() == 'Rechazado'){
                               echo "<p style=color:red>Rechazado</p>";
-                         }elseif ($reserva->getEstado() == 'Completado'){
+                         }elseif ($reserva->getEstado() == 'Completo'){
                               echo "<p style=color:blue>Completado</p>";
+                         }elseif ($reserva->getEstado() == 'Calificada'){
+                              echo "<p style=color:purple>Calificada</p>";
                          } ?></td>
                     </tr>
-
                <?php 
                } ?>
                </tbody>
