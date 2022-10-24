@@ -244,7 +244,7 @@ include('nav-bar.php');
                                         <?php if ($reserva->getEstado() == 'Completo' && $reserva->getEstado() != 'Calificado') { ?>
                                         <div class="input-group">
                                             <input type="number" min="0" max="5" name="calificacion"
-                                                class="form-control col-xs-2" style="text-align:center" placeholder="5">
+                                                class="form-control col-xs-2" style="text-align:center" placeholder="5" required>
                                             <span class="input-group-addon">-</span>
                                             <button class="btn btn-info" type="submit"
                                                 onclick="return confirm('Are you sure?')" style="text-align:center"

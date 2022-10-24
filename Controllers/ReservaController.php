@@ -72,20 +72,16 @@
 
         public function calificarGuardian ($guardian, $calificacion, $reserva){
             
-            if ($calificacion!=null){
-                $guardianBuscado = $this->guardianDAO->findGuardianByID($guardian);
-                $guardianBuscado->calcularCalificacion($calificacion);
-                $this->guardianDAO->updateUser($guardianBuscado);
-                if ($this->reservaDAO->cambiarEstado($reserva,"Calificada"))
-                {
-                    Session::SetOkMessage("Guardian Calificado con Exito");
-                }else{
-                    Session::SetBadMessage("No se pudo calificar al guardian");
-                }
-            }else{
-                Session::SetBadMessage("Seleccione una nota");
-            }
+            $guardianBuscado = $this->guardianDAO->findGuardianByID($guardian);
+            $guardianBuscado->calcularCalificacion($calificacion);
+            $this->guardianDAO->updateUser($guardianBuscado);
 
+            if ($this->reservaDAO->cambiarEstado($reserva,"Calificada"))
+            {
+                Session::SetOkMessage("Guardian Calificado con Exito");
+            }else{
+                Session::SetBadMessage("No se pudo calificar al guardian");
+            }
            header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");         
         }
         
