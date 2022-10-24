@@ -8,7 +8,7 @@
         "password": "1111",
         "tipoMascota": "Chico",
         "disponibilidad": [],
-        "reputacion": 12,
+        "reputacion": 0,
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-24",
         "finishDate": "2022-10-31"
@@ -26,7 +26,7 @@
             "domingo"
         ],
         "reputacion": 0,
-        "remuneracionEsperada": "1500",
+        "remuneracionEsperada": "1000",
         "initDate": "2022-10-21",
         "finishDate": "2022-10-24"
     }

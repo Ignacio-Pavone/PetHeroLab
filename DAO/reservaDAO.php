@@ -208,9 +208,11 @@ use Models\Guardian;
       foreach($this->list as $reserva){
         if ($reserva->getNroReserva() == $nroReserva){
           $reserva->setEstado($estado);
+          $this->SaveData();
+          return true;
         }
       }
-      $this->SaveData();
+      return false;
     }
 }
 
