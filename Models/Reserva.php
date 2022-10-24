@@ -57,7 +57,6 @@ use Utils\EReserva as EReserva;
         $this->tipo = $tipo;
     }
 
-
     public function getNroReserva(){
         return $this->nroReseva;
     }
@@ -122,5 +121,3 @@ use Utils\EReserva as EReserva;
         $this->costoTotal = $costoTotal;
     }
 }
-
-?>

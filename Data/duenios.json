@@ -5,36 +5,7 @@
         "fullname": "Ignacio Pavone",
         "dni": "34883612",
         "age": "32",
-        "password": "1111",
-        "mascotas": [
-            {
-                "nombre": "Keyra",
-                "tipo": "Perro",
-                "raza": "Pugs",
-                "tamanio": "chico",
-                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
-            },
-            {
-                "nombre": "Raro",
-                "tipo": "Perro",
-                "raza": "Ovejero",
-                "tamanio": "mediano",
-                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
-            },
-            {
-                "nombre": "Tito",
-                "tipo": "Gato",
-                "raza": "Pug",
-                "tamanio": "chico",
-                "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
-                "video": "https:\/\/st4.depositphotos.com\/4164793\/41475\/v\/600\/depositphotos_414754852-stock-video-pug-pug-breed-dog-portrait.mp4"
-            }
-        ]
+        "password": "1111"
     },
     {
         "idDuenio": 2,
@@ -42,8 +13,7 @@
         "fullname": "Nazareno",
         "dni": "32323",
         "age": "22",
-        "password": "1111",
-        "mascotas": []
+        "password": "1111"
     },
     {
         "idDuenio": 3,
@@ -51,8 +21,7 @@
         "fullname": "Lucrecia Bazan",
         "dni": "1111",
         "age": "22",
-        "password": "1111",
-        "mascotas": []
+        "password": "1111"
     },
     {
         "idDuenio": 4,
@@ -60,26 +29,6 @@
         "fullname": "Luis Taliercio",
         "dni": "42424242",
         "age": "21",
-        "password": "1111",
-        "mascotas": [
-            {
-                "nombre": "Chinche",
-                "tipo": "Perro",
-                "raza": "Callejero",
-                "tamanio": "chico",
-                "foto": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
-                "planVacunacion": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
-                "video": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1"
-            },
-            {
-                "nombre": "Rinho",
-                "tipo": "Gato",
-                "raza": "Siames",
-                "tamanio": "mediano",
-                "foto": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-                "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-                "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
-            }
-        ]
+        "password": "1111"
     }
 ]

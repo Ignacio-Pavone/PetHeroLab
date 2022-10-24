@@ -1,6 +1,8 @@
 <?php 
 namespace Models;
 class Mascota {
+     private $id;
+     private $idDuenio;
      private $nombre;
      private $tipo;
      private $raza;
@@ -9,8 +11,9 @@ class Mascota {
      private $planVacunacion;
      private $video;
 
-     public function __construct($nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video)
+     public function __construct($idDuenio,$nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video)
      {
+        $this->idDuenio = $idDuenio;
          $this->nombre=$nombre;
          $this->tipo=$tipo;
          $this->raza=$raza;
@@ -19,6 +22,22 @@ class Mascota {
          $this->planVacunacion=$planVacunacion;
          $this->video=$video;
      }
+
+         public function setidDuenio($idDuenio){
+         $this->idDuenio=$idDuenio;
+        }
+
+        public function getidDuenio(){
+            return $this->idDuenio;
+        }
+
+        public function getIdMascota(){
+            return $this->id;
+        }
+
+        public function setIdMascota($id){
+            $this->id = $id;
+        }
 
         public function getNombre(){
             return $this->nombre;

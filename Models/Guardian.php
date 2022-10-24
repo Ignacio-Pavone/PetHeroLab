@@ -12,8 +12,7 @@ class Guardian extends Usuario {
     private $finishDate;
     private $disponibilidad = array();
 
-    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad,$initDate,$finishDate)
-    {
+    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad,$initDate,$finishDate){
         parent::__construct($email, $fullname, $dni, $age, $password);
         $this->tipoMascota = $tipoMascota;
         $this->remuneracionEsperada = $remuneracionEsperada;

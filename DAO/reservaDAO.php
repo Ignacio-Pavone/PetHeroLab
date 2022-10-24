@@ -21,12 +21,11 @@ use Models\Guardian;
     {
       $arrayToEncode = array();
 
-      foreach($this->list as $reserva)
-      {
+      foreach($this->list as $reserva){
         $valuesArray["nroReserva"] = $reserva->getNroReserva();
-        $valuesArray["Mascota"] = $reserva->getMascota();
-        $valuesArray["Duenio"] = $reserva->getDuenio();
-        $valuesArray["Guardian"] = $reserva->getGuardian();
+        $valuesArray["idMascota"] = $reserva->getMascota();
+        $valuesArray["idDuenio"] = $reserva->getDuenio();
+        $valuesArray["idGuardian"] = $reserva->getGuardian();
         $valuesArray["fechaInicio"] = $reserva->getFechaInicio();
         $valuesArray["fechaFin"] = $reserva->getFechaFin();
         $valuesArray["estado"] = $reserva->getEstado();
@@ -34,7 +33,6 @@ use Models\Guardian;
         $valuesArray["tipo"] = $reserva->getTipo();
         $valuesArray["raza"] = $reserva->getRaza();
         $valuesArray["cantidadDias"] = $reserva->getCantidadDias();
-
         array_push($arrayToEncode, $valuesArray);
       }
 
@@ -48,22 +46,22 @@ use Models\Guardian;
         return $this->list;
     }
 
-    public function getReservasByGuardian($guardianName){
+    public function getReservasByDuenioID ($id){
       $this->LoadReservaJson();
       $array = array();
       foreach($this->list as $reserva){
-        if($reserva->getGuardian() == $guardianName){
+        if($reserva->getDuenio() == $id){
           array_push($array,$reserva);
         }
       }
       return $array;
     }
 
-    public function getReservasByDuenio ($duenioName){
+    public function getReservasByGuardianID($id){
       $this->LoadReservaJson();
       $array = array();
       foreach($this->list as $reserva){
-        if($reserva->getDuenio() == $duenioName){
+        if($reserva->getGuardian() == $id){
           array_push($array,$reserva);
         }
       }
@@ -78,12 +76,12 @@ use Models\Guardian;
                 $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
                 foreach($array as $item) 
                 {
-                    $reserva = new Reserva($item['Mascota'], $item['Duenio'],$item['Guardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
+                    $reserva = new Reserva($item['idMascota'], $item['idDuenio'],$item['idGuardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
                     $reserva->setEstado($item['estado']);
                     $reserva->setNroReserva($item['nroReserva']);
                     
                     if (($reserva->getFechaFin() < date('Y-m-d')) && ($reserva->getEstado() == 'Confirmado')){
-                      $reserva->estado=EReserva::Completo;
+                      $reserva->setEstado('Completo');
                     }
                     
                     array_push($this->list, $reserva);
@@ -149,17 +147,16 @@ use Models\Guardian;
       $this->SaveData();
     }
 
-    //para hacer comprobacion de que sean todos de la misma raza en el guardian, devuelve verdadero sino coinciden
-    //anda bien pero una vez que cuido un gato no se le puede volver a mandar otro gato chequear esto de alguna manera
-    public function checkfirstPetType ($guardian,$tipo,$raza){
-      $reservas = $this->getReservasByGuardian($guardian);
+
+    public function checkfirstPetType ($idGuardian,$tipo,$raza){
+      $reservas = $this->getReservasByGuardianID($idGuardian);
       if (empty($reservas)){
         return true;
       }
 
-      if ($reservas!=null){
+      if ($reservas){
         if (strcasecmp($reservas[0]->getTipo(),$tipo) == 0){
-          if (strcasecmp($reservas[0]->getTipo(),$raza) != 0){
+          if (strcasecmp($reservas[0]->getRaza(),$raza) == 0){
             return true;
           }
         }

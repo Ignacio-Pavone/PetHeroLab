@@ -147,18 +147,19 @@ use Models\Guardian;
           return false;
       }
 
-      public function updateGuardianDiponibility($user, $initDate, $lastDate, $daysToWork){
+      public function updateGuardianDiponibility($user, $initDate, $lastDate){
         $this->LoadGuardianJson();
         $search = $this->getGuardianByEmail($user);
-        $search->reiniciarDisponibilidad();
-        foreach($daysToWork as $value){
-          $search->setDisponibilidad($value);
+        if ($search != null){
+          $search->reiniciarDisponibilidad();
+          $search->setfinishDate($lastDate);
+          $search->setinitDate($initDate);
+          $this->updateUser($search);
+          $this->saveGuardianJson();
+          Session::CreateSession($search);
+          return true;
         }
-        $search->setfinishDate($lastDate);
-        $search->setinitDate($initDate);
-        $this->updateUser($search);
-        $this->saveGuardianJson();
-        Session::CreateSession($search);
+        return false;
 
       }
     }

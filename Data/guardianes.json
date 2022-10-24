@@ -7,14 +7,11 @@
         "age": "22",
         "password": "1111",
         "tipoMascota": "Chico",
-        "disponibilidad": [
-            "sabado",
-            "domingo"
-        ],
-        "reputacion": 9,
+        "disponibilidad": [],
+        "reputacion": 12,
         "remuneracionEsperada": "1500",
-        "initDate": "2022-10-21",
-        "finishDate": "2022-10-24"
+        "initDate": "2022-10-24",
+        "finishDate": "2022-10-31"
     },
     {
         "idGuardian": 2,
@@ -32,33 +29,5 @@
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-21",
         "finishDate": "2022-10-24"
-    },
-    {
-        "idGuardian": 3,
-        "email": "guardianidprueba@gmail.com",
-        "fullname": "ID probando",
-        "dni": "123123",
-        "age": "22",
-        "password": "1111",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "22",
-        "initDate": null,
-        "finishDate": null
-    },
-    {
-        "idGuardian": 4,
-        "email": "asd@asd.com",
-        "fullname": "asd",
-        "dni": "2222",
-        "age": "22",
-        "password": "1111",
-        "tipoMascota": "mediano",
-        "disponibilidad": [],
-        "reputacion": 0,
-        "remuneracionEsperada": "222",
-        "initDate": null,
-        "finishDate": null
     }
 ]

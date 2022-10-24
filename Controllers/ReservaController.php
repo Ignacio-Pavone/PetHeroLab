@@ -2,55 +2,63 @@
 
         use DAO\guardianDAO as guardianDAO;
         use DAO\duenioDAO as duenioDAO;
+        use DAO\mascotaDAO as mascotaDAO;
         use Models\Reserva as Reserva;
         use Utils\Session;
         use DAO\reservaDAO as reservaDAO;
-use Utils\EReserva;
+        use Utils\EReserva;
 
         class ReservaController{
         private $guardianDAO;
         private $duenioDAO;
         private $reservaDAO;
+        private $mascotaDAO;
 
         public function __construct(){
                 $this->guardianDAO = new guardianDAO();
                 $this->duenioDAO = new duenioDAO(); 
                 $this->reservaDAO = new reservaDAO();
+                $this->mascotaDAO = new mascotaDAO();
         }
         
-        public function solicitarReservaDuenio ($mascota,$Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal){
+        public function solicitarReservaDuenio ($idMascota,$Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal){
             $dias = $this->reservaDAO->contarDias($fechaInicio,$fechaFin);
-            $searchPet = $this->duenioDAO->searchPetByName($mascota);
+            $searchPet = $this->mascotaDAO->findMascotaByID($idMascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
-        
+            if (strcasecmp($searchGuardian->getTipoMascota(), $searchPet->getTamanio()) == 0){
             if ($this->reservaDAO->chequeoDataReserva($searchPet,$searchGuardian,$searchDuenio) && !$this->reservaDAO->dateChecker($fechaInicio,$fechaFin)){
-                if ($this->reservaDAO->checkfirstPetType($searchGuardian->getFullName(),$searchPet->getTipo(), $searchPet->getRaza())) {
-                    $reserva = new Reserva($searchPet->getNombre(), $searchDuenio->getFullName(), $searchGuardian->getFullName(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(),$searchPet->getRaza(), $dias);
+                if ($this->reservaDAO->checkfirstPetType($searchGuardian->getIdGuardian(),$searchPet->getTipo(), $searchPet->getRaza())) {
+                    $reserva = new Reserva($searchPet->getIdMascota(), $searchDuenio->getIdDuenio(), $searchGuardian->getIdGuardian(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(),$searchPet->getRaza(), $dias);
                     $reserva->calcularCostoTotal($costoTotal);
                     $this->reservaDAO->add($reserva);
                     Session::SetOkMessage("Guardian Solicitado con Exito");
                 }else{
                     Session::SetBadMessage("El guardian esta cuidando distinto tipo de mascotas");
-                }
+                 }
             }else{
                 Session::SetBadMessage("No se pudo realizar la reserva. Compruebe las fechas y que los datos esten correctamente cargados");
             }
-           header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
+            }else{
+                Session::SetBadMessage("El guardian no cuida mascotas de ese tamaño");
+            } 
+           header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile/");
         }
 
         public function aceptarReservaGuardian($nroReserva){
+            $user = Session::GetLoggedUser();
             if ($this->reservaDAO->aceptarReservaGuardiann($nroReserva)){
                 Session::SetOkMessage("Reserva Aceptada con Exito");
             }else{
                 Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
             }
-            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
+            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $user->getEmail() );
         }
 
         public function rechazarReservaGuardian($nroReserva){
+            $user = Session::GetLoggedUser();
             $this->reservaDAO->rechazarReservaGuardian($nroReserva);
-            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
+            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/". $user->getEmail());
         }
 
         public function cancelarReservaDuennio($nroReserva){
@@ -64,7 +72,6 @@ use Utils\EReserva;
 
         public function calificarGuardian ($guardian, $calificacion, $reserva){
             $guardianBuscado = $this->guardianDAO->searchGuardianByName($guardian);
-            var_dump($guardianBuscado);
             $guardianBuscado->calcularCalificacion($calificacion);
             $this->guardianDAO->updateUser($guardianBuscado);
             $reservaBuscada = $this->reservaDAO->buscarReservaporNumero($reserva);

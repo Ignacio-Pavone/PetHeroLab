@@ -9,6 +9,7 @@ class duenioDAO{
     private $list = array();
     private $filename;
     private $id;
+    private $idmascota;
 
     public function __construct()
     {
@@ -44,7 +45,6 @@ class duenioDAO{
     private function LoadDuenioJson() 
     {
         $this->list = array();
-        $arraypets = array();
         if(file_exists($this->filename)) 
         {
             $jsonContent = file_get_contents($this->filename);
@@ -54,10 +54,7 @@ class duenioDAO{
             {
                 $user = new Duenio($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password']);
                 $user->setIdDuenio($item['idDuenio']);
-                foreach ($item['mascotas'] as $mascota) {
-                    $mascota = new Mascota($mascota['nombre'], $mascota['tipo'], $mascota['raza'], $mascota['tamanio'], $mascota['foto'], $mascota['planVacunacion'], $mascota['video']);
-                    $user->addMascota($mascota);                  
-                }            
+       
                 array_push($this->list, $user);
                 if ($item["idDuenio"] > $this->id) {
                     $this->id = $item["idDuenio"];
@@ -76,19 +73,6 @@ class duenioDAO{
             $valuesArray['dni'] = $user->getDni();
             $valuesArray['age'] = $user->getAge();
             $valuesArray['password'] = $user->getPassword();
-            $mascotasArray = array();
-            foreach ($user->getMascotas() as $mascota) {
-                $mascotas['nombre'] = $mascota->getNombre();
-                $mascotas['tipo'] = $mascota->getTipo();
-                $mascotas['raza'] = $mascota->getRaza();
-                $mascotas['tamanio'] = $mascota->getTamanio();
-                $mascotas['foto'] = $mascota->getFoto();
-                $mascotas['planVacunacion'] = $mascota->getPlanVacunacion();
-                $mascotas['video'] = $mascota->getVideo();
-                array_push($mascotasArray, $mascotas);
-            }
-        
-            $valuesArray['mascotas'] = $mascotasArray;
             array_push($arrayToEncode, $valuesArray);
         }
         $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
@@ -99,82 +83,9 @@ class duenioDAO{
     {
         $this->LoadDuenioJson();
         $user->setIdDuenio($this->id + 1);
+        $user->getMascotas()->setIdMascota($this->idmascota + 1);
         array_push($this->list, $user);
         $this->saveDuenioJson();
-    }
-
-    public function addMascota($email, $mascota){
-        $user = $this->getDuenioByEmail($email);
-        if ($user != null){
-            $user->addMascota($mascota);
-            $this->saveDuenioJson();
-        }
-        Session::CreateSession($user);
-    }
-
-    public function searchPetByName ($name){
-        $this->LoadDuenioJson();
-        $pet = null;
-        foreach($this->list as $user){
-            foreach ($user->getMascotas() as $mascota) {
-                if ($mascota->getNombre() == $name){
-                    $pet = $mascota;
-                }
-            }  
-        }
-        return $pet;
-    }
-
-
-    public function deleteMascota ($user,$nombre){
-        $this->LoadDuenioJson();
-        $userSearch = $this->getDuenioByEmail($user->getEmail());
-        $petSearch = $this->searchPetByName($nombre);
-        if ($userSearch!=null && $petSearch!=null){
-            $nuevousuario = $this->deletePetbyName($userSearch,$petSearch);
-            Session::CreateSession($nuevousuario);
-            $this->saveDuenioJson();
-        } 
-    }
-
-    public function deletePetbyName ($user,$mascota){
-        $newarraPets = array();
-        $flag = 0;
-        foreach($this->list as $usersfromList){
-            if ($usersfromList->getEmail() == $user->getEmail() && $flag == 0){
-                foreach ($usersfromList->getMascotas() as $pet) {
-                    if ($pet->getNombre() != $mascota->getNombre() || $flag==1){
-                        array_push($newarraPets, $pet);
-                    }else $flag=1;
-                }
-                $usersfromList->setMascotas($newarraPets);
-                return $usersfromList;
-            }
-        }
-       
-    }
-
-    public function devolverTodaslasMascotas (){
-        $this->LoadDuenioJson();
-        $mascotas = array();
-        foreach($this->list as $user){
-            foreach ($user->getMascotas() as $mascota) {
-                array_push($mascotas, $mascota);
-            }
-        }
-        return $mascotas;
-    }
-
-    public function filtrarMascotasporTamanio($tamanio){
-        $this->LoadDuenioJson();
-        $mascotas = array();
-        $todaslasmascotas = $this->devolverTodaslasMascotas();
-        foreach ($todaslasmascotas as $mascota) {
-            if (strtolower($mascota->getTamanio()) == strtolower($tamanio)){
-                array_push($mascotas, $mascota);
-            }
-        }
-        return $mascotas;
     }
 
     public function LoginCheckDuenio ($email, $password){
@@ -187,43 +98,6 @@ class duenioDAO{
         return false;
     }
 
-    public function updateMascota ($user=NULL,$mascota=NULL,$nuevamascota=NULL){
-        if ($user != NULL && $mascota != NULL && $nuevamascota != NULL){
-            $this->LoadDuenioJson();
-            $userSearch = $this->getDuenioByEmail($user->getEmail());
-            $petSearch = $this->searchPetByName($mascota->getNombre());
-            if ($userSearch!=null){
-               $usernew= $this->updatePetbyName($userSearch,$petSearch,$nuevamascota);
-               $this->saveDuenioJson();
-               Session::CreateSession($usernew);
-               return true;
-            }
-        }
-        return false;
-    }
-
-    public function updatePetbyName ($userSearch,$petSearch,$search){
-        $newarraPets = array();
-        $flag = 0;
-        foreach($this->list as $usersfromList){
-            if ($usersfromList->getEmail() == $userSearch->getEmail() && $flag == 0){
-                foreach ($usersfromList->getMascotas() as $pet) {
-                    if ($pet->getNombre() == $petSearch->getNombre()){
-                        $pet->setNombre($search->getNombre());
-                        $pet->setRaza($search->getRaza());
-                        $pet->setTamanio($search->getTamanio());
-                        $pet->setFoto($search->getFoto());
-                        $pet->setPlanVacunacion($search->getPlanVacunacion());
-                        $pet->setVideo($search->getVideo());
-                        $flag = 1;
-                    }
-                    array_push($newarraPets, $pet);
-                }
-                $usersfromList->setMascotas($newarraPets);
-                return $usersfromList;
-            }
-        }
-    }
 
 
 
