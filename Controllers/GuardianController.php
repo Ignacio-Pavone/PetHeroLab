@@ -22,7 +22,7 @@ class GuardianController{
         }else{
             Session::SetBadMessage("El email ya esta en uso");
         }
-        header ("location: ".FRONT_ROOT."Auth/showGuardianProfile");
+        header ("location: ".FRONT_ROOT."Auth/showLogin");
     }
 
     public function checkingDates($startingDay, $finishDate, $daysToWork){

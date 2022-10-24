@@ -8,10 +8,21 @@ use Utils\Session;
 class duenioDAO{
     private $list = array();
     private $filename;
+    private $id;
 
     public function __construct()
     {
         $this->filename = dirname(__DIR__)."/Data/duenios.json";
+    }
+    
+    public function findDuenioByID ($id){
+        $this->LoadDuenioJson();
+        foreach($this->list as $duenio){
+            if($duenio->getIdDuenio() == $id){
+                return $duenio;
+            }
+        }
+        return null;
     }
 
     public function getDuenioByEmail($email){
@@ -42,20 +53,24 @@ class duenioDAO{
             foreach($array as $item) 
             {
                 $user = new Duenio($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password']);
+                $user->setIdDuenio($item['idDuenio']);
                 foreach ($item['mascotas'] as $mascota) {
                     $mascota = new Mascota($mascota['nombre'], $mascota['tipo'], $mascota['raza'], $mascota['tamanio'], $mascota['foto'], $mascota['planVacunacion'], $mascota['video']);
-                    $user->addMascota($mascota);
+                    $user->addMascota($mascota);                  
                 }            
                 array_push($this->list, $user);
+                if ($item["idDuenio"] > $this->id) {
+                    $this->id = $item["idDuenio"];
+                }
             }
         }
     }
 
     public function saveDuenioJson (){
         $arrayToEncode = array();
-       
-        
+
         foreach($this->list as $user) {
+            $valueArray['idDuenio'] = $user->getIdDuenio();
             $valuesArray['email'] = $user->getEmail();
             $valuesArray['fullname'] = $user->getFullname();
             $valuesArray['dni'] = $user->getDni();
@@ -83,6 +98,7 @@ class duenioDAO{
     public function addDuenio($user)
     {
         $this->LoadDuenioJson();
+        $user->setIdDuenio($this->id + 1);
         array_push($this->list, $user);
         $this->saveDuenioJson();
     }

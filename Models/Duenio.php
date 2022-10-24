@@ -1,11 +1,20 @@
 <?php 
 namespace Models;
 class Duenio extends Usuario {
+    private $idDuenio;
     private $mascotas;
     
     public function __construct($email,$fullname,$dni,$age,$password){
         parent::__construct($email,$fullname,$dni,$age,$password);
         $this->mascotas = array();
+    }
+
+    public function getIdDuenio(){
+        return $this->idDuenio;
+    }
+
+    public function setIdDuenio($idDuenio){
+        $this->idDuenio = $idDuenio;
     }
 
     public function getMascotas(){

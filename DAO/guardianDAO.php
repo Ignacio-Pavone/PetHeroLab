@@ -8,10 +8,21 @@ use Models\Guardian;
     {
       private $list = array();
       private $filename;
+      private $id;
 
       public function __construct()
       {
         $this->filename = dirname(__DIR__)."/Data/guardianes.json";
+      }
+
+      public function findGuardianByID ($id){
+        $this->LoadGuardianJson();
+        foreach($this->list as $guardian){
+          if($guardian->getIdGuardian() == $id){
+            return $guardian;
+          }
+        }
+        return null;
       }
 
       public function getGuardianByEmail($email){
@@ -41,7 +52,12 @@ use Models\Guardian;
           {
             $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad'],$item['initDate'],$item['finishDate']);
             $user->setReputacion($item['reputacion']);
+            $user->setIdGuardian($item['idGuardian']);
             array_push($this->list, $user);
+
+            if ($item["idGuardian"] > $this->id) {
+              $this->id = $item["idGuardian"];
+          }
           }
         }
       }
@@ -59,6 +75,7 @@ use Models\Guardian;
       public function addGuardian($user)
       {
         $this->LoadGuardianJson();
+        $user->setIdGuardian($this->id + 1);
         array_push($this->list, $user);
         $this->saveGuardianJson();
       }
@@ -90,6 +107,7 @@ use Models\Guardian;
             $arrayToEncode = array();
             
             foreach($this->list as $user) {
+            $valuesArray["idGuardian"] = $user->getIdGuardian();
             $valuesArray['email'] = $user->getEmail();
             $valuesArray['fullname'] = $user->getFullName();
             $valuesArray['dni'] = $user->getDni();

@@ -1,5 +1,6 @@
 [
     {
+        "idDuenio": 1,
         "email": "ignaciopavone@gmail.com",
         "fullname": "Ignacio Pavone",
         "dni": "34883612",
@@ -36,6 +37,7 @@
         ]
     },
     {
+        "idDuenio": 2,
         "email": "nazareno@gmail.com",
         "fullname": "Nazareno",
         "dni": "32323",
@@ -44,6 +46,7 @@
         "mascotas": []
     },
     {
+        "idDuenio": 3,
         "email": "lucre@gmail.com",
         "fullname": "Lucrecia Bazan",
         "dni": "1111",
@@ -52,6 +55,7 @@
         "mascotas": []
     },
     {
+        "idDuenio": 4,
         "email": "luis@gmail.com",
         "fullname": "Luis Taliercio",
         "dni": "42424242",

@@ -4,10 +4,9 @@ namespace Models;
 use Models\Usuario;
 
 class Guardian extends Usuario {
-
-    //TODO triple validacion para reserva tipo mascota, tamanio, raza
-    private $tipoMascota; //tamaño de mascota chica mediana grande
-    private $remuneracionEsperada; //no sabemos si es por hora o no
+    private $idGuardian;
+    private $tipoMascota; 
+    private $remuneracionEsperada;
     private $reputacion;
     private $initDate;
     private $finishDate;
@@ -24,6 +23,13 @@ class Guardian extends Usuario {
         $this->finishDate = $finishDate;
     }
 
+    public function getIdGuardian(){
+        return $this->idGuardian;
+    }
+
+    public function setIdGuardian($idGuardian){
+        $this->idGuardian = $idGuardian;
+    }
     public function setTipoMascota($tipoMascota){
         $this->tipoMascota = $tipoMascota;
     }

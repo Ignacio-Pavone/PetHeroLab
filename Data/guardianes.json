@@ -1,5 +1,6 @@
 [
     {
+        "idGuardian": 1,
         "email": "guardian@gmail.com",
         "fullname": "Fernando Jimenez",
         "dni": "33122333",
@@ -10,12 +11,13 @@
             "sabado",
             "domingo"
         ],
-        "reputacion": 6,
+        "reputacion": 9,
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-21",
         "finishDate": "2022-10-24"
     },
     {
+        "idGuardian": 2,
         "email": "guadnsito@gmail.com",
         "fullname": "El cuidador",
         "dni": "33122333",
@@ -30,5 +32,33 @@
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-21",
         "finishDate": "2022-10-24"
+    },
+    {
+        "idGuardian": 3,
+        "email": "guardianidprueba@gmail.com",
+        "fullname": "ID probando",
+        "dni": "123123",
+        "age": "22",
+        "password": "1111",
+        "tipoMascota": "mediano",
+        "disponibilidad": [],
+        "reputacion": 0,
+        "remuneracionEsperada": "22",
+        "initDate": null,
+        "finishDate": null
+    },
+    {
+        "idGuardian": 4,
+        "email": "asd@asd.com",
+        "fullname": "asd",
+        "dni": "2222",
+        "age": "22",
+        "password": "1111",
+        "tipoMascota": "mediano",
+        "disponibilidad": [],
+        "reputacion": 0,
+        "remuneracionEsperada": "222",
+        "initDate": null,
+        "finishDate": null
     }
 ]
