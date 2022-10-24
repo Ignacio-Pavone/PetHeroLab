@@ -40,5 +40,6 @@ class GuardianController{
         }
         header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $guardianEmail);
     }
+
 }
 ?>

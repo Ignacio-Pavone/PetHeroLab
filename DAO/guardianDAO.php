@@ -62,16 +62,6 @@ use Models\Guardian;
         }
       }
 
-      public function searchGuardianByName ($name){
-        $this->LoadGuardianJson();
-        $userAuth=null;
-        foreach($this->list as $user){
-          if ($user->getFullName() == $name)
-            $userAuth=$user;
-        }
-        return $userAuth;
-      }
-
       public function addGuardian($user)
       {
         $this->LoadGuardianJson();
@@ -161,6 +151,17 @@ use Models\Guardian;
         }
         return false;
 
+      }
+
+      public function getGuardiansByDate($fechaI,$fechaF){
+        $this->LoadGuardianJson();
+        $array = array();
+        foreach($this->list as $guardian){
+          if ($fechaI >= $guardian->getInitDate() && $fechaF <= $guardian->getFinishDate()){
+            array_push($array,$guardian);
+          }
+        }
+        return $array;
       }
     }
 ?>

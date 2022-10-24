@@ -77,8 +77,10 @@ class Guardian extends Usuario {
         $this->disponibilidad = array();
     }
 
-    public function calcularCalificacion ($calificacion){
-        $this->reputacion = ($this->reputacion + $calificacion);
+    public function calcularCalificacion ($calificacion,$count){
+        $reputacion = 0;     
+        $reputacion = $calificacion/$count; 
+        $this->setReputacion($reputacion);
     }
 
     public function setDisponibilidad($dia){

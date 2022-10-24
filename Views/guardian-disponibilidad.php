@@ -7,11 +7,11 @@ require_once VIEWS_PATH . 'header.php';
 $type = $_SESSION['userType'];
 include('nav-simple-bar.php');
 ?>
-<section class="login-block">
 
+<section id="disponibilidadSection" class="login-block">
     <main class="py-5">
-        <section id="login-block" class="mb-5">
-            <form action="<?php echo FRONT_ROOT ?>Guardian/ModifyAvailability" method="post">
+        
+    <form action="<?php echo FRONT_ROOT ?>Guardian/ModifyAvailability" method="post">
                 <div class="container" id="dataUser">
                     <center>
                         <h3 class="mb" id="dataUser">Modificar Disponibilidad Guardian</h3>
@@ -59,11 +59,10 @@ include('nav-simple-bar.php');
                         <button type="submit" onclick="return confirm('Are you sure?')" style="text-align:center"
                             class="btn btn-dark">Modificar</button>
                     </div>
-        </section>
-        </div>
-        </form>
-
-        <br>
-        </div>
-        </div>
+                </div> 
+            </form>  
+        
     </main>
+
+                        
+    

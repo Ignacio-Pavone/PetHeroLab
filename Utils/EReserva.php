@@ -8,7 +8,7 @@ enum EReserva : string {
     case Curso = "En Curso";
     case Rechazado  = "Rechazado";
     case Completo = "Completo";
-    case Calificada = "Calificada"; // aca seria calificado chequear en comprobaciones
+    case Calificado = "Calificado"; // aca seria calificado chequear en comprobaciones
 }
 
 ?>

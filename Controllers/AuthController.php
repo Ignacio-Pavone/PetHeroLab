@@ -47,6 +47,15 @@
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 
+            public function showFilter($filtroInicio,$filtroFin){
+                $user = Session::GetLoggedUser();
+                $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getidDuenio());
+                $guardianes = $this->guardianDAO->getGuardiansByDate($filtroInicio,$filtroFin);
+                $reservas = $this->reservaDAO->getReservasByDuenioID($user->getidDuenio()); 
+
+                require_once(VIEWS_PATH . 'duenio-profile.php');
+            }
+
             public function showdisponibilityView(){
                 require_once(VIEWS_PATH . 'guardian-disponibilidad.php');
             }

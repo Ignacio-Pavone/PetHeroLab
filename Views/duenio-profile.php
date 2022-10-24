@@ -119,6 +119,18 @@ include('nav-bar.php');
                         <h3 class="mb">Guardianes</h3>
                         <hr>
                     </center>
+                    
+                    <div id="divFiltroFecha">
+                    <form id="" action="<?php echo FRONT_ROOT. 'Auth/showFilter' ?>">
+                        <label style="margin-left:40px;" for="filtroInicio"><b>Fecha de Inicio</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroInicio" min="<?php echo date('Y-m-d') ?>" value="" select required>  
+                        <label style="margin-left:40px;" for="filtroFinal"><b>Fecha de Fin</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroFinal" min="<?php echo date('Y-m-d') ?>" value="" select required>
+                        <button type="submit" style="text-align:center" class="btn btn-dark">Filtrar</button>
+                    </form>
+                    <form action="<?php echo FRONT_ROOT. 'Auth/showDuenioProfile' ?>">
+                        <button style="margin-right: 55px;" type="submit" style="text-align:center" class="btn btn-dark">Limpiar Filtros</button>
+                    </form>
+                    </div>
+                    
                     <br>
                     <table style="text-align:center;">
                         <thead>
@@ -198,7 +210,7 @@ include('nav-bar.php');
                                 <th style="width: 10%;">Fecha Fin</th>
                                 <th style="width: 10%;">Dias</th>
                                 <th style="width: 10%;">Costo Total</th>
-                                <th style="width: 10%;">Estado</th>
+                                <th style="width: 5%;">Estado</th>
                                 <th style="width: 10%;">Rechazar</th>
                                 <th style="width: 15%;">Calificar</th>
                             </tr>
@@ -219,17 +231,19 @@ include('nav-bar.php');
                                 <td><?php echo $reserva->getFechaFin(); ?></td>
                                 <td><?php echo $reserva->getCantidadDias(); ?></td>
                                 <td><?php echo $reserva->getCostoTotal() . ' $' ?></td>
-                                <td><?php if ($reserva->getEstado() == 'Confirmado') {
-                                            echo "<p style=color:green>Confirmado</p>";
+                                <td class=""><?php if ($reserva->getEstado() == 'Confirmado') {
+                                             ?> <label class="circulo" style="background:green;"> <?php
                                         } elseif ($reserva->getEstado() == 'Pendiente') {
-                                            echo "<p style=color:orange>Pendiente</p>";
+                                        ?> <label class="circulo" style="background:orange;"> <?php
                                         } elseif ($reserva->getEstado() == 'Rechazado') {
-                                            echo "<p style=color:red>Rechazado</p>";
+                                             ?> <label class="circulo" style="background:red;"> <?php
                                         } elseif ($reserva->getEstado() == 'Completo') {
-                                            echo "<p style=color:blue>Completado</p>";
-                                        } elseif ($reserva->getEstado() == 'Calificada') {
-                                            echo "<p style=color:purple>Calificada</p>";
-                                        } ?></td>
+                                             ?> <label class="circulo" style="background:blue;"> <?php
+                                        } elseif ($reserva->getEstado() == 'Calificado') {
+                                             ?> <label class="circulo" style="background:purple;"> <?php
+                                        } elseif ($reserva->getEstado() == 'En Curso') {
+                                            ?> <label class="circulo" style="background:pink;"> </td>
+                                        <?php } ?>
                             
                                 <td>
                                     <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
@@ -266,6 +280,17 @@ include('nav-bar.php');
                         </tbody>
                     </table>
                     <br>
+                    <br>
+            <div class="divEstado">
+                
+               <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Pendiente</label>
+               <p class="circulo" style="background:green;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Confirmado</label> 
+               <p class="circulo" style="background:pink;"> </p><label style="padding-left:5px;padding-right:15px;" for="">En Curso</label>
+               <p class="circulo" style="background:blue;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Completo</label>               
+               <p class="circulo" style="background:purple;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Calificado</label> 
+               <p class="circulo" style="background:red;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Rechazado</label>
+            </div>
+            <br>
                 </div>
                 <br>
                 <section id="login-block" class="mb-5">

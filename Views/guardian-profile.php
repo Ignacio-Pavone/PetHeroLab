@@ -92,42 +92,6 @@ include('nav-bar.php');
                     </div>
                 </div>
         </section>
-        <div class="container" id="css-mine">
-            <br>
-            <center>
-                <h3 class="mb">Todas las mascotas con tamaño <?php echo $user->getTipoMascota() ?></h3>
-                <hr>
-            </center>
-            <br>
-            <table style="text-align:center;">
-                <thead>
-                    <tr>
-                        <th style="width: 15%;">Nombre</th>
-                        <th style="width: 15%;">Raza</th>
-                        <th style="width: 15%;">Tamaño</th>
-                        <th style="width: 20%;">Foto</th>
-                        <th style="width: 10%;">Plan Vacunacion</th>
-                        <th style="width: 10%;">Video</th>
-                        <th style="width: 15%;">Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($mascotas as $mascota) {?>
-                    <tr>
-                        <td><?php echo $mascota->getNombre(); ?></td>
-                        <td><?php echo $mascota->getRaza(); ?></td>
-                        <td><?php echo $mascota->getTamanio(); ?></td>
-                        <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="90px" height="70px"></td>
-                        <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
-                        <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
-                        <td><a class="btn btn-dark ml-auto" href="<?php ?>">Cuidar</a></td>
-                    </tr>
-                    <?php } ?>
-                </tbody>
-            </table>
-            <br>
-        </div>
-        <br>
 
         <div class="container" id="css-mine">
             <br>
@@ -205,7 +169,9 @@ include('nav-bar.php');
                     
                     <?php foreach ($reservas as $reserva) {?>
                     <tr>
-                    <?php foreach ($duenios as $duenio){
+                    <?php
+                    if ($reserva->getEstado() != 'Pendiente'){
+                    foreach ($duenios as $duenio){
                             if ($duenio->getIdDuenio() == $reserva->getDuenio()) { ?>
                         <td><?php echo $duenio->getFullName(); ?></td>
                         <?php } } ?>
@@ -215,22 +181,34 @@ include('nav-bar.php');
                         <?php } } ?>
                         <td><?php echo $reserva->getFechaInicio(); ?></td>
                         <td><?php echo $reserva->getFechaFin(); ?></td>
-                        <td><?php if ($reserva->getEstado() == 'Confirmado') {
-                                             echo "<p style=color:green>Confirmado</p>";
+                        <td class=""><?php if ($reserva->getEstado() == 'Confirmado') {
+                                             ?> <label class="circulo" style="background:green;"> <?php
                                         } elseif ($reserva->getEstado() == 'Pendiente') {
-                                             echo "<p style=color:orange>Pendiente</p>";
+                                        ?> <label class="circulo" style="background:orange;"> <?php
                                         } elseif ($reserva->getEstado() == 'Rechazado') {
-                                             echo "<p style=color:red>Rechazado</p>";
+                                             ?> <label class="circulo" style="background:red;"> <?php
                                         } elseif ($reserva->getEstado() == 'Completo') {
-                                             echo "<p style=color:blue>Completado</p>";
-                                        } elseif ($reserva->getEstado() == 'Calificada') {
-                                             echo "<p style=color:purple>Calificada</p>";
-                                        } ?></td>
+                                             ?> <label class="circulo" style="background:blue;"> <?php
+                                        } elseif ($reserva->getEstado() == 'Calificado') {
+                                             ?> <label class="circulo" style="background:purple;"> <?php
+                                        }  elseif ($reserva->getEstado() == 'En Curso') {
+                                             ?> <label class="circulo" style="background:pink;"> </td>
+                                         <?php } ?> 
+                                        </td>
                     </tr>
                     <?php
-                         } ?>
+                         } } ?>
                 </tbody>
-            </table>
+          </table>
+          <br>
+            <div class="divEstado">
+               <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Pendiente</label>
+               <p class="circulo" style="background:green;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Confirmado</label> 
+               <p class="circulo" style="background:pink;"> </p><label style="padding-left:5px;padding-right:15px;" for="">En Curso</label>
+               <p class="circulo" style="background:blue;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Completo</label>               
+               <p class="circulo" style="background:purple;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Calificado</label> 
+               <p class="circulo" style="background:red;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Rechazado</label>
+            </div>
             <br>
         </div>
     </main>

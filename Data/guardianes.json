@@ -11,7 +11,7 @@
         "reputacion": 0,
         "remuneracionEsperada": "1500",
         "initDate": "2022-10-24",
-        "finishDate": "2022-10-31"
+        "finishDate": "2022-10-26"
     },
     {
         "idGuardian": 2,
@@ -25,9 +25,9 @@
             "sabado",
             "domingo"
         ],
-        "reputacion": 0,
+        "reputacion": 2.3333333333333335,
         "remuneracionEsperada": "1000",
         "initDate": "2022-10-21",
-        "finishDate": "2022-10-24"
+        "finishDate": "2022-11-30"
     }
 ]

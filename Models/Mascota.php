@@ -67,7 +67,7 @@ class Mascota {
         public function getVideo(){
             return $this->video;
         }
-
+    
         public function setNombre($nombre){
             $this->nombre=$nombre;
         }

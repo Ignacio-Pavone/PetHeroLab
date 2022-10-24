@@ -29,6 +29,7 @@ use Models\Guardian;
         $valuesArray["fechaInicio"] = $reserva->getFechaInicio();
         $valuesArray["fechaFin"] = $reserva->getFechaFin();
         $valuesArray["estado"] = $reserva->getEstado();
+        $valuesArray["calificacion"] = intval($reserva->getCalificacion());
         $valuesArray["costoTotal"] = $reserva->getCostoTotal();
         $valuesArray["tipo"] = $reserva->getTipo();
         $valuesArray["raza"] = $reserva->getRaza();
@@ -71,25 +72,62 @@ use Models\Guardian;
     private function LoadReservaJson() {
         $this->list = array();
         if(file_exists($this->filename)) 
-            {
-                $jsonContent = file_get_contents($this->filename);
-                $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
-                foreach($array as $item) 
-                {
-                    $reserva = new Reserva($item['idMascota'], $item['idDuenio'],$item['idGuardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
-                    $reserva->setEstado($item['estado']);
-                    $reserva->setNroReserva($item['nroReserva']);
-                    
-                    if (($reserva->getFechaFin() < date('Y-m-d')) && ($reserva->getEstado() == 'Confirmado')){
-                      $reserva->setEstado('Completo');
-                    }
-                    
-                    array_push($this->list, $reserva);
-                    if ($item["nroReserva"] > $this->id) {
-                      $this->id = $item["nroReserva"];
-                  }
-                 }                  
+        {
+          $jsonContent = file_get_contents($this->filename);
+          $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
+          foreach($array as $item) 
+          {
+            $reserva = new Reserva($item['idMascota'], $item['idDuenio'],$item['idGuardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
+            $reserva->setEstado($item['estado']);
+            $reserva->setCalificacion($item['calificacion']);
+            $reserva->setNroReserva($item['nroReserva']);                   
+            $reserva= $this->estadosAutomaticos($reserva);                
+            array_push($this->list, $reserva);
+            if ($item["nroReserva"] > $this->id) {
+              $this->id = $item["nroReserva"];
+            }
+          }                  
         }
+        //Buscar mejor manera de ejecutar SaveData para mantener los Estados actualizados.
+        $this->SaveData();
+    }
+
+    public function sumarCalificacionesGuardian($idGuardian){
+      $this->LoadReservaJson();
+      $sum = 0;
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          if($reserva->getEstado() == "Calificado"){
+            $sum += $reserva->getCalificacion();
+          }
+        }
+      }
+      return $sum;
+    }
+
+    public function contarCalificacionesGuardian($idGuardian){
+      $this->LoadReservaJson();
+      $count = 0;
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          if($reserva->getEstado() == "Calificado"){
+            $count++;
+          }
+        }
+      }
+      return $count;
+    }
+
+    public function estadosAutomaticos($reserva){
+      if($reserva->getEstado() == 'Confirmado'){
+        if (($reserva->getFechaFin() < date('Y-m-d')) ){
+          $reserva->setEstado('Completo');
+        }
+        elseif ($reserva->getFechaInicio() >= date('Y-m-d') && $reserva->getFechaFin() >= date('Y-m-d')){
+          $reserva->setEstado('En Curso');
+        }
+      }
+      return $reserva;
     }
 
     public function add ($reserva){
@@ -214,6 +252,19 @@ use Models\Guardian;
       }
       return false;
     }
+
+    public function setearCalificacion($nroReserva,$calificacion){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setCalificacion($calificacion);
+          $this->SaveData();
+          return true;
+        }
+      }
+      return false;
+    }
+
 }
 
 

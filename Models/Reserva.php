@@ -12,6 +12,7 @@ use Utils\EReserva as EReserva;
         private $fechaFin;
         private $estado;
         private $costoTotal;
+        private $calificacion;
         private $tipo;
         private $raza;
         private $cantidadDias;
@@ -26,6 +27,7 @@ use Utils\EReserva as EReserva;
         $this->costoTotal = $costoTotal;
         $this->tipo = $tipo;
         $this->raza = $raza;
+        $this->calificacion=0;
         $this->cantidadDias = $cantidadDias;
     }
 
@@ -119,5 +121,15 @@ use Utils\EReserva as EReserva;
 
     public function setCostoTotal($costoTotal){
         $this->costoTotal = $costoTotal;
+    }
+
+    public function getCalificacion()
+    {
+        return $this->calificacion;
+    }
+
+    public function setCalificacion($calificacion)
+    {
+        $this->calificacion = $calificacion;
     }
 }

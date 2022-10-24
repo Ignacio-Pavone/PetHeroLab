@@ -21,10 +21,10 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   width: 100%;
   padding: 50px 0;
-    
+
 }
 
-.update-dispon{
+.update-dispon {
   font-style: italic;
 }
 
@@ -191,15 +191,15 @@ td {
   text-align: center;
   padding: 0px;
   width: 335px;
-  font-style: italic; 
+  font-style: italic;
 }
 
 .alert {
   left: 0;
-  margin: auto; 
-  position: absolute; 
+  margin: auto;
+  position: absolute;
   right: 0;
-  text-align: center; 
+  text-align: center;
   top: 4em;
   width: 50%;
 
@@ -215,7 +215,7 @@ td {
   text-align: center;
   padding: 0px;
   width: 100px;
-  font-style: italic; 
+  font-style: italic;
 }
 
 #dataUser {
@@ -257,21 +257,52 @@ input[type="checkbox"]:checked::before {
 ::-webkit-input-placeholder {
   font-style: italic;
 }
+
 :-moz-placeholder {
-  font-style: italic;  
-}
-::-moz-placeholder {
-  font-style: italic;  
-}
-:-ms-input-placeholder {  
-  font-style: italic; 
+  font-style: italic;
 }
 
-.linea
-{
-    display: inline-block;
+::-moz-placeholder {
+  font-style: italic;
+}
+
+:-ms-input-placeholder {
+  font-style: italic;
+}
+
+.linea {
+  display: inline-block;
 }
 
 .colu {
-  display:inline;
+  display: inline;
+}
+
+.circulo {
+  border: 0.5px solid black;
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.divEstado {
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.inputFiltro {
+  margin-right: 50px;
+}
+
+#divFiltroFecha {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#disponibilidadSection {
+  height: 100vh;
 }

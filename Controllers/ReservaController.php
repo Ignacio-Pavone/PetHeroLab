@@ -73,11 +73,14 @@
         public function calificarGuardian ($guardian, $calificacion, $reserva){
             
             $guardianBuscado = $this->guardianDAO->findGuardianByID($guardian);
-            $guardianBuscado->calcularCalificacion($calificacion);
+            $count = $this->reservaDAO->contarCalificacionesGuardian($guardian) + 1;
+            $suma = $this->reservaDAO->sumarCalificacionesGuardian($guardian) + $calificacion;
+            $guardianBuscado->calcularCalificacion($suma,$count);
             $this->guardianDAO->updateUser($guardianBuscado);
 
-            if ($this->reservaDAO->cambiarEstado($reserva,"Calificada"))
+            if ($this->reservaDAO->cambiarEstado($reserva,"Calificado"))
             {
+                $this->reservaDAO->setearCalificacion($reserva,$calificacion);
                 Session::SetOkMessage("Guardian Calificado con Exito");
             }else{
                 Session::SetBadMessage("No se pudo calificar al guardian");
