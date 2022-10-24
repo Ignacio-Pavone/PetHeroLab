@@ -220,7 +220,7 @@ include('nav-bar.php');
                             <?php foreach ($reservas as $reserva) { 
                                 ?>
                             <tr>
-                            <?php foreach ($guardianes as $guardian) {
+                            <?php foreach ($todoslosguardianes as $guardian) {
                             if ($reserva->getGuardian() == $guardian->getIdGuardian()){?>
                                 <td><?php echo $guardian->getFullName(); ?></td>
                                 <?php } } ?>

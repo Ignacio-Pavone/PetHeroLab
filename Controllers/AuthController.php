@@ -51,8 +51,9 @@
                 $user = Session::GetLoggedUser();
                 $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getidDuenio());
                 $guardianes = $this->guardianDAO->getGuardiansByDate($filtroInicio,$filtroFin);
+                $todoslosguardianes = $this->guardianDAO->GetAllGuardians();
                 $reservas = $this->reservaDAO->getReservasByDuenioID($user->getidDuenio()); 
-
+                
                 require_once(VIEWS_PATH . 'duenio-profile.php');
             }
 

@@ -155,9 +155,15 @@ use Models\Guardian;
 
       public function getGuardiansByDate($fechaI,$fechaF){
         $this->LoadGuardianJson();
+        $date1 = strtotime($fechaI);
+        $date2 = strtotime($fechaF);
+
         $array = array();
         foreach($this->list as $guardian){
-          if ($fechaI >= $guardian->getInitDate() && $fechaF <= $guardian->getFinishDate()){
+          $date1guardian = strtotime($guardian->getInitDate());
+          $date2guardian = strtotime($guardian->getFinishDate());
+          if ($date1guardian >= $date1 && $date2guardian <= $date2){
+
             array_push($array,$guardian);
           }
         }
