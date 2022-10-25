@@ -32,6 +32,7 @@
 
             public function showGuardianProfile($email){
                 $guardian = $this->guardianDAO->getGuardianByEmail($email);
+                ($this->guardianDAO->checkPerfil($guardian)) ? Session::SetBadMessage("Por favor establesca su disponibilidad laboral") : '' ;
                 $duenios = $this->duenioDAO->GetAllDuenios();
                 $todaslasmascotas = $this->mascotaDAO->GetAllMascotas();
                 $mascotas = $this->mascotaDAO->filtrarMascotasporTamanio($guardian->getTipoMascota());

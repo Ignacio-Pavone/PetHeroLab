@@ -163,7 +163,8 @@ include('nav-bar.php');
 
                         <tbody>
                             <?php
-                            foreach ($guardianes as $guardian) {?>
+                            foreach ($guardianes as $guardian) {
+                                if ($guardian->getInitDate()!=null){?>
                             <tr>
                                 <td><?php echo $guardian->getFullName(); ?></td>
                                 <td><?php echo $guardian->getAge(); ?></td>
@@ -176,16 +177,24 @@ include('nav-bar.php');
                                 <td style=color:orange><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
                             <?php } elseif ($guardian->getReputacion() == 0.0){?> 
                                 <td style=color:black><?php echo '-' ?> </td>
-                                <?php } ?>
-                            
+                                <?php } ?>                          
                                 <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                                 <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                                     <td><input type="date" id="initDate" name="fechaInicio" 
                                             max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon"
-                                            value="" min="<?php echo date('Y-m-d') ?>" select required></td>
+                                            value="" min="<?php if ($guardian->getInitDate() < date('Y-m-d')){
+                                                echo date('Y-m-d');
+                                            } else {
+                                                echo $guardian->getInitDate();
+                                            } ?>" required></td>
+                                            
                                     <td><input type="date" id="endDate" name="fechaFin" 
                                             max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon"
-                                            value="" min="<?php echo date('Y-m-d') ?>" select required></td>
+                                            value="" min="<?php if ($guardian->getInitDate() < date('Y-m-d')){
+                                                echo date('Y-m-d');
+                                            } else {
+                                                echo $guardian->getInitDate();
+                                            } ?>" required></td>
                                     <td>
                                         <div class="col-lg-2">
                                             <select  name = "idMascota" id="solapaDuenios">
@@ -193,7 +202,6 @@ include('nav-bar.php');
                                                 <option name = "idMascota" value="<?php echo $mascota->getIdMascota(); ?>">
                                                     <?php echo $mascota->getNombre(); ?></option>
                                                 <?php } ?>
-                                                
                                             </select>
                                         </div>
                                     </td>
@@ -206,6 +214,7 @@ include('nav-bar.php');
                                         <button type="submit" style="text-align:center"
                                             class="btn btn-dark">Solicitar</button>
                                     </td>
+                                    <?php } ?>
                                 </form>
                                 <?php
                             }
@@ -273,10 +282,10 @@ include('nav-bar.php');
                                         <?php } ?>                            
                                 <td>
                                     <?php if ($reserva->getEstado() == 'Calificado' || $reserva->getEstado() == 'En Curso' || $reserva->getEstado() == 'Confirmado') { ?>
-                                    <button type="button" class="btn btn-dark" disabled>Rechazar</button>
+                                    <button type="button" class="btn btn-dark" disabled>Cancelar</button>
                                     <?php } else { ?>
                                     <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                        href="<?php echo FRONT_ROOT . 'Reserva/cancelarReservaDuennio/' . $reserva->getNroReserva(); ?>">Rechazar</a>
+                                        href="<?php echo FRONT_ROOT . 'Reserva/cancelarReservaDuennio/' . $reserva->getNroReserva(); ?>">Cancelar</a>
                                 </td>
                                 <?php } ?>
                                 <td>

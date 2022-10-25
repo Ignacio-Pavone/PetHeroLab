@@ -12,7 +12,7 @@
                 include_once(VIEWS_PATH."login.php");
             }
         }
-
+        
         public static function VerifiyGoodMessage () {
             if(isset($_SESSION["good"])) {
                 return true;

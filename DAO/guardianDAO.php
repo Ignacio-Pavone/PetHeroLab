@@ -152,6 +152,13 @@ use Models\Guardian;
         return false;
 
       }
+      
+      public function checkPerfil ($guardian){
+        if ($guardian->getInitDate() == null){
+          return true;
+        }
+        return false;
+      }
 
       public function getGuardiansByDate($fechaI,$fechaF){
         $this->LoadGuardianJson();

@@ -4,7 +4,7 @@
         "idDuenio": 1,
         "nombre": "Perrosqui",
         "tipo": "Perro",
-        "raza": "Callejero",
+        "raza": "Ovejero",
         "tamanio": "Chico",
         "foto": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
         "planVacunacion": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
@@ -31,39 +31,6 @@
         "foto": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
         "planVacunacion": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg",
         "video": "http:\/\/c.files.bbci.co.uk\/48DD\/production\/_107435681_perro1.jpg"
-    },
-    {
-        "idMascota": 4,
-        "idDuenio": 4,
-        "nombre": "Rinho",
-        "tipo": "Gato",
-        "raza": "Siames",
-        "tamanio": "Chico",
-        "foto": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
-    },
-    {
-        "idMascota": 5,
-        "idDuenio": 1,
-        "nombre": "Tinche",
-        "tipo": "Gato",
-        "raza": "Siames",
-        "tamanio": "chico",
-        "foto": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
-        "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
-    },
-    {
-        "idMascota": 4,
-        "idDuenio": 1,
-        "nombre": "Rinho",
-        "tipo": "Gato",
-        "raza": "Siames",
-        "tamanio": "chico",
-        "foto": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
     },
     {
         "idMascota": 6,

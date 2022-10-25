@@ -185,7 +185,6 @@ use Models\Guardian;
       $this->SaveData();
     }
 
-
     public function checkfirstPetType ($idGuardian,$tipo,$raza){
       $reservas = $this->getReservasByGuardianID($idGuardian);
       if (empty($reservas)){
@@ -199,6 +198,70 @@ use Models\Guardian;
           }
         }
       }
+      return false;
+    }
+
+    public function filtrarPendientes ($idGuardian){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          if($reserva->getEstado() == "Pendiente"){
+            array_push($array,$reserva);
+          }
+        }
+      }
+      return $array;
+    }
+
+    public function filtrarConfirmados ($idGuardian){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          if($reserva->getEstado() == "Confirmado"){
+            array_push($array,$reserva);
+          }
+        }
+      }
+      return $array;
+    }
+
+    public function filtrarEnCurso ($idGuardian){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          if($reserva->getEstado() == "En Curso"){
+            array_push($array,$reserva);
+          }
+        }
+      }
+      return $array;
+    }
+
+
+    public function analizarReserva ($idGuardian, $tipo, $raza, $fechaInicio){
+      $reservas = $this->getReservasByGuardianID($idGuardian);
+      if (empty($reservas)){
+        return true;
+      }
+
+      if (count($this->filtrarConfirmados($idGuardian)) == 0 && count($this->filtrarEnCurso($idGuardian)) == 0){
+        return true;
+      }
+
+      foreach ($reservas as $reserva){
+          if ($reserva->getEstado() == "Confirmado" || $reserva->getEstado() == "En Curso"){
+            if ($fechaInicio >= $reserva->getFechaInicio()){
+              if ($tipo == $reserva->getTipo()){       
+                if ($raza == $reserva->getRaza()){
+                return true;      
+            }
+          }
+        }
+      }
+    }
       return false;
     }
 

@@ -28,7 +28,7 @@
             $searchDuenio = $this->duenioDAO->getDuenioByEmail($Duenio);
             if (strcasecmp($searchGuardian->getTipoMascota(), $searchPet->getTamanio()) == 0){
             if ($this->reservaDAO->chequeoDataReserva($searchPet,$searchGuardian,$searchDuenio) && !$this->reservaDAO->dateChecker($fechaInicio,$fechaFin)){
-                if ($this->reservaDAO->checkfirstPetType($searchGuardian->getIdGuardian(),$searchPet->getTipo(), $searchPet->getRaza())) {
+                if ($this->reservaDAO->analizarReserva($searchGuardian->getIdGuardian(),$searchPet->getTipo(), $searchPet->getRaza(), $fechaInicio)) {
                     $reserva = new Reserva($searchPet->getIdMascota(), $searchDuenio->getIdDuenio(), $searchGuardian->getIdGuardian(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(),$searchPet->getRaza(), $dias);
                     $reserva->calcularCostoTotal($costoTotal);
                     $this->reservaDAO->add($reserva);
