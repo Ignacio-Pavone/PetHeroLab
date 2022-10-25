@@ -1,8 +1,5 @@
 <?php
-
 use Utils\Session;
-use Utils\EReserva as EReserva;
-
 require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];

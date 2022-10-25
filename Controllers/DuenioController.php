@@ -17,8 +17,7 @@ class DuenioController{
  
     public function registerDuenio($fullname, $age, $dni, $email, $password){
         $user = new Duenio($email, $fullname, $dni, $age, $password);
-        if($this->duenioDAO->getDuenioByEmail($email) == null)
-        {
+        if($this->duenioDAO->getDuenioByEmail($email) == null){
             $this->duenioDAO->addDuenio($user);
             Session::SetOkMessage("Duenio registrado con exito");
         }else{

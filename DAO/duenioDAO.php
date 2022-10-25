@@ -11,8 +11,7 @@ class duenioDAO{
     private $id;
     private $idmascota;
 
-    public function __construct()
-    {
+    public function __construct(){
         $this->filename = dirname(__DIR__)."/Data/duenios.json";
     }
     
@@ -36,25 +35,19 @@ class duenioDAO{
         return $userAuth;
     }
 
-    public function GetAllDuenios()
-    {
+    public function GetAllDuenios(){
         $this->LoadDuenioJson();
         return $this->list;
     }
 
-    private function LoadDuenioJson() 
-    {
+    private function LoadDuenioJson(){
         $this->list = array();
-        if(file_exists($this->filename)) 
-        {
+        if(file_exists($this->filename)){
             $jsonContent = file_get_contents($this->filename);
-            $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
-            
-            foreach($array as $item) 
-            {
+            $array = ($jsonContent) ? json_decode($jsonContent, true) : array();         
+            foreach($array as $item) {
                 $user = new Duenio($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password']);
-                $user->setIdDuenio($item['idDuenio']);
-       
+                $user->setIdDuenio($item['idDuenio']);    
                 array_push($this->list, $user);
                 if ($item["idDuenio"] > $this->id) {
                     $this->id = $item["idDuenio"];
@@ -65,7 +58,6 @@ class duenioDAO{
 
     public function saveDuenioJson (){
         $arrayToEncode = array();
-
         foreach($this->list as $user) {
             $valueArray['idDuenio'] = $user->getIdDuenio();
             $valuesArray['email'] = $user->getEmail();
@@ -79,8 +71,7 @@ class duenioDAO{
         file_put_contents($this->filename, $jsonContent);
     }
 
-    public function addDuenio($user)
-    {
+    public function addDuenio($user){
         $this->LoadDuenioJson();
         $user->setIdDuenio($this->id + 1);
         $user->getMascotas()->setIdMascota($this->idmascota + 1);
@@ -97,9 +88,4 @@ class duenioDAO{
         } 
         return false;
     }
-
-
-
-
-    
 }

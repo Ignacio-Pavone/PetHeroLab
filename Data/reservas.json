@@ -6,25 +6,11 @@
         "idGuardian": 1,
         "fechaInicio": "2022-10-25",
         "fechaFin": "2022-10-26",
-        "estado": "Pendiente",
+        "estado": "Rechazado",
         "calificacion": 0,
         "costoTotal": 1500,
         "tipo": "Perro",
         "raza": "Ovejero",
-        "cantidadDias": 1
-    },
-    {
-        "nroReserva": 2,
-        "idMascota": 2,
-        "idDuenio": 1,
-        "idGuardian": 1,
-        "fechaInicio": "2022-10-25",
-        "fechaFin": "2022-10-26",
-        "estado": "Rechazado",
-        "calificacion": 0,
-        "costoTotal": 1500,
-        "tipo": "Gato",
-        "raza": "Siames",
         "cantidadDias": 1
     },
     {

@@ -8,8 +8,7 @@ class mascotaDAO {
     private $filename;
     private $id;
 
-    public function __construct()
-    {
+    public function __construct(){
       $this->filename = dirname(__DIR__)."/Data/mascotas.json";
     }
 
@@ -23,14 +22,12 @@ class mascotaDAO {
         return null;
     }
 
-    public function GetAllMascotas()
-    {
+    public function GetAllMascotas(){
         $this->LoadMascotaJson();
         return $this->list;
     }
 
-    private function LoadMascotaJson() 
-    {
+    private function LoadMascotaJson() {
         $this->list = array();
         if(file_exists($this->filename)) 
         {

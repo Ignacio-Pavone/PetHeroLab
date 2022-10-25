@@ -35,35 +35,29 @@ use Models\Guardian;
         return $userAuth;
       }
 
-      public function GetAllGuardians()
-      {
+      public function GetAllGuardians(){
         $this->LoadGuardianJson();
         return $this->list;
       }
 
-      private function LoadGuardianJson() 
-      {
+      private function LoadGuardianJson(){
         $this->list = array();
-        if(file_exists($this->filename)) 
-        {
+        if(file_exists($this->filename)){
           $jsonContent = file_get_contents($this->filename);
           $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
-          foreach($array as $item) 
-          {
-            $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad'],$item['initDate'],$item['finishDate']);
-            $user->setReputacion($item['reputacion']);
-            $user->setIdGuardian($item['idGuardian']);
-            array_push($this->list, $user);
-
-            if ($item["idGuardian"] > $this->id) {
-              $this->id = $item["idGuardian"];
-          }
+          foreach($array as $item) {
+              $user = new Guardian($item['email'], $item['fullname'], $item['dni'], $item['age'], $item['password'], $item['tipoMascota'], $item['remuneracionEsperada'],$item['disponibilidad'],$item['initDate'],$item['finishDate']);
+              $user->setReputacion($item['reputacion']);
+              $user->setIdGuardian($item['idGuardian']);
+              array_push($this->list, $user);
+              if ($item["idGuardian"] > $this->id) {
+                $this->id = $item["idGuardian"];
+            }
           }
         }
       }
 
-      public function addGuardian($user)
-      {
+      public function addGuardian($user){
         $this->LoadGuardianJson();
         $user->setIdGuardian($this->id + 1);
         array_push($this->list, $user);
@@ -94,27 +88,25 @@ use Models\Guardian;
 
 
         public function saveGuardianJson (){
-            $arrayToEncode = array();
-            
+            $arrayToEncode = array();      
             foreach($this->list as $user) {
-            $valuesArray["idGuardian"] = $user->getIdGuardian();
-            $valuesArray['email'] = $user->getEmail();
-            $valuesArray['fullname'] = $user->getFullName();
-            $valuesArray['dni'] = $user->getDni();
-            $valuesArray['age'] = $user->getAge();
-            $valuesArray['password'] = $user->getPassword();
-            $valuesArray['tipoMascota'] = $user->getTipoMascota();
-            $valuesArray['disponibilidad'] = $user->getDisponibilidad();
-            $valuesArray['reputacion'] = $user->getReputacion();
-            $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
-            $valuesArray['initDate'] = $user->getInitDate();
-            $valuesArray['finishDate'] = $user->getFinishDate();
-            array_push($arrayToEncode, $valuesArray);
+              $valuesArray["idGuardian"] = $user->getIdGuardian();
+              $valuesArray['email'] = $user->getEmail();
+              $valuesArray['fullname'] = $user->getFullName();
+              $valuesArray['dni'] = $user->getDni();
+              $valuesArray['age'] = $user->getAge();
+              $valuesArray['password'] = $user->getPassword();
+              $valuesArray['tipoMascota'] = $user->getTipoMascota();
+              $valuesArray['disponibilidad'] = $user->getDisponibilidad();
+              $valuesArray['reputacion'] = $user->getReputacion();
+              $valuesArray['remuneracionEsperada'] = $user->getRemuneracionEsperada();
+              $valuesArray['initDate'] = $user->getInitDate();
+              $valuesArray['finishDate'] = $user->getFinishDate();
+              array_push($arrayToEncode, $valuesArray);
             }
-
-            $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-            file_put_contents($this->filename, $jsonContent);
-        }
+           $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
+           file_put_contents($this->filename, $jsonContent);
+      }
         
         public function modifyDispobibilidad($user){
           $this->LoadGuardianJson();
@@ -164,13 +156,11 @@ use Models\Guardian;
         $this->LoadGuardianJson();
         $date1 = strtotime($fechaI);
         $date2 = strtotime($fechaF);
-
         $array = array();
         foreach($this->list as $guardian){
           $date1guardian = strtotime($guardian->getInitDate());
           $date2guardian = strtotime($guardian->getFinishDate());
           if ($date1guardian >= $date1 && $date2guardian <= $date2){
-
             array_push($array,$guardian);
           }
         }

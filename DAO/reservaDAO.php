@@ -6,21 +6,17 @@ use Utils\Session;
 
 use Models\Guardian;
 
-    class reservaDAO
-    {
+    class reservaDAO{
       private $list = array();
       private $filename;
       private $id;
 
-      public function __construct()
-      {
+      public function __construct(){
         $this->filename = dirname(__DIR__)."/Data/reservas.json";
       }
 
-    public function SaveData()
-    {
+    public function SaveData(){
       $arrayToEncode = array();
-
       foreach($this->list as $reserva){
         $valuesArray["nroReserva"] = $reserva->getNroReserva();
         $valuesArray["idMascota"] = $reserva->getMascota();
@@ -36,11 +32,9 @@ use Models\Guardian;
         $valuesArray["cantidadDias"] = $reserva->getCantidadDias();
         array_push($arrayToEncode, $valuesArray);
       }
-
       $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
       file_put_contents($this->filename, $jsonContent);
-    }
-    
+    }  
 
     public function GetAllReservas(){
         $this->LoadReservaJson();
@@ -69,14 +63,12 @@ use Models\Guardian;
       return $array;
     }
 
-    private function LoadReservaJson() {
+    private function LoadReservaJson(){
         $this->list = array();
-        if(file_exists($this->filename)) 
-        {
+        if(file_exists($this->filename)){
           $jsonContent = file_get_contents($this->filename);
           $array = ($jsonContent) ? json_decode($jsonContent, true) : array();
-          foreach($array as $item) 
-          {
+          foreach($array as $item){
             $reserva = new Reserva($item['idMascota'], $item['idDuenio'],$item['idGuardian'], $item['fechaInicio'], $item['fechaFin'], $item['costoTotal'],$item['tipo'],$item['raza'],$item['cantidadDias']);
             $reserva->setEstado($item['estado']);
             $reserva->setCalificacion($item['calificacion']);
@@ -122,8 +114,7 @@ use Models\Guardian;
       if($reserva->getEstado() == 'Confirmado'){
         if (($reserva->getFechaFin() < date('Y-m-d')) ){
           $reserva->setEstado('Completo');
-        }
-        elseif ($reserva->getFechaInicio() >= date('Y-m-d') && $reserva->getFechaFin() >= date('Y-m-d')){
+        }elseif ($reserva->getFechaInicio() >= date('Y-m-d') && $reserva->getFechaFin() >= date('Y-m-d')){
           $reserva->setEstado('En Curso');
         }
       }
@@ -239,7 +230,6 @@ use Models\Guardian;
       }
       return $array;
     }
-
 
     public function analizarReserva ($idGuardian, $tipo, $raza, $fechaInicio){
       $reservas = $this->getReservasByGuardianID($idGuardian);
