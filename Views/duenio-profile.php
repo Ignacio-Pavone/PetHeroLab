@@ -79,8 +79,8 @@ include('nav-bar.php');
                             <th style="width: 20%;">Foto</th>
                             <th style="width: 10%;">Plan Vacunacion</th>
                             <th style="width: 10%;">Video</th>
-                            <th style="width: 15%;">Actualizar Mascota</th>
-                            <th style="width: 15%;">Borrar Mascota</th>
+                            <th style="width: 15%;">Actualizar</th>
+                            <th style="width: 15%;">Borrar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -123,9 +123,9 @@ include('nav-bar.php');
                     
                     <div id="divFiltroFecha">
                     <form id="" action="<?php echo FRONT_ROOT. 'Auth/showFilter' ?>">
-                        <label style="margin-left:40px;" for="filtroInicio"><b>Fecha de Inicio</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroInicio" min="<?php echo date('Y-m-d') ?>" value="" select required>  
-                        <label style="margin-left:40px;" for="filtroFinal"><b>Fecha de Fin</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroFinal" min="<?php echo date('Y-m-d') ?>" value="" select required>
-                        <button type="submit" style="text-align:center" class="btn btn-dark">Filtrar</button>
+                        <label style="margin-left:30px;font-style: italic;" for="filtroInicio"><b>Fecha de Inicio</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroInicio" min="<?php echo date('Y-m-d') ?>" value="" select required>  
+                        <label style="margin-left:30px;font-style: italic;" for="filtroFinal"><b>Fecha de Fin</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroFinal" min="<?php echo date('Y-m-d') ?>" value="" select required>
+                        <button type="submit" style="margin-left: 100px; text-align:center" class="btn btn-dark">Filtrar</button>
                     </form>
                     <form action="<?php echo FRONT_ROOT. 'Auth/showDuenioProfile' ?>">
                         <button style="margin-right: 55px;" type="submit" style="text-align:center" class="btn btn-dark">Limpiar Filtros</button>
@@ -139,7 +139,7 @@ include('nav-bar.php');
                                 <th style="width: 10%;">Nombre</th>
                                 <th style="width: 10%;">Edad</th>
                                 <th style="width: 10%;">Preferencia</th>
-                                <th style="width: 5%;">Reputacion</th>
+                                <th style="width: 5%;">Calificacion</th>
                                 <th style="width: 25%;">Costo por Dia</th>
                                 <th style="width: 5%;">Fecha inicio</th>
                                 <th style="width: 5%;">Fecha fin</th>
@@ -147,6 +147,7 @@ include('nav-bar.php');
                                 <th style="width: 5%;">Accion</th>
                             </tr>
                         </thead>
+
                         <tbody>
                             <?php
                             foreach ($guardianes as $guardian) {?>
@@ -154,7 +155,12 @@ include('nav-bar.php');
                                 <td><?php echo $guardian->getFullName(); ?></td>
                                 <td><?php echo $guardian->getAge(); ?></td>
                                 <td><?php echo $guardian->getTipoMascota(); ?></td>
-                                <td><?php echo bcdiv($guardian->getReputacion(), '1', 1); ?></td>
+                                <?php if ($guardian->getReputacion() >= 3) { ?>
+                                    <td style=color:green><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
+                                <?php } else { ?>
+                                     <td style=color:red><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
+                            <?php } ?>
+                            
                                 <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                                 <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
                                     <td><input type="date" id="initDate" name="fechaInicio" multiple="multiple"
@@ -190,11 +196,13 @@ include('nav-bar.php');
                         </tbody>
                     </table>
                     <br>
-
-
+                    <div class="divEstado">
+                
+            <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Positivo</label>
+            <p class="circulo" style="background:red;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Negativo</label>  
+             </div>
                 </div>
                 <br>
-
                 <div class="container" id="css-mine">
                     <br>
                     <center>
@@ -244,8 +252,7 @@ include('nav-bar.php');
                                              ?> <label class="circulo" style="background:purple;"> <?php
                                         } elseif ($reserva->getEstado() == 'En Curso') {
                                             ?> <label class="circulo" style="background:pink;"> </td>
-                                        <?php } ?>
-                            
+                                        <?php } ?>                            
                                 <td>
                                     <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
                                         href="<?php echo FRONT_ROOT . 'Reserva/cancelarReservaDuennio/' . $reserva->getNroReserva(); ?>">Borrar</a>
@@ -310,7 +317,7 @@ include('nav-bar.php');
                                     <input type="text" name="nombre" class="form-control form-control-ml" required>
                                 </div>
                                 <div class="col-lg-4">
-                                    <label for="" class="" id="">Tamaño</label><br>
+                                    <label for="" class="" id="">Tipo</label><br>
                                     <select name="tipo" id="tamanioSolapa">
                                         <option value="Gato" selected>Gato</option>
                                         <option value="Perro">Perro</option>
@@ -340,13 +347,14 @@ include('nav-bar.php');
                                         placeholder="Url Only" required>
                                 </div>
                                 <div class="col-lg-12" style="height:15px"></div>
-                                <div class="col-lg-4">
+                                <div class="col-lg-4" style= "margin-left: 370px">
                                     <label for="">Video</label>
                                     <input type="url" name="video" class="form-control form-control-ml"
                                         placeholder="Url Only" required>
                                 </div>
                                 <br>
-                                <div class="row" id="buttonraro" style="border: 1px solid">
+                                <div class="col-lg-12" style="height:15px"></div>
+                                <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
                                     <div class="col-lg-1" style="text-align:center">
                                         <button type="submit" onclick="return confirm('Are you sure?')"
                                             style="text-align:center" class="btn btn-dark">Agregar</button>

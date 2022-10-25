@@ -42,6 +42,7 @@
             public function showDuenioProfile(){
                 $user = Session::GetLoggedUser();
                 $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getidDuenio());
+                $todoslosguardianes = $this->guardianDAO->GetAllGuardians();
                 $guardianes = $this->guardianDAO->GetAllGuardians();
                 $reservas = $this->reservaDAO->getReservasByDuenioID($user->getidDuenio()); 
                 require_once(VIEWS_PATH . 'duenio-profile.php');
@@ -49,12 +50,16 @@
 
             public function showFilter($filtroInicio,$filtroFin){
                 $user = Session::GetLoggedUser();
+                if (!$this->reservaDAO->dateChecker($filtroInicio,$filtroFin)){
                 $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getidDuenio());
-                $guardianes = $this->guardianDAO->getGuardiansByDate($filtroInicio,$filtroFin);
                 $todoslosguardianes = $this->guardianDAO->GetAllGuardians();
+                $guardianes = $this->guardianDAO->getGuardiansByDate($filtroInicio, $filtroFin);
                 $reservas = $this->reservaDAO->getReservasByDuenioID($user->getidDuenio()); 
-                
                 require_once(VIEWS_PATH . 'duenio-profile.php');
+                } else{
+                    Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
+                    header ("location: ".FRONT_ROOT."Auth/showDuenioProfile");
+                }
             }
 
             public function showdisponibilityView(){

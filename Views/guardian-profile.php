@@ -162,6 +162,7 @@ include('nav-bar.php');
                         <th style="width: 10%;">Mascota</th>
                         <th style="width: 10%;">Fecha Inicio</th>
                         <th style="width: 10%;">Fecha Fin</th>
+                        <th style="width: 10%;">Califacion</th>
                         <th style="width: 10%;">Estado</th>
                     </tr>
                 </thead>
@@ -181,6 +182,7 @@ include('nav-bar.php');
                         <?php } } ?>
                         <td><?php echo $reserva->getFechaInicio(); ?></td>
                         <td><?php echo $reserva->getFechaFin(); ?></td>
+                        <td><?php echo $reserva->getCalificacion(); ?></td>
                         <td class=""><?php if ($reserva->getEstado() == 'Confirmado') {
                                              ?> <label class="circulo" style="background:green;"> <?php
                                         } elseif ($reserva->getEstado() == 'Pendiente') {
