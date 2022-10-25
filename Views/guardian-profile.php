@@ -35,58 +35,79 @@ include('nav-bar.php');
                 <hr>
                 <div class="bg-light-alpha p-4">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <label for="">Nombre</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getFullName();  ?>">
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getFullName();?>">
                         </div>
-                        <div class="col-lg-3">
-                            <label for="">Edad</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getAge();  ?>">
+
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getAge();?>">
                         </div>
-                        <div class="col-lg-3">
-                            <label for="">DNI</label>
-                            <input type="number" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getDni();  ?>">
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3"  id="basic-addon1">DNI</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getDni();  ?>">
                         </div>
-                        <div class="col-lg-3">
-                            <label for="">Email</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getEmail();  ?>">
+
+                        <div class="col-lg-12 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getEmail();  ?>">
                         </div>
-                        <div class="col-lg-12" style="height:15px"></div>
-                        <div class="col-lg-6">
-                            <label for="">Tipo de Mascotas a Cuidar</label>
-                            <input type="text" name="tipoMascota" class="form-control form-control-ml"
-                                style="text-align:center" disabled value="<?php echo $user->getTipoMascota();  ?>">
+
+                        <div class="col-lg-6 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Tipo de Mascotas a Cuidar</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Tamaño" name="tipoMascota" style="text-align:center" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getTipoMascota();  ?>">
                         </div>
-                        <div class="col-lg-6">
-                            <label for="">Remuneracion Esperada</label>
-                            <input type="text" name="remuneracionEsperada" style="text-align:center"
-                                class="form-control form-control-ml" disabled
-                                value="<?php echo $user->getRemuneracionEsperada() . " $";  ?>">
+
+                        <div class="col-lg-6 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Remuneracion Esperada</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="remuneracionEsperada" style="text-align:center" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getRemuneracionEsperada() . " $"; ?>">
                         </div>
-                        <div class="col-lg-12" style="height:15px"></div>
-                        <div class="col-lg-6">
-                            <label for="">Fecha Incio</label>
-                            <input type="text" name="fechainicio" style="text-align:center;"
-                                class="form-control form-control-ml" disabled
-                                value="<?php echo $user->getInitDate()                                                                                                                                                        ?>">
+
+                        <div class="col-lg-6 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Fecha Inicio</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Inicio" name="fechainicio" style="text-align:center" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getInitDate() ?>">
                         </div>
-                        <div class="col-lg-6">
-                            <label for="">Fecha Fin</label>
-                            <input type="text" name="fechafin" style="text-align:center;"
-                                class="form-control form-control-ml" disabled
-                                value="<?php echo $user->getFinishDate();                                                                                                                                                  ?>">
+
+                        <div class="col-lg-6 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Fecha Fin</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Fin" name="fechafin" style="text-align:center" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getFinishDate() ?>">
                         </div>
+                        
                     </div>
                 </div>
-            <br>
             <div class="divEstado">
             <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Entre 4 y 5</label>
             <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Entre 3 y 4</label>
             <p class="circulo" style="background:red;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Entre 0 y 3</label>  
+            <p class="circulo" style="background:black;"></p><label style="padding-left:5px; padding-right:15px;" for="">Sin calificaciones</label> 
              </div>
         </section>
         <div class="container" id="css-mine"  style="overflow-y:scroll; height: 350px;">
@@ -119,7 +140,7 @@ include('nav-bar.php');
                         <?php } } ?>
                         <?php foreach ($todaslasmascotas as $mascota){
                             if ($mascota->getIdMascota() == $reserva->getMascota()) { ?>
-                        <td><?php echo $mascota->getNombre(); ?></td>
+                        <td><?php echo $mascota->getNombre(); break; ?></td>
                         <?php } } ?>
                         <td><?php echo $reserva->getTipo(); ?></td>
                         <td><?php echo $reserva->getFechaInicio(); ?></td>

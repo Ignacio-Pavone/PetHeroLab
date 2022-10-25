@@ -35,34 +35,48 @@ include('nav-bar.php');
                 </center>
                 <div class="bg-light-alpha p-1" id="dataUser">
                     <div class="row">
-                        <div class="col-lg-3">
-                            <label for="">Nombre</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getFullName();  ?>">
-                        </div>
-                        <div class="col-lg-3">
-                            <label for="">Edad</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getAge();  ?>">
+
+                        <div class="col-lg-12" style="height:10px;"></div>
+
+                        <div class="col-lg-3 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getFullName();?>">
                         </div>
 
-                        <div class="col-lg-3">
-                            <label for="">DNI</label>
-                            <input type="number" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getDni();  ?>">
+
+                        <div class="col-lg-3 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getAge();?>">
                         </div>
 
-                        <div class="col-lg-3">
-                            <label for="">Email</label>
-                            <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
-                                disabled value="<?php echo $user->getEmail();  ?>">
+                        <div class="col-lg-3 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3"  id="basic-addon1">DNI</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getDni();  ?>">
                         </div>
+
+                        <div class="col-lg-3 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
+                            disabled value="<?php echo $user->getEmail();  ?>">
+                        </div>
+
                     </div>
                 </div>
-                <br>
+                
             </div>
             <br>
-            <div class="container" id="css-mine" style="overflow-y:scroll; height: 500px;">
+            <div class="container" id="css-mine" style="overflow-y:scroll; height: 450px;">
                 <br>
                 <center>
                     <h3 class="mb">Mis mascotas</h3>
@@ -156,11 +170,13 @@ include('nav-bar.php');
                                 <td><?php echo $guardian->getTipoMascota(); ?></td>
                                 <?php if ($guardian->getReputacion() >= 3 && $guardian->getReputacion() < 4) { ?>
                                     <td style=color:green><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
-                                <?php } elseif ($guardian->getReputacion() >= 0 && $guardian->getReputacion() < 3) { ?>
+                                <?php } elseif ($guardian->getReputacion() > 0 && $guardian->getReputacion() < 3) { ?>
                                      <td style=color:red><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
-                            <?php } else { ?>
+                            <?php } elseif ($guardian->getReputacion() >= 4) { ?>
                                 <td style=color:orange><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
-                            <?php } ?>
+                            <?php } elseif ($guardian->getReputacion() == 0.0){?> 
+                                <td style=color:black><?php echo '-' ?> </td>
+                                <?php } ?>
                             
                                 <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                                 <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
@@ -201,10 +217,11 @@ include('nav-bar.php');
             <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Sobresaliente</label>
             <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Muy bueno</label>
             <p class="circulo" style="background:red;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Negativo</label>  
+            <p class="circulo" style="background:black;"></p><label style="padding-left:5px; padding-right:15px;" for="">Sin calificaciones</label> 
              </div>
                 </div>
                 <br>
-                <div class="container" id="css-mine" style="overflow-y:scroll; height: 500px;">
+                <div class="container" id="css-mine" style="overflow-y:scroll; height: 400px;">
                     <br>
                     <center>
                         <h3 class="mb">Peticiones Hechas</h3>
@@ -235,7 +252,7 @@ include('nav-bar.php');
                                 <?php } } ?>
                                 <?php foreach ($mascotas as $mascota) {
                                 if ($reserva->getMascota() == $mascota->getIdMascota()){?>
-                                <td><?php echo $mascota->getNombre(); ?></td>
+                                <td><?php echo $mascota->getNombre(); break; ?></td>
                                 <?php } } ?>
                                 <td><?php echo $reserva->getFechaInicio(); ?></td>
                                 <td><?php echo $reserva->getFechaFin(); ?></td>
@@ -316,54 +333,72 @@ include('nav-bar.php');
                         </center>
                         <form action="<?php echo FRONT_ROOT ?>Mascota/addPet" method="post">
                         <input type="hidden" name="idDuenio" value="<?php echo $user->getidDuenio(); ?>">
+                            
                             <div class="row">
-                                <div class="col-lg-4">
-                                    <label for="">Nombre</label>
-                                    <input type="text" name="nombre" class="form-control form-control-ml" required>
+                            
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Nombre</span>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="" class="" id="">Tipo</label><br>
-                                    <select name="tipo" id="tamanioSolapa">
-                                        <option value="Gato" selected>Gato</option>
-                                        <option value="Perro">Perro</option>
-                                    </select>
+                                <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1">
+                            </div>
+
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="">Raza</label>
-                                    <input type="text" name="raza" class="form-control form-control-ml" required>
+                                <select class="custom-select" name="tipo" id="inputGroupSelect01">
+                                    <option value="Gato" selected>Gato</option>
+                                    <option value="Perro">Perro</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon1">Raza</span>
                                 </div>
-                                <div class="col-lg-12" style="height:15px"></div>
-                                <div class="col-lg-4">
-                                    <label for="" class="" id="">Tamaño</label><br>
-                                    <select name="tamanio" id="tamanioSolapa">
-                                        <option value="Chico" selected>Chico</option>
-                                        <option value="Mediano">Mediano</option>
-                                        <option value="Grande">Grande</option>
-                                    </select>
+                                <input type="text" class="form-control" placeholder="Raza" name="raza" aria-describedby="basic-addon1">
+                            </div>
+
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Tamaño</label>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="">Foto</label>
-                                    <input type="url" name="foto" class="form-control form-control-ml"
-                                        placeholder="Url Only" reqiured>
+                                <select class="custom-select" name="tamanio" id="inputGroupSelect01">
+                                    <option value="Chico" >Chico</option>
+                                    <option value="Mediano" selected>Mediano</option>
+                                    <option value="Grande">Grande</option>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">URL</span>
                                 </div>
-                                <div class="col-lg-4">
-                                    <label for="">Plan de Vacunacion</label>
-                                    <input type="url" name="planVacunacion" class="form-control form-control-ml"
-                                        placeholder="Url Only" required>
+                                <input type="text" name="foto" placeholder="Foto" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            </div>
+
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">URL</span>
                                 </div>
-                                <div class="col-lg-12" style="height:15px"></div>
-                                <div class="col-lg-4" style= "margin-left: 370px">
-                                    <label for="">Video</label>
-                                    <input type="url" name="video" class="form-control form-control-ml"
-                                        placeholder="Url Only" required>
+                                <input type="text" name="planVacunacion" placeholder="Plan de Vacunacion" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            </div>
+
+                            <div class="col-lg-12 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">URL</span>
                                 </div>
-                                <br>
-                                <div class="col-lg-12" style="height:15px"></div>
-                                <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
-                                    <div class="col-lg-1" style="text-align:center">
-                                        <button type="submit" onclick="return confirm('Are you sure?')"
-                                            style="text-align:center" class="btn btn-dark">Agregar</button>
-                                    </div>
+                                <input type="text" name="video" placeholder="Video" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                            </div>
+
+                            <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
+                                <div class="col-lg-1" style="text-align:center">
+                                    <button type="submit" onclick="return confirm('Are you sure?')"
+                                    style="text-align:center" class="btn btn-dark">Agregar</button>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                     <br>

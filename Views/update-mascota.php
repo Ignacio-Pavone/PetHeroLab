@@ -46,52 +46,69 @@ require_once VIEWS_PATH . 'header.php';
                     <br>
                 </center>
                 <form action="<?php echo FRONT_ROOT ?>Mascota/ModifyPet" method="post">
-                    <div class="row" style="width:1000px">
+                    
+                <div class="row" style="">
                         
                         <input type="hidden" name="idDuenio" class="form-control form-control-ml"
-                            value=<?php echo $search->getidDuenio() ?>>
-                            <input type="hidden" name="idMascota" class="form-control form-control-ml"
-                            value=<?php echo $search->getIdMascota() ?>>    
-                        <div class="col-lg-4">
-                            <label for="">Nombre</label>
-                            <input type="text" name="nombre" class="form-control form-control-ml"
-                                value=<?php echo $search->getNombre() ?> required>
-                        </div>
+                        value=<?php echo $search->getidDuenio() ?>>
+                        <input type="hidden" name="idMascota" class="form-control form-control-ml"
+                        value=<?php echo $search->getIdMascota() ?>>    
                         <input type="hidden" name="tipo" class="form-control form-control-ml"
-                            value=<?php echo $search->getTipo() ?>>
-                        <div class="col-lg-4">
-                            <label for="">Raza</label>
-                            <input type="text" name="raza" class="form-control form-control-ml"
-                                value=<?php echo $search->getRaza() ?> required>
+                        value=<?php echo $search->getTipo() ?>>
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Nombre</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Nombre" name="nombre" value=<?php echo $search->getNombre() ?> 
+                            required aria-label="Username" aria-describedby="basic-addon1">
                         </div>
-                        <div class="col-lg-4">
-                            <label for="" class="" id="">Tamaño</label><br>
-                            <select name="tamanio" id="tamanioSolapa">
-                                <option value="Chico"
-                                    <?php echo ($search->getTamanio() == 'Chico' ? 'selected' : '') ?>>Chico</option>
-                                <option value="Mediano"
-                                    <?php echo ($search->getTamanio() == 'Mediano' ? 'selected' : '') ?>>Mediano
-                                </option>
-                                <option value="Grande"
-                                    <?php echo ($search->getTamanio() == 'Grande' ? 'selected' : '') ?>>Grande</option>
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon1">Raza</span>
+                            </div>
+                            <input type="text" class="form-control" placeholder="Raza" name="raza" aria-describedby="basic-addon1" value=<?php echo $search->getRaza() ?>
+                            required>
+                        </div>
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Tamaño</label>
+                            </div>
+                            <select class="custom-select" name="tamanio" id="inputGroupSelect01">
+                                <option value="Chico" <?php echo ($search->getTamanio() == 'Chico' ? 'selected' : '') ?>>Chico</option>
+                                <option value="Mediano" <?php echo ($search->getTamanio() == 'Mediano' ? 'selected' : '') ?>>Mediano</option>
+                                <option value="Grande" <?php echo ($search->getTamanio() == 'Grande' ? 'selected' : '') ?>>Grande</option>
                             </select>
                         </div>
-                        <div class="col-lg-4">
-                            <label for="">Foto</label>
-                            <input type="url" name="foto" class="form-control form-control-ml" placeholder="Url Only"
-                                value=<?php echo $search->getFoto() ?> reqiured>
+                    
+
+                        <div class="col-lg-4 input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="basic-addon3">URL</span>
+                            </div>
+                            <input type="text" name="foto" placeholder="Foto" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                            value=<?php echo $search->getFoto() ?> required>
                         </div>
-                        <div class="col-lg-4">
-                            <label for="">Plan de Vacunacion</label>
-                            <input type="url" name="planVacunacion" class="form-control form-control-ml"
-                                placeholder="Url Only" value=<?php echo $search->getPlanVacunacion() ?> required>
-                        </div>
-                        <div class="col-lg-4">
-                            <label for="">Video</label>
-                            <input type="url" name="video" class="form-control form-control-ml" placeholder="Url Only"
+
+                        <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">URL</span>
+                                </div>
+                                <input type="text" name="planVacunacion" placeholder="Plan de Vacunacion" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                                value=<?php echo $search->getPlanVacunacion() ?> required>
+                            </div>
+                        
+                            <div class="col-lg-4 input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="basic-addon3">URL</span>
+                                </div>
+                                <input type="text" name="video" placeholder="Video" class="form-control" id="basic-url" aria-describedby="basic-addon3"
                                 value=<?php echo $search->getVideo() ?> required>
-                        </div>
-                        <br>
+                            </div>
+
+                        
                         <div class="row" id="buttonraro" style="border: 1px solid">
                             <div class="col-lg-1" style="text-align:center">
                                 <button type="submit" onclick="return confirm('Are you sure?')"

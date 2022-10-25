@@ -38,7 +38,7 @@
         "nombre": "Rinho",
         "tipo": "Gato",
         "raza": "Siames",
-        "tamanio": "chico",
+        "tamanio": "Chico",
         "foto": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
         "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
         "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
@@ -66,14 +66,14 @@
         "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
     },
     {
-        "idMascota": 5,
-        "idDuenio": 1,
-        "nombre": "Tinche",
+        "idMascota": 6,
+        "idDuenio": 4,
+        "nombre": "Canicho",
         "tipo": "Gato",
-        "raza": "Siames",
-        "tamanio": "chico",
-        "foto": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
-        "planVacunacion": "https:\/\/t1.ea.ltmcdn.com\/es\/razas\/3\/5\/8\/gato-thai-o-siames-tradicional_853_0_orig.jpg",
-        "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/1090170243\/preview\/stock-footage-siamese-cat-walks-in-the-backyard-of-a-private-house-sniffs-the-grass-enjoys-nature.webm"
+        "raza": "Negro",
+        "tamanio": "Mediano",
+        "foto": "https:\/\/th.bing.com\/th\/id\/OIP.PTC0N2a13a_oyIcKrWU6IwHaE8?pid=ImgDet&rs=1",
+        "planVacunacion": "https:\/\/th.bing.com\/th\/id\/OIP.92qTM8wN4ioayjGEI7mOgQHaIj?pid=ImgDet&rs=1",
+        "video": "https:\/\/ak.picdn.net\/shutterstock\/videos\/25712501\/preview\/stock-footage-pantera.webm"
     }
 ]

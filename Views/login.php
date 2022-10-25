@@ -12,18 +12,32 @@ include_once 'nav-bar.php';
             <div class="row">
             <div class="col-md-4 login-sec">
             <h2 class="text-center">Pet Hero</h2>
-                <div class="form-group">
-                    <label for="exampleInputEmail1" class="text-uppercase">Email</label>
-                    <input type="text" name="email" class="form-control" placeholder="pethero@gmail.com" required>
+            <div class="col-lg-12" style="height:10px"></div>
+            <hr>
+                
+                <div class="col-lg-12 input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="btn btn-dark" id="basic-addon1">Email</span>
+                    </div>
+                    <input type="text" class="form-control" name="email" aria-describedby="basic-addon1"
+                    placeholder="pethero@gmail.com" required>
                 </div>
-                <div class="form-group">
-                    <label for="exampleInputPassword1" class="text-uppercase">Password</label>
-                    <input type="password" name="password" class="form-control" placeholder="*******" required>
+
+                <div class="col-lg-12 input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="btn btn-dark" id="basic-addon1">Password</span>
+                    </div>
+                    <input type="password" class="form-control" name="password" aria-describedby="basic-addon1"
+                    placeholder="*******" required>
                 </div>
-                <div>
-                    <br>
-                    <button type="submit" class="btn btn-login float-right">Submit</button>
+                
+                <hr>
+                <br>
+
+                <div>                 
+                    <button type="submit" class="btn btn-login float-right">Ingresar</button>
                 </div>
+                
             </div>
             <div class="col-md-8 banner-sec">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
