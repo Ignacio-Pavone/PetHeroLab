@@ -13,14 +13,13 @@ require_once VIEWS_PATH . 'header.php';
                 <table style="text-align:center;">
                     <thead>
                         <tr>
-                            <th style="width: 15%;">Nombre</th>
-                            <th style="width: 15%;">Especie</th>
-                            <th style="width: 15%;">Raza</th>
-                            <th style="width: 15%;">Tamaño</th>
-                            <th style="width: 20%;">Foto</th>
+                            <th style="width: 10%;">Nombre</th>
+                            <th style="width: 10%;">Especie</th>
+                            <th style="width: 10%;">Raza</th>
+                            <th style="width: 10%;">Tamaño</th>
+                            <th style="width: 10%;">Foto</th>
                             <th style="width: 10%;">Plan Vacunacion</th>
                             <th style="width: 10%;">Video</th>
-                            <th style="width: 15%;">Actualizar Mascota</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -32,7 +31,6 @@ require_once VIEWS_PATH . 'header.php';
                             <td><img src="<?php echo $search->getFoto(); ?>" alt="" width="80px" height="60px"></td>
                             <td><a href="<?php echo $search->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
                             <td><a href="<?php echo $search->getVideo(); ?>" target="_blank">Ver Video</a></td>
-                            <td><a href="<?php  ?>">Actualizar</a></td>
                         </tr>
                     </tbody>
                 </table>

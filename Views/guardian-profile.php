@@ -23,8 +23,7 @@ include('nav-bar.php');
             <div class="alert alert-success alert-dismissible fade show center-block" style="text-align:center"
                 role="alert">
                 <?php echo $_SESSION['good'];
-                              unset($_SESSION['good']);
-                              ?>
+                              unset($_SESSION['good']); ?>
             </div>
             <?php }
                } ?>
@@ -41,19 +40,16 @@ include('nav-bar.php');
                             <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
                                 disabled value="<?php echo $user->getFullName();  ?>">
                         </div>
-
                         <div class="col-lg-3">
                             <label for="">Edad</label>
                             <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
                                 disabled value="<?php echo $user->getAge();  ?>">
                         </div>
-
                         <div class="col-lg-3">
                             <label for="">DNI</label>
                             <input type="number" name="" class="form-control form-control-ml" style="text-align:center"
                                 disabled value="<?php echo $user->getDni();  ?>">
                         </div>
-
                         <div class="col-lg-3">
                             <label for="">Email</label>
                             <input type="text" name="" class="form-control form-control-ml" style="text-align:center"
@@ -65,35 +61,35 @@ include('nav-bar.php');
                             <input type="text" name="tipoMascota" class="form-control form-control-ml"
                                 style="text-align:center" disabled value="<?php echo $user->getTipoMascota();  ?>">
                         </div>
-
                         <div class="col-lg-6">
                             <label for="">Remuneracion Esperada</label>
                             <input type="text" name="remuneracionEsperada" style="text-align:center"
                                 class="form-control form-control-ml" disabled
                                 value="<?php echo $user->getRemuneracionEsperada() . " $";  ?>">
                         </div>
-
                         <div class="col-lg-12" style="height:15px"></div>
                         <div class="col-lg-6">
                             <label for="">Fecha Incio</label>
                             <input type="text" name="fechainicio" style="text-align:center;"
                                 class="form-control form-control-ml" disabled
-                                value="<?php
-                                                                                                                                                           echo $user->getInitDate();
-                                                                                                                                                           ?>">
+                                value="<?php echo $user->getInitDate()                                                                                                                                                        ?>">
                         </div>
                         <div class="col-lg-6">
                             <label for="">Fecha Fin</label>
                             <input type="text" name="fechafin" style="text-align:center;"
                                 class="form-control form-control-ml" disabled
-                                value="<?php echo $user->getFinishDate();
-                                                                                                                                                      ?>">
+                                value="<?php echo $user->getFinishDate();                                                                                                                                                  ?>">
                         </div>
                     </div>
                 </div>
+            <br>
+            <div class="divEstado">
+            <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Entre 4 y 5</label>
+            <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Entre 3 y 4</label>
+            <p class="circulo" style="background:red;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Entre 0 y 3</label>  
+             </div>
         </section>
-
-        <div class="container" id="css-mine">
+        <div class="container" id="css-mine"  style="overflow-y:scroll; height: 350px;">
             <br>
             <center>
                 <h3 class="mb">Peticiones Recibidas</h3>
@@ -137,18 +133,15 @@ include('nav-bar.php');
                             <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
                                 href="<?php echo FRONT_ROOT . 'Reserva/rechazarReservaGuardian/' . $reserva->getNroReserva(); ?>">Rechazar</a>
                         </td>
-
                     </tr>
-
                     <?php }
                          } ?>
                 </tbody>
             </table>
             <br>
         </div>
-
         <br>
-        <div class="container" id="css-mine">
+        <div class="container" id="css-mine" style="overflow-y:scroll; height: 400px;">
             <br>
             <center>
                 <h3 class="mb">Historial Reservas</h3>
@@ -202,6 +195,7 @@ include('nav-bar.php');
                          } } ?>
                 </tbody>
           </table>
+          <br>
           <br>
             <div class="divEstado">
                <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Pendiente</label>

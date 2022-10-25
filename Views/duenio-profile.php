@@ -62,7 +62,7 @@ include('nav-bar.php');
                 <br>
             </div>
             <br>
-            <div class="container" id="css-mine">
+            <div class="container" id="css-mine" style="overflow-y:scroll; height: 500px;">
                 <br>
                 <center>
                     <h3 class="mb">Mis mascotas</h3>
@@ -103,7 +103,6 @@ include('nav-bar.php');
                                 <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
                                     href="<?php echo FRONT_ROOT . 'Mascota/DeletePet/' . $mascota->getIdMascota(); ?>">Borrar</a>
                             </td>
-
                         </tr>
                         <?php
                         }
@@ -114,16 +113,16 @@ include('nav-bar.php');
             </div>
             <br>
             <div>
-                <div class="container" id="css-mine1">
+                <div class="container" id="css-mine1" style="overflow-y:scroll; height: 500px;">
                     <br>
                     <center>
                         <h3 class="mb">Guardianes</h3>
                         <hr>
                     </center>
-                    
+                    <div class="col-lg-12" style="height:15px"></div>              
                     <div id="divFiltroFecha">
                     <form id="" action="<?php echo FRONT_ROOT. 'Auth/showFilter' ?>">
-                        <label style="margin-left:30px;font-style: italic;" for="filtroInicio"><b>Fecha de Inicio</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroInicio" min="<?php echo date('Y-m-d') ?>" value="" select required>  
+                        <label style="margin-left:30px;font-style: italic;" for="filtroInicio"><b>Fecha de Inicio</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroInicio" min="<?php echo date('Y-m-d') ?>" value="<?php echo date('Y-m-d') ?>" select required>  
                         <label style="margin-left:30px;font-style: italic;" for="filtroFinal"><b>Fecha de Fin</b></label> <input style="margin-left:20px;" type="date" class="update-dispon inputFiltro" id="initDate" name="filtroFinal" min="<?php echo date('Y-m-d') ?>" value="" select required>
                         <button type="submit" style="margin-left: 100px; text-align:center" class="btn btn-dark">Filtrar</button>
                     </form>
@@ -155,18 +154,20 @@ include('nav-bar.php');
                                 <td><?php echo $guardian->getFullName(); ?></td>
                                 <td><?php echo $guardian->getAge(); ?></td>
                                 <td><?php echo $guardian->getTipoMascota(); ?></td>
-                                <?php if ($guardian->getReputacion() >= 3) { ?>
+                                <?php if ($guardian->getReputacion() >= 3 && $guardian->getReputacion() < 4) { ?>
                                     <td style=color:green><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
-                                <?php } else { ?>
+                                <?php } elseif ($guardian->getReputacion() >= 0 && $guardian->getReputacion() < 3) { ?>
                                      <td style=color:red><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
+                            <?php } else { ?>
+                                <td style=color:orange><?php echo bcdiv($guardian->getReputacion(), '1', 1) ?> </td>
                             <?php } ?>
                             
                                 <td><?php echo $guardian->getRemuneracionEsperada() . ' $'; ?></td>
                                 <form action="<?php echo FRONT_ROOT ?>Reserva/solicitarReservaDuenio" method="post">
-                                    <td><input type="date" id="initDate" name="fechaInicio" multiple="multiple"
+                                    <td><input type="date" id="initDate" name="fechaInicio" 
                                             max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon"
                                             value="" min="<?php echo date('Y-m-d') ?>" select required></td>
-                                    <td><input type="date" id="endDate" name="fechaFin" multiple="multiple"
+                                    <td><input type="date" id="endDate" name="fechaFin" 
                                             max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon"
                                             value="" min="<?php echo date('Y-m-d') ?>" select required></td>
                                     <td>
@@ -197,13 +198,13 @@ include('nav-bar.php');
                     </table>
                     <br>
                     <div class="divEstado">
-                
-            <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Positivo</label>
+            <p class="circulo" style="background:orange;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Sobresaliente</label>
+            <p class="circulo" style="background:green;"> </p><label style="padding-left:5px;padding-right:15px;" for="">Muy bueno</label>
             <p class="circulo" style="background:red;"> </p><label style="padding-left:5px; padding-right:15px;" for="">Negativo</label>  
              </div>
                 </div>
                 <br>
-                <div class="container" id="css-mine">
+                <div class="container" id="css-mine" style="overflow-y:scroll; height: 500px;">
                     <br>
                     <center>
                         <h3 class="mb">Peticiones Hechas</h3>
@@ -254,9 +255,13 @@ include('nav-bar.php');
                                             ?> <label class="circulo" style="background:pink;"> </td>
                                         <?php } ?>                            
                                 <td>
+                                    <?php if ($reserva->getEstado() == 'Calificado' || $reserva->getEstado() == 'En Curso' || $reserva->getEstado() == 'Confirmado') { ?>
+                                    <button type="button" class="btn btn-dark" disabled>Rechazar</button>
+                                    <?php } else { ?>
                                     <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                        href="<?php echo FRONT_ROOT . 'Reserva/cancelarReservaDuennio/' . $reserva->getNroReserva(); ?>">Borrar</a>
+                                        href="<?php echo FRONT_ROOT . 'Reserva/cancelarReservaDuennio/' . $reserva->getNroReserva(); ?>">Rechazar</a>
                                 </td>
+                                <?php } ?>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Reserva/calificarGuardian" method="post">
                                         <input type="hidden" name="guardian"
@@ -277,7 +282,7 @@ include('nav-bar.php');
                                             <input type="number" min="0" max="5" name="" class="form-control col-xs-2"
                                                 style="text-align:center" placeholder="5" disabled>
                                             <span class="input-group-addon">-</span>
-                                            <a class="btn btn-secondary">Calificar</a>
+                                            <button type="button" class="btn btn-dark" disabled>Calificar</button>
                                         </div>
                                         <?php } ?>
                                 </td>

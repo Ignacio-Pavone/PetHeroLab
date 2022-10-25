@@ -26,8 +26,14 @@ require_once VIEWS_PATH . 'header.php';
             <a class="nav-link" href="#css-mine1">Ver Guardianes</a>
         </li>
         <?php }else{?>
-            <button type="button" style = "margin-right:20px"class="btn btn-info text-dark position-relative">Calificacion
-            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo bcdiv($guardian->getReputacion(), '1', 1)?></span>
+            <button type="button" style = "margin-right:20px"class="hovertext btn btn-info text-dark position-relative" data-hover="Tu Calificacion">Calificacion
+            <?php if ($user->getReputacion() >= 3 && $user->getReputacion() < 4) { ?>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success"><?php echo bcdiv($user->getReputacion(), '1', 1)?></span>
+                <?php } elseif ($user->getReputacion() >= 0 && $user->getReputacion() < 3) { ?>
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"><?php echo bcdiv($user->getReputacion(), '1', 1)?></span>
+                <?php } else { ?>
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning"><?php echo bcdiv($user->getReputacion(), '1', 1)?></span>
+                <?php } ?>
             <span class="visually-hidden"></span>
             </span>
             </button>
