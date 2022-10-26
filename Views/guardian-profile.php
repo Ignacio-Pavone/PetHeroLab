@@ -33,32 +33,28 @@ include('nav-bar.php');
                 <div class="bg-light-alpha p-4">
                     <div class="row">
 
-                        <div class="col-lg-4 input-group mb-3">
+                        <div class="col-lg-3 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
                             disabled value="<?php echo $user->getFullName();?>">
                         </div>
-
-
-                        <div class="col-lg-4 input-group mb-3">
+                        <div class="col-lg-2 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
                             disabled value="<?php echo $user->getAge();?>">
                         </div>
-
-                        <div class="col-lg-4 input-group mb-3">
+                        <div class="col-lg-3 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3"  id="basic-addon1">DNI</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Nombre" name="nombre" aria-label="Username" aria-describedby="basic-addon1"
                             disabled value="<?php echo $user->getDni();  ?>">
                         </div>
-
-                        <div class="col-lg-12 input-group mb-3">
+                        <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
                             </div>
