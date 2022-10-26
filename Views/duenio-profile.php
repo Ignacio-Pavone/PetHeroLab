@@ -45,7 +45,7 @@ include('nav-bar.php');
                         </div>
 
 
-                        <div class="col-lg-3 input-group mb-3">
+                        <div class="col-lg-2 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
                             </div>
@@ -61,7 +61,7 @@ include('nav-bar.php');
                             disabled value="<?php echo $user->getDni();  ?>">
                         </div>
 
-                        <div class="col-lg-3 input-group mb-3">
+                        <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
                             </div>

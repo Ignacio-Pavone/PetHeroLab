@@ -171,7 +171,7 @@ use Models\Guardian;
         $this->aceptarReserva($nroReserva);
         return true;
       }
-      
+
       $this->rechazarAutomatico($nroReserva);
       return false;
     }
@@ -195,7 +195,6 @@ use Models\Guardian;
         }
       }
     }
-
 
     public function todaslasReservasdelguardian($idGuardian){
       $this->LoadReservaJson();
