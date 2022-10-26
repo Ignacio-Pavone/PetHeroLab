@@ -156,6 +156,7 @@ use Models\Guardian;
       $this->LoadReservaJson();
       $reservaBuscada = $this->findreservaByID($nroReserva);
       $reservasGuardian = $this->getReservasByGuardianID($idGuardian);
+
       if(empty($reservasGuardian)){
         $this->aceptarReserva($nroReserva);
         return true;
@@ -303,9 +304,11 @@ use Models\Guardian;
     if (empty($reservas)){
       return true;
     }
+
     if (count($this->filtrarConfirmados($idGuardian)) == 0 && count($this->filtrarEnCurso($idGuardian)) == 0){
       return true;
     }
+
     foreach ($reservas as $reserva){
         if ($reserva->getEstado() == "Confirmado" || $reserva->getEstado() == "En Curso"){
           if ($fechaInicio >= $reserva->getFechaInicio()){
@@ -383,6 +386,24 @@ use Models\Guardian;
       return false;
     }
 
+    public function EqualsReserva ($reserva1,$reserva2){
+      if ($reserva1->getFechaInicio() == $reserva2->getFechaInicio() && $reserva1->getFechaFin() == $reserva2->getFechaFin() && $reserva1->getTipo() == $reserva2->getTipo() && $reserva1->getRaza() == $reserva2->getRaza() && $reserva1->getGuardian() == $reserva2->getGuardian() && $reserva1->getDuenio() == $reserva2->getDuenio() && $reserva1->getMascota() == $reserva2->getMascota() && $reserva1->getCostoTotal() == $reserva2->getCostoTotal()){
+        return true;
+      }
+      return false;
+    }
+
+    public function Exist($reservaComparar){
+      $this->LoadReservaJson();
+      foreach($this->list as $reserva){
+        if ($reserva->getEstado() != "Rechazado"){
+          if ($this->EqualsReserva($reserva,$reservaComparar)){
+            return true;
+          }
+        }
+      }
+      return false;
+  }
 }
 
 

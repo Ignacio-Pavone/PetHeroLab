@@ -31,8 +31,12 @@
                 if ($this->reservaDAO->analizarReserva($searchGuardian->getIdGuardian(),$searchPet->getTipo(), $searchPet->getRaza(), $fechaInicio)) {
                     $reserva = new Reserva($searchPet->getIdMascota(), $searchDuenio->getIdDuenio(), $searchGuardian->getIdGuardian(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(),$searchPet->getRaza(), $dias);
                     $reserva->calcularCostoTotal($costoTotal);
-                    $this->reservaDAO->add($reserva);
-                    Session::SetOkMessage("Guardian Solicitado con Exito");
+                    if (!$this->reservaDAO->Exist($reserva)){
+                        $this->reservaDAO->add($reserva);
+                        Session::SetOkMessage("Guardian Solicitado con Exito");
+                    }else{
+                        Session::SetBadMessage("Ya existe una reserva con esos datos");
+                    }                 
                 }else{
                     Session::SetBadMessage("El guardian esta cuidando distinto tipo de mascotas");
                  }

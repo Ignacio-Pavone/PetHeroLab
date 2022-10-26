@@ -8,7 +8,7 @@ require_once VIEWS_PATH . 'header.php';
 
 <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
     <span class="navbar-text">
-        <strong>Welcome - <?php echo $user->getFullName() ?></strong>
+        <strong>Welcome  <?php echo $user->getFullName() ?></strong>
     </span>
     <ul class="navbar-nav ml-auto">
         <?php if (Session::getType() == "guardian") { ?>
