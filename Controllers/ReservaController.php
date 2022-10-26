@@ -47,12 +47,12 @@
 
         public function aceptarReservaGuardian($nroReserva){
             $user = Session::GetLoggedUser();
-            if ($this->reservaDAO->aceptarReservaGuardiann($nroReserva)){
+            if ($this->reservaDAO->aceptarReservaGuardiann($nroReserva,$user->getIdGuardian())){
                 Session::SetOkMessage("Reserva Aceptada con Exito");
             }else{
                 Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
             }
-            header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $user->getEmail() );
+           header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $user->getEmail() );
         }
 
         public function rechazarReservaGuardian($nroReserva){

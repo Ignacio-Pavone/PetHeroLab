@@ -5,7 +5,7 @@
         "idDuenio": 1,
         "idGuardian": 1,
         "fechaInicio": "2022-10-25",
-        "fechaFin": "2022-10-26",
+        "fechaFin": "2022-10-28",
         "estado": "Rechazado",
         "calificacion": 0,
         "costoTotal": 1500,
@@ -19,12 +19,26 @@
         "idDuenio": 1,
         "idGuardian": 1,
         "fechaInicio": "2022-10-25",
-        "fechaFin": "2022-10-26",
+        "fechaFin": "2022-10-28",
         "estado": "En Curso",
         "calificacion": 0,
         "costoTotal": 1500,
         "tipo": "Gato",
         "raza": "Siames",
+        "cantidadDias": 1
+    },
+    {
+        "nroReserva": 4,
+        "idMascota": 1,
+        "idDuenio": 1,
+        "idGuardian": 1,
+        "fechaInicio": "2022-10-25",
+        "fechaFin": "2022-10-28",
+        "estado": "Rechazado",
+        "calificacion": 0,
+        "costoTotal": 1500,
+        "tipo": "Perro",
+        "raza": "Ovejero",
         "cantidadDias": 1
     }
 ]

@@ -11,9 +11,9 @@ use Models\Guardian;
       private $filename;
       private $id;
 
-      public function __construct(){
-        $this->filename = dirname(__DIR__)."/Data/reservas.json";
-      }
+    public function __construct(){
+      $this->filename = dirname(__DIR__)."/Data/reservas.json";
+    }
 
     public function SaveData(){
       $arrayToEncode = array();
@@ -35,6 +35,16 @@ use Models\Guardian;
       $jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
       file_put_contents($this->filename, $jsonContent);
     }  
+
+    public function findreservaByID ($nroReserva){
+      $this->LoadReservaJson();
+      foreach ($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          return $reserva;
+        }
+      }
+      return false;
+    }
 
     public function GetAllReservas(){
         $this->LoadReservaJson();
@@ -121,23 +131,81 @@ use Models\Guardian;
       return $reserva;
     }
 
-    public function add ($reserva){
+    public function add($reserva){
         $this->LoadReservaJson();
         $reserva->setNroReserva($this->id + 1);
         array_push($this->list, $reserva);
         $this->SaveData();
     }
 
-    public function aceptarReservaGuardiann($nroReserva){
+    public function checkReservasdeGuardian($reservas, $reservaaAceptar){
       $this->LoadReservaJson();
-      foreach($this->list as $reserva){
-        if ($reserva->getNroReserva() == $nroReserva){
-            $reserva->setEstado(EReserva::Confirmado);
-            $this->SaveData();
-            return true;
+      foreach ($reservas as $reserva){
+        if ($reserva->getEstado() == 'En Curso'){
+          if ($reserva->getTipo() == $reservaaAceptar->getTipo()){
+            if ($reserva->getRaza() == $reservaaAceptar->getRaza()){
+                return true;
+              }       
           }
+        }
       }
+    return false;
+    }
+
+    public function aceptarReservaGuardiann($nroReserva,$idGuardian){
+      $this->LoadReservaJson();
+      $reservaBuscada = $this->findreservaByID($nroReserva);
+      $reservasGuardian = $this->getReservasByGuardianID($idGuardian);
+      if(empty($reservasGuardian)){
+        $this->aceptarReserva($nroReserva);
+        return true;
+      }
+
+      if(count($this->filtrarConfirmados($idGuardian)) == 0 && count($this->filtrarEnCurso($idGuardian)) == 0){   
+        $this->aceptarReserva($nroReserva);
+        return true;
+      }
+
+      if($this->checkReservasdeGuardian($reservasGuardian,$reservaBuscada)){
+        var_dump($reservaBuscada);
+        $this->aceptarReserva($nroReserva);
+        return true;
+      }
+      
+      $this->rechazarAutomatico($nroReserva);
       return false;
+    }
+
+    public function rechazarAutomatico ($nroReserva){
+      $this->LoadReservaJson();
+      foreach ($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setEstado('Rechazado');
+          $this->SaveData();
+        }
+      }
+    }
+
+    public function aceptarReserva($nroReserva){
+      $this->LoadReservaJson();
+      foreach ($this->list as $reserva){
+        if ($reserva->getNroReserva() == $nroReserva){
+          $reserva->setEstado('Confirmado');
+          $this->SaveData();
+        }
+      }
+    }
+
+
+    public function todaslasReservasdelguardian($idGuardian){
+      $this->LoadReservaJson();
+      $array = array();
+      foreach($this->list as $reserva){
+        if($reserva->getGuardian() == $idGuardian){
+          array_push($array,$reserva);
+        }
+      }
+      return $array;
     }
 
     public function rechazarReservaGuardian($nroReserva){
@@ -150,7 +218,7 @@ use Models\Guardian;
       $this->SaveData();
     }
 
-    public function cancelarcomoDuenio ($nroReserva){
+    public function cancelarcomoDuenio($nroReserva){
       $this->LoadReservaJson();
       foreach($this->list as $reserva){
       if ($reserva->getEstado() != "Confirmado" && $reserva->getEstado() != "Completo"){
@@ -164,7 +232,7 @@ use Models\Guardian;
       return false;
     }
 
-    public function borrarReserva ($nroReserva){
+    public function borrarReserva($nroReserva){
       $this->LoadReservaJson();
       $newlist = array();
       foreach($this->list as $reserva){
@@ -176,7 +244,7 @@ use Models\Guardian;
       $this->SaveData();
     }
 
-    public function checkfirstPetType ($idGuardian,$tipo,$raza){
+    public function checkfirstPetType($idGuardian,$tipo,$raza){
       $reservas = $this->getReservasByGuardianID($idGuardian);
       if (empty($reservas)){
         return true;
@@ -192,7 +260,7 @@ use Models\Guardian;
       return false;
     }
 
-    public function filtrarPendientes ($idGuardian){
+    public function filtrarPendientes($idGuardian){
       $this->LoadReservaJson();
       $array = array();
       foreach($this->list as $reserva){
@@ -205,7 +273,7 @@ use Models\Guardian;
       return $array;
     }
 
-    public function filtrarConfirmados ($idGuardian){
+    public function filtrarConfirmados($idGuardian){
       $this->LoadReservaJson();
       $array = array();
       foreach($this->list as $reserva){
@@ -218,7 +286,7 @@ use Models\Guardian;
       return $array;
     }
 
-    public function filtrarEnCurso ($idGuardian){
+    public function filtrarEnCurso($idGuardian){
       $this->LoadReservaJson();
       $array = array();
       foreach($this->list as $reserva){
@@ -231,26 +299,24 @@ use Models\Guardian;
       return $array;
     }
 
-    public function analizarReserva ($idGuardian, $tipo, $raza, $fechaInicio){
-      $reservas = $this->getReservasByGuardianID($idGuardian);
-      if (empty($reservas)){
-        return true;
-      }
-
-      if (count($this->filtrarConfirmados($idGuardian)) == 0 && count($this->filtrarEnCurso($idGuardian)) == 0){
-        return true;
-      }
-
-      foreach ($reservas as $reserva){
-          if ($reserva->getEstado() == "Confirmado" || $reserva->getEstado() == "En Curso"){
-            if ($fechaInicio >= $reserva->getFechaInicio()){
-              if ($tipo == $reserva->getTipo()){       
-                if ($raza == $reserva->getRaza()){
-                return true;      
-            }
+    public function analizarReserva($idGuardian, $tipo, $raza, $fechaInicio){
+    $reservas = $this->getReservasByGuardianID($idGuardian);
+    if (empty($reservas)){
+      return true;
+    }
+    if (count($this->filtrarConfirmados($idGuardian)) == 0 && count($this->filtrarEnCurso($idGuardian)) == 0){
+      return true;
+    }
+    foreach ($reservas as $reserva){
+        if ($reserva->getEstado() == "Confirmado" || $reserva->getEstado() == "En Curso"){
+          if ($fechaInicio >= $reserva->getFechaInicio()){
+            if ($tipo == $reserva->getTipo()){       
+              if ($raza == $reserva->getRaza()){
+              return true;      
           }
         }
       }
+    }
     }
       return false;
     }
@@ -264,7 +330,7 @@ use Models\Guardian;
       return true;
     }
 
-    public function contarDias ($fechaInicio, $fechaFin){
+    public function contarDias($fechaInicio, $fechaFin){
       $date1 = strtotime($fechaInicio);
       $date2 = strtotime($fechaFin);
       $diff = abs($date2 - $date1);
@@ -277,7 +343,7 @@ use Models\Guardian;
       return $days;
     }
 
-    public function chequeoDataReserva ($searchPet,$searchGuardian,$searchDuenio){
+    public function chequeoDataReserva($searchPet,$searchGuardian,$searchDuenio){
       if ($searchPet!=null && $searchGuardian!=null && $searchDuenio!=null)
       return true;
       else
@@ -294,7 +360,7 @@ use Models\Guardian;
       return null;
     }
 
-    public function cambiarEstado ($nroReserva,$estado){
+    public function cambiarEstado($nroReserva,$estado){
       $this->LoadReservaJson();
       foreach($this->list as $reserva){
         if ($reserva->getNroReserva() == $nroReserva){
