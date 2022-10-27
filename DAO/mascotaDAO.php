@@ -112,7 +112,6 @@ class mascotaDAO {
    public function filtrarMascotasporTamanio($tamanio){
         try{
             $sql = "SELECT * FROM ".$this->tableName." WHERE pet_size = " . $tamanio;
-            var_dump($sql);
             $this->connection = Connection::GetInstance();
             $result = $this->connection->Execute($sql);
             $mascotas = array();

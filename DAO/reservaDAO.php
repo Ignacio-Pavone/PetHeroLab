@@ -1,10 +1,7 @@
 <?php namespace DAO;
 
 use Models\Reserva as Reserva;
-use Utils\EReserva as EReserva;
 use DAO\Connection as Connection;
-
-use Models\Guardian;
 
   class reservaDAO{
     private $connection;
@@ -48,7 +45,6 @@ use Models\Guardian;
         throw $ex;
       }
     }
-
 
     public function getReservasByDuenioID ($id){
       try{
@@ -201,7 +197,6 @@ use Models\Guardian;
           try {
             $sql = "UPDATE ".$this->tableName." SET req_status = :req_status WHERE id_request = " . $reserva->getNroReserva();
             $parameters["req_status"] = $reserva->getEstado();
-
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($sql, $parameters);
           } catch (\PDOException $ex) {
@@ -310,7 +305,6 @@ use Models\Guardian;
 
     public function analizarReserva($idGuardian, $tipo, $raza, $fechaInicio){
     $reservas = $this->getReservasByGuardianID($idGuardian);
-    var_dump($reservas);
     if (empty($reservas)){
       return true;
     }

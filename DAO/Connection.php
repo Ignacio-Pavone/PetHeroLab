@@ -8,8 +8,7 @@
     use \Exception as Exception;
     use DAO\QueryType as QueryType;
 
-    class Connection
-    {
+    class Connection{
         private $pdo = null;
         private $pdoStatement = null;
         private static $instance = null;
