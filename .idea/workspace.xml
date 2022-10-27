@@ -1,22 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="3edb88b7-7dec-4a62-8c59-c0f82bc17607" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Config/Config.php" beforeDir="false" afterPath="$PROJECT_DIR$/Config/Config.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/AuthController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/AuthController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/GuardianController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/GuardianController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/OwnerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/OwnerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/PetController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/PetController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/ReservaController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RequestController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/Connection.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/Connection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/guardianDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/GuardianDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/ownerDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/OwnerDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/petDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/PetDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/reservaDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/ReservaDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Models/Reserva.php" beforeDir="false" afterPath="$PROJECT_DIR$/Models/Request.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/guardian-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/guardian-profile.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/owner-profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/owner-profile.php" afterDir="false" />
-    </list>
+    <list default="true" id="3edb88b7-7dec-4a62-8c59-c0f82bc17607" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -56,7 +41,7 @@
       <option name="presentableId" value="Default" />
       <updated>1666872483668</updated>
       <workItem from="1666872485030" duration="13687000" />
-      <workItem from="1666902376796" duration="5225000" />
+      <workItem from="1666902376796" duration="5530000" />
     </task>
     <servers />
   </component>
