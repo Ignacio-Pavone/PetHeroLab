@@ -75,8 +75,7 @@
             header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");
         }
 
-        public function calificarGuardian ($guardian, $calificacion, $reserva){
-            
+        public function calificarGuardian ($guardian, $calificacion, $reserva){          
             $guardianBuscado = $this->guardianDAO->findGuardianByID($guardian);
             $count = $this->reservaDAO->contarCalificacionesGuardian($guardian) + 1;
             $suma = $this->reservaDAO->sumarCalificacionesGuardian($guardian) + $calificacion;
@@ -89,7 +88,5 @@
                 Session::SetBadMessage("No se pudo calificar al guardian");
             }
            header ("location: ".FRONT_ROOT."Auth/ShowDuenioProfile");         
-        }
-        
-
+        }     
 }

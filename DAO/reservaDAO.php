@@ -104,8 +104,7 @@ use DAO\Connection as Connection;
       $result = $this->connection->Execute($sql);
       foreach($result as $row){
         $sum = $row["sum(calificacion)"];
-      }
-      
+      }    
       return $sum;
     }
 
@@ -124,7 +123,6 @@ use DAO\Connection as Connection;
         $sql = "UPDATE ".$this->tableName." SET req_status = :estado WHERE id_request = :id";
         $parameters["id"] = $reserva->getNroReserva();
         $parameters["estado"] = $estado;
- 
         $this->connection = Connection::GetInstance();
         $this->connection->ExecuteNonQuery($sql, $parameters);
       }catch(\PDOException $ex){
@@ -247,36 +245,7 @@ use DAO\Connection as Connection;
         throw $ex;
       }
     }
-
-    public function checkfirstPetType($idGuardian,$tipo,$raza){
-      $reservas = $this->getReservasByGuardianID($idGuardian);
-      if (empty($reservas)){
-        return true;
-      }
-
-      if ($reservas){
-        if (strcasecmp($reservas[0]->getTipo(),$tipo) == 0){
-          if (strcasecmp($reservas[0]->getRaza(),$raza) == 0){
-            return true;
-          }
-        }
-      }
-      return false;
-    }
-
-    public function filtrarPendientes($idGuardian){
-      $reservas = $this->getReservasByGuardianID($idGuardian);
-      $array = array();
-      foreach($reservas as $reserva){
-        if($reserva->getGuardian() == $idGuardian){
-          if($reserva->getEstado() == "Pendiente"){
-            array_push($array,$reserva);
-          }
-        }
-      }
-      return $array;
-    }
-
+    
     public function filtrarConfirmados($idGuardian){
       $reservas = $this->getReservasByGuardianID($idGuardian);
       $array = array();
@@ -368,7 +337,6 @@ use DAO\Connection as Connection;
         throw $ex;
       }
       return false;
-      
     }
 
     public function setearCalificacion($nroReserva,$calificacion){

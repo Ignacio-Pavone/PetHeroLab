@@ -1,6 +1,6 @@
 <?php 
 namespace Models;
-class Mascota {
+class Mascota{
      private $id;
      private $idDuenio;
      private $nombre;
@@ -11,8 +11,7 @@ class Mascota {
      private $planVacunacion;
      private $video;
 
-     public function __construct($idDuenio,$nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video)
-     {
+     public function __construct($idDuenio,$nombre,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video){
         $this->idDuenio = $idDuenio;
          $this->nombre=$nombre;
          $this->tipo=$tipo;

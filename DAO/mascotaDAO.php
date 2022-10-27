@@ -108,20 +108,4 @@ class mascotaDAO {
             throw $ex;
         }
     }
-
-   public function filtrarMascotasporTamanio($tamanio){
-        try{
-            $sql = "SELECT * FROM ".$this->tableName." WHERE pet_size = " . $tamanio;
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
-            $mascotas = array();
-            foreach($result as $row){
-                $mascota = new Mascota($row["id_pet"],$row["id_owner"],$row['name'],$row["type"],$row["breed"],$row["pet_size"],$row["vaccination_schedule"],$row["photo_url"],$row["video_url"]);
-                array_push($mascotas, $mascota);
-            }
-            return $mascotas;
-        }catch(\PDOException $ex){
-            throw $ex;
-        }
-    }
 }

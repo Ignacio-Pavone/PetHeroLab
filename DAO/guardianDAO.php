@@ -33,8 +33,7 @@ use Models\Guardian;
             $guardian->setIdGuardian($row["id_guardian"]);
             $guardian->setReputacion($row["reputation"]);
             return $guardian;
-          }
-          
+          }     
         }catch(\PDOException $ex){
           throw $ex;
         }
@@ -143,8 +142,6 @@ use Models\Guardian;
           return true;
        }
       return false;
-
-
-}
+    }
 }
 ?>

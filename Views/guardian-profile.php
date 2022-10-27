@@ -169,7 +169,7 @@ include('nav-bar.php');
                         <th style="width: 10%;">Mascota</th>
                         <th style="width: 10%;">Fecha Inicio</th>
                         <th style="width: 10%;">Fecha Fin</th>
-                        <th style="width: 10%;">Califacion</th>
+                        <th style="width: 10%;">Calificacion</th>
                         <th style="width: 10%;">Estado</th>
                     </tr>
                 </thead>

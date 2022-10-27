@@ -13,8 +13,7 @@ include_once 'nav-bar.php';
             <div class="col-md-4 login-sec">
             <h2 class="text-center">Pet Hero</h2>
             <div class="col-lg-12" style="height:10px"></div>
-            <hr>
-                
+            <hr>            
                 <div class="col-lg-12 input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="btn btn-dark" id="basic-addon1">Email</span>
@@ -29,15 +28,12 @@ include_once 'nav-bar.php';
                     </div>
                     <input type="password" class="form-control" name="password" aria-describedby="basic-addon1"
                     placeholder="*******" required>
-                </div>
-                
+                </div>      
                 <hr>
                 <br>
-
                 <div>                 
                     <button type="submit" class="btn btn-login float-right">Ingresar</button>
-                </div>
-                
+                </div>             
             </div>
             <div class="col-md-8 banner-sec">
                 <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

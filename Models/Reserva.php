@@ -1,6 +1,6 @@
 <?php 
 namespace Models;
-    class Reserva  {    
+    class Reserva{    
         private $nroReseva;
         private $guardian;
         private $duenio;
