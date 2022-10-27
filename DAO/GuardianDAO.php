@@ -4,7 +4,7 @@ use Utils\Session;
 use DAo\Connection as Connection;
 use Models\Guardian;
 
-    class guardianDAO{
+    class GuardianDAO{
       private $connection;
       private $tableName = "Guardians";
 

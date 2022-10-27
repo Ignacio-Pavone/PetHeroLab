@@ -201,7 +201,7 @@ include('nav-bar.php');
                                 <td style=color:black><?php echo '-' ?> </td>
                             <?php } ?>
                             <td><?php echo $guardian->getFee() . ' $'; ?></td>
-                            <form action="<?php echo FRONT_ROOT ?>Reserva/requestGuardian" method="post">
+                            <form action="<?php echo FRONT_ROOT ?>Request/requestGuardian" method="post">
                                 <td><input type="date" id="initDate" name="fechaInicio"
                                            max="<?php echo $guardian->getFinishDate() ?>" class="update-dispon"
                                            value="" min="<?php if ($guardian->getInitDate() < date('Y-m-d')) {
@@ -280,54 +280,54 @@ include('nav-bar.php');
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($reservas as $reserva) {
+                        <?php foreach ($requests as $request) {
                             ?>
                             <tr>
                                 <?php foreach ($allGuardians as $guardian) {
-                                    if ($reserva->getIdGuardian() == $guardian->getId()) {
+                                    if ($request->getIdGuardian() == $guardian->getId()) {
                                         ?>
                                         <td><?php echo $guardian->getFullName(); ?></td>
                                     <?php }
                                 } ?>
                                 <?php foreach ($allPets as $mascota) {
-                                    if ($reserva->getIdPet() == $mascota->getId()) {
+                                    if ($request->getIdPet() == $mascota->getId()) {
                                         ?>
                                         <td><?php echo $mascota->getName();
                                             break; ?></td>
                                     <?php }
                                 } ?>
-                                <td><?php echo Format::formatDate($reserva->getInitDate()); ?></td>
-                                <td><?php echo Format::formatDate($reserva->getFinishDate());  ?></td>
-                                <td><?php echo $reserva->getDaysAmount(); ?></td>
-                                <td><?php echo $reserva->getFinalPrice() . ' $' ?></td>
-                                <td class=""><?php if ($reserva->getReqStatus() == 'Confirmado') {
+                                <td><?php echo Format::formatDate($request->getInitDate()); ?></td>
+                                <td><?php echo Format::formatDate($request->getFinishDate());  ?></td>
+                                <td><?php echo $request->getDaysAmount(); ?></td>
+                                <td><?php echo $request->getFinalPrice() . ' $' ?></td>
+                                <td class=""><?php if ($request->getReqStatus() == 'Confirmado') {
                                     ?> <label class="circulo" style="background:green;"> <?php
-                                        } elseif ($reserva->getReqStatus() == 'Pendiente') {
+                                        } elseif ($request->getReqStatus() == 'Pendiente') {
                                         ?> <label class="circulo" style="background:orange;"> <?php
-                                            } elseif ($reserva->getReqStatus() == 'Rechazado') {
+                                            } elseif ($request->getReqStatus() == 'Rechazado') {
                                             ?> <label class="circulo" style="background:red;"> <?php
-                                                } elseif ($reserva->getReqStatus() == 'Completo') {
+                                                } elseif ($request->getReqStatus() == 'Completo') {
                                                 ?> <label class="circulo" style="background:blue;"> <?php
-                                                    } elseif ($reserva->getReqStatus() == 'Calificado') {
+                                                    } elseif ($request->getReqStatus() == 'Calificado') {
                                                     ?> <label class="circulo" style="background:purple;"> <?php
-                                                        } elseif ($reserva->getReqStatus() == 'En Curso') {
+                                                        } elseif ($request->getReqStatus() == 'En Curso') {
                                                         ?> <label class="circulo" style="background:pink;"></td>
                             <?php } ?>
                                 <td>
-                                    <?php if ($reserva->getReqStatus() == 'Calificado' || $reserva->getReqStatus() == 'En Curso' || $reserva->getReqStatus() == 'Confirmado') { ?>
+                                    <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Confirmado') { ?>
                                         <button type="button" class="btn btn-dark" disabled>Cancelar</button>
                                     <?php } else { ?>
                                     <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                       href="<?php echo FRONT_ROOT . 'Reserva/cancelRequestasOwner/' . $reserva->getIdRequest(); ?>">Cancelar</a>
+                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">Cancelar</a>
                                 </td>
                             <?php } ?>
                                 <td>
-                                    <form action="<?php echo FRONT_ROOT ?>Reserva/qualifyGuardian" method="post">
+                                    <form action="<?php echo FRONT_ROOT ?>Request/qualifyGuardian" method="post">
                                         <input type="hidden" name="guardian"
-                                               value="<?php echo $reserva->getIdGuardian() ?>">
+                                               value="<?php echo $request->getIdGuardian() ?>">
                                         <input type="hidden" name="reserva"
-                                               value="<?php echo $reserva->getIdRequest() ?>">
-                                        <?php if ($reserva->getReqStatus() == 'Completo' && $reserva->getReqStatus() != 'Calificado') { ?>
+                                               value="<?php echo $request->getIdRequest() ?>">
+                                        <?php if ($request->getReqStatus() == 'Completo' && $request->getReqStatus() != 'Calificado') { ?>
                                             <div class="input-group">
                                                 <input type="number" min="1" max="5" name="calificacion"
                                                        class="form-control col-xs-2" style="text-align:center"

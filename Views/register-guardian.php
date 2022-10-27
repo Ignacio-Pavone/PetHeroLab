@@ -32,7 +32,7 @@ require_once VIEWS_PATH . 'header.php';
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
                         </div>
-                        <input type="number" min="18" class="form-control" placeholder=">18" name="age"
+                        <input type="number" min="18" max="100" class="form-control" placeholder=">18" name="age"
                         aria-describedby="basic-addon1" required>
                     </div>
 

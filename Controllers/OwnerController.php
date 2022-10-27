@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use DAO\ownerDAO as ownerDAO;
+use DAO\OwnerDAO as OwnerDAO;
 use Models\Owner as Owner;
 use Utils\Session;
 
@@ -10,7 +10,7 @@ class OwnerController{
 
 
     public function __construct(){
-        $this->ownerDAO = new ownerDAO();
+        $this->ownerDAO = new OwnerDAO();
     }
  
     public function register($fullname, $age, $dni, $email, $password){

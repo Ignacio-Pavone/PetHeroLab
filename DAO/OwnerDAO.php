@@ -4,7 +4,7 @@ use Models\Owner;
 use Utils\Session;
 use DAo\Connection as Connection;
 
-class ownerDAO{
+class OwnerDAO{
     private $connection;
     private $tableName = "Owners";
 

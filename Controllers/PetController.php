@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 
-use DAO\petDAO as petDAO;
+use DAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 use Utils\Session;
 
@@ -10,7 +10,7 @@ class PetController {
     private $mascotaDAO;
 
     public function __construct(){
-        $this->mascotaDAO = new petDAO();
+        $this->mascotaDAO = new PetDAO();
     }
 
     public function add($id_owner, $name, $type, $breed, $pet_size, $photo_url, $vaccination_schedule, $video_url){

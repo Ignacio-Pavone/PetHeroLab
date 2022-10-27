@@ -1,9 +1,9 @@
 <?php namespace Controllers;
 
-        use DAO\guardianDAO as guardianDAO;
-        use DAO\ownerDAO as ownerDAO;
-        use DAO\reservaDAO as reservaDAO;
-        use DAO\petDAO as petDAO;
+        use DAO\GuardianDAO as GuardianDAO;
+        use DAO\OwnerDAO as OwnerDAO;
+        use DAO\ReservaDAO as ReservaDAO;
+        use DAO\PetDAO as PetDAO;
         use Utils\Session;
 
         class AuthController{
@@ -13,10 +13,10 @@
         private $petDAO;
             
         public function __construct(){
-        $this->guardianDAO = new guardianDAO();
-        $this->ownerDAO = new ownerDAO();
-        $this->reservaDAO = new reservaDAO();
-        $this->petDAO = new petDAO();
+        $this->guardianDAO = new GuardianDAO();
+        $this->ownerDAO = new OwnerDAO();
+        $this->reservaDAO = new ReservaDAO();
+        $this->petDAO = new PetDAO();
         }
 
         public function login($email, $password){
@@ -36,7 +36,7 @@
         ($this->guardianDAO->checkProfile($guardian)) ? Session::SetBadMessage("Por favor establesca su disponibilidad laboral") : '' ;
         $owners = $this->ownerDAO->GetAll();
         $allpets = $this->petDAO->GetAll();
-        $reservas = $this->reservaDAO->findByGuardianId($guardian->getId());
+        $requests = $this->reservaDAO->findByGuardianId($guardian->getId());
         require_once(VIEWS_PATH . 'guardian-profile.php');
         }
 
@@ -44,10 +44,10 @@
         $user = Session::GetLoggedUser();
         $sesion = $this->ownerDAO->getByEmail($user->getEmail());
         Session::CreateSession($sesion);
-        $allPets = $this->petDAO->returnByOwner($user->getId());
+        $allPets = $this->petDAO->returnByOwner($sesion->getId());
         $allGuardians = $this->guardianDAO->GetAll();
-        $guardianes = $this->guardianDAO->GetAll();
-        $reservas = $this->reservaDAO->findByOwnerId($user->getId());
+        $guardians = $this->guardianDAO->GetAll();
+        $requests = $this->reservaDAO->findByOwnerId($user->getId());
         require_once(VIEWS_PATH . 'owner-profile.php');
         }
 
@@ -56,8 +56,8 @@
         if (!$this->reservaDAO->dateChecker($filtroInicio,$filtroFin)){
         $allPets = $this->petDAO->returnByOwner($user->getId());
         $allGuardians = $this->guardianDAO->GetAll();
-        $guardianes = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
-        $reservas = $this->reservaDAO->findByOwnerId($user->getId());
+        $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
+        $requests = $this->reservaDAO->findByOwnerId($user->getId());
         require_once(VIEWS_PATH . 'owner-profile.php');
         } else{
         Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");

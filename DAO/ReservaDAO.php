@@ -1,9 +1,9 @@
 <?php namespace DAO;
 
-use Models\Reserva as Reserva;
+use Models\Request as Request;
 use DAO\Connection as Connection;
 
-class reservaDAO
+class ReservaDAO
 {
     private $connection;
     private $tableName = "Requests";
@@ -16,7 +16,7 @@ class reservaDAO
             $result = $this->connection->Execute($sql);
             $requests = array();
             foreach ($result as $row) {
-                $request = new Reserva($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
                 $request->setIdRequest($row["id_request"]);
                 $request->setReqstatus($row["req_status"]);
                 $request->setScore($row["score"]);
@@ -37,7 +37,7 @@ class reservaDAO
             $this->connection = Connection::GetInstance();
             $result = $this->connection->Execute($sql);
             foreach ($result as $row) {
-                $request = new Reserva($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
                 $request->setReqstatus($row["req_status"]);
                 $request->setIdRequest($row["id_request"]);
                 $request->setScore($row["score"]);
@@ -57,7 +57,7 @@ class reservaDAO
             $result = $this->connection->Execute($sql);
             $requests = array();
             foreach ($result as $row) {
-                $request = new Reserva($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
                 $request->setReqstatus($row["req_status"]);
                 $request->setIdRequest($row["id_request"]);
                 $request->setScore($row["score"]);
@@ -78,7 +78,7 @@ class reservaDAO
             $result = $this->connection->Execute($sql);
             $requests = array();
             foreach ($result as $row) {
-                $request = new Reserva($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
                 $request->setIdRequest($row["id_request"]);
                 $request->setReqstatus($row["req_status"]);
                 $request->setScore($row["score"]);
@@ -281,7 +281,7 @@ class reservaDAO
         return $array;
     }
 
-    public function analizarReserva($idGuardian, $tipo, $raza, $fechaInicio)
+    public function analyzeRequest($idGuardian, $type, $breed, $initDate)
     {
         $reservas = $this->findByGuardianId($idGuardian);
         if (empty($reservas)) {
@@ -294,9 +294,9 @@ class reservaDAO
 
         foreach ($reservas as $reserva) {
             if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "En Curso") {
-                if ($fechaInicio >= $reserva->getInitDate()) {
-                    if ($tipo == $reserva->getType()) {
-                        if ($raza == $reserva->getBreed()) {
+                if ($initDate >= $reserva->getInitDate()) {
+                    if ($type == $reserva->getType()) {
+                        if ($breed == $reserva->getBreed()) {
                             return true;
                         }
                     }
@@ -316,10 +316,10 @@ class reservaDAO
         return true;
     }
 
-    public function countDays ($fechaInicio, $fechaFin)
+    public function countDays ($initdate, $finishdate)
     {
-        $date1 = strtotime($fechaInicio);
-        $date2 = strtotime($fechaFin);
+        $date1 = strtotime($initdate);
+        $date2 = strtotime($finishdate);
         $diff = abs($date2 - $date1);
         $years = floor($diff / (365 * 60 * 60 * 24));
         $months = floor(($diff - $years * 365 * 60 * 60 * 24) / (30 * 60 * 60 * 24));
@@ -330,20 +330,20 @@ class reservaDAO
         return $days;
     }
 
-    public function checkDataNotNull ($searchPet, $searchGuardian, $searchDuenio)
+    public function checkDataNotNull ($searchPet, $searchGuardian, $searchOwner)
     {
-        if ($searchPet != null && $searchGuardian != null && $searchDuenio != null)
+        if ($searchPet != null && $searchGuardian != null && $searchOwner != null)
             return true;
         else
             return false;
     }
 
-    public function changeReqStatus ($id_request, $estado)
+    public function changeReqStatus ($id_request, $req_status)
     {
         try {
             $sql = "UPDATE " . $this->tableName . " SET req_status = :estado WHERE id_request = :id";
             $parameters["id"] = $id_request;
-            $parameters["estado"] = $estado;
+            $parameters["req_status"] = $req_status;
             $this->connection = Connection::GetInstance();
             $this->connection->ExecuteNonQuery($sql, $parameters);
             return true;
@@ -360,8 +360,8 @@ class reservaDAO
             if ($reserva->getIdRequest() == $id_request) {
                 $reserva->setScore($score);
                 try {
-                    $sql = "UPDATE " . $this->tableName . " SET score = :score WHERE id_request = :nroReserva";
-                    $parameters["nroReserva"] = $id_request;
+                    $sql = "UPDATE " . $this->tableName . " SET score = :score WHERE id_request = :id_request";
+                    $parameters["id_request"] = $id_request;
                     $parameters["score"] = $score;
                     $this->connection = Connection::GetInstance();
                     $this->connection->ExecuteNonQuery($sql, $parameters);
@@ -374,20 +374,20 @@ class reservaDAO
         return false;
     }
 
-    public function EqualsRequest($reserva1, $reserva2)
+    public function EqualsRequest($request1, $request2)
     {
-        if ($reserva1->getInitDate() == $reserva2->getInitDate() && $reserva1->getFinishDate() == $reserva2->getFinishDate() && $reserva1->getType() == $reserva2->getType() && $reserva1->getBreed() == $reserva2->getBreed() && $reserva1->getIdGuardian() == $reserva2->getIdGuardian() && $reserva1->getIdOwner() == $reserva2->getIdOwner() && $reserva1->getIdPet() == $reserva2->getIdPet() && $reserva1->getFinalPrice() == $reserva2->getFinalPrice()) {
+        if ($request1->getInitDate() == $request2->getInitDate() && $request1->getFinishDate() == $request2->getFinishDate() && $request1->getType() == $request2->getType() && $request1->getBreed() == $request2->getBreed() && $request1->getIdGuardian() == $request2->getIdGuardian() && $request1->getIdOwner() == $request2->getIdOwner() && $request1->getIdPet() == $request2->getIdPet() && $request1->getFinalPrice() == $request2->getFinalPrice()) {
             return true;
         }
         return false;
     }
 
-    public function Exist($reservaComparar)
+    public function Exists($requestCompared)
     {
         $reservas = $this->getAll();
         foreach ($reservas as $reserva) {
             if ($reserva->getReqStatus() != "Rechazado") {
-                if ($this->EqualsRequest($reserva, $reservaComparar)) {
+                if ($this->EqualsRequest($reserva, $requestCompared)) {
                     return true;
                 }
             }

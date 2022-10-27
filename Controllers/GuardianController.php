@@ -1,7 +1,7 @@
 <?php
 namespace Controllers;
 use Models\Guardian as Guardian;
-use DAO\guardianDAO as guardianDAO;
+use DAO\GuardianDAO as GuardianDAO;
 use Utils\Session;
 
 class GuardianController{
@@ -9,7 +9,7 @@ class GuardianController{
     private $guardianDAO;
 
     public function __construct(){
-        $this->guardianDAO = new guardianDAO();
+        $this->guardianDAO = new GuardianDAO();
     }
 
     public function register($fullname, $age, $dni, $email, $password, $tipoMascota, $fee){

@@ -1,7 +1,7 @@
 <?php 
 namespace Models;
 
-    class Reserva{    
+    class Request{
         private $id_request;
         private $id_guardian;
         private $id_owner;

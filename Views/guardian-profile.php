@@ -140,31 +140,31 @@ include('nav-bar.php');
                 </tr>
                 </thead>
                 <tbody>
-                <?php foreach ($reservas as $reserva) {
-                    if ($reserva->getReqStatus() == "Pendiente") { ?>
+                <?php foreach ($requests as $request) {
+                    if ($request->getReqStatus() == "Pendiente") { ?>
                         <tr>
                             <?php foreach ($owners as $duenio) {
-                                if ($duenio->getId() == $reserva->getIdOwner()) { ?>
+                                if ($duenio->getId() == $request->getIdOwner()) { ?>
                                     <td><?php echo $duenio->getFullName(); ?></td>
                                 <?php }
                             } ?>
                             <?php foreach ($allpets as $mascota) {
-                                if ($mascota->getId() == $reserva->getIdPet()) { ?>
+                                if ($mascota->getId() == $request->getIdPet()) { ?>
                                     <td><?php echo $mascota->getName();
                                         break; ?></td>
                                 <?php }
                             } ?>
-                            <td><?php echo $reserva->getType(); ?></td>
-                            <td><?php echo Format::formatDate($reserva->getInitDate()) ?></td>
-                            <td><?php echo Format::formatDate($reserva->getFinishDate()); ?></td>
-                            <td><?php echo $reserva->getFinalPrice() . ' $'; ?></td>
+                            <td><?php echo $request->getType(); ?></td>
+                            <td><?php echo Format::formatDate($request->getInitDate()) ?></td>
+                            <td><?php echo Format::formatDate($request->getFinishDate()); ?></td>
+                            <td><?php echo $request->getFinalPrice() . ' $'; ?></td>
                             <td>
                                 <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                   href="<?php echo FRONT_ROOT . 'Reserva/confirmRequestasGuardian/' . $reserva->getIdRequest(); ?>">Aceptar</a>
+                                   href="<?php echo FRONT_ROOT . 'Request/confirmRequestasGuardian/' . $request->getIdRequest(); ?>">Aceptar</a>
                             </td>
                             <td>
                                 <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                   href="<?php echo FRONT_ROOT . 'Reserva/rejectRequestasGuardian/' . $reserva->getIdRequest(); ?>">Rechazar</a>
+                                   href="<?php echo FRONT_ROOT . 'Request/rejectRequestasGuardian/' . $request->getIdRequest(); ?>">Rechazar</a>
                             </td>
                         </tr>
                     <?php }
@@ -194,34 +194,34 @@ include('nav-bar.php');
                 </thead>
                 <tbody>
 
-                <?php foreach ($reservas as $reserva) { ?>
+                <?php foreach ($requests as $request) { ?>
                     <tr>
                     <?php
-                    if ($reserva->getReqStatus() != 'Pendiente') {
+                    if ($request->getReqStatus() != 'Pendiente') {
                         foreach ($owners as $duenio) {
-                            if ($duenio->getId() == $reserva->getIdOwner()) { ?>
+                            if ($duenio->getId() == $request->getIdOwner()) { ?>
                                 <td><?php echo $duenio->getFullName(); ?></td>
                             <?php }
                         } ?>
                         <?php foreach ($allpets as $mascota) {
-                            if ($mascota->getId() == $reserva->getIdPet()) { ?>
+                            if ($mascota->getId() == $request->getIdPet()) { ?>
                                 <td><?php echo $mascota->getName(); ?></td>
                             <?php }
                         } ?>
-                        <td><?php echo Format::formatDate($reserva->getInitDate()); ?></td>
-                        <td><?php echo Format::formatDate($reserva->getFinishDate()); ?></td>
-                        <td><?php echo $reserva->getScore(); ?></td>
-                        <td class=""><?php if ($reserva->getReqStatus() == 'Confirmado') {
+                        <td><?php echo Format::formatDate($request->getInitDate()); ?></td>
+                        <td><?php echo Format::formatDate($request->getFinishDate()); ?></td>
+                        <td><?php echo $request->getScore(); ?></td>
+                        <td class=""><?php if ($request->getReqStatus() == 'Confirmado') {
                             ?> <label class="circulo" style="background:green;"> <?php
-                        } elseif ($reserva->getReqStatus() == 'Pendiente') {
+                        } elseif ($request->getReqStatus() == 'Pendiente') {
                             ?> <label class="circulo" style="background:orange;"> <?php
-                        } elseif ($reserva->getReqStatus() == 'Rechazado') {
+                        } elseif ($request->getReqStatus() == 'Rechazado') {
                             ?> <label class="circulo" style="background:red;"> <?php
-                        } elseif ($reserva->getReqStatus() == 'Completo') {
+                        } elseif ($request->getReqStatus() == 'Completo') {
                             ?> <label class="circulo" style="background:blue;"> <?php
-                        } elseif ($reserva->getReqStatus() == 'Calificado') {
+                        } elseif ($request->getReqStatus() == 'Calificado') {
                             ?> <label class="circulo" style="background:purple;"> <?php
-                        } elseif ($reserva->getReqStatus() == 'En Curso') {
+                        } elseif ($request->getReqStatus() == 'En Curso') {
                             ?> <label class="circulo" style="background:pink;"> </td>
                         <?php } ?>
                         </td>

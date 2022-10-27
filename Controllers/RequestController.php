@@ -1,13 +1,13 @@
 <?php namespace Controllers;
 
-use DAO\guardianDAO as guardianDAO;
-use DAO\ownerDAO as ownerDAO;
-use DAO\petDAO as petDAO;
-use DAO\reservaDAO as reservaDAO;
-use Models\Reserva as Reserva;
+use DAO\GuardianDAO as GuardianDAO;
+use DAO\OwnerDAO as OwnerDAO;
+use DAO\PetDAO as PetDAO;
+use DAO\ReservaDAO as ReservaDAO;
+use Models\Request as Request;
 use Utils\Session;
 
-class ReservaController
+class RequestController
 {
     private $guardianDAO;
     private $ownerDAO;
@@ -16,10 +16,10 @@ class ReservaController
 
     public function __construct()
     {
-        $this->guardianDAO = new guardianDAO();
-        $this->ownerDAO = new ownerDAO();
-        $this->reservaDAO = new reservaDAO();
-        $this->mascotaDAO = new petDAO();
+        $this->guardianDAO = new GuardianDAO();
+        $this->ownerDAO = new OwnerDAO();
+        $this->reservaDAO = new ReservaDAO();
+        $this->mascotaDAO = new PetDAO();
     }
 
     public function requestGuardian($idMascota, $Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal)
@@ -30,11 +30,11 @@ class ReservaController
         $searchDuenio = $this->ownerDAO->getByEmail($Duenio);
         if (strcasecmp($searchGuardian->getPetSize(), $searchPet->getPetsize()) == 0) {
             if ($this->reservaDAO->checkDataNotNull($searchPet, $searchGuardian, $searchDuenio) && !$this->reservaDAO->dateChecker($fechaInicio, $fechaFin)) {
-                if ($this->reservaDAO->analizarReserva($searchGuardian->getId(), $searchPet->getType(), $searchPet->getBreed(), $fechaInicio)) {
-                    $reserva = new Reserva($searchPet->getId(), $searchDuenio->getId(), $searchGuardian->getId(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getType(), $searchPet->getBreed(), $dias);
+                if ($this->reservaDAO->analyzeRequest($searchGuardian->getId(), $searchPet->getType(), $searchPet->getBreed(), $fechaInicio)) {
+                    $reserva = new Request($searchPet->getId(), $searchDuenio->getId(), $searchGuardian->getId(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getType(), $searchPet->getBreed(), $dias);
                     $reserva->setIdOwner($searchDuenio->getId());
                     $reserva->setFinalPrice($costoTotal);
-                    if (!$this->reservaDAO->Exist($reserva)) {
+                    if (!$this->reservaDAO->Exists($reserva)) {
                         $this->reservaDAO->add($reserva);
                         Session::SetOkMessage("Guardian Solicitado con Exito");
                     } else {
@@ -56,7 +56,7 @@ class ReservaController
     {
         $user = Session::GetLoggedUser();
         if ($this->reservaDAO->acceptRequestAsGuardian($nroReserva, $user->getId())) {
-            Session::SetOkMessage("Reserva Aceptada con Exito");
+            Session::SetOkMessage("Request Aceptada con Exito");
         } else {
             Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
         }
@@ -73,7 +73,7 @@ class ReservaController
     public function cancelRequestasOwner($nroReserva)
     {
         if ($this->reservaDAO->cancelAsOwner($nroReserva)) {
-            Session::SetOkMessage("Reserva Cancelada con Exito");
+            Session::SetOkMessage("Request Cancelada con Exito");
         } else {
             Session::SetBadMessage("No se pudo cancelar la reserva");
         };
