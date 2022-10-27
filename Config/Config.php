@@ -3,7 +3,7 @@
 define("ROOT", dirname(__DIR__) . "/");
 //Luis path: /Facu/PetHeroLab/
 //naza path: /PetHeroLab/
-//define("FRONT_ROOT", "/Facu/PetHeroLab/");
+//define("FRONT_ROOT", "/Facu/petHeroRar/");
 define("FRONT_ROOT", "/TP_FINAL/");
 define("VIEWS_PATH", "Views/");
 define("CSS_PATH", FRONT_ROOT.VIEWS_PATH . "layout/styles/");

@@ -21,7 +21,7 @@
                 $this->mascotaDAO = new mascotaDAO();
         }
         
-        public function solicitarReservaDuenio ($idMascota,$Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal){
+        public function solicitarReservaDuenio ($idMascota,$Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal){  
             $dias = $this->reservaDAO->contarDias($fechaInicio,$fechaFin);
             $searchPet = $this->mascotaDAO->findMascotaByID($idMascota);
             $searchGuardian = $this->guardianDAO->getGuardianByEmail($Guardian);
@@ -30,6 +30,7 @@
             if ($this->reservaDAO->chequeoDataReserva($searchPet,$searchGuardian,$searchDuenio) && !$this->reservaDAO->dateChecker($fechaInicio,$fechaFin)){
                 if ($this->reservaDAO->analizarReserva($searchGuardian->getIdGuardian(),$searchPet->getTipo(), $searchPet->getRaza(), $fechaInicio)) {
                     $reserva = new Reserva($searchPet->getIdMascota(), $searchDuenio->getIdDuenio(), $searchGuardian->getIdGuardian(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getTipo(),$searchPet->getRaza(), $dias);
+                    $reserva->setDuenio($searchDuenio->getIdDuenio());
                     $reserva->calcularCostoTotal($costoTotal);
                     if (!$this->reservaDAO->Exist($reserva)){
                         $this->reservaDAO->add($reserva);
@@ -81,9 +82,7 @@
             $suma = $this->reservaDAO->sumarCalificacionesGuardian($guardian) + $calificacion;
             $guardianBuscado->calcularCalificacion($suma,$count);
             $this->guardianDAO->updateUser($guardianBuscado);
-
-            if ($this->reservaDAO->cambiarEstado($reserva,"Calificado"))
-            {
+            if ($this->reservaDAO->cambiarEstado($reserva,"Calificado")){
                 $this->reservaDAO->setearCalificacion($reserva,$calificacion);
                 Session::SetOkMessage("Guardian Calificado con Exito");
             }else{

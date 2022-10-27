@@ -47,8 +47,7 @@ require_once VIEWS_PATH . 'header.php';
                 </center>
                 <form action="<?php echo FRONT_ROOT ?>Mascota/ModifyPet" method="post">
                     
-                <div class="row" style="">
-                        
+                <div class="row">     
                         <input type="hidden" name="idDuenio" class="form-control form-control-ml"
                         value=<?php echo $search->getidDuenio() ?>>
                         <input type="hidden" name="idMascota" class="form-control form-control-ml"
@@ -86,7 +85,7 @@ require_once VIEWS_PATH . 'header.php';
 
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">URL</span>
+                                <span class="input-group-text" id="basic-addon3">Foto</span>
                             </div>
                             <input type="text" name="foto" placeholder="Foto" class="form-control" id="basic-url" aria-describedby="basic-addon3"
                             value=<?php echo $search->getFoto() ?> required>
@@ -94,17 +93,17 @@ require_once VIEWS_PATH . 'header.php';
 
                         <div class="col-lg-4 input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">URL</span>
+                                    <span class="input-group-text" id="basic-addon3">Video</span>
                                 </div>
-                                <input type="text" name="planVacunacion" placeholder="Plan de Vacunacion" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                                <input type="text" name="planVacunacion" placeholder="Video" class="form-control" id="basic-url" aria-describedby="basic-addon3"
                                 value=<?php echo $search->getPlanVacunacion() ?> required>
                             </div>
                         
                             <div class="col-lg-4 input-group mb-3">
                                 <div class="input-group-prepend">
-                                    <span class="input-group-text" id="basic-addon3">URL</span>
+                                    <span class="input-group-text" id="basic-addon3">Plan Vacunacion</span>
                                 </div>
-                                <input type="text" name="video" placeholder="Video" class="form-control" id="basic-url" aria-describedby="basic-addon3"
+                                <input type="text" name="video" placeholder="Plan Vacunacion" class="form-control" id="basic-url" aria-describedby="basic-addon3"
                                 value=<?php echo $search->getVideo() ?> required>
                             </div>
 

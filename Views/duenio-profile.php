@@ -97,28 +97,30 @@ include('nav-bar.php');
                     </thead>
                     <tbody>
                         <?php
-                        foreach ($mascotas as $mascota) {
-                        ?>
-                        <tr>
-                            <td><?php echo $mascota->getNombre(); ?></td>
-                            <td><?php echo $mascota->getTipo(); ?></td>
-                            <td><?php echo $mascota->getRaza(); ?></td>
-                            <td><?php echo $mascota->getTamanio(); ?></td>
-                            <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="80px" height="60px"></td>
-                            <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
-                            <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
-                            <td>
-                                <a class="btn btn-dark ml-auto"
-                                    href="<?php echo FRONT_ROOT . 'Mascota/UpdatePet/' . $mascota->getIdMascota() ?>">Actualizar</a>
-                            </td>
-                            <td>
-                                <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                    href="<?php echo FRONT_ROOT . 'Mascota/DeletePet/' . $mascota->getIdMascota(); ?>">Borrar</a>
-                            </td>
-                        </tr>
-                        <?php
-                        }
-                        ?>
+                        if ($mascotas != null){
+                            foreach ($mascotas as $mascota) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $mascota->getNombre(); ?></td>
+                                    <td><?php echo $mascota->getTipo(); ?></td>
+                                    <td><?php echo $mascota->getRaza(); ?></td>
+                                    <td><?php echo $mascota->getTamanio(); ?></td>
+                                    <td><img src="<?php echo $mascota->getFoto(); ?>" alt="" width="80px" height="60px"></td>
+                                    <td><a href="<?php echo $mascota->getPlanVacunacion(); ?>" target="_blank">Ver Plan</a></td>
+                                    <td><a href="<?php echo $mascota->getVideo(); ?>" target="_blank">Ver Video</a></td>
+                                    <td>
+                                        <a class="btn btn-dark ml-auto"
+                                            href="<?php echo FRONT_ROOT . 'Mascota/UpdatePet/' . $mascota->getIdMascota() ?>">Actualizar</a>
+                                    </td>
+                                    <td>
+                                        <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
+                                            href="<?php echo FRONT_ROOT . 'Mascota/DeletePet/' . $mascota->getIdMascota(); ?>">Borrar</a>
+                                    </td>
+                                </tr>
+                                <?php
+                                 }}
+                                ?>                       
+
                     </tbody>
                 </table>
                 <br>
@@ -316,7 +318,6 @@ include('nav-bar.php');
                             } ?>
                         </tbody>
                     </table>
-                    <br>
                     <br>
             <div class="divEstado">
                 

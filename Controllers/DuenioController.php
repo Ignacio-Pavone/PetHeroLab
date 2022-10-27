@@ -23,7 +23,7 @@ class DuenioController{
         }else{
             Session::SetBadMessage("El email ya esta en uso");
         }
-        header ("location: ".FRONT_ROOT."Auth/showLogin");
+       header ("location: ".FRONT_ROOT."Auth/showLogin");
     }
 
 }

@@ -20,14 +20,14 @@
         }
 
         public function login($email, $password){
-             if ($this->guardianDAO->LoginCheckGuardian($email, $password)){
-        header("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $email);
-            }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
+        if ($this->guardianDAO->LoginCheckGuardian($email, $password)){
+            header("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $email);
+        }elseif ($this->duenioDAO->LoginCheckDuenio($email, $password)){
             header("location: ".FRONT_ROOT."Auth/showDuenioProfile");
          }else{
             Session::SetBadMessage("Usuario o contraseña incorrectos");
             header ("location: ".FRONT_ROOT."Auth/showLogin");
-            }
+        }
         }   
 
         public function showGuardianProfile($email){
@@ -35,17 +35,16 @@
         ($this->guardianDAO->checkPerfil($guardian)) ? Session::SetBadMessage("Por favor establesca su disponibilidad laboral") : '' ;
         $duenios = $this->duenioDAO->GetAllDuenios();
         $todaslasmascotas = $this->mascotaDAO->GetAllMascotas();
-        $mascotas = $this->mascotaDAO->filtrarMascotasporTamanio($guardian->getTipoMascota());
         $reservas = $this->reservaDAO->getReservasByGuardianID($guardian->getIdGuardian());
         require_once(VIEWS_PATH . 'guardian-profile.php');
         }
 
         public function showDuenioProfile(){
         $user = Session::GetLoggedUser();
-        $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getidDuenio());
+        $mascotas = $this->mascotaDAO->devolverMascotasporDuenio($user->getIdDuenio());
         $todoslosguardianes = $this->guardianDAO->GetAllGuardians();
         $guardianes = $this->guardianDAO->GetAllGuardians();
-        $reservas = $this->reservaDAO->getReservasByDuenioID($user->getidDuenio()); 
+        $reservas = $this->reservaDAO->getReservasByDuenioID($user->getIdDuenio()); 
         require_once(VIEWS_PATH . 'duenio-profile.php');
         }
 

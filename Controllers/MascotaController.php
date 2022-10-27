@@ -46,7 +46,7 @@ class MascotaController {
         $string = str_replace(' ', '_', $nombre);
         $nuevamascota = new Mascota($idDuenio,$string,$tipo,$raza,$tamanio,$foto,$planVacunacion,$video);
         $nuevamascota->setIdMascota($idMascota);
-        
+    
         if($this->mascotaDAO->updateMascota($nuevamascota)){
             Session::SetOkMessage("Mascota modificada con exito");
         }else{

@@ -1,9 +1,6 @@
 <?php 
 namespace Models;
-use Utils\EReserva as EReserva;
-
-    class Reserva  {
-        
+    class Reserva  {    
         private $nroReseva;
         private $guardian;
         private $duenio;
@@ -23,7 +20,6 @@ use Utils\EReserva as EReserva;
         $this->guardian = $guardian;
         $this->fechaInicio = $fechaInicio;
         $this->fechaFin = $fechaFin;
-        $this->estado = EReserva::Pendiente;
         $this->costoTotal = $costoTotal;
         $this->tipo = $tipo;
         $this->raza = $raza;

@@ -42,12 +42,15 @@ require_once VIEWS_PATH . 'header.php';
         <li class="nav-item">
             <a class="nav-link" href="#dataUser">Mis Datos</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#css-mine">Ver Todas las Mascotas</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT.'Auth/showdisponibilityView/'.$user->getFullName(); ?>">Modificar Disponibilidad</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#css-mine">Ver Notificaciones</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#css-mine">Ver Historial</a>
         <?php } ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Cerrar Sesión</a>

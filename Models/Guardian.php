@@ -10,14 +10,12 @@ class Guardian extends Usuario {
     private $reputacion;
     private $initDate;
     private $finishDate;
-    private $disponibilidad = array();
 
-    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$disponibilidad,$initDate,$finishDate){
+    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$initDate,$finishDate){
         parent::__construct($email, $fullname, $dni, $age, $password);
         $this->tipoMascota = $tipoMascota;
         $this->remuneracionEsperada = $remuneracionEsperada;
         $this->reputacion = 0;
-        $this->disponibilidad = $disponibilidad;
         $this->initDate = $initDate;
         $this->finishDate = $finishDate;
     }
@@ -69,35 +67,12 @@ class Guardian extends Usuario {
         return $this->reputacion;
     }
 
-    public function getDisponibilidad(){
-        return $this->disponibilidad;
-    }
-
-    public function reiniciarDisponibilidad(){
-        $this->disponibilidad = array();
-    }
-
     public function calcularCalificacion ($calificacion,$count){
         $reputacion = 0;     
         $reputacion = $calificacion/$count; 
         $this->setReputacion($reputacion);
     }
 
-    public function setDisponibilidad($dia){
-        if (!($this->checkDisponibilidad($dia)))
-            array_push($this->disponibilidad,$dia);
-    }
-    
-    public function checkDisponibilidad($dia){
-        $flag=false;
-        if ($this->disponibilidad!=null){
-            foreach($this->disponibilidad as $value){
-                if ($value==$dia)
-                    $flag=true;
-            }
-        }
-        return $flag;
-    }
 }
 
 ?>

@@ -8,8 +8,8 @@ abstract class Usuario {
     private $fullname;
     private $dni;
     private $age;
-    
-    public function __construct($email,$fullname,$dni,$age,$password){
+
+    public function __construct($email, $fullname, $dni, $age, $password){
         $this->email = $email;
         $this->fullname = $fullname;
         $this->dni = $dni;

@@ -14,9 +14,9 @@ class GuardianController{
     }
 
     public function registerGuardian($fullname, $age, $dni, $email, $password,$tipoMascota,$remuneracionEsperada){
-        $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada,$diponibilidad=array(),$initDate=null,$finishDate=null);
-        if($this->guardianDAO->getGuardianByEmail($email) == null)
-        {
+        $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$remuneracionEsperada,$initDate=null,$finishDate=null);
+        var_dump($user);
+        if($this->guardianDAO->getGuardianByEmail($email) == null){
             $this->guardianDAO->addGuardian($user);
             Session::SetOkMessage("Guardian registrado con exito");
         }else{
@@ -31,8 +31,7 @@ class GuardianController{
         header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $guardianEmail);
     }
 
-    public function ModifyAvailability($guardianEmail,$initDate, $finishDate){   
-        
+    public function ModifyAvailability($guardianEmail,$initDate, $finishDate){    
          if ($this->guardianDAO->updateGuardianDiponibility ($guardianEmail,$initDate, $finishDate)){
             Session::SetOkMessage("Guardian modificado con exito");
         }else{
@@ -40,6 +39,8 @@ class GuardianController{
         }
         header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $guardianEmail);
     }
+
+
 
 }
 ?>
