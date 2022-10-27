@@ -1,4 +1,6 @@
 <?php
+
 use Utils\Session;
-    Session::DeleteSession();
+
+Session::DeleteSession();
 ?>

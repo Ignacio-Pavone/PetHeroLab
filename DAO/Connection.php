@@ -4,6 +4,7 @@
     define("DB_NAME", "pethero");
     define("DB_USER", "root");
     define("DB_PASS", "root");
+    //define("DB_PASS","1234");
     use \PDO as PDO;
     use \Exception as Exception;
     use DAO\QueryType as QueryType;

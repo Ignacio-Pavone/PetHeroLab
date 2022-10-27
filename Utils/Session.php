@@ -1,6 +1,6 @@
 <?php namespace Utils;
 
-    use Models\Usuario as User;
+    use Models\User as User;
 
     class Session {
         public static function CreateSession(User $user) {

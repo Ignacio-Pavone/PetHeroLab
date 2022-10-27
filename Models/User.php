@@ -1,8 +1,7 @@
 <?php 
 namespace Models;
 
-
-abstract class Usuario{
+abstract class User{
     private $email;
     private $password;
     private $fullname;

@@ -1,8 +1,6 @@
 <?php
 	namespace Controllers;
 
-use Utils\Session;
-
 	class HomeController
 	{
 		public function Index(){
@@ -17,7 +15,7 @@ use Utils\Session;
 			require_once(VIEWS_PATH."register-guardian.php");
 		}
 
-		public function showduenioRegister(){
+		public function showownerRegister(){
 			require_once(VIEWS_PATH."register-owner.php");
 		}
 	}

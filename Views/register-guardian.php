@@ -10,7 +10,7 @@ require_once VIEWS_PATH . 'header.php';
                 <div class="col-lg-12" style="height:10px;"></div>
                 <hr>
 
-                <form class="register-guardian-form" action="<?php echo FRONT_ROOT . "Guardian/registerGuardian" ?>"
+                <form class="register-guardian-form" action="<?php echo FRONT_ROOT . "Guardian/register" ?>"
                     method="POST">
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
@@ -67,7 +67,7 @@ require_once VIEWS_PATH . 'header.php';
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Remuneracion</span>
                         </div>
-                        <input type="number" class="form-control" placeholder="Remuneracion Esperada" name="remuneracionEsperada"
+                        <input type="number" class="form-control" placeholder="Remuneracion Esperada" name="fee"
                         aria-describedby="basic-addon1" min="1" required>
                     </div>
                        

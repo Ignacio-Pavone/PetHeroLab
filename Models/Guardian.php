@@ -1,34 +1,32 @@
 <?php
 namespace Models;
 
-use Models\Usuario;
-
-class Guardian extends Usuario {
-    private $idGuardian;
-    private $tipoMascota; 
-    private $remuneracionEsperada;
-    private $reputacion;
+class Guardian extends User {
+    private $id;
+    private $pet_size;
+    private $fee;
+    private $reputation;
     private $initDate;
     private $finishDate;
 
-    public function __construct($email, $fullname, $dni, $age, $password, $tipoMascota, $remuneracionEsperada,$initDate,$finishDate){
+    public function __construct($email, $fullname, $dni, $age, $password, $pet_size, $fee, $initDate, $finishDate){
         parent::__construct($email, $fullname, $dni, $age, $password);
-        $this->tipoMascota = $tipoMascota;
-        $this->remuneracionEsperada = $remuneracionEsperada;
-        $this->reputacion = 0;
+        $this->pet_size = $pet_size;
+        $this->fee = $fee;
+        $this->reputation = 0;
         $this->initDate = $initDate;
         $this->finishDate = $finishDate;
     }
 
-    public function getIdGuardian(){
-        return $this->idGuardian;
+    public function getId(){
+        return $this->id;
     }
 
-    public function setIdGuardian($idGuardian){
-        $this->idGuardian = $idGuardian;
+    public function setId($id){
+        $this->id = $id;
     }
-    public function setTipoMascota($tipoMascota){
-        $this->tipoMascota = $tipoMascota;
+    public function setPetSize($pet_size){
+        $this->pet_size = $pet_size;
     }
 
     public function setinitDate($initDate){
@@ -47,30 +45,30 @@ class Guardian extends Usuario {
         return $this->initDate;
     }
 
-    public function getTipoMascota(){
-        return $this->tipoMascota;
+    public function getPetSize(){
+        return $this->pet_size;
     }
 
-    public function setRemuneracionEsperada($remuneracionEsperada){
-        $this->remuneracionEsperada = $remuneracionEsperada;
+    public function setFee($fee){
+        $this->fee = $fee;
     }
 
-    public function getRemuneracionEsperada(){
-        return $this->remuneracionEsperada;
+    public function getFee(){
+        return $this->fee;
     }
 
-    public function setReputacion($reputacion){
-        $this->reputacion = $reputacion;
+    public function setReputation($reputation){
+        $this->reputation = $reputation;
     }
 
-    public function getReputacion(){
-        return $this->reputacion;
+    public function getReputation(){
+        return $this->reputation;
     }
 
-    public function calcularCalificacion ($calificacion,$count){
-        $reputacion = 0;     
-        $reputacion = $calificacion/$count; 
-        $this->setReputacion($reputacion);
+    public function checkReputation ($rep, $count){
+        $reputation = 0;
+        $reputation = $rep/$count;
+        $this->setReputation($reputation);
     }
 
 }

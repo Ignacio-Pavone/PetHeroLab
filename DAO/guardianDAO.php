@@ -8,14 +8,14 @@ use Models\Guardian;
       private $connection;
       private $tableName = "Guardians";
 
-      public function findGuardianByID ($id){
+      public function findByID ($id){
         try{
           $sql = "SELECT * FROM ".$this->tableName." WHERE id_guardian = " . $id;
           $this->connection = Connection::GetInstance();
           $result = $this->connection->Execute($sql);
           foreach ($result as $row){
-            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['remuneracion'],$row['init_date'],$row['finish_date']);
-            $guardian->setIdGuardian($row["id_guardian"]);
+            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['fee'],$row['init_date'],$row['finish_date']);
+            $guardian->setId($row["id_guardian"]);
           }
           return $guardian;
         }catch(\PDOException $ex){
@@ -23,15 +23,15 @@ use Models\Guardian;
         }
       }
 
-      public function getGuardianByEmail($email){
+      public function getByEmail($email){
         try{
           $sql = "SELECT * FROM ".$this->tableName." WHERE email = '".$email."'";
           $this->connection = Connection::GetInstance();
           $result = $this->connection->Execute($sql);
           foreach ($result as $row){
-            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['remuneracion'],$row['init_date'],$row['finish_date']);
-            $guardian->setIdGuardian($row["id_guardian"]);
-            $guardian->setReputacion($row["reputation"]);
+            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['fee'],$row['init_date'],$row['finish_date']);
+            $guardian->setId($row["id_guardian"]);
+            $guardian->setReputation($row["reputation"]);
             return $guardian;
           }     
         }catch(\PDOException $ex){
@@ -39,16 +39,16 @@ use Models\Guardian;
         }
       }
 
-      public function GetAllGuardians(){
+      public function GetAll(){
         try{
           $sql = "SELECT * FROM ".$this->tableName;
           $this->connection = Connection::GetInstance();
           $result = $this->connection->Execute($sql);
           $guardians = array();
           foreach($result as $row){
-            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['remuneracion'],$row['init_date'],$row['finish_date']);
-            $guardian->setIdGuardian($row["id_guardian"]);
-            $guardian->setReputacion($row["reputation"]);
+            $guardian = new Guardian($row["email"],$row["fullname"],$row["dni"],$row["age"],$row["password"],$row['pet_size'],$row['fee'],$row['init_date'],$row['finish_date']);
+            $guardian->setId($row["id_guardian"]);
+            $guardian->setReputation($row["reputation"]);
             array_push($guardians, $guardian);
           }
           return $guardians;
@@ -57,17 +57,17 @@ use Models\Guardian;
         }
       }
 
-      public function addGuardian($user){
+      public function add($user){
         try{
-          $sql = "INSERT INTO ".$this->tableName." (email, fullname, dni, age, password,pet_size,remuneracion,reputation,init_date,finish_date) VALUES (:email, :fullname, :dni, :age, :password,:pet_size,:remuneracion,:reputation,:init_date,:finish_date)";
+          $sql = "INSERT INTO ".$this->tableName." (email, fullname, dni, age, password,pet_size,fee,reputation,init_date,finish_date) VALUES (:email, :fullname, :dni, :age, :password,:pet_size,:fee,:reputation,:init_date,:finish_date)";
           $parameters["email"] = $user->getEmail();
           $parameters["fullname"] = $user->getFullName();
           $parameters["dni"] = $user->getDni();
           $parameters["age"] = $user->getAge();
           $parameters["password"] = $user->getPassword();
-          $parameters["pet_size"] = $user->getTipoMascota();
-          $parameters["remuneracion"] = $user->getRemuneracionEsperada();
-          $parameters["reputation"] = $user->getReputacion();
+          $parameters["pet_size"] = $user->getPetSize();
+          $parameters["fee"] = $user->getFee();
+          $parameters["reputation"] = $user->getReputation();
           $parameters["init_date"] = $user->getInitDate();
           $parameters["finish_date"] = $user->getFinishDate();
           $this->connection = Connection::GetInstance();
@@ -77,19 +77,19 @@ use Models\Guardian;
         }
       }
 
-      public function updateUser ($user){
-        $search = $this->getGuardianByEmail($user->getEmail());
+      public function update ($user){
+        $search = $this->getByEmail($user->getEmail());
         if($search != null){
           try{
-            $sql = "UPDATE ".$this->tableName." SET email = :email, fullname = :fullname, dni = :dni, age = :age, password = :password, pet_size = :pet_size, remuneracion = :remuneracion, reputation = :reputation, init_date = :init_date, finish_date = :finish_date WHERE email = :email";
+            $sql = "UPDATE ".$this->tableName." SET email = :email, fullname = :fullname, dni = :dni, age = :age, password = :password, pet_size = :pet_size, fee = :fee, reputation = :reputation, init_date = :init_date, finish_date = :finish_date WHERE email = :email";
             $parameters["email"] = $user->getEmail();
             $parameters["fullname"] = $user->getFullName();
             $parameters["dni"] = $user->getDni();
             $parameters["age"] = $user->getAge();
             $parameters["password"] = $user->getPassword();
-            $parameters["pet_size"] = $user->getTipoMascota();
-            $parameters["remuneracion"] = $user->getRemuneracionEsperada();
-            $parameters["reputation"] = $user->getReputacion();
+            $parameters["pet_size"] = $user->getPetSize();
+            $parameters["fee"] = $user->getFee();
+            $parameters["reputation"] = $user->getReputation();
             $parameters["init_date"] = $user->getInitDate();
             $parameters["finish_date"] = $user->getFinishDate();
             $this->connection = Connection::GetInstance();
@@ -100,8 +100,8 @@ use Models\Guardian;
         }
       }
 
-      public function LoginCheckGuardian ($email,$password){
-          $user = $this->getGuardianByEmail($email);
+      public function LoginCheck ($email, $password){
+          $user = $this->getByEmail($email);
           if($user != null){
             if($user->getPassword() == $password){
               Session::CreateSession($user);
@@ -111,18 +111,18 @@ use Models\Guardian;
           }
     }
       
-    public function checkPerfil ($guardian){
+    public function checkProfile ($guardian){
         if ($guardian->getInitDate() == null){
           return true;
         }
         return false;
    }
 
-    public function getGuardiansByDate($fechaI,$fechaF){
+    public function getByDate($fechaI, $fechaF){
         $date1 = strtotime($fechaI);
         $date2 = strtotime($fechaF);
         $array = array();
-        foreach($this->GetAllGuardians() as $guardian){
+        foreach($this->GetAll() as $guardian){
           $date1guardian = strtotime($guardian->getInitDate());
           $date2guardian = strtotime($guardian->getFinishDate());
           if ($date1guardian >= $date1 && $date2guardian <= $date2){
@@ -132,12 +132,12 @@ use Models\Guardian;
         return $array;
     }
 
-    public function updateGuardianDiponibility($user, $initDate, $lastDate){
-        $search = $this->getGuardianByEmail($user);
+    public function updateDisponibility($user, $initDate, $lastDate){
+        $search = $this->getByEmail($user);
         if ($search != null){
           $search->setfinishDate($lastDate);
           $search->setinitDate($initDate);
-          $this->updateUser($search);
+          $this->update($search);
           Session::CreateSession($search);
           return true;
        }
