@@ -11,4 +11,5 @@ enum EReserva : string {
     case Calificado = "Calificado"; // aca seria calificado chequear en comprobaciones
 }
 
+
 ?>

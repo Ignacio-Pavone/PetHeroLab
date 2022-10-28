@@ -166,7 +166,7 @@ class ReservaDAO
     {
         foreach ($requests as $request) {
             if ($request->getReqStatus() == 'En Curso') {
-                if ($request->setType() == $requestToAccept->getType()) {
+                if ($request->getType() == $requestToAccept->getType()) {
                     if ($request->getBreed() == $requestToAccept->getBreed()) {
                         return true;
                     }

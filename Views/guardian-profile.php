@@ -1,7 +1,6 @@
 <?php
 use Utils\Session;
 use Utils\DateFormat as Format;
-
 require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
@@ -67,7 +66,6 @@ include('nav-bar.php');
                                    aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getEmail(); ?>">
                         </div>
-
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3"
@@ -77,7 +75,6 @@ include('nav-bar.php');
                                    style="text-align:center" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getPetSize(); ?>">
                         </div>
-
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3"
@@ -87,25 +84,32 @@ include('nav-bar.php');
                                    style="text-align:center" aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getFee() . " $"; ?>">
                         </div>
-
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Fecha Inicio</span>
-                            </div>
+                        </div>
                             <input type="text" class="form-control" placeholder="Inicio" name="init_date"
                                    style="text-align:center" aria-describedby="basic-addon1"
-                                   disabled value="<?php echo Format::formatDate($user->getInitDate()); ?>">
+                                   disabled value="<?php 
+                                    if ($user->getInitDate()!=null) {
+                                        echo Format::formatDate($user->getInitDate());
+                                      } else {
+                                        echo 'No tiene fecha de inicio';
+                                   }; ?>">
                         </div>
-
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Fecha Fin</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Fin" name="finish_date"
                                    style="text-align:center" aria-describedby="basic-addon1"
-                                   disabled value="<?php echo Format::formatDate($user->getFinishDate())?>">
+                                   disabled value="<?php 
+                                    if ($user->getInitDate()!=null) {
+                                      echo Format::formatDate($user->getFinishDate());
+                                      } else {
+                                      echo 'No tiene fecha de fin';
+                                 }; ?>">
                         </div>
-
                     </div>
                 </div>
                 <div class="divEstado">
