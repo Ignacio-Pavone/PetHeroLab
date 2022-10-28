@@ -64,9 +64,9 @@
         $allPets = $this->petDAO->returnByOwner($user->getId());
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
-        $requests = $this->reservaDAO->findByOwnerId($user->getId());
-        $pendingRequests = $this->reservaDAO->filterPendingRequest();
-        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner();
+        $requests = $this->reservaDAO->filterPaidRequestsByOwner($user->getId());
+        $pendingRequests = $this->reservaDAO->filterPendingRequestsByOwner($user->getId());
+        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner($user->getId());
         $payments = $this->paymentDAO->getAllByOwner($user->getId);
         //faltafiltrarnipagadasnipendientes.
         require_once(VIEWS_PATH . 'owner-profile.php');
