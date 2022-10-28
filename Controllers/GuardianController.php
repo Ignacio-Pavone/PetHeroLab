@@ -38,7 +38,26 @@ class GuardianController{
         header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $guardianEmail);
     }
 
+    public function showChangePassword(){
+        require_once(VIEWS_PATH."change-password.php");
+     }
 
+    public function changePassword($userID,$oldPassword,$newPassword,$newPassword2){
+        $user = $this->guardianDAO->findbyID($userID);
+       
+        if($oldPassword == $user->getPassword()){ 
+            if($newPassword==$newPassword2){
+                $this->guardianDAO->updatePassword($userID,$newPassword);
+                Session::DeleteSession();
+            }else{     
+                Session::SetBadMessage("Contraseña nueva no concuerda.");
+                $this->showChangePassword(); 
+            }
+        }else{
+            Session::SetBadMessage("Verificar su antigua contraseña.");
+            $this->showChangePassword(); 
+        }       
+    }
 
 }
 ?>

@@ -54,7 +54,7 @@
         public static function DeleteSession() {
             unset($_SESSION['loggedUser']);
             session_destroy();
-            include_once(VIEWS_PATH."login.php");
+            header("location: ".FRONT_ROOT."Auth/showLogin");
         }
     }
 ?>

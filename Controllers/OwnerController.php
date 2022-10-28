@@ -24,4 +24,26 @@ class OwnerController{
        header ("location: ".FRONT_ROOT."Auth/showLogin");
     }
 
+    public function showChangePassword(){
+       require_once(VIEWS_PATH."change-password.php");
+    }
+
+    public function changePassword($userID,$oldPassword,$newPassword,$newPassword2){
+        $user = $this->ownerDAO->findbyID($userID);
+       
+        if($oldPassword == $user->getPassword()){ 
+            if($newPassword==$newPassword2){
+                $this->ownerDAO->updatePassword($userID,$newPassword);
+                Session::SetOkMessage("Contraseña actualizada con exito.");
+                Session::DeleteSession();
+            }else{     
+                Session::SetBadMessage("Contraseña nueva no concuerda.");
+                $this->showChangePassword(); 
+            }
+        }else{
+            Session::SetBadMessage("Verificar su antigua contraseña.");
+            $this->showChangePassword(); 
+        }       
+    }
+
 }

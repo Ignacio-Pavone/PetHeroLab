@@ -143,5 +143,17 @@ use Models\Guardian;
        }
       return false;
     }
+
+    public function updatePassword($id, $password){
+      try{
+          $sql = "UPDATE ".$this->tableName." SET password = :password WHERE id_guardian = :id_guardian";
+          $parameters["id_guardian"] = $id;
+          $parameters["password"] = $password;
+          $this->connection = Connection::GetInstance();
+          $this->connection->ExecuteNonQuery($sql, $parameters);
+      }catch(\PDOException $ex){
+          throw $ex;
+      }
+  }
 }
 ?>

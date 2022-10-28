@@ -25,6 +25,18 @@ class OwnerDAO{
         }
     }
 
+    public function updatePassword($id, $password){
+        try{
+            $sql = "UPDATE ".$this->tableName." SET password = :password WHERE id_owner = :id_owner";
+            $parameters["id_owner"] = $id;
+            $parameters["password"] = $password;
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($sql, $parameters);
+        }catch(\PDOException $ex){
+            throw $ex;
+        }
+    }
+
     public function add($owner){
         try{
             $sql = "INSERT INTO ".$this->tableName." (id_owner,email,fullname,dni,age,password) VALUES (:id_owner,:email,:fullname,:dni,:age,:password)";
@@ -44,13 +56,13 @@ class OwnerDAO{
     public function findbyID($id){
         try{
             $sql = "SELECT * FROM ".$this->tableName." WHERE id_owner = " . $id;
-            $parameters["id_owner"] = $id;
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql, $parameters);
+            $result = $this->connection->Execute($sql);
             foreach ($result as $row){
-                $owner = new Owner($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"]);
-                return $owner;
+                $owner = new Owner($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"]);            
+                $owner->setId($row["id_owner"]);
             }
+            return $owner;
         }catch(\PDOException $ex){
             throw $ex;
         }

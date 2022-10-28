@@ -25,6 +25,9 @@ require_once VIEWS_PATH . 'header.php';
         <li class="nav-item">
             <a class="nav-link" href="#css-mine1">Ver Guardianes</a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo FRONT_ROOT."Owner/showChangePassword"; ?>">Modificar Contraseña</a>
+        </li>
         <?php }else{?>
             <button type="button" style = "margin-right:20px"class="hovertext btn btn-info text-dark position-relative" data-hover="Tu Calificacion">Calificacion
             <?php if ($user->getReputation() >= 3 && $user->getReputation() < 4) { ?>
@@ -51,6 +54,10 @@ require_once VIEWS_PATH . 'header.php';
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#css-mine">Ver Historial</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="<?php echo FRONT_ROOT."Guardian/showChangePassword"; ?>">Modificar Contraseña</a>
+        </li>
         <?php } ?>
         <li class="nav-item">
             <a class="nav-link" href="<?php echo FRONT_ROOT ?>Home/Logout">Cerrar Sesión</a>
