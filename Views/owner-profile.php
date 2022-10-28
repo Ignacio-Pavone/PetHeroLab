@@ -316,13 +316,13 @@ include('nav-bar.php');
                         <?php foreach ($notConfirmedRequests as $nC){ ?>
                             <tr>
                                 <?php foreach ($allGuardians as $guardian) {
-                                    if ($pR->getIdGuardian() == $guardian->getId()) {
+                                    if ($nC->getIdGuardian() == $guardian->getId()) {
                                         ?>
                                         <td><?php echo $guardian->getFullName(); ?></td>
                                     <?php }
                                 } ?>
                                 <?php foreach ($allPets as $mascota) {
-                                    if ($pR->getIdPet() == $mascota->getId()) {
+                                    if ($nC->getIdPet() == $mascota->getId()) {
                                         ?>
                                         <td><?php echo $mascota->getName();
                                             break; ?></td>
@@ -330,8 +330,8 @@ include('nav-bar.php');
                                 } ?>
                                 <td><?php echo Format::formatDate($nC->getInitDate()); ?></td>
                                 <td><?php echo Format::formatDate($nC->getFinishDate());  ?></td>
-                                <td><?php echo $pR->getDaysAmount(); ?></td>
-                                <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
+                                <td><?php echo $nC->getDaysAmount(); ?></td>
+                                <td><?php echo $nC->getFinalPrice() . ' $' ?></td>
                                 
                                 <td><label class="circulo" style="background:orange;"></td>
                                 <td>
