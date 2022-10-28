@@ -4,6 +4,7 @@
         use DAO\OwnerDAO as OwnerDAO;
         use DAO\ReservaDAO as ReservaDAO;
         use DAO\PetDAO as PetDAO;
+        use DAO\PaymentDAO as PaymentDAO;
         use Utils\Session;
 
         class AuthController{
@@ -11,12 +12,14 @@
         private $ownerDAO;
         private $reservaDAO;
         private $petDAO;
+        private $paymentDAO;
             
         public function __construct(){
         $this->guardianDAO = new GuardianDAO();
         $this->ownerDAO = new OwnerDAO();
         $this->reservaDAO = new ReservaDAO();
         $this->petDAO = new PetDAO();
+        $this->paymentDAO = new PaymentDAO();
         }
 
         public function login($email, $password){
@@ -47,7 +50,11 @@
         $allPets = $this->petDAO->returnByOwner($sesion->getId());
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->GetAll();
-        $requests = $this->reservaDAO->findByOwnerId($user->getId());
+        //$requests = $this->reservaDAO->findByOwnerId($user->getId());
+        $requests = $this->reservaDAO->filterPaidRequestsByOwner($user->getId());
+        $pendingRequests = $this->reservaDAO->filterPendingRequestsByOwner($user->getId());
+        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner($user->getId());
+        $payments = $this->paymentDAO->getAllByOwner($user->getId());
         require_once(VIEWS_PATH . 'owner-profile.php');
         }
 
@@ -58,11 +65,20 @@
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
         $requests = $this->reservaDAO->findByOwnerId($user->getId());
+        $pendingRequests = $this->reservaDAO->filterPendingRequest();
+        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner();
+        $payments = $this->paymentDAO->getAllByOwner($user->getId);
+        //faltafiltrarnipagadasnipendientes.
         require_once(VIEWS_PATH . 'owner-profile.php');
         } else{
         Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
         header ("location: ".FRONT_ROOT."Auth/showOwnerProfile");
         }
+        }
+
+        public function showPaymentForm($idPayment){
+            $payment = $this->paymentDAO->getById($id);
+            require_once(VIEWS_PATH."payment-method.php");
         }
 
         public function showdisponibilityView(){

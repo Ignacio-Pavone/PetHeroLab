@@ -280,6 +280,71 @@ include('nav-bar.php');
                         </tr>
                         </thead>
                         <tbody>
+                        <?php foreach ($pendingRequests as $pR){ ?>
+                            <tr>
+                                <?php foreach ($allGuardians as $guardian) {
+                                    if ($pR->getIdGuardian() == $guardian->getId()) {
+                                        ?>
+                                        <td><?php echo $guardian->getFullName(); ?></td>
+                                    <?php }
+                                } ?>
+                                <?php foreach ($allPets as $mascota) {
+                                    if ($pR->getIdPet() == $mascota->getId()) {
+                                        ?>
+                                        <td><?php echo $mascota->getName();
+                                            break; ?></td>
+                                    <?php }
+                                } ?>
+                                <td><?php echo Format::formatDate($pR->getInitDate()); ?></td>
+                                <td><?php echo Format::formatDate($pR->getFinishDate());  ?></td>
+                                <td><?php echo $pR->getDaysAmount(); ?></td>
+                                <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
+                                <?php foreach($payments as $p){ if($pR->getIdRequest() == $p->getId_request()){ ?>
+                                <td><a class="btn btn-dark" href="<?php echo FRONT_ROOT.'Payment/showPaymentForm/'.$p->getId_payment(); ?>">PAGAR</a></td>
+                                <td>
+                                    <?php if ($pR->getReqStatus() == 'Calificado' || $pR->getReqStatus() == 'En Curso' || $pR->getReqStatus() == 'Confirmado') { ?>
+                                        <button type="button" class="btn btn-dark" disabled>Cancelar</button>
+                                    <?php } else { ?>
+                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
+                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $pR->getIdRequest(); ?>">Cancelar</a>
+                                </td>
+                                <?php } ?>   
+                            <?php }} ?>
+                             <td><button type="button" class="btn btn-dark" disabled>Calificar</button></td>
+                            </tr>
+                            <?php } ?>
+                        <?php foreach ($notConfirmedRequests as $nC){ ?>
+                            <tr>
+                                <?php foreach ($allGuardians as $guardian) {
+                                    if ($pR->getIdGuardian() == $guardian->getId()) {
+                                        ?>
+                                        <td><?php echo $guardian->getFullName(); ?></td>
+                                    <?php }
+                                } ?>
+                                <?php foreach ($allPets as $mascota) {
+                                    if ($pR->getIdPet() == $mascota->getId()) {
+                                        ?>
+                                        <td><?php echo $mascota->getName();
+                                            break; ?></td>
+                                    <?php }
+                                } ?>
+                                <td><?php echo Format::formatDate($nC->getInitDate()); ?></td>
+                                <td><?php echo Format::formatDate($nC->getFinishDate());  ?></td>
+                                <td><?php echo $pR->getDaysAmount(); ?></td>
+                                <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
+                                
+                                <td><label class="circulo" style="background:orange;"></td>
+                                <td>
+                                    <?php if ($nC->getReqStatus() == 'Calificado' || $nC->getReqStatus() == 'En Curso' || $nC->getReqStatus() == 'Confirmado') { ?>
+                                        <button type="button" class="btn btn-dark" disabled>Cancelar</button>
+                                    <?php } else { ?>
+                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
+                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $nC->getIdRequest(); ?>">Cancelar</a>
+                                </td>
+                                <?php } ?>   
+                             <td><button type="button" class="btn btn-dark" disabled>Calificar</button></td>
+                            </tr>
+                            <?php } ?>
                         <?php foreach ($requests as $request) {
                             ?>
                             <tr>
@@ -349,7 +414,7 @@ include('nav-bar.php');
                                             </div>
                                         <?php } ?>
                                 </td>
-                                </form>
+                                </form> 
                             </tr>
                             <?php
                         } ?>

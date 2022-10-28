@@ -3,6 +3,8 @@
 use DAO\GuardianDAO as GuardianDAO;
 use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
+use Models\Payment as Payment;
+use DAO\PaymentDAO as PaymentDAO;
 use DAO\ReservaDAO as ReservaDAO;
 use Models\Request as Request;
 use Utils\Session;
@@ -14,6 +16,7 @@ class RequestController
     private $ownerDAO;
     private $reservaDAO;
     private $mascotaDAO;
+    private $paymentDAO;
 
     public function __construct()
     {
@@ -21,6 +24,7 @@ class RequestController
         $this->ownerDAO = new OwnerDAO();
         $this->reservaDAO = new ReservaDAO();
         $this->mascotaDAO = new PetDAO();
+        $this->paymentDAO = new PaymentDAO();
     }
 
     public function requestGuardian($idMascota, $Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal)
@@ -58,14 +62,18 @@ class RequestController
         $user = Session::GetLoggedUser();
         if ($this->reservaDAO->acceptRequestAsGuardian($nroReserva, $user->getId())) {
             $reserva= $this->reservaDAO->findByRequestId($nroReserva);
-            $owner = $this->ownerDAO->findbyID($reserva->getIdOwner());
-            $pet = $this->mascotaDAO->findByID($reserva->getIdPet());
-            Tools::sendEmail('ignaciopavone@gmail.com', 'Datos de tu reserva', $this->compraMailBody($user,$reserva,$pet,$owner));
+            $this->addPayment($reserva->getIdOwner(),$reserva->getIdRequest(),$reserva->getFinalPrice());
+            //Tools::sendEmail('ignaciopavone@gmail.com', 'Datos de tu reserva', $this->compraMailBody($user,$reserva,$pet,$owner));
             Session::SetOkMessage("Request Aceptada con Exito");
         } else {
             Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
         }
      header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $user->getEmail());
+    }
+
+    public function addPayment($id_owner,$id_request,$price){
+        $payment = new Payment($id_owner,$id_request,$price);
+        $this->paymentDAO->add($payment);
     }
 
     public function rejectRequestasGuardian($nroReserva)
