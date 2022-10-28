@@ -147,7 +147,7 @@ td {
   margin-top: 2em;
   clear: both;
   height: 300px;
-	width: 200px;
+  width: 200px;
 }
 
 
@@ -335,4 +335,8 @@ input[type="checkbox"]:checked::before {
 .hovertext:hover:before {
   opacity: 1;
   visibility: visible;
+}
+
+tbody h4 {
+  font-weight: 900;
 }
