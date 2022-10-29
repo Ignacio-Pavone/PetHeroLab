@@ -483,7 +483,7 @@ include('nav-bar.php');
                                 <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
                                     <div class="col-lg-1" style="text-align:center">
                                         <button type="submit" onclick="return confirm('Are you sure?')"
-                                                style="text-align:center" class="btn btn-dark">Agregar
+                                                style="text-align:center" class="btn btn-login">Agregar
                                         </button>
                                     </div>
                                 </div>

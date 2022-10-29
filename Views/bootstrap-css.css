@@ -347,6 +347,11 @@ tbody h4 {
   font-style: italic;
   font-weight: 10;
   margin-top: -20px;
+  color: #DE6262;
+}
 
-
+a:hover {
+  color: red;
+  background-color: transparent;
+  text-decoration: underline;
 }

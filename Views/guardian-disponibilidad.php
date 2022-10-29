@@ -57,7 +57,7 @@ include('nav-simple-bar.php');
                 <br>
                 <div class="row-lg-1" style="text-align:center">
                     <button type="submit" onclick="return confirm('Are you sure?')" style="text-align:center"
-                            class="btn btn-dark">Modificar
+                            class="btn btn-login">Modificar
                     </button>
                 </div>
             </div>

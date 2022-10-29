@@ -66,7 +66,7 @@ $user = Session::GetLoggedUser();
                     <div class="row">
                     <div class="col-lg-4 input-group mb-3" style="margin-left: 350px;">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Forma de Pago</label>
+                                <label class="btn btn-dark" for="inputGroupSelect01">Forma de Pago</label>
                             </div>
                             <select class="custom-select" name="Method">
                                 <option value="credito" <?php  ?>>
@@ -87,7 +87,7 @@ $user = Session::GetLoggedUser();
                      <div class="row" id="buttonraro" style="margin-left: 445px; border: 1px solid">
                                     <div class="col-lg-1" style="text-align:center">
                                         <button type="submit" onclick="return confirm('Are you sure?')"
-                                                style="text-align:center" class="btn btn-dark">CONFIRMAR
+                                                style="text-align:center" class="btn btn-login">CONFIRMAR
                                         </button>
                                     </div>
                                 </div>

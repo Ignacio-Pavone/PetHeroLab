@@ -17,15 +17,15 @@ require_once VIEWS_PATH . 'header.php';
                 <br>
             <form action="<?php echo FRONT_ROOT . "Auth/sendPass"?>">
             <div class="row">
-            <div class="col-lg-4 input-group mb-3">
+            <div class="col-lg-3 input-group mb-3" style="margin-left: 260px">
                 <div class="input-group-prepend">
-                    <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
+                    <span class="btn btn-md btn-dark m-0 px-3"  id="basic-addon1">Email</span>
                 </div>
                 <input type="text" class="form-control" placeholder="jhondoe@gmail.com" name="email"
                 aria-describedby="basic-addon1" required>
             </div>
 
-                 <div class="col-lg-4 input-group mb-3">
+                 <div class="col-lg-3 input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="btn btn-md btn-dark m-0 px-3 for="inputGroupSelect01">Tipo Usuario</label>
                             </div>
