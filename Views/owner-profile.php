@@ -337,7 +337,7 @@ include('nav-bar.php');
                                     <?php if ($payment->getPaid() == 0) { ?>
                                             <a class="btn btn-login ml-auto" href="<?php echo FRONT_ROOT . 'Payment/showPaymentFormy/' . $payment->getId_payment(); ?>">PAGAR</a>
                                     <?php } else{ ?>
-                                            <button type="button" class="btn btn-login" disabled>PAGAR</button>
+                                            <button type="button" class="btn btn-login" disabled>PAGADO</button>
                                     <?php } ?>
                                     <?php }
                                 } ?>
