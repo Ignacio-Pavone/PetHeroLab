@@ -36,7 +36,7 @@ include('nav-simple-bar.php');
                 <div class="input-group-prepend">
                     <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Antigua Contraseña</span>
                 </div>
-                <input type="text" class="form-control" placeholder="****" name="oldPassword"
+                <input type="password" class="form-control" placeholder="****" name="oldPassword"
                 aria-describedby="basic-addon1" required>
             </div>
 

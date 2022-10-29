@@ -413,7 +413,7 @@ include('nav-bar.php');
                                         <span class="input-group-text" id="basic-addon1">Nombre</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Nombre" name="name"
-                                           aria-label="Username" aria-describedby="basic-addon1">
+                                           aria-label="Username" aria-describedby="basic-addon1" required>
                                 </div>
 
                                 <div class="col-lg-4 input-group mb-3">
@@ -431,7 +431,7 @@ include('nav-bar.php');
                                         <span class="input-group-text" id="basic-addon1">Raza</span>
                                     </div>
                                     <input type="text" class="form-control" placeholder="Raza" name="breed"
-                                           aria-describedby="basic-addon1">
+                                           aria-describedby="basic-addon1" required>
                                 </div>
 
                                 <div class="col-lg-4 input-group mb-3">
@@ -450,7 +450,7 @@ include('nav-bar.php');
                                         <span class="input-group-text" id="basic-addon3">URL</span>
                                     </div>
                                     <input type="text" name="photo_url" placeholder="Foto" class="form-control"
-                                           id="basic-url" aria-describedby="basic-addon3">
+                                           id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
 
                                 <div class="col-lg-4 input-group mb-3">
@@ -458,7 +458,7 @@ include('nav-bar.php');
                                         <span class="input-group-text" id="basic-addon3">URL</span>
                                     </div>
                                     <input type="text" name="vaccination_schedule" placeholder="Plan de Vacunacion"
-                                           class="form-control" id="basic-url" aria-describedby="basic-addon3">
+                                           class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
 
                                 <div class="col-lg-12 input-group mb-3">
@@ -466,7 +466,7 @@ include('nav-bar.php');
                                         <span class="input-group-text" id="basic-addon3">URL</span>
                                     </div>
                                     <input type="text" name="video_url" placeholder="Video" class="form-control"
-                                           id="basic-url" aria-describedby="basic-addon3">
+                                           id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
 
                                 <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
