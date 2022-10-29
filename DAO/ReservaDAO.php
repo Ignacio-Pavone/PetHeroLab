@@ -182,12 +182,28 @@ class ReservaDAO
 
     public function autoReqStatus($request)
     {
-        if ($request->getReqStatus() == 'Confirmado') {
-            if (($request->getFinishDate() < date('Y-m-d')) ){
-                $this->updateStatusQuery($request->getIdRequest(), 'Completo');
-            } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d')){
-                $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
+            if ($request->getReqStatus() == 'Confirmado' && $this->isPay($request)) {
+                if (($request->getFinishDate() < date('Y-m-d')) ) {
+                    $this->updateStatusQuery($request->getIdRequest(), 'Completo');
+                } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d') ){
+                    $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
+                }
+            }else{
+                if ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d') && !$this->isPay($request)){
+                    $this->updateStatusQuery($request->getIdRequest(), 'Rechazado');
+                }
             }
+
+    }
+
+    public function isPay ($request){
+        $sql = "SELECT * FROM payments WHERE id_request = " . $request->getIdRequest() . " AND paid = true;";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql);
+        if ($result){
+            return true;
+        }else{
+            return false;
         }
     }
 
