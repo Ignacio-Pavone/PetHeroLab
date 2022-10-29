@@ -6,7 +6,7 @@
         use DAO\PetDAO as PetDAO;
         use DAO\PaymentDAO as PaymentDAO;
         use Utils\Session;
-        use Utils\Tools;
+        use Utils\Email;
 
         class AuthController{
         private $guardianDAO;
@@ -101,7 +101,7 @@
             $user = $this->ownerDAO->getByEmail($email);
         }
         if ($user != null){
-            Tools::sendPassMail ($user->getEmail(), $user->getPassword());
+            Email::sendPassMail ($user->getEmail(), $user->getPassword());
             Session::SetOkMessage("Se ha enviado un mail con su contraseña");
         }else{
             Session::SetBadMessage("El mail ingresado no existe");

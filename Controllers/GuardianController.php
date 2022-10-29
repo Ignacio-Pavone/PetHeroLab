@@ -30,12 +30,17 @@ class GuardianController{
     }
 
     public function ModifyAvailability($guardianEmail,$initDate, $finishDate){
-         if ($this->guardianDAO->updateDisponibility ($guardianEmail,$initDate, $finishDate)){
+        if ($initDate < $finishDate){
+            if ($this->guardianDAO->updateDisponibility ($guardianEmail,$initDate, $finishDate)){
             Session::SetOkMessage("Guardian modificado con exito");
-        }else{
+            }else{
             Session::SetBadMessage("Hubo algun problema");
+            }
+        }else{
+            Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
         }
         header ("location: ".FRONT_ROOT."Auth/showGuardianProfile/" . $guardianEmail);
+      
     }
 
     public function showChangePassword(){
