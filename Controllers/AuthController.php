@@ -6,6 +6,7 @@
         use DAO\PetDAO as PetDAO;
         use DAO\PaymentDAO as PaymentDAO;
         use Utils\Session;
+        use Utils\Tools;
 
         class AuthController{
         private $guardianDAO;
@@ -39,6 +40,7 @@
         ($this->guardianDAO->checkProfile($guardian)) ? Session::SetBadMessage("Por favor establesca su disponibilidad laboral") : '' ;
         $owners = $this->ownerDAO->GetAll();
         $allpets = $this->petDAO->GetAll();
+        $payments = $this->paymentDAO->GetAll();
         $requests = $this->reservaDAO->findByGuardianId($guardian->getId());
         require_once(VIEWS_PATH . 'guardian-profile.php');
         }
@@ -72,6 +74,10 @@
 
         public function showPaymentForm($idPayment){
             $payment = $this->paymentDAO->findybyID($idPayment);
+            $request = $this->reservaDAO->getAll();
+            $guardians = $this->guardianDAO->getAll();
+            $owners = $this->ownerDAO->getAll();
+            $pets = $this->petDAO->getAll();
             require_once(VIEWS_PATH."payment-method.php");
         }
 
@@ -80,7 +86,27 @@
         }
 
         public function showLogin($message = ""){
-         require_once(VIEWS_PATH . 'login.php');
+        require_once(VIEWS_PATH . 'login.php');
+        }
+
+        public function forgotPassword(){
+        require_once(VIEWS_PATH . 'forgot-password.php');
+        }
+
+        public function sendPass ($email, $tipo) {
+        $user = null;
+        if ($tipo == "guardian"){
+            $user = $this->guardianDAO->getByEmail($email);    
+            }elseif ($tipo == "owner"){ 
+            $user = $this->ownerDAO->getByEmail($email);
+        }
+        if ($user != null){
+            Tools::sendPassMail ($user->getEmail(), $user->getPassword());
+            Session::SetOkMessage("Se ha enviado un mail con su contraseña");
+        }else{
+            Session::SetBadMessage("El mail ingresado no existe");
+        }
+           header ("location: ".FRONT_ROOT."Auth/showLogin");
         }
     }
 ?>

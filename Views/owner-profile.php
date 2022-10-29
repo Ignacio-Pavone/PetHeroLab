@@ -275,9 +275,9 @@ include('nav-bar.php');
                             <th style="width: 5%;">Dias</th>
                             <th style="width: 10%;">Costo Total</th>
                             <th style="width: 5%;">Estado</th>
-                            <th style="width: 5%;">X</th>
                             <th style="width: 10%;">Pagar</th>
                             <th style="width: 15%;">Calificar</th>
+                            <th style="width: 5%;"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -314,30 +314,14 @@ include('nav-bar.php');
                                                         } elseif ($request->getReqStatus() == 'En Curso') {
                                                         ?> <label class="circulo" style="background:pink;"></td>
                             <?php } ?>
-                                <td>
-                                    <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso') { ?>
-                                        <button type="button" class="btn btn-dark" disabled>X</button>
-                                    <?php } else { ?>  
-                                    <?php foreach ($payments as $payment){ ?>
-                                    <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
-                                       <?php if ($payment->getPaid() == 0){ ?>
-                                            <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                            href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
-                                     </td>
-                                    <?php } else { ?>
-                                        <button type="button" class="btn btn-dark" disabled>X</button>
-                                        
-                             <?php } ?>               
-                            <?php } ?>
-                            <?php } ?>
-                            <?php } ?>
+
                                 
                             <td> <?php foreach ($payments as $payment) {
                                     if ($payment->getId_request() == $request->getIdRequest()) {?>
-                                    <?php if ($payment->getPaid() == 0) { ?>
-                                            <a class="btn btn-login ml-auto" href="<?php echo FRONT_ROOT . 'Payment/showPaymentFormy/' . $payment->getId_payment(); ?>">PAGAR</a>
-                                    <?php } else{ ?>
-                                            <button type="button" class="btn btn-login" disabled>PAGADO</button>
+                                    <?php if ($payment->getPaid() == 0 && $request->getReqStatus() != 'Rechazado') { ?>
+                                            <a class="btn btn-info ml-auto" href="<?php echo FRONT_ROOT . 'Payment/showPaymentForm/' . $payment->getId_payment(); ?>">PAGAR</a>
+                                    <?php }else{ ?>
+                                            <button type="button" class="btn btn-info" disabled>PAGAR</button>
                                     <?php } ?>
                                     <?php }
                                 } ?>
@@ -368,6 +352,23 @@ include('nav-bar.php');
                                                 <button type="button" class="btn btn-dark" disabled>Calificar</button>
                                             </div>
                                         <?php } ?>
+                                        <td>
+                                    <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Rechazado') { ?>
+                                        <button type="button" class="btn btn-login" disabled>X</button>
+                                    <?php } else { ?>  
+                                    <?php foreach ($payments as $payment){ ?>
+                                    <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
+                                       <?php if ($payment->getPaid() == 0){ ?>
+                                            <a class="btn btn-danger ml-auto" onclick="return confirm('Are you sure?')"
+                                            href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
+                                    <?php } else { ?>
+                                        <button type="button" class="btn btn-danger" disabled>X</button>
+                                        </td>
+                                        
+                             <?php } ?>               
+                            <?php } ?>
+                            <?php } ?>
+                            <?php } ?>
                                 </td>
                                 </form>
                             </tr>

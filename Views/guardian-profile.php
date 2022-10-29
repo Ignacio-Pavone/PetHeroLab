@@ -194,6 +194,7 @@ include('nav-bar.php');
                     <th style="width: 10%;">Fecha Fin</th>
                     <th style="width: 10%;">Calificacion</th>
                     <th style="width: 10%;">Estado</th>
+                    <th style="width: 10%;">Pago</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -229,6 +230,16 @@ include('nav-bar.php');
                             ?> <label class="circulo" style="background:pink;"> </td>
                         <?php } ?>
                         </td>
+                        <td><?php foreach ($payments as $payment) {
+                                if ($payment->getId_request() == $request->getIdRequest()) {
+                                    if ($payment->getPaid() == 1) { ?>
+                                        <button type="button" class="btn btn-success">Pagado</button>
+                                   <?php } else {
+                                        ?>
+                                        <button type="button"class="btn btn-danger" disabled>No Pago</button>
+                                 <?php   }
+                                }
+                            } ?></td>
                         </tr>
                         <?php
                     }

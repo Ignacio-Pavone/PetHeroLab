@@ -189,7 +189,7 @@ class ReservaDAO
                     $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
                 }
             }else{
-                if ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d') && !$this->isPay($request)){
+                if ($request->getInitDate() <= date('Y-m-d') && !$this->isPay($request)){
                     $this->updateStatusQuery($request->getIdRequest(), 'Rechazado');
                 }
             }

@@ -341,3 +341,12 @@ input[type="checkbox"]:checked::before {
 tbody h4 {
   font-weight: 900;
 }
+
+.forgotpass {
+  text-align: center;
+  font-style: italic;
+  font-weight: 10;
+  margin-top: -20px;
+
+
+}

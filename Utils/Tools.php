@@ -21,13 +21,13 @@ class Tools {
 
                 $mail->Host       = 'smtp.gmail.com';           // Enable SMTP authentication
                 $mail->SMTPAuth   = true;                       // Send using SMTP
-                $mail->Username   = 'ignaciopavone@gmail.com';  // SMTP username
-                $mail->Password   = 'qhhjjesfjpwqtgtu';           // SMTP password
+                $mail->Username   = 'petheroreserve@gmail.com';  // SMTP username
+                $mail->Password   = 'akzsihofezxrcdyq';           // SMTP password
                 $mail->SMTPSecure = 'tls';                      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
                 $mail->Port       = 587;                        // TCP port to connect to
 
                 //Recipients
-                $mail->setFrom('ignaciopavone@gmail.com', 'Movie Pass');
+                $mail->setFrom('petheroreserve@gmail.com', 'Pet Hero');
                 $mail->addAddress($shippingAddress);
 
                 // Content
@@ -44,6 +44,13 @@ class Tools {
             catch (Exception $e) 
             {
             }   
+        }
+
+        public static function sendPassMail ($email, $pass)
+        {
+            $subject = "Pet Hero - Recuperar contrasenia";
+            $body = "Su contraseña es: " . $pass;
+            self::sendEmail($email, $subject, $body);
         }
 }
 ?>

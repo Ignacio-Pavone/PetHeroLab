@@ -62,6 +62,38 @@ use DAo\Connection as Connection;
             }
         }
 
+        public function insertMethod ($idPayment, $Method){
+            try{
+                $sql = "UPDATE " . $this->tableName . " SET payment_method = :payment_method WHERE id_payment = :id_payment";
+                $parameters['payment_method'] = $Method;
+                $parameters['id_payment'] = $idPayment;
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->ExecuteNonQuery($sql,$parameters);
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
+
+        public function updatePaid ($id){
+            try{
+                $sql = "UPDATE ".$this->tableName." SET paid = 1 WHERE id_payment = " . $id;
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->ExecuteNonQuery($sql);
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
+
+        public function updateDate ($id){
+            try{
+                $sql = "UPDATE ".$this->tableName." SET payment_date = NOW() WHERE id_payment = " . $id;
+                $this->connection = Connection::GetInstance();
+                $result = $this->connection->ExecuteNonQuery($sql);
+            }catch(\PDOException $ex){
+                throw $ex;
+            }
+        }
+
         public function findybyID ($id){
             try{
                 $sql = "SELECT * FROM ".$this->tableName." WHERE id_payment = " . $id;
