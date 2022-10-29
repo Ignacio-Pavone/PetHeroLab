@@ -50,10 +50,7 @@
         $allPets = $this->petDAO->returnByOwner($sesion->getId());
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->GetAll();
-        //$requests = $this->reservaDAO->findByOwnerId($user->getId());
-        $requests = $this->reservaDAO->filterPaidRequestsByOwner($user->getId());
-        $pendingRequests = $this->reservaDAO->filterPendingRequestsByOwner($user->getId());
-        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner($user->getId());
+        $requests = $this->reservaDAO->findByOwnerId($user->getId());
         $payments = $this->paymentDAO->getAllByOwner($user->getId());
         require_once(VIEWS_PATH . 'owner-profile.php');
         }
@@ -65,10 +62,7 @@
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
         $requests = $this->reservaDAO->findByOwnerId($user->getId());
-        $pendingRequests = $this->reservaDAO->filterPendingRequestsByOwner($user->getId());
-        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner($user->getId());
         $payments = $this->paymentDAO->getAllByOwner($user->getId);
-        //faltafiltrarnipagadasnipendientes.
         require_once(VIEWS_PATH . 'owner-profile.php');
         } else{
         Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");

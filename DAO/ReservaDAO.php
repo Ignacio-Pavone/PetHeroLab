@@ -312,13 +312,15 @@ class ReservaDAO
     {
         $reservas = $this->getAll();
         foreach ($reservas as $reserva) {
-            if ($reserva->getReqStatus() != "Confirmado" && $reserva->getReqStatus() != "Completo") {
+            if (!$this->isPay($reserva)) {
+            if ($reserva->getReqStatus() != "Completo") {
                 if ($reserva->getIdRequest() == $id_request) {
                     $this->deleteRequest($id_request);
                     return true;
                 }
             }
         }
+    }
         return false;
     }
 
@@ -374,13 +376,11 @@ class ReservaDAO
 
         foreach ($reservas as $reserva) {
             if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "En Curso") {
-                if ($initDate >= $reserva->getInitDate()) {
                     if ($type == $reserva->getType()) {
                         if ($breed == $reserva->getBreed()) {
                             return true;
                         }
                     }
-                }
             }
         }
         return false;

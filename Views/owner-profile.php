@@ -269,82 +269,18 @@ include('nav-bar.php');
                         <thead>
                         <tr>
                             <th style="width: 10%;">Guardian</th>
-                            <th style="width: 10%;">Mascota</th>
+                            <th style="width: 5%;">Mascota</th>
                             <th style="width: 10%;">Fecha Inicio</th>
                             <th style="width: 10%;">Fecha Fin</th>
-                            <th style="width: 10%;">Dias</th>
+                            <th style="width: 5%;">Dias</th>
                             <th style="width: 10%;">Costo Total</th>
                             <th style="width: 5%;">Estado</th>
-                            <th style="width: 10%;">Rechazar</th>
+                            <th style="width: 5%;">X</th>
+                            <th style="width: 10%;">Pagar</th>
                             <th style="width: 15%;">Calificar</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($pendingRequests as $pR){ ?>
-                            <tr>
-                                <?php foreach ($allGuardians as $guardian) {
-                                    if ($pR->getIdGuardian() == $guardian->getId()) {
-                                        ?>
-                                        <td><?php echo $guardian->getFullName(); ?></td>
-                                    <?php }
-                                } ?>
-                                <?php foreach ($allPets as $mascota) {
-                                    if ($pR->getIdPet() == $mascota->getId()) {
-                                        ?>
-                                        <td><?php echo $mascota->getName();
-                                            break; ?></td>
-                                    <?php }
-                                } ?>
-                                <td><?php echo Format::formatDate($pR->getInitDate()); ?></td>
-                                <td><?php echo Format::formatDate($pR->getFinishDate());  ?></td>
-                                <td><?php echo $pR->getDaysAmount(); ?></td>
-                                <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
-                                <?php foreach($payments as $p){ if($pR->getIdRequest() == $p->getId_request()){ ?>
-                                <td><a class="btn btn-login" href="<?php echo FRONT_ROOT.'Payment/showPaymentForm/'.$p->getId_payment(); ?>">PAGAR</a></td>
-                                <td>
-                                    <?php if ($pR->getReqStatus() == 'Calificado' || $pR->getReqStatus() == 'En Curso' || $pR->getReqStatus() == 'Confirmado') { ?>
-                                        <button type="button" class="btn btn-dark" disabled>Cancelar</button>
-                                    <?php } else { ?>
-                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $pR->getIdRequest(); ?>">Cancelar</a>
-                                </td>
-                                <?php } ?>   
-                            <?php }} ?>
-                             <td><button type="button" class="btn btn-dark" disabled>Calificar</button></td>
-                            </tr>
-                            <?php } ?>
-                        <?php foreach ($notConfirmedRequests as $nC){ ?>
-                            <tr>
-                                <?php foreach ($allGuardians as $guardian) {
-                                    if ($pR->getIdGuardian() == $guardian->getId()) {
-                                        ?>
-                                        <td><?php echo $guardian->getFullName(); ?></td>
-                                    <?php }
-                                } ?>
-                                <?php foreach ($allPets as $mascota) {
-                                    if ($pR->getIdPet() == $mascota->getId()) {
-                                        ?>
-                                        <td><?php echo $mascota->getName();
-                                            break; ?></td>
-                                    <?php }
-                                } ?>
-                                <td><?php echo Format::formatDate($nC->getInitDate()); ?></td>
-                                <td><?php echo Format::formatDate($nC->getFinishDate());  ?></td>
-                                <td><?php echo $pR->getDaysAmount(); ?></td>
-                                <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
-                                
-                                <td><label class="circulo" style="background:orange;"></td>
-                                <td>
-                                    <?php if ($nC->getReqStatus() == 'Calificado' || $nC->getReqStatus() == 'En Curso' || $nC->getReqStatus() == 'Confirmado') { ?>
-                                        <button type="button" class="btn btn-dark" disabled>Cancelar</button>
-                                    <?php } else { ?>
-                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $nC->getIdRequest(); ?>">Cancelar</a>
-                                </td>
-                                <?php } ?>   
-                             <td><button type="button" class="btn btn-dark" disabled>Calificar</button></td>
-                            </tr>
-                            <?php } ?>
                         <?php foreach ($requests as $request) {
                             ?>
                             <tr>
@@ -379,13 +315,32 @@ include('nav-bar.php');
                                                         ?> <label class="circulo" style="background:pink;"></td>
                             <?php } ?>
                                 <td>
-                                    <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Confirmado') { ?>
-                                        <button type="button" class="btn btn-dark" disabled>Cancelar</button>
+                                    <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso') { ?>
+                                        <button type="button" class="btn btn-dark" disabled>X</button>
+                                    <?php } else { ?>  
+                                    <?php foreach ($payments as $payment){ ?>
+                                    <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
+                                       <?php if ($payment->getPaid() == 0){ ?>
+                                            <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
+                                            href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
+                                     </td>
                                     <?php } else { ?>
-                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                       href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">Cancelar</a>
-                                </td>
+                                        <button type="button" class="btn btn-dark" disabled>X</button>
+                                        
+                             <?php } ?>               
                             <?php } ?>
+                            <?php } ?>
+                            <?php } ?>
+                                
+                            <td> <?php foreach ($payments as $payment) {
+                                    if ($payment->getId_request() == $request->getIdRequest()) {?>
+                                    <?php if ($payment->getPaid() == 0) { ?>
+                                            <a class="btn btn-login ml-auto" href="<?php echo FRONT_ROOT . 'Payment/showPaymentFormy/' . $payment->getId_payment(); ?>">PAGAR</a>
+                                    <?php } else{ ?>
+                                            <button type="button" class="btn btn-login" disabled>PAGAR</button>
+                                    <?php } ?>
+                                    <?php }
+                                } ?>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Request/qualifyGuardian" method="post">
                                         <input type="hidden" name="guardian"
@@ -414,7 +369,7 @@ include('nav-bar.php');
                                             </div>
                                         <?php } ?>
                                 </td>
-                                </form> 
+                                </form>
                             </tr>
                             <?php
                         } ?>
