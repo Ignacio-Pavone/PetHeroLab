@@ -193,7 +193,6 @@ class ReservaDAO
                     $this->updateStatusQuery($request->getIdRequest(), 'Rechazado');
                 }
             }
-
     }
 
     public function isPay ($request){
@@ -246,7 +245,7 @@ class ReservaDAO
     public function checkGuardianRequests($requests, $requestToAccept)
     {
         foreach ($requests as $request) {
-            if ($request->getReqStatus() == 'En Curso') {
+            if ($request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Confirmado') {
                 if ($request->getType() == $requestToAccept->getType()) {
                     if ($request->getBreed() == $requestToAccept->getBreed()) {
                         return true;

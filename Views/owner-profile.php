@@ -300,7 +300,7 @@ include('nav-bar.php');
                                 <td><?php echo $pR->getDaysAmount(); ?></td>
                                 <td><?php echo $pR->getFinalPrice() . ' $' ?></td>
                                 <?php foreach($payments as $p){ if($pR->getIdRequest() == $p->getId_request()){ ?>
-                                <td><a class="btn btn-dark" href="<?php echo FRONT_ROOT.'Payment/showPaymentForm/'.$p->getId_payment(); ?>">PAGAR</a></td>
+                                <td><a class="btn btn-login" href="<?php echo FRONT_ROOT.'Payment/showPaymentForm/'.$p->getId_payment(); ?>">PAGAR</a></td>
                                 <td>
                                     <?php if ($pR->getReqStatus() == 'Calificado' || $pR->getReqStatus() == 'En Curso' || $pR->getReqStatus() == 'Confirmado') { ?>
                                         <button type="button" class="btn btn-dark" disabled>Cancelar</button>

@@ -65,8 +65,8 @@
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
         $requests = $this->reservaDAO->findByOwnerId($user->getId());
-        $pendingRequests = $this->reservaDAO->filterPendingRequest();
-        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner();
+        $pendingRequests = $this->reservaDAO->filterPendingRequestsByOwner($user->getId());
+        $notConfirmedRequests = $this->reservaDAO->filterNotConfirmedRequestsByOwner($user->getId());
         $payments = $this->paymentDAO->getAllByOwner($user->getId);
         //faltafiltrarnipagadasnipendientes.
         require_once(VIEWS_PATH . 'owner-profile.php');
@@ -77,7 +77,7 @@
         }
 
         public function showPaymentForm($idPayment){
-            $payment = $this->paymentDAO->getById($id);
+            $payment = $this->paymentDAO->findybyID($idPayment);
             require_once(VIEWS_PATH."payment-method.php");
         }
 
