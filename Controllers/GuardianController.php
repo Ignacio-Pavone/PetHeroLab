@@ -14,11 +14,11 @@ class GuardianController{
 
     public function register($fullname, $age, $dni, $email, $password, $tipoMascota, $fee){
         $user = new Guardian($email, $fullname, $dni, $age, $password,$tipoMascota,$fee,$initDate=null,$finishDate=null);
-        if($this->guardianDAO->getByEmail($email) == null){
+        if(!$this->guardianDAO->emailExistBoth($email) && !$this->guardianDAO->dniExistboth($dni)){
             $this->guardianDAO->add($user);
             Session::SetOkMessage("Guardian registrado con exito");
         }else{
-            Session::SetBadMessage("El email ya esta en uso");
+            Session::SetBadMessage("El email o dni ya esta en uso");
         }
         header ("location: ".FRONT_ROOT."Auth/showLogin");
     }

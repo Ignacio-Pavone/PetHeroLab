@@ -68,6 +68,32 @@ class OwnerDAO{
         }
     }
 
+    public function emailExistBoth ($email){
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
+        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE email = '" . $email . "'";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql);
+        $result2 = $this->connection->Execute($sql2);
+        if(!empty($result) || !empty($result2)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    public function dniExistBoth ($dni){
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = '" . $dni . "'";
+        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE dni = '" . $dni . "'";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql);
+        $result2 = $this->connection->Execute($sql2);
+        if(!empty($result) || !empty($result2)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
     public function getByEmail($email){
         try{
             $sql = "SELECT * FROM ".$this->tableName." WHERE email = '".$email."'";

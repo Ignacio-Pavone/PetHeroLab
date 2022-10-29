@@ -15,11 +15,11 @@ class OwnerController{
  
     public function register($fullname, $age, $dni, $email, $password){
         $user = new Owner($email, $fullname, $dni, $age, $password);
-        if($this->ownerDAO->getByEmail($email) == null){
+        if(!$this->ownerDAO->emailExistBoth($email) && !$this->ownerDAO->dniExistboth($dni)){
             $this->ownerDAO->add($user);
             Session::SetOkMessage("Owner registrado con exito");
         }else{
-            Session::SetBadMessage("El email ya esta en uso");
+            Session::SetBadMessage("El email o dni ya esta en uso");
         }
        header ("location: ".FRONT_ROOT."Auth/showLogin");
     }
