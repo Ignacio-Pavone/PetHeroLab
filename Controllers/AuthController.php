@@ -64,7 +64,7 @@
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
         $requests = $this->reservaDAO->findByOwnerId($user->getId());
-        $payments = $this->paymentDAO->getAllByOwner($user->getId);
+        $payments = $this->paymentDAO->getAllByOwner($user->getId());
         require_once(VIEWS_PATH . 'owner-profile.php');
         } else{
         Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");

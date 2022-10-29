@@ -152,7 +152,7 @@ include('nav-bar.php');
                                                               value="<?php echo date('Y-m-d') ?>" select required>
                             <label style="margin-left:30px;font-style: italic;" for="filtroFinal"><b>Fecha de
                                     Fin</b></label> <input style="margin-left:20px;" type="date"
-                                                           class="update-dispon inputFiltro" id="initDate"
+                                                           class="update-dispon inputFiltro" id="finishDate"
                                                            name="filtroFinal" min="<?php echo date('Y-m-d') ?>" value=""
                                                            select required>
                             <button type="submit" style="margin-left: 100px; text-align:center" class="btn btn-dark">
@@ -184,7 +184,7 @@ include('nav-bar.php');
 
                         <tbody>
                         <?php
-                        foreach ($allGuardians as $guardian) {
+                        foreach ($guardians as $guardian) {
                         if ($guardian->getInitDate() != null){
                         ?>
                         <tr>
@@ -220,11 +220,16 @@ include('nav-bar.php');
                                 <td>
                                     <div class="col-lg-2">
                                         <select name="idMascota" id="solapaDuenios">
-                                            <?php foreach ($allPets as $mascota) { ?>
-                                                <option name="idMascota"
-                                                        value="<?php echo $mascota->getId(); ?>">
-                                                    <?php echo $mascota->getName(); ?></option>
-                                            <?php } ?>
+                                            <?php if ($allPets){
+                                                foreach ($allPets as $mascota) { ?>
+                                                    <option name="idMascota"
+                                                            value="<?php echo $mascota->getId(); ?>">
+                                                        <?php echo $mascota->getName(); ?></option>
+                                                <?php }
+                                            } else{ ?>
+                                                <option name="idMascota" value="" selected disabled>No hay</option>
+                                            <?php
+                                            }?>
                                         </select>
                                     </div>
                                 </td>
@@ -234,9 +239,15 @@ include('nav-bar.php');
                                            value="<?php echo $guardian->getEmail(); ?>">
                                     <input type="hidden" name="costoTotal"
                                            value="<?php echo $guardian->getFee(); ?>">
+                                    <?php if ($allPets) {?>
                                     <button type="submit" style="text-align:center"
                                             class="btn btn-dark">Solicitar
                                     </button>
+                                    <?php }else{ ?>
+                                        <button type="submit" style="text-align:center"
+                                                class="btn btn-dark" disabled>Solicitar
+                                        </button>
+                                    <?php } ?>
                                 </td>
                                 <?php } ?>
                             </form>
