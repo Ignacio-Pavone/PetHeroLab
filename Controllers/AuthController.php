@@ -77,7 +77,7 @@
         }
 
         public function showPaymentForm($idPayment){
-            $payment = $this->paymentDAO->getById($id);
+            $payment = $this->paymentDAO->findybyID($idPayment);
             require_once(VIEWS_PATH."payment-method.php");
         }
 

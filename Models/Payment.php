@@ -11,7 +11,7 @@
         public function __construct($id_owner,$id_request,$price){
             $this->id_owner = $id_owner;
             $this->id_request = $id_request;
-            $this->paid = false;
+            $this->paid = 0;
             $this->price = $price;
             $this->payment_method = null;
             $this->payment_date = null;

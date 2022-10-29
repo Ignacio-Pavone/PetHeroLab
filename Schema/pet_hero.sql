@@ -42,15 +42,19 @@ constraint fk_id_owner_d foreign key(id_owner) references Owners(id_owner)
 );
 
 
-create table payments(
+create table Payments(
 id_payment int auto_increment,
 id_owner int,
+id_request int,
+paid bool,
 price float,
 payment_method varchar(60),
 payment_date date,
 constraint pk_id_payment primary key (id_payment),
+constraint fk_id_request foreign key (id_request) references Requests(id_request),
 constraint fk_id_owner_p foreign key (id_owner) references Owners(id_owner)
 );
+
 
 create table Requests(
     id_request int auto_increment,
