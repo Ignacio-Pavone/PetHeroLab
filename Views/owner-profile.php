@@ -171,14 +171,14 @@ include('nav-bar.php');
                         <thead>
                         <tr>
                             <th style="width: 15%;">Nombre</th>
-                            <th style="width: 10%;">Edad</th>
-                            <th style="width: 10%;">Preferencia</th>
-                            <th style="width: 5%;">Calificacion</th>
-                            <th style="width: 25%;">Costo</th>
+                            <th style="width: 1%;">Edad</th>
+                            <th style="width: 5%;">Preferencia</th>
+                            <th style="width: 5%;">Score</th>
+                            <th style="width: 10%;">Costo</th>
                             <th style="width: 5%;">Fecha inicio</th>
                             <th style="width: 5%;">Fecha fin</th>
-                            <th style="width: 5%;">Mascotas</th>
-                            <th style="width: 5%;">Accion</th>
+                            <th style="width: 3%;">Mascotas</th>
+                            <th style="width: 1%">Accion</th>
                         </tr>
                         </thead>
 
