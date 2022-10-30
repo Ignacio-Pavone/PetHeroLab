@@ -365,21 +365,20 @@ include('nav-bar.php');
                                         <?php } ?>
                                         <td>
                                     <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Rechazado') { ?>
-                                        <button type="button" class="btn btn-login" disabled>X</button>
+                                        <button type="button" class="btn btn-dark" style="border-radius: 20px" disabled>X</button>
                                     <?php } else { ?>  
                                     <?php foreach ($payments as $payment){ ?>
                                     <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
                                        <?php if ($payment->getPaid() == 0){ ?>
-                                            <a class="btn btn-danger ml-auto" onclick="return confirm('Are you sure?')"
+                                            <a class="btn btn-danger ml-auto" style="border-radius: 20px;" onclick="return confirm('Are you sure?')"
                                             href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
                                     <?php } else { ?>
-                                        <button type="button" class="btn btn-danger" disabled>X</button>
-                                        </td>
-                                        
-                             <?php } ?>               
-                            <?php } ?>
-                            <?php } ?>
-                            <?php } ?>
+                                        <button type="button" class="btn btn-dark" style="border-radius: 20px" disabled>X</button>
+                                        </td>        
+                                <?php } ?>               
+                                <?php } ?>
+                                <?php } ?>
+                                <?php } ?>
                                 </td>
                                 </form>
                             </tr>
