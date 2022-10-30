@@ -182,7 +182,7 @@ class ReservaDAO
 
     public function autoReqStatus($request)
     {
-            if ($request->getReqStatus() == 'Confirmado' && $this->isPay($request)) {
+            if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'En Curso' && $this->isPay($request)) {
                 if (($request->getFinishDate() < date('Y-m-d')) ) {
                     $this->updateStatusQuery($request->getIdRequest(), 'Completo');
                 } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d') ){
@@ -421,7 +421,7 @@ class ReservaDAO
     public function changeReqStatus ($id_request, $req_status)
     {
         try {
-            $sql = "UPDATE " . $this->tableName . " SET req_status = :estado WHERE id_request = :id";
+            $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id";
             $parameters["id"] = $id_request;
             $parameters["req_status"] = $req_status;
             $this->connection = Connection::GetInstance();
