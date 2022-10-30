@@ -63,7 +63,7 @@ class Email {
                         <td style='font-family: Consolas; font-weight:400;font-size:15px;color:#fff;text-align:center;padding:20px;line-height:25px; ' class=''><center><img src='https://cdn.discordapp.com/attachments/855473848869847050/1035570001761022023/Screenshot_4.png' width='300px' height='150px' style='display: block'></center>
            
             <center><img src='".$pet->getPhotoUrl()."' style='display: block; border-radius: 200px' width='200'></center>
-            <p style='color: black; font-size: 36px; font-weight: 900; text-align:center' font-family:Consolas;>Datos de tu Reserva</p></td></tr>
+            <p style='color: black; font-size: 36px; font-weight: 900; text-align:center' font-family:Consolas;>Reserva</p></td></tr>
             </tbody>
             </table>
            ";
@@ -74,15 +74,15 @@ class Email {
                             <table align='center' border='0' cellpadding='0' cellspacing='0' width='350'>
                                 <tbody>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Guardian: " . $guardian->getFullName() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de inicio: " . $request->getInitDate() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de fin: " . $request->getFinishDate() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Costo total: $" . $request->getFinalPrice() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Modo de Pago: " . $Method . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Email del guardian: " . $guardian->getEmail() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Nombre de la mascota: " . $pet->getName() . "</h4>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Tipo de mascota: " . $pet->getType() . "</h4>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Raza: " . $pet->getBreed() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Nombre de la mascota: " . $pet->getName() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Nombre del dueño: " . $owner->getFullName() . " </h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Email del guardian: " . $guardian->getEmail() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de inicio: " . $request->getInitDate() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de fin: " . $request->getFinishDate() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Dias: " . $request->getDaysAmount() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Costo total: $" . $request->getFinalPrice() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Modo de Pago: " . $Method . "</h4>                                
                                 </tbody>
                             </table>
                             </td>
