@@ -26,11 +26,13 @@
 
 .update-dispon {
   font-style: italic;
+  border-radius: 4px;
+  overflow: hidden;
 }
+
 
 .custom-select{
   font-style: italic;
-
 }
 
 .banner-sec {
@@ -365,3 +367,4 @@ a:hover {
   font-weight: 50;
   font-size:large;
 }
+

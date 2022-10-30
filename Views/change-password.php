@@ -56,14 +56,12 @@ include('nav-simple-bar.php');
             <span id='message' style="margin-left: 500px"></span>           
             <div class="row" id="buttonraro" style="border: 1px solid">
                 <div class="col-lg-1" style="text-align:center">
-                    <button type="submit" onclick="return confirm('Are you sure?')"
+                    <button type="submit" onclick="return confirm('Are you sure?');"
                     style="text-align:center" class="btn btn-login">Modificar
                     </button>
                 </div>
             </div>
             </form>
-            <br>
-
         </section>
     </main>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -71,8 +69,10 @@ include('nav-simple-bar.php');
         $('#newPassword, #newPassword2').on('keyup', function () {
         if ($('#newPassword').val() == $('#newPassword2').val()) {
             $('#message').html('Coinciden').css('color', 'green');
+
         } else 
             $('#message').html('No Coinciden').css('color', 'red');
         });
     </script>
+
 

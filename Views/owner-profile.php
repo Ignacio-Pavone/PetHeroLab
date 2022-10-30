@@ -174,7 +174,7 @@ include('nav-bar.php');
                             <th style="width: 10%;">Edad</th>
                             <th style="width: 10%;">Preferencia</th>
                             <th style="width: 5%;">Calificacion</th>
-                            <th style="width: 25%;">Costo por Dia</th>
+                            <th style="width: 25%;">Costo</th>
                             <th style="width: 5%;">Fecha inicio</th>
                             <th style="width: 5%;">Fecha fin</th>
                             <th style="width: 5%;">Mascotas</th>
@@ -219,7 +219,7 @@ include('nav-bar.php');
                                     } ?>" required></td>
                                 <td>
                                     <div class="col-lg-2">
-                                        <select name="idMascota" id="solapaDuenios">
+                                        <select name="idMascota" id="solapaDuenios" style="width: 80px;">
                                             <?php if ($allPets){
                                                 foreach ($allPets as $mascota) { ?>
                                                     <option name="idMascota"
