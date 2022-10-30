@@ -110,7 +110,7 @@ include('nav-bar.php');
                                 <td><?php echo $mascota->getType(); ?></td>
                                 <td><?php echo $mascota->getBreed(); ?></td>
                                 <td><?php echo $mascota->getPetsize(); ?></td>
-                                <td><img src="<?php echo $mascota->getPhotoUrl(); ?>" alt="" width="80px" height="60px">
+                                <td><img src="<?php echo $mascota->getPhotoUrl(); ?>" style= "border-radius:10px"alt="" width="80px" height="60px">
                                 </td>
                                 <td><a href="<?php echo $mascota->getVaccinationschedule(); ?>" target="_blank">Ver
                                         Plan</a>
@@ -170,7 +170,7 @@ include('nav-bar.php');
                     <table style="text-align:center;">
                         <thead>
                         <tr>
-                            <th style="width: 10%;">Nombre</th>
+                            <th style="width: 15%;">Nombre</th>
                             <th style="width: 10%;">Edad</th>
                             <th style="width: 10%;">Preferencia</th>
                             <th style="width: 5%;">Calificacion</th>
@@ -279,16 +279,16 @@ include('nav-bar.php');
                     <table style="text-align:center;">
                         <thead>
                         <tr>
-                            <th style="width: 10%;">Guardian</th>
-                            <th style="width: 5%;">Mascota</th>
-                            <th style="width: 10%;">Fecha Inicio</th>
-                            <th style="width: 10%;">Fecha Fin</th>
-                            <th style="width: 5%;">Dias</th>
-                            <th style="width: 10%;">Costo Total</th>
-                            <th style="width: 5%;">Estado</th>
+                            <th style="width: 15%;">Guardian</th>
+                            <th style="width: 1%;">Mascota</th>
+                            <th style="width: 14%;">Fecha Inicio</th>
+                            <th style="width: 14%;">Fecha Fin</th>
+                            <th style="width: 1%;">Dias</th>
+                            <th style="width: 8%;">Costo Total</th>
+                            <th style="width: 1%;">Estado</th>
                             <th style="width: 10%;">Pagar</th>
                             <th style="width: 15%;">Calificar</th>
-                            <th style="width: 5%;"></th>
+                            <th style="width: 4%;"></th>
                         </tr>
                         </thead>
                         <tbody>
