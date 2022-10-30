@@ -1,6 +1,8 @@
 <?php
+
 use Utils\Session;
 use Utils\DateFormat as Format;
+
 require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
@@ -110,7 +112,8 @@ include('nav-bar.php');
                                 <td><?php echo $mascota->getType(); ?></td>
                                 <td><?php echo $mascota->getBreed(); ?></td>
                                 <td><?php echo $mascota->getPetsize(); ?></td>
-                                <td><img src="<?php echo $mascota->getPhotoUrl(); ?>" style= "border-radius:10px"alt="" width="80px" height="60px">
+                                <td><img src="<?php echo $mascota->getPhotoUrl(); ?>" style="border-radius:10px" alt=""
+                                         width="80px" height="60px">
                                 </td>
                                 <td><a href="<?php echo $mascota->getVaccinationschedule(); ?>" target="_blank">Ver
                                         Plan</a>
@@ -121,7 +124,8 @@ include('nav-bar.php');
                                        href="<?php echo FRONT_ROOT . 'Pet/update/' . $mascota->getId() ?>">Actualizar</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-danger ml-auto" style= "border-radius:17px" onclick="return confirm('Are you sure?')"
+                                    <a class="btn btn-danger ml-auto" style="border-radius:17px"
+                                       onclick="return confirm('Are you sure?')"
                                        href="<?php echo FRONT_ROOT . 'Pet/delete/' . $mascota->getId(); ?>">X</a>
                                 </td>
                             </tr>
@@ -184,7 +188,9 @@ include('nav-bar.php');
 
                         <tbody>
                         <?php
-                        foreach ($guardians as $guardian) {
+                        foreach ($guardians
+
+                        as $guardian) {
                         if ($guardian->getInitDate() != null){
                         ?>
                         <tr>
@@ -220,16 +226,16 @@ include('nav-bar.php');
                                 <td>
                                     <div class="col-lg-2">
                                         <select name="idMascota" id="solapaDuenios" style="width: 80px;">
-                                            <?php if ($allPets){
+                                            <?php if ($allPets) {
                                                 foreach ($allPets as $mascota) { ?>
                                                     <option name="idMascota"
                                                             value="<?php echo $mascota->getId(); ?>">
                                                         <?php echo $mascota->getName(); ?></option>
                                                 <?php }
-                                            } else{ ?>
+                                            } else { ?>
                                                 <option name="idMascota" value="" selected disabled>No hay</option>
-                                            <?php
-                                            }?>
+                                                <?php
+                                            } ?>
                                         </select>
                                     </div>
                                 </td>
@@ -239,11 +245,11 @@ include('nav-bar.php');
                                            value="<?php echo $guardian->getEmail(); ?>">
                                     <input type="hidden" name="costoTotal"
                                            value="<?php echo $guardian->getFee(); ?>">
-                                    <?php if ($allPets) {?>
-                                    <button type="submit" style="text-align:center"
-                                            class="btn btn-dark">Solicitar
-                                    </button>
-                                    <?php }else{ ?>
+                                    <?php if ($allPets) { ?>
+                                        <button type="submit" style="text-align:center"
+                                                class="btn btn-dark">Solicitar
+                                        </button>
+                                    <?php } else { ?>
                                         <button type="submit" style="text-align:center"
                                                 class="btn btn-dark" disabled>Solicitar
                                         </button>
@@ -309,7 +315,7 @@ include('nav-bar.php');
                                     <?php }
                                 } ?>
                                 <td><?php echo Format::formatDate($request->getInitDate()); ?></td>
-                                <td><?php echo Format::formatDate($request->getFinishDate());  ?></td>
+                                <td><?php echo Format::formatDate($request->getFinishDate()); ?></td>
                                 <td><?php echo $request->getDaysAmount(); ?></td>
                                 <td><?php echo $request->getFinalPrice() . ' $' ?></td>
                                 <td class=""><?php if ($request->getReqStatus() == 'Confirmado') {
@@ -326,16 +332,17 @@ include('nav-bar.php');
                                                         ?> <label class="circulo" style="background:pink;"></td>
                             <?php } ?>
 
-                                
-                            <td> <?php foreach ($payments as $payment) {
-                                    if ($payment->getId_request() == $request->getIdRequest()) {?>
-                                    <?php if ($payment->getPaid() == 0 && $request->getReqStatus() != 'Rechazado') { ?>
-                                            <a class="btn btn-info ml-auto" href="<?php echo FRONT_ROOT . 'Payment/showPaymentForm/' . $payment->getId_payment(); ?>">PAGAR</a>
-                                    <?php }else{ ?>
-                                            <button type="button" class="btn btn-info" disabled>PAGAR</button>
-                                    <?php } ?>
-                                    <?php }
-                                } ?>
+
+                                <td> <?php foreach ($payments as $payment) {
+                                        if ($payment->getId_request() == $request->getIdRequest()) { ?>
+                                            <?php if ($payment->getPaid() == 0 && $request->getReqStatus() != 'Rechazado') { ?>
+                                                <a class="btn btn-info ml-auto"
+                                                   href="<?php echo FRONT_ROOT . 'Payment/showPaymentForm/' . $payment->getId_payment(); ?>">PAGAR</a>
+                                            <?php } else { ?>
+                                                <button type="button" class="btn btn-info" disabled>PAGAR</button>
+                                            <?php } ?>
+                                        <?php }
+                                    } ?>
                                 <td>
                                     <form action="<?php echo FRONT_ROOT ?>Request/qualifyGuardian" method="post">
                                         <input type="hidden" name="guardian"
@@ -363,22 +370,28 @@ include('nav-bar.php');
                                                 <button type="button" class="btn btn-dark" disabled>Calificar</button>
                                             </div>
                                         <?php } ?>
-                                        <td>
+                                <td>
                                     <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Rechazado') { ?>
-                                        <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>X</button>
-                                    <?php } else { ?>  
-                                    <?php foreach ($payments as $payment){ ?>
-                                    <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
-                                       <?php if ($payment->getPaid() == 0){ ?>
-                                            <a class="btn btn-danger ml-auto" style="border-radius: 17px;" onclick="return confirm('Are you sure?')"
-                                            href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
+                                        <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>
+                                            X
+                                        </button>
                                     <?php } else { ?>
-                                        <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>X</button>
-                                        </td>        
-                                <?php } ?>               
-                                <?php } ?>
-                                <?php } ?>
-                                <?php } ?>
+                                    <?php foreach ($payments
+
+                                    as $payment){ ?>
+                                    <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
+                                    <?php if ($payment->getPaid() == 0){ ?>
+                                        <a class="btn btn-danger ml-auto" style="border-radius: 17px;"
+                                           onclick="return confirm('Are you sure?')"
+                                           href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
+                                    <?php } else { ?>
+                                    <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>X
+                                    </button>
+                                </td>
+                            <?php } ?>
+                            <?php } ?>
+                            <?php } ?>
+                            <?php } ?>
                                 </td>
                                 </form>
                             </tr>

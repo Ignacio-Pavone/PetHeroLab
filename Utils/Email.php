@@ -1,60 +1,63 @@
 <?php
+
 namespace Utils;
-use PHPMailer\PHPMailer as PHPMailer;	
+
+use PHPMailer\PHPMailer as PHPMailer;
 use PHPMailer\Exception as Exception;
-class Email {
 
- public static function sendEmail($shippingAddress, $subject, $body, $attachment = null)
-        {
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->SMTPDebug = 0;
-                $mail->isSMTP();                     
-                $mail->SMTPOptions = array(
-                    'ssl' => array(
-                        'verify_peer' => false,
-                        'verify_peer_name' => false,
-                        'allow_self_signed' => true
-                    )
-                );
+class Email
+{
 
-                $mail->Host       = 'smtp.gmail.com';           // Enable SMTP authentication
-                $mail->SMTPAuth   = true;                       // Send using SMTP
-                $mail->Username   = 'petheroreserve@gmail.com';  // SMTP username
-                $mail->Password   = 'akzsihofezxrcdyq';           // SMTP password
-                $mail->SMTPSecure = 'tls';                      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
-                $mail->Port       = 587;                        // TCP port to connect to
+    public static function sendEmail($shippingAddress, $subject, $body, $attachment = null)
+    {
+        $mail = new PHPMailer(true);
+        try {
+            //Server settings
+            $mail->SMTPDebug = 0;
+            $mail->isSMTP();
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
 
-                //Recipients
-                $mail->setFrom('petheroreserve@gmail.com', 'Pet Hero');
-                $mail->addAddress($shippingAddress);
+            $mail->Host = 'smtp.gmail.com';           // Enable SMTP authentication
+            $mail->SMTPAuth = true;                       // Send using SMTP
+            $mail->Username = 'petheroreserve@gmail.com';  // SMTP username
+            $mail->Password = 'akzsihofezxrcdyq';           // SMTP password
+            $mail->SMTPSecure = 'tls';                      // Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` also accepted
+            $mail->Port = 587;                        // TCP port to connect to
 
-                // Content
-                $mail->isHTML(true);                             // Set email format to HTML
-                $mail->Subject = $subject;
-                $mail->Body    = $body;
-                if($attachment!=null){
-                    $mail->addAttachment($attachment);
-                }
+            //Recipients
+            $mail->setFrom('petheroreserve@gmail.com', 'Pet Hero');
+            $mail->addAddress($shippingAddress);
 
-                $mail->send();
+            // Content
+            $mail->isHTML(true);                             // Set email format to HTML
+            $mail->Subject = $subject;
+            $mail->Body = $body;
+            if ($attachment != null) {
+                $mail->addAttachment($attachment);
+            }
 
-            } 
-            catch (Exception $e) 
-            {
-            }   
+            $mail->send();
+
+        } catch (Exception $e) {
         }
+    }
 
-        public static function sendPassMail ($email, $pass)
-        {
-            $subject = "Pet Hero - Recuperar contrasenia";
-            $body = "Su contraseña es: " . $pass;
-            self::sendEmail($email, $subject, $body);
-        }
+    public static function sendPassMail($email, $pass)
+    {
+        $subject = "Pet Hero - Recuperar contrasenia";
+        $body = "Su contraseña es: " . $pass;
+        self::sendEmail($email, $subject, $body);
+    }
 
-        public static function buyaMailBody($guardian, $request, $pet, $owner,$Method){
-            $message = "<html>
+    public static function buyaMailBody($guardian, $request, $pet, $owner, $Method)
+    {
+        $message = "<html>
             <body style='background-color:#fff; background-image:url(https://as1.ftcdn.net/v2/jpg/04/24/35/24/1000_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg); background-size:cover' bgcolor='#fff' >
            
             <table align='center' cellpadding='0' cellspacing='0' font-family: Consolas;border-radius: 80px; background-image: ; background-size: cover' width='650'>
@@ -62,12 +65,12 @@ class Email {
                     <tr>
                         <td style='font-family: Consolas; font-weight:400;font-size:15px;color:#fff;text-align:center;padding:20px;line-height:25px; ' class=''><center><img src='https://cdn.discordapp.com/attachments/855473848869847050/1035570001761022023/Screenshot_4.png' width='300px' height='150px' style='display: block'></center>
            
-            <center><img src='".$pet->getPhotoUrl()."' style='display: block; border-radius: 200px' width='200'></center>
+            <center><img src='" . $pet->getPhotoUrl() . "' style='display: block; border-radius: 200px' width='200'></center>
             <p style='color: black; font-size: 36px; font-weight: 900; text-align:center' font-family:Consolas;>Reserva</p></td></tr>
             </tbody>
             </table>
            ";
-                $message .= "<table align='center' border='0' cellpadding='0' cellspacing='0' style='font-family: Consolas;' width='650'>
+        $message .= "<table align='center' border='0' cellpadding='0' cellspacing='0' style='font-family: Consolas;' width='650'>
                     <tbody>
                         <tr>
                             <td bgcolor='#fff' style='color:#666; text-align:left; font-size:14px;font-family:Consolas; padding:20px 0px 20px 40px; line-height:25px; border-radius:30px 0 0 30px;' valign='middle' width='50%' class=''>                                                
@@ -90,7 +93,8 @@ class Email {
                     </tbody>
                 </table>
                 &nbsp;";
-            return $message;
-        }
+        return $message;
+    }
 }
+
 ?>

@@ -118,7 +118,8 @@ class GuardianDAO
         }
     }
 
-    public function dniExistboth ($dni){
+    public function dniExistboth($dni)
+    {
         $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = '" . $dni . "'";
         $sql2 = "SELECT * FROM " . "Owners" . " WHERE dni = '" . $dni . "'";
         $this->connection = Connection::GetInstance();
@@ -131,7 +132,8 @@ class GuardianDAO
         }
     }
 
-    public function emailExistBoth ($email){
+    public function emailExistBoth($email)
+    {
         $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
         $sql2 = "SELECT * FROM " . "Owners" . " WHERE email = '" . $email . "'";
         $this->connection = Connection::GetInstance();

@@ -30,8 +30,8 @@ include_once 'nav-bar.php';
                         <hr>
                         <br>
                         <div>
-                        <p class="forgotpass" ><a href="<?php echo FRONT_ROOT . "Auth/forgotPassword" ?>">Olvidé mi
-                                contraseña</a></p>
+                            <p class="forgotpass"><a href="<?php echo FRONT_ROOT . "Auth/forgotPassword" ?>">Olvidé mi
+                                    contraseña</a></p>
                             <button type="submit" class="btn btn-login float-right">Ingresar</button>
                         </div>
 

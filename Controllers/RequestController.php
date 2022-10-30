@@ -61,17 +61,18 @@ class RequestController
     {
         $user = Session::GetLoggedUser();
         if ($this->reservaDAO->acceptRequestAsGuardian($nroReserva, $user->getId())) {
-            $reserva= $this->reservaDAO->findByRequestId($nroReserva);
-            $this->addPayment($reserva->getIdOwner(),$reserva->getIdRequest(),$reserva->getFinalPrice());
-            Session::SetOkMessage("Request Aceptada con Exito");
+            $reserva = $this->reservaDAO->findByRequestId($nroReserva);
+            $this->addPayment($reserva->getIdOwner(), $reserva->getIdRequest(), $reserva->getFinalPrice());
+            Session::SetOkMessage("Reserva Aceptada con Exito");
         } else {
             Session::SetBadMessage("No se pudo aceptar la reserva distinto tipo de mascota");
         }
-     header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $user->getEmail());
+        header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $user->getEmail());
     }
 
-    public function addPayment($id_owner,$id_request,$price){
-        $payment = new Payment($id_owner,$id_request,$price);
+    public function addPayment($id_owner, $id_request, $price)
+    {
+        $payment = new Payment($id_owner, $id_request, $price);
         $this->paymentDAO->add($payment);
     }
 
@@ -85,7 +86,7 @@ class RequestController
     public function cancelRequestasOwner($nroReserva)
     {
         if ($this->reservaDAO->cancelAsOwner($nroReserva)) {
-            Session::SetOkMessage("Request Cancelada con Exito");
+            Session::SetOkMessage("Reserva Cancelada con Exito");
         } else {
             Session::SetBadMessage("No se pudo cancelar la reserva");
         };

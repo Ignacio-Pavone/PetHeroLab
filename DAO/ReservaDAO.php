@@ -29,12 +29,13 @@ class ReservaDAO
         }
     }
 
-    public function filterNotConfirmedRequestsByOwner($id){
-        try{
+    public function filterNotConfirmedRequestsByOwner($id)
+    {
+        try {
             $array = array();
             $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
             r.final_price, r.type, r.breed, r.days_amount
-            FROM requests as r LEFT OUTER JOIN Payments as p ON p.id_request = r.id_request WHERE p.id_request IS null AND r.id_owner = " .$id. ";";
+            FROM requests as r LEFT OUTER JOIN Payments as p ON p.id_request = r.id_request WHERE p.id_request IS null AND r.id_owner = " . $id . ";";
             $this->connection = Connection::GetInstance();
             $result = $this->connection->Execute($sql);
             foreach ($result as $row) {
@@ -46,35 +47,37 @@ class ReservaDAO
                 array_push($array, $request);
             }
             return $array;
-            }catch (\PDOException $ex){
-                throw $ex;
-            }
-    }
-
-    public function filterPendingRequestsByOwner($id){
-        try{
-        $array = array();
-        $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
-        r.final_price, r.type, r.breed, r.days_amount
-        FROM requests as r INNER JOIN Payments as p ON p.id_request =  r.id_request WHERE p.paid = false AND r.id_owner = " . $id . ";";
-        $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
-        foreach ($result as $row) {
-            $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-            $request->setIdRequest($row["id_request"]);
-            $request->setReqstatus($row["req_status"]);
-            $request->setScore($row["score"]);
-            $this->autoReqStatus($request);
-            array_push($array, $request);
-        }
-        return $array;
-        }catch (\PDOException $ex){
+        } catch (\PDOException $ex) {
             throw $ex;
         }
     }
 
-    public function filterPaidRequestsByOwner($id){
-        try{
+    public function filterPendingRequestsByOwner($id)
+    {
+        try {
+            $array = array();
+            $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
+        r.final_price, r.type, r.breed, r.days_amount
+        FROM requests as r INNER JOIN Payments as p ON p.id_request =  r.id_request WHERE p.paid = false AND r.id_owner = " . $id . ";";
+            $this->connection = Connection::GetInstance();
+            $result = $this->connection->Execute($sql);
+            foreach ($result as $row) {
+                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+                $request->setIdRequest($row["id_request"]);
+                $request->setReqstatus($row["req_status"]);
+                $request->setScore($row["score"]);
+                $this->autoReqStatus($request);
+                array_push($array, $request);
+            }
+            return $array;
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
+
+    public function filterPaidRequestsByOwner($id)
+    {
+        try {
             $array = array();
             $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
             r.final_price, r.type, r.breed, r.days_amount
@@ -90,9 +93,9 @@ class ReservaDAO
                 array_push($array, $request);
             }
             return $array;
-            }catch (\PDOException $ex){
-                throw $ex;
-            }
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
     }
 
     public function findByRequestId($id_request)
@@ -182,26 +185,27 @@ class ReservaDAO
 
     public function autoReqStatus($request)
     {
-            if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'En Curso' && $this->isPay($request)) {
-                if (($request->getFinishDate() < date('Y-m-d')) ) {
-                    $this->updateStatusQuery($request->getIdRequest(), 'Completo');
-                } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d') ){
-                    $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
-                }
-            }else{
-                if ($request->getInitDate() <= date('Y-m-d') && !$this->isPay($request)){
-                    $this->updateStatusQuery($request->getIdRequest(), 'Rechazado');
-                }
+        if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'En Curso' && $this->isPay($request)) {
+            if (($request->getFinishDate() < date('Y-m-d'))) {
+                $this->updateStatusQuery($request->getIdRequest(), 'Completo');
+            } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d')) {
+                $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
             }
+        } else {
+            if ($request->getInitDate() <= date('Y-m-d') && !$this->isPay($request)) {
+                $this->updateStatusQuery($request->getIdRequest(), 'Rechazado');
+            }
+        }
     }
 
-    public function isPay ($request){
+    public function isPay($request)
+    {
         $sql = "SELECT * FROM payments WHERE id_request = " . $request->getIdRequest() . " AND paid = true;";
         $this->connection = Connection::GetInstance();
         $result = $this->connection->Execute($sql);
-        if ($result){
+        if ($result) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -313,14 +317,14 @@ class ReservaDAO
         $reservas = $this->getAll();
         foreach ($reservas as $reserva) {
             if (!$this->isPay($reserva)) {
-            if ($reserva->getReqStatus() != "Completo") {
-                if ($reserva->getIdRequest() == $id_request) {
-                    $this->deleteRequest($id_request);
-                    return true;
+                if ($reserva->getReqStatus() != "Completo") {
+                    if ($reserva->getIdRequest() == $id_request) {
+                        $this->deleteRequest($id_request);
+                        return true;
+                    }
                 }
             }
         }
-    }
         return false;
     }
 
@@ -335,7 +339,7 @@ class ReservaDAO
         }
     }
 
-    public function filterConfirmed ($idGuardian)
+    public function filterConfirmed($idGuardian)
     {
         $reservas = $this->findByGuardianId($idGuardian);
         $array = array();
@@ -349,7 +353,7 @@ class ReservaDAO
         return $array;
     }
 
-    public function filterInCurse ($idGuardian)
+    public function filterInCurse($idGuardian)
     {
         $reservas = $this->findByGuardianId($idGuardian);
         $array = array();
@@ -376,17 +380,17 @@ class ReservaDAO
 
         foreach ($reservas as $reserva) {
             if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "En Curso") {
-                    if ($type == $reserva->getType()) {
-                        if ($breed == $reserva->getBreed()) {
-                            return true;
-                        }
+                if ($type == $reserva->getType()) {
+                    if ($breed == $reserva->getBreed()) {
+                        return true;
                     }
+                }
             }
         }
         return false;
     }
 
-    public function dateChecker ($dateone, $datetwo)
+    public function dateChecker($dateone, $datetwo)
     {
         $date1 = strtotime($dateone);
         $date2 = strtotime($datetwo);
@@ -396,7 +400,7 @@ class ReservaDAO
         return true;
     }
 
-    public function countDays ($initdate, $finishdate)
+    public function countDays($initdate, $finishdate)
     {
         $date1 = strtotime($initdate);
         $date2 = strtotime($finishdate);
@@ -410,7 +414,7 @@ class ReservaDAO
         return $days;
     }
 
-    public function checkDataNotNull ($searchPet, $searchGuardian, $searchOwner)
+    public function checkDataNotNull($searchPet, $searchGuardian, $searchOwner)
     {
         if ($searchPet != null && $searchGuardian != null && $searchOwner != null)
             return true;
@@ -418,7 +422,7 @@ class ReservaDAO
             return false;
     }
 
-    public function changeReqStatus ($id_request, $req_status)
+    public function changeReqStatus($id_request, $req_status)
     {
         try {
             $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id";
@@ -433,7 +437,7 @@ class ReservaDAO
         return false;
     }
 
-    public function setScore ($id_request, $score)
+    public function setScore($id_request, $score)
     {
         $reservas = $this->getAll();
         foreach ($reservas as $reserva) {
