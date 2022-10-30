@@ -205,7 +205,6 @@ td {
   text-align: center;
   top: 4em;
   width: 50%;
-
 }
 
 #solapaDuenios {
@@ -326,7 +325,6 @@ input[type="checkbox"]:checked::before {
   border-radius: 5px;
   padding: 5px 0;
   transition: opacity 1s ease-in-out;
-
   position: absolute;
   z-index: 1;
   left: 0;
@@ -354,4 +352,11 @@ a:hover {
   color: red;
   background-color: transparent;
   text-decoration: underline;
+}
+
+#message {
+  color: #DE6262;
+  font-style: italic;
+  font-weight: 50;
+  font-size:large;
 }
