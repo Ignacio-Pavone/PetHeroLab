@@ -90,14 +90,14 @@ include('nav-bar.php');
                     <thead>
                     <tr>
                         <th style="width: 15%;">Nombre</th>
-                        <th style="width: 15%;">Especie</th>
+                        <th style="width: 10%;">Especie</th>
                         <th style="width: 15%;">Raza</th>
                         <th style="width: 15%;">Tamaño</th>
-                        <th style="width: 20%;">Foto</th>
-                        <th style="width: 10%;">Plan Vacunacion</th>
-                        <th style="width: 10%;">Video</th>
-                        <th style="width: 15%;">Actualizar</th>
-                        <th style="width: 15%;">Borrar</th>
+                        <th style="width: 15%;">Foto</th>
+                        <th style="width: 15%;">Vacunas</th>
+                        <th style="width: 15%;">Video</th>
+                        <th style="width: 10%;">Actualizar</th>
+                        <th style="width: 5%;">Borrar</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -121,8 +121,8 @@ include('nav-bar.php');
                                        href="<?php echo FRONT_ROOT . 'Pet/update/' . $mascota->getId() ?>">Actualizar</a>
                                 </td>
                                 <td>
-                                    <a class="btn btn-dark ml-auto" onclick="return confirm('Are you sure?')"
-                                       href="<?php echo FRONT_ROOT . 'Pet/delete/' . $mascota->getId(); ?>">Borrar</a>
+                                    <a class="btn btn-danger ml-auto" style= "border-radius:17px" onclick="return confirm('Are you sure?')"
+                                       href="<?php echo FRONT_ROOT . 'Pet/delete/' . $mascota->getId(); ?>">X</a>
                                 </td>
                             </tr>
                             <?php
@@ -365,15 +365,15 @@ include('nav-bar.php');
                                         <?php } ?>
                                         <td>
                                     <?php if ($request->getReqStatus() == 'Calificado' || $request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Rechazado') { ?>
-                                        <button type="button" class="btn btn-dark" style="border-radius: 20px" disabled>X</button>
+                                        <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>X</button>
                                     <?php } else { ?>  
                                     <?php foreach ($payments as $payment){ ?>
                                     <?php if ($payment->getId_request() == $request->getIdRequest()) { ?>
                                        <?php if ($payment->getPaid() == 0){ ?>
-                                            <a class="btn btn-danger ml-auto" style="border-radius: 20px;" onclick="return confirm('Are you sure?')"
+                                            <a class="btn btn-danger ml-auto" style="border-radius: 17px;" onclick="return confirm('Are you sure?')"
                                             href="<?php echo FRONT_ROOT . 'Request/cancelRequestasOwner/' . $request->getIdRequest(); ?>">X</a>
                                     <?php } else { ?>
-                                        <button type="button" class="btn btn-dark" style="border-radius: 20px" disabled>X</button>
+                                        <button type="button" class="btn btn-dark" style="border-radius: 17px" disabled>X</button>
                                         </td>        
                                 <?php } ?>               
                                 <?php } ?>
