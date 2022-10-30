@@ -28,6 +28,11 @@
   font-style: italic;
 }
 
+.custom-select{
+  font-style: italic;
+
+}
+
 .banner-sec {
   background: url(https://d3mvlb3hz2g78.cloudfront.net/wp-content/uploads/2020/07/thumb_720_450_dreamstime_m_156181857.jpg) no-repeat left bottom;
   background-size: cover;
