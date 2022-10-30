@@ -1,6 +1,8 @@
 <?php
+
 use Utils\Session;
 use Utils\DateFormat as Format;
+
 require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
@@ -87,15 +89,15 @@ include('nav-bar.php');
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Fecha Inicio</span>
-                        </div>
+                            </div>
                             <input type="text" class="form-control" placeholder="Inicio" name="init_date"
                                    style="text-align:center" aria-describedby="basic-addon1"
-                                   disabled value="<?php 
-                                    if ($user->getInitDate()!=null) {
-                                        echo Format::formatDate($user->getInitDate());
-                                      } else {
-                                        echo 'No tiene fecha de inicio';
-                                   }; ?>">
+                                   disabled value="<?php
+                            if ($user->getInitDate() != null) {
+                                echo Format::formatDate($user->getInitDate());
+                            } else {
+                                echo 'No tiene fecha de inicio';
+                            }; ?>">
                         </div>
                         <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
@@ -103,12 +105,12 @@ include('nav-bar.php');
                             </div>
                             <input type="text" class="form-control" placeholder="Fin" name="finish_date"
                                    style="text-align:center" aria-describedby="basic-addon1"
-                                   disabled value="<?php 
-                                    if ($user->getInitDate()!=null) {
-                                      echo Format::formatDate($user->getFinishDate());
-                                      } else {
-                                      echo 'No tiene fecha de fin';
-                                 }; ?>">
+                                   disabled value="<?php
+                            if ($user->getInitDate() != null) {
+                                echo Format::formatDate($user->getFinishDate());
+                            } else {
+                                echo 'No tiene fecha de fin';
+                            }; ?>">
                         </div>
                     </div>
                 </div>
@@ -133,10 +135,10 @@ include('nav-bar.php');
             <table style="text-align:center;">
                 <thead>
                 <tr>
-                    <th style="width: 15%;">Dueño</th>
+                    <th style="width: 20%;">Dueño</th>
                     <th style="width: 15%;">Mascota</th>
                     <th style="width: 15%;">Tipo</th>
-                    <th style="width: 20%;">Fecha Inicio</th>
+                    <th style="width: 15%;">Fecha Inicio</th>
                     <th style="width: 20%;">Fecha Fin</th>
                     <th style="width: 20%;">Ganancia</th>
                     <th style="width: 20%;">Aceptar</th>
@@ -194,6 +196,7 @@ include('nav-bar.php');
                     <th style="width: 10%;">Fecha Fin</th>
                     <th style="width: 10%;">Calificacion</th>
                     <th style="width: 10%;">Estado</th>
+                    <th style="width: 10%;">Pago</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -229,6 +232,16 @@ include('nav-bar.php');
                             ?> <label class="circulo" style="background:pink;"> </td>
                         <?php } ?>
                         </td>
+                        <td><?php foreach ($payments as $payment) {
+                                if ($payment->getId_request() == $request->getIdRequest()) {
+                                    if ($payment->getPaid() == 1) { ?>
+                                        <button type="button" class="btn btn-success">Pagado</button>
+                                    <?php } else {
+                                        ?>
+                                        <button type="button" class="btn btn-danger" disabled>No Pago</button>
+                                    <?php }
+                                }
+                            } ?></td>
                         </tr>
                         <?php
                     }

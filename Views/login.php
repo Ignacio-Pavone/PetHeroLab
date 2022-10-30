@@ -30,8 +30,11 @@ include_once 'nav-bar.php';
                         <hr>
                         <br>
                         <div>
+                            <p class="forgotpass"><a href="<?php echo FRONT_ROOT . "Auth/forgotPassword" ?>">Olvidé mi
+                                    contraseña</a></p>
                             <button type="submit" class="btn btn-login float-right">Ingresar</button>
                         </div>
+
                     </div>
                     <div class="col-md-8 banner-sec">
                         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
@@ -39,7 +42,9 @@ include_once 'nav-bar.php';
                                 <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                             </ol>
                         </div>
+
                     </div>
+
         </form>
         <?php if (Session::VerifiyBadMessage()) { ?>
             <div class="alert alert-danger alert-dismissible fade show center-block" style="text-align:center"
