@@ -133,10 +133,10 @@ include('nav-bar.php');
             <table style="text-align:center;">
                 <thead>
                 <tr>
-                    <th style="width: 15%;">Dueño</th>
+                    <th style="width: 20%;">Dueño</th>
                     <th style="width: 15%;">Mascota</th>
                     <th style="width: 15%;">Tipo</th>
-                    <th style="width: 20%;">Fecha Inicio</th>
+                    <th style="width: 15%;">Fecha Inicio</th>
                     <th style="width: 20%;">Fecha Fin</th>
                     <th style="width: 20%;">Ganancia</th>
                     <th style="width: 20%;">Aceptar</th>
