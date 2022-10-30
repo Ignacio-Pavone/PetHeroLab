@@ -69,13 +69,13 @@ $user = Session::GetLoggedUser();
                                 <label class="btn btn-dark" for="inputGroupSelect01">Forma de Pago</label>
                             </div>
                             <select class="custom-select" name="Method">
-                                <option value="credito" <?php  ?>>
+                                <option value="Credito" <?php  ?>>
                                     Credito
                                 </option>
-                                <option value="debito" <?php ?>>
+                                <option value="Debito" <?php ?>>
                                      Debito
                                 </option>
-                                <option value="efectivo" <?php ?>>
+                                <option value="Efectivo" <?php ?>>
                                     Efectivo
                                 </option>
                             </select>

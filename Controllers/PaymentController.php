@@ -6,6 +6,7 @@ use DAO\PetDAO as petDAO;
 use DAO\ReservaDAO as requestDAO;
 use Utils\Email as Email;
 
+
 class PaymentController{
     private $paymentDAO;
     private $requestDAO;
@@ -20,7 +21,7 @@ class PaymentController{
         $this->requestDAO = new RequestDAO();
     }
 
-    public function processPayment($Method,$idPayment, $idOwner, $idRequest){
+    public function processPayment($Method,$idPayment,$idOwner,$idRequest){
         $owner = $this->ownerDAO->findbyID($idOwner);
         $idGuardian = $this->findGuardianIdbyRequest($idRequest);
         $guardian = $this->guardianDAO->findbyID($idGuardian);
@@ -30,7 +31,7 @@ class PaymentController{
         $this->paymentDAO->insertMethod($idPayment, $Method);
         $this->paymentDAO->updatePaid($idPayment);
         $this->paymentDAO->updateDate($idPayment);
-        Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian,$request,$pet,$owner));
+        Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian,$request,$pet,$owner,$Method));
         header ("location: ".FRONT_ROOT."Auth/showOwnerProfile");
     }
 
