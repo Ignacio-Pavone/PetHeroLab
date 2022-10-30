@@ -30,7 +30,7 @@ class PaymentController{
         $this->paymentDAO->insertMethod($idPayment, $Method);
         $this->paymentDAO->updatePaid($idPayment);
         $this->paymentDAO->updateDate($idPayment);
-        Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::compraMailBody($guardian,$request,$pet,$owner));
+        Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian,$request,$pet,$owner));
         header ("location: ".FRONT_ROOT."Auth/showOwnerProfile");
     }
 

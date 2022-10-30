@@ -53,7 +53,7 @@ class Email {
             self::sendEmail($email, $subject, $body);
         }
 
-        public static function compraMailBody($guardian, $request, $pet, $owner){
+        public static function buyaMailBody($guardian, $request, $pet, $owner){
             $message = "<html>
             <body style='background-color:#fff; background-image:url(https://as1.ftcdn.net/v2/jpg/04/24/35/24/1000_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg); background-size:cover' bgcolor='#fff' >
            

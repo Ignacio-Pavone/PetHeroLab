@@ -1,6 +1,6 @@
 <?php 
 require_once VIEWS_PATH . 'header.php';
-
+include('back-bar.php');
 ?>
 
 <section class="login-block" style="height:100vh;">
