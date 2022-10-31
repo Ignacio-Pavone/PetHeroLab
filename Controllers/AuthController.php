@@ -120,5 +120,4 @@ class AuthController
         header("location: " . FRONT_ROOT . "Auth/showLogin");
     }
 }
-
 ?>

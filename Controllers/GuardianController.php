@@ -69,7 +69,5 @@ class GuardianController
             $this->showChangePassword();
         }
     }
-
 }
-
 ?>

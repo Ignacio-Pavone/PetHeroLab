@@ -132,7 +132,5 @@ class PaymentDAO
             throw $ex;
         }
     }
-
 }
-
 ?>

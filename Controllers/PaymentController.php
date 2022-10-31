@@ -63,8 +63,5 @@ class PaymentController
     {
         header("location: " . FRONT_ROOT . "Auth/showPaymentForm/" . $id);
     }
-
-
 }
-
 ?>

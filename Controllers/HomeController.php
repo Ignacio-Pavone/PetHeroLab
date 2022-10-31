@@ -23,5 +23,4 @@ class HomeController
         require_once(VIEWS_PATH . "register-owner.php");
     }
 }
-
 ?>

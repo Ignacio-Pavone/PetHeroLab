@@ -4,7 +4,6 @@ use DAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 use Utils\Session;
 
-
 class PetController
 {
     private $mascotaDAO;
@@ -55,5 +54,5 @@ class PetController
         }
         header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
     }
-
 }
+?>

@@ -8,7 +8,6 @@ class OwnerController
 {
     private $ownerDAO;
 
-
     public function __construct()
     {
         $this->ownerDAO = new OwnerDAO();
@@ -49,5 +48,5 @@ class OwnerController
             $this->showChangePassword();
         }
     }
-
 }
+?>
