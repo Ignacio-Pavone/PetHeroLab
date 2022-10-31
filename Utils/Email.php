@@ -53,7 +53,7 @@ class Email
         self::sendEmail($email, $subject, $body);
     }
 
-    public static function buyaMailBody($guardian, $request, $pet, $owner, $Method)
+    public static function buyaMailBody($guardian, $request, $pet, $owner, $Method, $numeroTarjeta, $finalprice)
     {
         $message = "<html>
             <body style='background-color:#fff; background-image:url(https://as1.ftcdn.net/v2/jpg/04/24/35/24/1000_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg); background-size:cover' bgcolor='#fff' >
@@ -71,7 +71,7 @@ class Email
         $message .= "<table align='center' border='0' cellpadding='0' cellspacing='0' style='font-family: Consolas;' width='650'>
                     <tbody>
                         <tr>
-                            <td bgcolor='#fff' style='color:#666; text-align:left; font-size:14px;font-family:Consolas; padding:20px 0px 20px 40px; line-height:25px; border-radius:30px 0 0 30px;' valign='middle' width='50%' class=''>                                                
+                            <td bgcolor='' style='opacity: 0,0; font-weight: 1000; color:#666; text-align:left; font-size:14px;font-family:Consolas; padding:20px 0px 20px 40px; line-height:25px; border-radius:30px 0 0 30px;' valign='middle' width='60%' class=''>                                                
                             <table align='center' border='0' cellpadding='0' cellspacing='0' width='350'>
                                 <tbody>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Guardian: " . $guardian->getFullName() . "</h4>
@@ -82,9 +82,10 @@ class Email
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de inicio: " . $request->getInitDate() . "</h4>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de fin: " . $request->getFinishDate() . "</h4>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Dias: " . $request->getDaysAmount() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Costo total: $" . $request->getFinalPrice() . "</h4>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Costo total: $" .  $finalprice. "</h4>
                                     <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Modo de Pago: " . $Method . "</h4>                                
-                                </tbody>
+                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Tarjeta: " . $numeroTarjeta . "</h4>                                
+                                    </tbody>
                             </table>
                             </td>
                         </tr>

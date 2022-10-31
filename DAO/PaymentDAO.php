@@ -132,5 +132,18 @@ class PaymentDAO
             throw $ex;
         }
     }
+
+    public function updateFinalPrice ($id, $price)
+    {
+        try {
+            $sql = "UPDATE " . $this->tableName . " SET price = :price WHERE id_payment = :id_payment";
+            $parameters['price'] = $price;
+            $parameters['id_payment'] = $id;
+            $this->connection = Connection::GetInstance();
+            $result = $this->connection->ExecuteNonQuery($sql, $parameters);
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+    }
 }
 ?>

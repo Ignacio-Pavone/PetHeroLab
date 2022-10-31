@@ -409,6 +409,21 @@ class RequestDAO
         }
         return false;
     }
+
+    public function updateFinalPrice ($id_request, $final_price)
+    {
+        try {
+            $sql = "UPDATE " . $this->tableName . " SET final_price = :final_price WHERE id_request = :id_request";
+            $parameters["id_request"] = $id_request;
+            $parameters["final_price"] = $final_price;
+            $this->connection = Connection::GetInstance();
+            $this->connection->ExecuteNonQuery($sql, $parameters);
+            return true;
+        } catch (\PDOException $ex) {
+            throw $ex;
+        }
+        return false;
+    }
 }
 ?>
 

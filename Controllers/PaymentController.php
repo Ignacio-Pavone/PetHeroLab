@@ -29,27 +29,29 @@ class PaymentController
 
     public function processPayment($idPayment, $idOwner, $idRequest, $name, $expiry, $number, $cvc)
     {
-        if(!($this->validatePay($name,$expiry,$number,$cvc))){
-            Session::SetBadMessage("Datos de la tarjeta incorrectos.");
-            header("location: ".VIEWS_PATH."payment-method.php");
+        $datos = CreditCard::validCreditCard($number);
+        if(!$this->validatePay($name,$expiry,$number,$cvc)){
+            Session::SetBadMessage("Datos de la tarjeta incorrectos intente nuevamente.");
+            header("location: ".FRONT_ROOT . 'Payment/showPaymentForm/' . $idPayment);
+        }else{
+            $owner = $this->ownerDAO->findbyID($idOwner);
+            $idGuardian = $this->findGuardianIdbyRequest($idRequest);
+            $guardian = $this->guardianDAO->findbyID($idGuardian);
+            $request = $this->requestDAO->findByRequestId($idRequest);
+            $idPet = $this->findPetIdbyRequest($idRequest);
+            $pet = $this->petDAO->findbyID($idPet);
+            $finalprice = $request->getfinalPrice() / 2;
+            $this->paymentDAO->insertMethod($idPayment, $datos['type']);
+            $this->paymentDAO->updatePaid($idPayment);
+            $this->paymentDAO->updateDate($idPayment);
+            $this->paymentDAO->updateFinalPrice($idPayment, $finalprice);
+            $this->requestDAO->updateFinalPrice($idRequest, $finalprice);
+            Session::setOkMessage("Tu compra con tarjeta ".$datos['type']." fue procesada con éxito.");
+            Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner,$datos['type'], $datos['number'],  $finalprice));
+            header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
         }
 
-        $owner = $this->ownerDAO->findbyID($idOwner);
-        $idGuardian = $this->findGuardianIdbyRequest($idRequest);
-        $guardian = $this->guardianDAO->findbyID($idGuardian);
-        $request = $this->requestDAO->findByRequestId($idRequest);
-        $idPet = $this->findPetIdbyRequest($idRequest);
-        $pet = $this->petDAO->findbyID($idPet);
 
-        //$arrayValidateCard = CreditCard::validateCreditCard($number);
-
-        //$arrayValidateCard['type']; 
-
-        $this->paymentDAO->insertMethod($idPayment, "credit");
-        $this->paymentDAO->updatePaid($idPayment);
-        $this->paymentDAO->updateDate($idPayment);
-        Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner, "credit"));
-        header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
     }
 
     public function findPetIdbyRequest($idRequest)
@@ -88,12 +90,10 @@ class PaymentController
             if($validateCvc == false) return false;
 
             //Validamos fecha de expiracion
-            $date = explode(" / ", $mmyy);
+            $date = explode("/", $mmyy);
             $validateDate = CreditCard::validDate("20".$date[1], $date[0]);
             if(!$validateDate) return false;
 
-            //Si pasa todas las validaciones procesamos la compra
-            Session::setOkMessage("Tu compra con tarjeta ".$validateCard['type']." fue procesada con éxito.");
             return true;
         }
 }
