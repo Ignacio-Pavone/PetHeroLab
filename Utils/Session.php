@@ -1,5 +1,5 @@
-<?php namespace Utils;
-
+<?php 
+namespace Utils;
 use Models\User as User;
 
 class Session

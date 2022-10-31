@@ -1,7 +1,5 @@
 <?php
-
 namespace Config;
-
 use Config\Request as Request;
 
 class Router
@@ -9,13 +7,9 @@ class Router
     public static function Route(Request $request)
     {
         $controllerName = $request->getcontroller() . 'Controller';
-
         $methodName = $request->getmethod();
-
         $methodParameters = $request->getparameters();
-
         $controllerClassName = "Controllers\\" . $controllerName;
-
         $controller = new $controllerClassName;
 
         if (!isset($methodParameters))

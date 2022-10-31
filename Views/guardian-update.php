@@ -1,7 +1,5 @@
 <?php
-
 use Utils\Session;
-
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
 ?>
@@ -58,5 +56,4 @@ $type = $_SESSION['userType'];
         <br>
         </div>
         </div>
-
     </main>

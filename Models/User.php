@@ -1,5 +1,4 @@
 <?php
-
 namespace Models;
 
 abstract class User

@@ -1,7 +1,5 @@
-create
-database  if not exists pethero;
-use
-pethero;
+create database if not exists pethero;
+use pethero;
 
 create table Owners
 (
@@ -13,7 +11,6 @@ create table Owners
     password varchar(60),
     constraint pk_id_duenio primary key (id_owner)
 );
-
 
 create table Guardians
 (
@@ -46,7 +43,6 @@ create table Pets
     constraint fk_id_owner_d foreign key (id_owner) references Owners (id_owner)
 );
 
-
 create table Payments
 (
     id_payment     int auto_increment,
@@ -60,7 +56,6 @@ create table Payments
     constraint fk_id_request foreign key (id_request) references Requests (id_request),
     constraint fk_id_owner_p foreign key (id_owner) references Owners (id_owner)
 );
-
 
 create table Requests
 (

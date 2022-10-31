@@ -1,7 +1,5 @@
 <?php
-
 namespace Utils;
-
 use PHPMailer\PHPMailer as PHPMailer;
 use PHPMailer\Exception as Exception;
 

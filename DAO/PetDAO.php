@@ -1,7 +1,5 @@
 <?php
-
 namespace DAO;
-
 use Models\Pet;
 use DAO\Connection as Connection;
 

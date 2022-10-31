@@ -1,8 +1,6 @@
 <?php
-
 use Utils\Session;
 use Utils\DateFormat as Format;
-
 require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
@@ -200,7 +198,6 @@ include('nav-bar.php');
                 </tr>
                 </thead>
                 <tbody>
-
                 <?php foreach ($requests as $request) { ?>
                     <tr>
                     <?php

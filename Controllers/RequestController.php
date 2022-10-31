@@ -1,5 +1,5 @@
-<?php namespace Controllers;
-
+<?php 
+namespace Controllers;
 use DAO\GuardianDAO as GuardianDAO;
 use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
@@ -8,7 +8,6 @@ use DAO\PaymentDAO as PaymentDAO;
 use DAO\ReservaDAO as ReservaDAO;
 use Models\Request as Request;
 use Utils\Session;
-use Utils\Tools as Tools;
 
 class RequestController
 {
