@@ -1,8 +1,7 @@
 <?php
 require_once VIEWS_PATH . 'header.php';
-include('back-bar.php');
+require_once VIEWS_PATH . 'navbars/back-bar.php';
 ?>
-
 <section class="login-block" style="height:100vh;">
     <main class="py-1">
         <section id="login-block" class="mb-5">

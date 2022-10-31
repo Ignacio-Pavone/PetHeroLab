@@ -1,7 +1,7 @@
 <?php
 use Utils\Session as Session;
-include('nav-simple-bar.php');
 require_once VIEWS_PATH . 'header.php';
+require_once VIEWS_PATH . 'navbars/nav-simple-bar.php';
 $user = Session::GetLoggedUser();
 ?>
 <section class="login-block">

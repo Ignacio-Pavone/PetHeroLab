@@ -1,7 +1,7 @@
 <?php
 use Utils\Session;
 require_once VIEWS_PATH . 'header.php';
-include_once 'nav-bar.php';
+require_once VIEWS_PATH . 'nav-bar.php';
 ?>
 <section id="disponibilidadSection" class="login-block">
     <main class="py-5">

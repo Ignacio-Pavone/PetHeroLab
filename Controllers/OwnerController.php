@@ -27,7 +27,7 @@ class OwnerController
 
     public function showChangePassword()
     {
-        require_once(VIEWS_PATH . "change-password.php");
+        require_once(VIEWS_PATH . "password/change-password.php");
     }
 
     public function changePassword($userID, $oldPassword, $newPassword, $newPassword2)

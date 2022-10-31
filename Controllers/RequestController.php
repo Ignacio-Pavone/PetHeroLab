@@ -5,7 +5,7 @@ use DAO\OwnerDAO as OwnerDAO;
 use DAO\PetDAO as PetDAO;
 use Models\Payment as Payment;
 use DAO\PaymentDAO as PaymentDAO;
-use DAO\ReservaDAO as ReservaDAO;
+use DAO\RequestDAO as RequestDAO;
 use Models\Request as Request;
 use Utils\Session;
 
@@ -13,7 +13,7 @@ class RequestController
 {
     private $guardianDAO;
     private $ownerDAO;
-    private $reservaDAO;
+    private $requestDAO;
     private $mascotaDAO;
     private $paymentDAO;
 
@@ -21,25 +21,25 @@ class RequestController
     {
         $this->guardianDAO = new GuardianDAO();
         $this->ownerDAO = new OwnerDAO();
-        $this->reservaDAO = new ReservaDAO();
+        $this->requestDAO = new requestDAO();
         $this->mascotaDAO = new PetDAO();
         $this->paymentDAO = new PaymentDAO();
     }
 
     public function requestGuardian($idMascota, $Duenio, $Guardian, $fechaInicio, $fechaFin, $costoTotal)
     {
-        $dias = $this->reservaDAO->countDays($fechaInicio, $fechaFin);
+        $dias = $this->requestDAO->countDays($fechaInicio, $fechaFin);
         $searchPet = $this->mascotaDAO->findByID($idMascota);
         $searchGuardian = $this->guardianDAO->getByEmail($Guardian);
         $searchDuenio = $this->ownerDAO->getByEmail($Duenio);
         if (strcasecmp($searchGuardian->getPetSize(), $searchPet->getPetsize()) == 0) {
-            if ($this->reservaDAO->checkDataNotNull($searchPet, $searchGuardian, $searchDuenio) && !$this->reservaDAO->dateChecker($fechaInicio, $fechaFin)) {
-                if ($this->reservaDAO->analyzeRequest($searchGuardian->getId(), $searchPet->getType(), $searchPet->getBreed(), $fechaInicio)) {
+            if ($this->requestDAO->checkDataNotNull($searchPet, $searchGuardian, $searchDuenio) && !$this->requestDAO->dateChecker($fechaInicio, $fechaFin)) {
+                if ($this->requestDAO->analyzeRequest($searchGuardian->getId(), $searchPet->getType(), $searchPet->getBreed(), $fechaInicio)) {
                     $reserva = new Request($searchPet->getId(), $searchDuenio->getId(), $searchGuardian->getId(), $fechaInicio, $fechaFin, doubleval($costoTotal), $searchPet->getType(), $searchPet->getBreed(), $dias);
                     $reserva->setIdOwner($searchDuenio->getId());
                     $reserva->setFinalPrice($costoTotal);
-                    if (!$this->reservaDAO->Exists($reserva)) {
-                        $this->reservaDAO->add($reserva);
+                    if (!$this->requestDAO->Exists($reserva)) {
+                        $this->requestDAO->add($reserva);
                         Session::SetOkMessage("Guardian Solicitado con Exito");
                     } else {
                         Session::SetBadMessage("Ya existe una reserva con esos datos");
@@ -59,8 +59,8 @@ class RequestController
     public function confirmRequestasGuardian($nroReserva)
     {
         $user = Session::GetLoggedUser();
-        if ($this->reservaDAO->acceptRequestAsGuardian($nroReserva, $user->getId())) {
-            $reserva = $this->reservaDAO->findByRequestId($nroReserva);
+        if ($this->requestDAO->acceptRequestAsGuardian($nroReserva, $user->getId())) {
+            $reserva = $this->requestDAO->findByRequestId($nroReserva);
             $this->addPayment($reserva->getIdOwner(), $reserva->getIdRequest(), $reserva->getFinalPrice());
             Session::SetOkMessage("Reserva Aceptada con Exito");
         } else {
@@ -78,13 +78,13 @@ class RequestController
     public function rejectRequestasGuardian($nroReserva)
     {
         $user = Session::GetLoggedUser();
-        $this->reservaDAO->rejectRequestGuardian($nroReserva);
+        $this->requestDAO->rejectRequestGuardian($nroReserva);
         header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $user->getEmail());
     }
 
     public function cancelRequestasOwner($nroReserva)
     {
-        if ($this->reservaDAO->cancelAsOwner($nroReserva)) {
+        if ($this->requestDAO->cancelAsOwner($nroReserva)) {
             Session::SetOkMessage("Reserva Cancelada con Exito");
         } else {
             Session::SetBadMessage("No se pudo cancelar la reserva");
@@ -95,12 +95,12 @@ class RequestController
     public function qualifyGuardian($guardian, $calificacion, $reserva)
     {
         $guardianBuscado = $this->guardianDAO->findByID($guardian);
-        $count = $this->reservaDAO->countReviewsById($guardian) + 1;
-        $suma = $this->reservaDAO->sumReviewsById($guardian) + $calificacion;
+        $count = $this->requestDAO->countReviewsById($guardian) + 1;
+        $suma = $this->requestDAO->sumReviewsById($guardian) + $calificacion;
         $guardianBuscado->checkReputation($suma, $count);
         $this->guardianDAO->update($guardianBuscado);
-        if ($this->reservaDAO->changeReqStatus($reserva, "Calificado")) {
-            $this->reservaDAO->setScore($reserva, $calificacion);
+        if ($this->requestDAO->changeReqStatus($reserva, "Calificado")) {
+            $this->requestDAO->setScore($reserva, $calificacion);
             Session::SetOkMessage("Guardian Calificado con Exito");
         } else {
             Session::SetBadMessage("No se pudo calificar al guardian");

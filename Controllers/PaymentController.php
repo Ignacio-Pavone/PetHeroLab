@@ -4,7 +4,7 @@ use DAO\PaymentDAO as paymentDAO;
 use DAO\OwnerDAO as ownerDAO;
 use DAO\GuardianDAO as guardianDAO;
 use DAO\PetDAO as petDAO;
-use DAO\ReservaDAO as requestDAO;
+use DAO\RequestDAO as requestDAO;
 use Utils\Email as Email;
 
 

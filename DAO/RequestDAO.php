@@ -3,7 +3,7 @@ namespace DAO;
 use Models\Request as Request;
 use DAO\Connection as Connection;
 
-class ReservaDAO
+class RequestDAO
 {
     private $connection;
     private $tableName = "Requests";
