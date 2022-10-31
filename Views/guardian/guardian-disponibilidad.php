@@ -1,13 +1,12 @@
 <?php
 use Utils\Session;
 $user = Session::GetLoggedUser();
-require_once VIEWS_PATH . 'header.php';
 $type = $_SESSION['userType'];
-include('nav-simple-bar.php');
+require_once VIEWS_PATH . 'header.php';
+require_once VIEWS_PATH . 'navbars/nav-simple-bar.php';
 ?>
 <section id="disponibilidadSection" class="login-block">
     <main class="py-5">
-
         <form action="<?php echo FRONT_ROOT ?>Guardian/ModifyAvailability" method="post">
             <div class="container" id="dataUser">
                 <center>
@@ -59,7 +58,6 @@ include('nav-simple-bar.php');
                 </div>
             </div>
         </form>
-
     </main>
 
                         

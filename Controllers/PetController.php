@@ -1,12 +1,8 @@
 <?php
-
 namespace Controllers;
-
 use DAO\PetDAO as PetDAO;
 use Models\Pet as Pet;
 use Utils\Session;
-
-
 class PetController
 {
     private $mascotaDAO;
@@ -40,7 +36,7 @@ class PetController
     {
         $user = Session::GetLoggedUser();
         $search = $this->mascotaDAO->findByID($id);
-        require_once(VIEWS_PATH . "update-mascota.php");
+        require_once(VIEWS_PATH . "owner/update-pet.php");
     }
 
     public function modify($id_owner, $id, $name, $type, $breed, $pet_size, $photo_url, $vaccination_schedule, $video_url)
@@ -57,5 +53,5 @@ class PetController
         }
         header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
     }
-
 }
+?>

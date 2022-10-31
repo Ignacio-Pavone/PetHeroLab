@@ -1,9 +1,9 @@
-<?php namespace DAO;
-
+<?php 
+namespace DAO;
 use Models\Request as Request;
 use DAO\Connection as Connection;
 
-class ReservaDAO
+class RequestDAO
 {
     private $connection;
     private $tableName = "Requests";
@@ -24,75 +24,6 @@ class ReservaDAO
                 array_push($requests, $request);
             }
             return $requests;
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    public function filterNotConfirmedRequestsByOwner($id)
-    {
-        try {
-            $array = array();
-            $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
-            r.final_price, r.type, r.breed, r.days_amount
-            FROM requests as r LEFT OUTER JOIN Payments as p ON p.id_request = r.id_request WHERE p.id_request IS null AND r.id_owner = " . $id . ";";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($array, $request);
-            }
-            return $array;
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    public function filterPendingRequestsByOwner($id)
-    {
-        try {
-            $array = array();
-            $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
-        r.final_price, r.type, r.breed, r.days_amount
-        FROM requests as r INNER JOIN Payments as p ON p.id_request =  r.id_request WHERE p.paid = false AND r.id_owner = " . $id . ";";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($array, $request);
-            }
-            return $array;
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    public function filterPaidRequestsByOwner($id)
-    {
-        try {
-            $array = array();
-            $sql = "SELECT r.id_request, r.id_pet, r.id_owner, r.id_guardian, r.init_date, r.finish_date, r.req_status, r.score, 
-            r.final_price, r.type, r.breed, r.days_amount
-            FROM requests as r INNER JOIN Payments as p ON p.id_request =  r.id_request WHERE p.paid = true AND r.id_owner = " . $id . ";";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($array, $request);
-            }
-            return $array;
         } catch (\PDOException $ex) {
             throw $ex;
         }
@@ -479,6 +410,7 @@ class ReservaDAO
         return false;
     }
 }
+?>
 
 
 

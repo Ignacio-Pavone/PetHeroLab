@@ -1,6 +1,6 @@
 <?php
-
 namespace Utils;
+
 enum EReserva: string
 {
     case Pendiente = "Pendiente";

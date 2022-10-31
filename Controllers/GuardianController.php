@@ -1,7 +1,5 @@
 <?php
-
 namespace Controllers;
-
 use Models\Guardian as Guardian;
 use DAO\GuardianDAO as GuardianDAO;
 use Utils\Session;
@@ -51,7 +49,7 @@ class GuardianController
 
     public function showChangePassword()
     {
-        require_once(VIEWS_PATH . "change-password.php");
+        require_once(VIEWS_PATH . "password/change-password.php");
     }
 
     public function changePassword($userID, $oldPassword, $newPassword, $newPassword2)
@@ -71,7 +69,5 @@ class GuardianController
             $this->showChangePassword();
         }
     }
-
 }
-
 ?>

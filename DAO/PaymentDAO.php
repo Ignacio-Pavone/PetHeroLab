@@ -1,7 +1,6 @@
-<?php namespace DAO;
-
+<?php 
+namespace DAO;
 use Models\Payment as Payment;
-use Utils\Session;
 use DAo\Connection as Connection;
 
 class PaymentDAO
@@ -133,7 +132,5 @@ class PaymentDAO
             throw $ex;
         }
     }
-
 }
-
 ?>

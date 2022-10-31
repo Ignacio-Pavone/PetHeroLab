@@ -1,7 +1,5 @@
 <?php
-
 namespace Controllers;
-
 use DAO\OwnerDAO as OwnerDAO;
 use Models\Owner as Owner;
 use Utils\Session;
@@ -9,7 +7,6 @@ use Utils\Session;
 class OwnerController
 {
     private $ownerDAO;
-
 
     public function __construct()
     {
@@ -30,7 +27,7 @@ class OwnerController
 
     public function showChangePassword()
     {
-        require_once(VIEWS_PATH . "change-password.php");
+        require_once(VIEWS_PATH . "password/change-password.php");
     }
 
     public function changePassword($userID, $oldPassword, $newPassword, $newPassword2)
@@ -51,5 +48,5 @@ class OwnerController
             $this->showChangePassword();
         }
     }
-
 }
+?>

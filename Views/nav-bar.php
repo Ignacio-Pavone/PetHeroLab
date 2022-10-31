@@ -1,7 +1,5 @@
 <?php
-
 use Utils\Session;
-
 $user = Session::GetLoggedUser();
 require_once VIEWS_PATH . 'header.php';
 ?>

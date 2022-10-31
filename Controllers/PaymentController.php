@@ -1,10 +1,10 @@
-<?php namespace Controllers;
-
+<?php 
+namespace Controllers;
 use DAO\PaymentDAO as paymentDAO;
 use DAO\OwnerDAO as ownerDAO;
 use DAO\GuardianDAO as guardianDAO;
 use DAO\PetDAO as petDAO;
-use DAO\ReservaDAO as requestDAO;
+use DAO\RequestDAO as requestDAO;
 use Utils\Email as Email;
 
 
@@ -63,8 +63,5 @@ class PaymentController
     {
         header("location: " . FRONT_ROOT . "Auth/showPaymentForm/" . $id);
     }
-
-
 }
-
 ?>

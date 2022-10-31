@@ -1,7 +1,7 @@
 <?php
 use Utils\Session;
 require_once VIEWS_PATH . 'header.php';
-include_once 'nav-bar.php';
+require_once VIEWS_PATH . 'nav-bar.php';
 ?>
 <section id="disponibilidadSection" class="login-block">
     <main class="py-5">
@@ -19,7 +19,6 @@ include_once 'nav-bar.php';
                             <input type="text" class="form-control" name="email" aria-describedby="basic-addon1"
                                    placeholder="pethero@gmail.com" required>
                         </div>
-
                         <div class="col-lg-12 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-dark" id="basic-addon1">Password</span>
@@ -44,7 +43,6 @@ include_once 'nav-bar.php';
                         </div>
 
                     </div>
-
         </form>
         <?php if (Session::VerifiyBadMessage()) { ?>
             <div class="alert alert-danger alert-dismissible fade show center-block" style="text-align:center"
@@ -63,5 +61,4 @@ include_once 'nav-bar.php';
                 </div>
             <?php }
         } ?>
-
     </main>

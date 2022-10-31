@@ -1,12 +1,10 @@
 <?php
-
 use Utils\Session;
 use Utils\DateFormat as Format;
-
-require_once VIEWS_PATH . 'header.php';
 $user = Session::GetLoggedUser();
 $type = $_SESSION['userType'];
-include('nav-bar.php');
+require_once VIEWS_PATH . 'header.php';
+require_once VIEWS_PATH . 'nav-bar.php';
 ?>
 <section class="login-block">
     <main class="py-1">
@@ -36,9 +34,7 @@ include('nav-bar.php');
                 </center>
                 <div class="bg-light-alpha p-1" id="dataUser">
                     <div class="row">
-
                         <div class="col-lg-12" style="height:10px;"></div>
-
                         <div class="col-lg-3 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
@@ -47,8 +43,6 @@ include('nav-bar.php');
                                    aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getFullName(); ?>">
                         </div>
-
-
                         <div class="col-lg-2 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
@@ -57,7 +51,6 @@ include('nav-bar.php');
                                    aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getAge(); ?>">
                         </div>
-
                         <div class="col-lg-3 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">DNI</span>
@@ -66,7 +59,6 @@ include('nav-bar.php');
                                    aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getDni(); ?>">
                         </div>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Email</span>
@@ -75,10 +67,8 @@ include('nav-bar.php');
                                    aria-label="Username" aria-describedby="basic-addon1"
                                    disabled value="<?php echo $user->getEmail(); ?>">
                         </div>
-
                     </div>
                 </div>
-
             </div>
             <br>
             <div class="container" id="css-mine" style="overflow-y:scroll; height: 450px;">
@@ -133,7 +123,6 @@ include('nav-bar.php');
                         }
                     }
                     ?>
-
                     </tbody>
                 </table>
                 <br>
@@ -169,7 +158,6 @@ include('nav-bar.php');
                             </button>
                         </form>
                     </div>
-
                     <br>
                     <table style="text-align:center;">
                         <thead>
@@ -185,11 +173,9 @@ include('nav-bar.php');
                             <th style="width: 1%">Accion</th>
                         </tr>
                         </thead>
-
                         <tbody>
                         <?php
                         foreach ($guardians
-
                         as $guardian) {
                         if ($guardian->getInitDate() != null){
                         ?>
@@ -331,8 +317,6 @@ include('nav-bar.php');
                                                         } elseif ($request->getReqStatus() == 'En Curso') {
                                                         ?> <label class="circulo" style="background:pink;"></td>
                             <?php } ?>
-
-
                                 <td> <?php foreach ($payments as $payment) {
                                         if ($payment->getId_request() == $request->getIdRequest()) { ?>
                                             <?php if ($payment->getPaid() == 0 && $request->getReqStatus() != 'Rechazado') { ?>
@@ -401,7 +385,6 @@ include('nav-bar.php');
                     </table>
                     <br>
                     <div class="divEstado">
-
                         <p class="circulo" style="background:orange;"></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">Pendiente</label>
                         <p class="circulo" style="background:green;"></p><label
@@ -428,9 +411,7 @@ include('nav-bar.php');
                         </center>
                         <form action="<?php echo FRONT_ROOT ?>Pet/add" method="post">
                             <input type="hidden" name="id_owner" value="<?php echo $user->getId(); ?>">
-
                             <div class="row">
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -438,7 +419,6 @@ include('nav-bar.php');
                                     <input type="text" class="form-control" placeholder="Nombre" name="name"
                                            aria-label="Username" aria-describedby="basic-addon1" required>
                                 </div>
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="inputGroupSelect01">Tipo</label>
@@ -448,7 +428,6 @@ include('nav-bar.php');
                                         <option value="Perro">Perro</option>
                                     </select>
                                 </div>
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon1">Raza</span>
@@ -456,7 +435,6 @@ include('nav-bar.php');
                                     <input type="text" class="form-control" placeholder="Raza" name="breed"
                                            aria-describedby="basic-addon1" required>
                                 </div>
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label class="input-group-text" for="inputGroupSelect01">Tamaño</label>
@@ -467,7 +445,6 @@ include('nav-bar.php');
                                         <option value="Grande">Grande</option>
                                     </select>
                                 </div>
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">URL</span>
@@ -475,7 +452,6 @@ include('nav-bar.php');
                                     <input type="text" name="photo_url" placeholder="Foto" class="form-control"
                                            id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
-
                                 <div class="col-lg-4 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">URL</span>
@@ -483,7 +459,6 @@ include('nav-bar.php');
                                     <input type="text" name="vaccination_schedule" placeholder="Plan de Vacunacion"
                                            class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
-
                                 <div class="col-lg-12 input-group mb-3">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text" id="basic-addon3">URL</span>
@@ -491,7 +466,6 @@ include('nav-bar.php');
                                     <input type="text" name="video_url" placeholder="Video" class="form-control"
                                            id="basic-url" aria-describedby="basic-addon3" required>
                                 </div>
-
                                 <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
                                     <div class="col-lg-1" style="text-align:center">
                                         <button type="submit" onclick="return confirm('Are you sure?')"
@@ -499,11 +473,10 @@ include('nav-bar.php');
                                         </button>
                                     </div>
                                 </div>
-
-                        </form>
-                    </div>
+                            </form>
+                        </div>
                     <br>
-                    </form>
+                </form>
             </div>
-            </div>
-        </section>
+        </div>
+</section>

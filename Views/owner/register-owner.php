@@ -1,6 +1,6 @@
 <?php
-include_once 'back-bar.php';
 require_once VIEWS_PATH . 'header.php';
+require_once VIEWS_PATH . 'navbars/back-bar.php';
 ?>
 <section class="login-block" style="height:100vh;">
     <div class="container">
@@ -11,7 +11,6 @@ require_once VIEWS_PATH . 'header.php';
                 <hr>
                 <form class="register-guardian-form" action="<?php echo FRONT_ROOT . "Owner/register" ?>"
                       method="POST">
-
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Mail</span>
@@ -20,7 +19,6 @@ require_once VIEWS_PATH . 'header.php';
                                aria-label="Username"
                                aria-describedby="basic-addon1" required>
                     </div>
-
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Password</span>
@@ -29,7 +27,6 @@ require_once VIEWS_PATH . 'header.php';
                                aria-label="Username"
                                aria-describedby="basic-addon1" required>
                     </div>
-
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Edad</span>
@@ -37,7 +34,6 @@ require_once VIEWS_PATH . 'header.php';
                         <input type="number" min="18" max="100" class="form-control" placeholder=">18" name="age"
                                aria-describedby="basic-addon1" required>
                     </div>
-
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre Completo</span>
@@ -45,7 +41,6 @@ require_once VIEWS_PATH . 'header.php';
                         <input type="text" class="form-control" placeholder="John Doe" name="fullname"
                                aria-describedby="basic-addon1" required>
                     </div>
-
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">DNI</span>
@@ -53,16 +48,13 @@ require_once VIEWS_PATH . 'header.php';
                         <input type="text" class="form-control" placeholder="DNI" name="dni"
                                aria-describedby="basic-addon1" required>
                     </div>
-
                     <hr>
                     <br>
-
                     <div class="form-check">
                         <button type="submit" class="btn btn-login float-right" id="submitGuardianButton"
                                 onclick="">Registrarse como Dueño
                         </button>
                     </div>
-
                 </form>
             </div>
             <div class="col-md-8 banner-sec">

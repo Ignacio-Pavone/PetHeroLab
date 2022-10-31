@@ -1,7 +1,8 @@
-<?php namespace Controllers;
+<?php 
+namespace Controllers;
 use DAO\GuardianDAO as GuardianDAO;
 use DAO\OwnerDAO as OwnerDAO;
-use DAO\ReservaDAO as ReservaDAO;
+use DAO\RequestDAO as RequestDAO;
 use DAO\PetDAO as PetDAO;
 use DAO\PaymentDAO as PaymentDAO;
 use Utils\Session;
@@ -11,7 +12,7 @@ class AuthController
 {
     private $guardianDAO;
     private $ownerDAO;
-    private $reservaDAO;
+    private $requestDAO;
     private $petDAO;
     private $paymentDAO;
 
@@ -19,7 +20,7 @@ class AuthController
     {
         $this->guardianDAO = new GuardianDAO();
         $this->ownerDAO = new OwnerDAO();
-        $this->reservaDAO = new ReservaDAO();
+        $this->requestDAO = new requestDAO ();
         $this->petDAO = new PetDAO();
         $this->paymentDAO = new PaymentDAO();
     }
@@ -44,8 +45,8 @@ class AuthController
         $owners = $this->ownerDAO->GetAll();
         $allpets = $this->petDAO->GetAll();
         $payments = $this->paymentDAO->GetAll();
-        $requests = $this->reservaDAO->findByGuardianId($guardian->getId());
-        require_once(VIEWS_PATH . 'guardian-profile.php');
+        $requests = $this->requestDAO->findByGuardianId($guardian->getId());
+        require_once(VIEWS_PATH . 'guardian/guardian-profile.php');
     }
 
     public function showOwnerProfile()
@@ -56,21 +57,21 @@ class AuthController
         $allPets = $this->petDAO->returnByOwner($sesion->getId());
         $allGuardians = $this->guardianDAO->GetAll();
         $guardians = $this->guardianDAO->GetAll();
-        $requests = $this->reservaDAO->findByOwnerId($user->getId());
+        $requests = $this->requestDAO->findByOwnerId($user->getId());
         $payments = $this->paymentDAO->getAllByOwner($user->getId());
-        require_once(VIEWS_PATH . 'owner-profile.php');
+        require_once(VIEWS_PATH . 'owner/owner-profile.php');
     }
 
     public function showFilter($filtroInicio, $filtroFin)
     {
         $user = Session::GetLoggedUser();
-        if (!$this->reservaDAO->dateChecker($filtroInicio, $filtroFin)) {
+        if (!$this->requestDAO ->dateChecker($filtroInicio, $filtroFin)) {
             $allPets = $this->petDAO->returnByOwner($user->getId());
             $allGuardians = $this->guardianDAO->GetAll();
             $guardians = $this->guardianDAO->getByDate($filtroInicio, $filtroFin);
-            $requests = $this->reservaDAO->findByOwnerId($user->getId());
+            $requests = $this->requestDAO->findByOwnerId($user->getId());
             $payments = $this->paymentDAO->getAllByOwner($user->getId());
-            require_once(VIEWS_PATH . 'owner-profile.php');
+            require_once(VIEWS_PATH . 'owner/owner-profile.php');
         } else {
             Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
             header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
@@ -80,26 +81,26 @@ class AuthController
     public function showPaymentForm($idPayment)
     {
         $payment = $this->paymentDAO->findybyID($idPayment);
-        $request = $this->reservaDAO->getAll();
+        $request = $this->requestDAO->getAll();
         $guardians = $this->guardianDAO->getAll();
         $owners = $this->ownerDAO->getAll();
         $pets = $this->petDAO->getAll();
-        require_once(VIEWS_PATH . "payment-method.php");
+        require_once(VIEWS_PATH . "payment/payment-method.php");
     }
 
     public function showdisponibilityView()
     {
-        require_once(VIEWS_PATH . 'guardian-disponibilidad.php');
+        require_once(VIEWS_PATH . 'guardian/guardian-disponibilidad.php');
     }
 
     public function showLogin($message = "")
     {
-        require_once(VIEWS_PATH . 'login.php');
+        require_once(VIEWS_PATH . 'system/login.php');
     }
 
     public function forgotPassword()
     {
-        require_once(VIEWS_PATH . 'forgot-password.php');
+        require_once(VIEWS_PATH . 'password/forgot-password.php');
     }
 
     public function sendPass($email, $tipo)
@@ -119,5 +120,4 @@ class AuthController
         header("location: " . FRONT_ROOT . "Auth/showLogin");
     }
 }
-
 ?>

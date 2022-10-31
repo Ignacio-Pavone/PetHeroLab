@@ -1,9 +1,7 @@
 <?php
-
 use Utils\Session as Session;
-
-include('nav-simple-bar.php');
 require_once VIEWS_PATH . 'header.php';
+require_once VIEWS_PATH . 'navbars/nav-simple-bar.php';
 $user = Session::GetLoggedUser();
 ?>
 <section class="login-block">
@@ -49,7 +47,6 @@ $user = Session::GetLoggedUser();
                                 <td><?php echo $reserva->getFinishDate(); ?></td>
                                 <td><?php echo $reserva->getDaysAmount(); ?></td>
                                 <td><?php echo "$" . $reserva->getFinalPrice(); ?></td>
-
                             <?php }
                         } ?>
                     </tr>
@@ -67,8 +64,6 @@ $user = Session::GetLoggedUser();
                     <br>
                 </center>
                 <form action="<?php echo FRONT_ROOT ?>Payment/processPayment" method="post">
-
-
                     <div class="row">
                         <div class="col-lg-4 input-group mb-3" style="margin-left: 350px;">
                             <div class="input-group-prepend">
@@ -103,5 +98,4 @@ $user = Session::GetLoggedUser();
             <br>
             </div>
             </div>
-
     </main>

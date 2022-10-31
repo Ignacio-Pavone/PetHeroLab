@@ -1,4 +1,6 @@
-<?php namespace Models;
+<?php 
+namespace Models;
+
 class Payment
 {
     private $id_payment;

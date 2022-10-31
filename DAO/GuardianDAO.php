@@ -1,5 +1,5 @@
-<?php namespace DAO;
-
+<?php
+namespace DAO;
 use Utils\Session;
 use DAo\Connection as Connection;
 use Models\Guardian;
@@ -192,5 +192,4 @@ class GuardianDAO
         }
     }
 }
-
 ?>

@@ -1,5 +1,5 @@
 <?php
-include('nav-simple-bar.php');
+require_once VIEWS_PATH . "navbars/nav-simple-bar.php";
 require_once VIEWS_PATH . 'header.php';
 ?>
 <section class="login-block">
@@ -46,7 +46,6 @@ require_once VIEWS_PATH . 'header.php';
                     <br>
                 </center>
                 <form action="<?php echo FRONT_ROOT ?>Pet/modify" method="post">
-
                     <div class="row">
                         <input type="hidden" name="id_owner" class="form-control form-control-ml"
                                value=<?php echo $search->getidOwner() ?>>
@@ -54,7 +53,6 @@ require_once VIEWS_PATH . 'header.php';
                                value=<?php echo $search->getId() ?>>
                         <input type="hidden" name="type" class="form-control form-control-ml"
                                value=<?php echo $search->getType() ?>>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Nombre</span>
@@ -63,7 +61,6 @@ require_once VIEWS_PATH . 'header.php';
                                    value=<?php echo $search->getName() ?>
                                    required aria-label="Username" aria-describedby="basic-addon1">
                         </div>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon1">Raza</span>
@@ -72,7 +69,6 @@ require_once VIEWS_PATH . 'header.php';
                                    aria-describedby="basic-addon1" value=<?php echo $search->getBreed() ?>
                                    required>
                         </div>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <label class="input-group-text" for="inputGroupSelect01">Tamaño</label>
@@ -89,8 +85,6 @@ require_once VIEWS_PATH . 'header.php';
                                 </option>
                             </select>
                         </div>
-
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">Foto</span>
@@ -99,7 +93,6 @@ require_once VIEWS_PATH . 'header.php';
                                    aria-describedby="basic-addon3"
                                    value=<?php echo $search->getPhotoUrl() ?> required>
                         </div>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">Video</span>
@@ -108,7 +101,6 @@ require_once VIEWS_PATH . 'header.php';
                                    id="basic-url" aria-describedby="basic-addon3"
                                    value=<?php echo $search->getVaccinationschedule() ?> required>
                         </div>
-
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="input-group-text" id="basic-addon3">Plan Vacunacion</span>
@@ -117,20 +109,16 @@ require_once VIEWS_PATH . 'header.php';
                                    id="basic-url" aria-describedby="basic-addon3"
                                    value=<?php echo $search->getVideoUrl() ?> required>
                         </div>
-
-
                         <div class="row" id="buttonraro" style="border: 1px solid">
                             <div class="col-lg-1" style="text-align:center">
                                 <button type="submit" onclick="return confirm('Are you sure?')"
                                         style="text-align:center" class="btn btn-dark">Modificar
                                 </button>
-                            </div>
-                </form>
+                         </div>
+                    </form>
+                 </div>
+                <br>
             </div>
-            <br>
-            </div>
-            </div>
-
+        </div>
     </main>
 
-    <!-- ################################################################################################ -->
