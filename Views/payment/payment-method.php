@@ -63,39 +63,57 @@ $user = Session::GetLoggedUser();
                     <hr>
                     <br>
                 </center>
-                <form action="<?php echo FRONT_ROOT ?>Payment/processPayment" method="post">
+                        
+                <div class="col-8 mb-5" style="margin-left:180px;">                
+                <div class="bg-light rounded shadow-sm py-4 px-4">
                     <div class="row">
-                        <div class="col-lg-4 input-group mb-3" style="margin-left: 350px;">
-                            <div class="input-group-prepend">
-                                <label class="btn btn-dark" for="inputGroupSelect01">Forma de Pago</label>
-                            </div>
-                            <select class="custom-select" name="Method">
-                                <option value="Credito" <?php ?>>
-                                    Credito
-                                </option>
-                                <option value="Debito" <?php ?>>
-                                    Debito
-                                </option>
-                                <option value="Efectivo" <?php ?>>
-                                    Efectivo
-                                </option>
-                            </select>
-                        </div>
-                        </select>
-                        <input type="hidden" name="idPayment" value="<?php echo $payment->getId_payment(); ?>">
-                        <input type="hidden" name="idOwner" value="<?php echo $payment->getId_owner(); ?>">
-                        <input type="hidden" name="idRequest" value="<?php echo $payment->getId_request(); ?>">
-                        <div class="row" id="buttonraro" style="margin-left: 445px; border: 1px solid">
-                            <div class="col-lg-1" style="text-align:center">
-                                <button type="submit" onclick="return confirm('Are you sure?')"
-                                        style="text-align:center" class="btn btn-login">CONFIRMAR
-                                </button>
-                            </div>
+                        <div class="form-group col-12">
+                            <div class="card-wrapper mt-4"></div>
                         </div>
                     </div>
-                </form>
+                    <div class="row py-4 px-4">
+                        <form id="cardform" action="<?php echo FRONT_ROOT ?>Payment/processPayment" method="POST">
+                            <div class="row">
+                                <div class="form-group col-7">
+                                    <label for="card-holder">Nombre completo</label>
+                                    <input id="card-holder" type="text" class="form-control" name="name" placeholder="Nombre Completo" aria-label="Nombre Completo" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-5">
+                                    <label for="card-expiry">Fecha de expiracion</label>
+                                    <input id="card-expiry" type="tel" class="form-control" name="expiry" placeholder="MMAA" aria-label="MMAA" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-8">
+                                    <label for="card-number">Numero de tarjeta</label>
+                                    <input id="card-number" type="tel" class="form-control" name="number" placeholder="Numero de Tarjeta" aria-label="Numero de Tarjeta" aria-describedby="basic-addon1">
+                                </div>
+                                <div class="form-group col-4">
+                                    <label for="cvc">Cod.Seguridad</label>
+                                    <input id="cvc" type="number" class="form-control" name="cvc" placeholder="CVC" aria-label="CVC" aria-describedby="basic-addon1">
+                                </div>
+                                <input type="hidden" name="idPayment" value="<?php echo $payment->getId_payment(); ?>">
+                                <input type="hidden" name="idOwner" value="<?php echo $payment->getId_owner(); ?>">
+                                <input type="hidden" name="idRequest" value="<?php echo $payment->getId_request(); ?>">
+                                <div class="col-lg-1" style="text-align:center; margin-left: 250px;">
+                                    <button type="submit" onclick="return confirm('Are you sure?')"
+                                    style="text-align:center" class="btn btn-login">CONFIRMAR
+                                    </button>
+                                </div>
+                            </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                        
+                      
+
+                       
+                        
+                    
             </div>
             <br>
             </div>
-            </div>
+        </div>
     </main>
+
+ 

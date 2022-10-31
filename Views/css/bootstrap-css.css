@@ -367,3 +367,21 @@ a:hover {
     font-size: large;
 }
 
+.divsEmpleo {
+    padding: 10px;
+    position: relative;
+    margin-left: 200px;
+    visibility: visible;
+    vertical-align: baseline;
+    z-index: 0;
+}
+
+.creditDiv {
+    display: none;
+    z-index: 1;
+}
+
+.debitDiv {
+    display: none;
+    z-index: 1;
+}
