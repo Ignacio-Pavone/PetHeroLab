@@ -385,3 +385,8 @@ a:hover {
     display: none;
     z-index: 1;
 }
+
+.mail {
+    color: red;
+    font-weight: 500;
+}

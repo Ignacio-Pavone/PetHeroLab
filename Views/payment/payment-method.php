@@ -117,13 +117,7 @@ $user = Session::GetLoggedUser();
                                     </button>
                         </div>
                     </form>
-            </div>
-                        
-                      
-
-                       
-                        
-                    
+            </div>          
             </div>
             <br>
             </div>

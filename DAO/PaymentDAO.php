@@ -64,36 +64,15 @@ class PaymentDAO
         }
     }
 
-    public function insertMethod($idPayment, $Method)
+    public function setPayment($id,$finalPrice,$method)
     {
         try {
-            $sql = "UPDATE " . $this->tableName . " SET payment_method = :payment_method WHERE id_payment = :id_payment";
-            $parameters['payment_method'] = $Method;
-            $parameters['id_payment'] = $idPayment;
+            $sql = "UPDATE " . $this->tableName . " SET paid = 1, payment_date = NOW(), price = :finalPrice, payment_method = :payment_method  WHERE (id_payment = :id ) ";
+            $parameters['finalPrice'] = $finalPrice;
+            $parameters['payment_method'] = $method;
+            $parameters['id'] = $id;
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->ExecuteNonQuery($sql, $parameters);
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    public function updatePaid($id)
-    {
-        try {
-            $sql = "UPDATE " . $this->tableName . " SET paid = 1 WHERE id_payment = " . $id;
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->ExecuteNonQuery($sql);
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-    }
-
-    public function updateDate($id)
-    {
-        try {
-            $sql = "UPDATE " . $this->tableName . " SET payment_date = NOW() WHERE id_payment = " . $id;
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->ExecuteNonQuery($sql);
+            $result = $this->connection->ExecuteNonQuery($sql,$parameters);
         } catch (\PDOException $ex) {
             throw $ex;
         }

@@ -55,43 +55,39 @@ class Email
 
     public static function buyaMailBody($guardian, $request, $pet, $owner, $Method, $numeroTarjeta, $finalprice)
     {
-        $message = "<html>
-            <body style='background-color:#fff; background-image:url(https://as1.ftcdn.net/v2/jpg/04/24/35/24/1000_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg); background-size:cover' bgcolor='#fff' >
-           
-            <table align='center' cellpadding='0' cellspacing='0' font-family: Consolas;border-radius: 80px; background-image: ; background-size: cover' width='650'>
+        $message = "<body
+        style='background-image: url(https://as1.ftcdn.net/v2/jpg/04/24/35/24/1000_F_424352469_WJYlrdisV68nj5yh3MWteLh8qohN7AZU.jpg); background-size:cover; font-family:Consolas;'>
+        <table>
+            <tbody>
+                <tr>
+                    
+                        <img src='https://cdn.discordapp.com/attachments/855473848869847050/1035570001761022023/Screenshot_4.png'
+                        style='width:300px; height:150px; display: block; margin-left:550px;'>
+                   
+                        <img src='https://heraldodemexico.com.mx/u/fotografias/m/2020/10/30/f960x540-276234_350309_0.jpg'
+                        style='display: block; border-radius: 200px; width: 200px; margin-left:600px;'>
+                </tr>
+            </tbody>
+        </table>
+        <br><br>
+        <div style='margin-left:580px;'>
+            <table style='height:20px'>
                 <tbody>
                     <tr>
-                        <td style='font-family: Consolas; font-weight:400;font-size:15px;color:#fff;text-align:center;padding:20px;line-height:25px; ' class=''><center><img src='https://cdn.discordapp.com/attachments/855473848869847050/1035570001761022023/Screenshot_4.png' width='300px' height='150px' style='display: block'></center>
-           
-            <center><img src='" . $pet->getPhotoUrl() . "' style='display: block; border-radius: 200px' width='200'></center>
-            <p style='color: black; font-size: 36px; font-weight: 900; text-align:center' font-family:Consolas;>Reserva</p></td></tr>
-            </tbody>
+                            <h5 style='font-size:16px'> Guardian: ". $guardian->getFullName() ." </h5>
+                            <h5 style='font-size:16px'> Email Guardian: ". $guardian->getEmail() ." </h5>
+                            <h5 style='font-size:16px'> Mascota: ". $pet->getName() ." </h5>
+                            <h5 style='font-size:16px'> Fecha Inicio: ". $request->getInitDate() ." </h5>
+                            <h5 style='font-size:16px'> Fecha Fin: ". $request->getFinishDate() ." </h5>
+                            <h5 style='font-size:16px'> Dias: ". $request->getDaysAmount() ." </h5>
+                            <h5 style='font-size:16px'> Costo Total: $". $finalprice ." </h5>
+                            <h5 style='font-size:16px'> Metodo Pago: ".  $Method ." </h5>
+                            <h5 style='font-size:16px'> Numero Tarjeta: ".  $numeroTarjeta ." </h5>
+                    </tr>
+                </tbody>
             </table>
-           ";
-        $message .= "<table align='center' border='0' cellpadding='0' cellspacing='0' style='font-family: Consolas;' width='650'>
-                    <tbody>
-                        <tr>
-                            <td bgcolor='' style='opacity: 0,0; font-weight: 1000; color:#666; text-align:left; font-size:14px;font-family:Consolas; padding:20px 0px 20px 40px; line-height:25px; border-radius:30px 0 0 30px;' valign='middle' width='60%' class=''>                                                
-                            <table align='center' border='0' cellpadding='0' cellspacing='0' width='350'>
-                                <tbody>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Guardian: " . $guardian->getFullName() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Email del guardian: " . $guardian->getEmail() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Nombre de la mascota: " . $pet->getName() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Tipo de mascota: " . $pet->getType() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Raza: " . $pet->getBreed() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de inicio: " . $request->getInitDate() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Fecha de fin: " . $request->getFinishDate() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Dias: " . $request->getDaysAmount() . "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Costo total: $" .  $finalprice. "</h4>
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Modo de Pago: " . $Method . "</h4>                                
-                                    <h4 style= letter-spacing: 1px; font-weight: 700; font-size: 26px; text-align: center; margin: 0; line-height: normal' >Tarjeta: " . $numeroTarjeta . "</h4>                                
-                                    </tbody>
-                            </table>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                &nbsp;";
+        </div>
+        </body>";
         return $message;
     }
 }

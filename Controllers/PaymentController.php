@@ -41,17 +41,13 @@ class PaymentController
             $idPet = $this->findPetIdbyRequest($idRequest);
             $pet = $this->petDAO->findbyID($idPet);
             $finalprice = $request->getfinalPrice() / 2;
-            $this->paymentDAO->insertMethod($idPayment, $datos['type']);
-            $this->paymentDAO->updatePaid($idPayment);
-            $this->paymentDAO->updateDate($idPayment);
-            $this->paymentDAO->updateFinalPrice($idPayment, $finalprice);
+            $method = ucfirst($datos['type']);
+            $this->paymentDAO->setPayment($idPayment,$finalprice,$method);
             $this->requestDAO->updateFinalPrice($idRequest, $finalprice);
-            Session::setOkMessage("Tu compra con tarjeta ".$datos['type']." fue procesada con éxito.");
-            Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner,$datos['type'], $datos['number'],  $finalprice));
+            Session::setOkMessage("Tu pago de $". $finalprice ." con tarjeta ".ucfirst($datos['type'])." fue procesada con éxito.");
+            Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner, ucfirst($datos['type']), $datos['number'],  $finalprice));
             header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
         }
-
-
     }
 
     public function findPetIdbyRequest($idRequest)
