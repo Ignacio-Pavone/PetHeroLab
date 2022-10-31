@@ -1,6 +1,7 @@
 <?php
 namespace Controllers;
 use DAO\PetDAO as PetDAO;
+use DAO\RequestDAO as RequestDAO;
 use Models\Pet as Pet;
 use Utils\Session;
 class PetController
@@ -10,6 +11,7 @@ class PetController
     public function __construct()
     {
         $this->mascotaDAO = new PetDAO();
+        $this->requestDAO = new RequestDAO();
     }
 
     public function add($id_owner, $name, $type, $breed, $pet_size, $photo_url, $vaccination_schedule, $video_url)
@@ -24,12 +26,15 @@ class PetController
     public function delete($id)
     {
         $user = Session::GetLoggedUser();
-        if ($id != null) {
+        if ($id != null){
+        if (!($this->requestDAO->checkRequestsPet($id))){
             $this->mascotaDAO->delete($id);
             Session::SetOkMessage("Pet eliminada con exito");
-        }
+        }else Session::SetBadMessage("Mascota posee reservas realizadas, cancelarlas antes de eliminarla.");
         $id = null;
-        header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
+        header("location: " . FRONT_ROOT . "Auth/showOwnerProfile"); 
+        }
+        
     }
 
     public function update($id)

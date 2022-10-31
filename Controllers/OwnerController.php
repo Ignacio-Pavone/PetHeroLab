@@ -48,5 +48,9 @@ class OwnerController
             $this->showChangePassword();
         }
     }
+
+    public function showAddPet(){
+        require_once(VIEWS_PATH . "owner/add-pet.php");
+    }
 }
 ?>

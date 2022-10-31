@@ -20,7 +20,7 @@ require_once VIEWS_PATH . 'header.php';
                     <a class="nav-link" href="#css-mine">Ver Mascotas</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#addPetsDuenio">Agregar Mascotas</a>
+                    <a class="nav-link" href="<?php echo FRONT_ROOT . "Owner/showAddPet" ?>">Agregar Mascotas</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#css-mine1">Ver Guardianes</a>

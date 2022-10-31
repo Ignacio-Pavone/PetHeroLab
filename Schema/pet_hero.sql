@@ -53,7 +53,8 @@ create table Payments
     payment_method varchar(60),
     payment_date   date,
     constraint pk_id_payment primary key (id_payment),
-    constraint fk_id_request foreign key (id_request) references Requests (id_request),
+    constraint fk_id_request foreign key (id_request) references Requests (id_request)
+    ON DELETE CASCADE,
     constraint fk_id_owner_p foreign key (id_owner) references Owners (id_owner)
 );
 

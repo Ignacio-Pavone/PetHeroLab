@@ -424,6 +424,14 @@ class RequestDAO
         }
         return false;
     }
+
+    public function checkRequestsPet($idPet){
+        $sql = "SELECT id_pet FROM " . $this->tableName . " WHERE id_pet = ".$idPet;
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql); 
+        if ($result) return true;
+        else return false;
+    }
 }
 ?>
 

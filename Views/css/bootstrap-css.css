@@ -189,6 +189,8 @@ td {
     text-align: center;
     color: rgb(0, 0, 0);
     font-size: 16px;
+    padding-left: 180px;
+    padding-right: 180px;
 }
 
 #tamanioSolapa {
