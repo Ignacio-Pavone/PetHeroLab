@@ -38,12 +38,10 @@ require_once VIEWS_PATH . 'header.php';
         </section>
         </div>
         <section id="login-block" class="mb-5">
-            <div class="container" id="addPetsDuenio">
-                <br>
+            <div class="container" id="dataUser">
                 <center>
-                    <h3 class="mb">Modifique los datos de la mascota</h3>
+                    <h3 class="mb" id="dataUser">Modifique los datos de la mascota</h3>
                     <hr>
-                    <br>
                 </center>
                 <form action="<?php echo FRONT_ROOT ?>Pet/modify" method="post">
                     <div class="row">
@@ -55,7 +53,7 @@ require_once VIEWS_PATH . 'header.php';
                                value=<?php echo $search->getType() ?>>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Nombre</span>
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Nombre" name="name"
                                    value=<?php echo $search->getName() ?>
@@ -63,7 +61,7 @@ require_once VIEWS_PATH . 'header.php';
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon1">Raza</span>
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Raza</span>
                             </div>
                             <input type="text" class="form-control" placeholder="Raza" name="breed"
                                    aria-describedby="basic-addon1" value=<?php echo $search->getBreed() ?>
@@ -71,7 +69,7 @@ require_once VIEWS_PATH . 'header.php';
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Tamaño</label>
+                                <label class="btn btn-md btn-dark m-0 px-3" for="inputGroupSelect01">Tamaño</label>
                             </div>
                             <select class="custom-select" name="pet_size" id="inputGroupSelect01">
                                 <option value="Chico" <?php echo($search->getPetsize() == 'Chico' ? 'selected' : '') ?>>
@@ -87,7 +85,7 @@ require_once VIEWS_PATH . 'header.php';
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Foto</span>
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">Foto</span>
                             </div>
                             <input type="text" name="photo_url" placeholder="Foto" class="form-control" id="basic-url"
                                    aria-describedby="basic-addon3"
@@ -95,7 +93,7 @@ require_once VIEWS_PATH . 'header.php';
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Video</span>
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">Video</span>
                             </div>
                             <input type="text" name="vaccination_schedule" placeholder="Video" class="form-control"
                                    id="basic-url" aria-describedby="basic-addon3"
@@ -103,7 +101,7 @@ require_once VIEWS_PATH . 'header.php';
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
-                                <span class="input-group-text" id="basic-addon3">Plan Vacunacion</span>
+                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">Plan Vacunacion</span>
                             </div>
                             <input type="text" name="video_url" placeholder="Plan Vacunacion" class="form-control"
                                    id="basic-url" aria-describedby="basic-addon3"
@@ -112,7 +110,7 @@ require_once VIEWS_PATH . 'header.php';
                         <div class="row" id="buttonraro" style="border: 1px solid">
                             <div class="col-lg-1" style="text-align:center">
                                 <button type="submit" onclick="return confirm('Are you sure?')"
-                                        style="text-align:center" class="btn btn-dark">Modificar
+                                        style="text-align:center" class="btn btn-login">Actualizar
                                 </button>
                          </div>
                     </form>

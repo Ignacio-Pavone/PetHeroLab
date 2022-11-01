@@ -29,12 +29,13 @@ class PetController
         if ($id != null){
         if (!($this->requestDAO->checkRequestsPet($id))){
             $this->mascotaDAO->delete($id);
-            Session::SetOkMessage("Pet eliminada con exito");
-        }else Session::SetBadMessage("Mascota posee reservas realizadas, cancelarlas antes de eliminarla.");
+            Session::SetOkMessage("Mascota eliminada con exito");
+        }else{
+            Session::SetBadMessage("Mascota posee reservas realizadas, cancelarlas antes de eliminarla.");
+        }
         $id = null;
         header("location: " . FRONT_ROOT . "Auth/showOwnerProfile"); 
         }
-        
     }
 
     public function update($id)
