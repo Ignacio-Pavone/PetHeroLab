@@ -51,7 +51,6 @@ class PetController
         $string = str_replace(' ', '_', $name);
         $nuevamascota = new Pet($id_owner, $string, $type, $breed, $pet_size, $photo_url, $vaccination_schedule, $video_url);
         $nuevamascota->setId($id);
-
         if ($this->mascotaDAO->update($nuevamascota)) {
             Session::SetOkMessage("Mascota modificada con exito");
         } else {

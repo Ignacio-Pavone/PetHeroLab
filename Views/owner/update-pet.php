@@ -51,6 +51,8 @@ require_once VIEWS_PATH . 'header.php';
                                value=<?php echo $search->getId() ?>>
                         <input type="hidden" name="type" class="form-control form-control-ml"
                                value=<?php echo $search->getType() ?>>
+                        <input type="hidden" name="breed" class="form-control form-control-ml"
+                               value=<?php echo $search->getBreed() ?>>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Nombre</span>
@@ -58,14 +60,6 @@ require_once VIEWS_PATH . 'header.php';
                             <input type="text" class="form-control" placeholder="Nombre" name="name"
                                    value=<?php echo $search->getName() ?>
                                    required aria-label="Username" aria-describedby="basic-addon1">
-                        </div>
-                        <div class="col-lg-4 input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon1">Raza</span>
-                            </div>
-                            <input type="text" class="form-control" placeholder="Raza" name="breed"
-                                   aria-describedby="basic-addon1" value=<?php echo $search->getBreed() ?>
-                                   required>
                         </div>
                         <div class="col-lg-4 input-group mb-3">
                             <div class="input-group-prepend">
@@ -91,7 +85,7 @@ require_once VIEWS_PATH . 'header.php';
                                    aria-describedby="basic-addon3"
                                    value=<?php echo $search->getPhotoUrl() ?> required>
                         </div>
-                        <div class="col-lg-4 input-group mb-3">
+                        <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">Video</span>
                             </div>
@@ -99,7 +93,7 @@ require_once VIEWS_PATH . 'header.php';
                                    id="basic-url" aria-describedby="basic-addon3"
                                    value=<?php echo $search->getVaccinationschedule() ?> required>
                         </div>
-                        <div class="col-lg-4 input-group mb-3">
+                        <div class="col-lg-6 input-group mb-3">
                             <div class="input-group-prepend">
                                 <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">Plan Vacunacion</span>
                             </div>
