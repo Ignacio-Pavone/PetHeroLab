@@ -4,6 +4,7 @@
 - CSS
 - PHP
 - PHPMAILER
+- MYSQL
 
 
 
