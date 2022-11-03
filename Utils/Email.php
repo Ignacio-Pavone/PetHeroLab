@@ -64,7 +64,7 @@ class Email
                         <img src='https://cdn.discordapp.com/attachments/855473848869847050/1035570001761022023/Screenshot_4.png'
                         style='width:300px; height:150px; display: block; margin-left:550px;'>
                    
-                        <img src='https://heraldodemexico.com.mx/u/fotografias/m/2020/10/30/f960x540-276234_350309_0.jpg'
+                        <img src='". $pet->getPhotoUrl() ."'
                         style='display: block; border-radius: 200px; width: 200px; margin-left:600px;'>
                 </tr>
             </tbody>
