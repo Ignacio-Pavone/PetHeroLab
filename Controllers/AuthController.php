@@ -27,44 +27,60 @@ class AuthController
 
     public function login($email, $password)
     {
-        if ($this->guardianDAO->LoginCheck($email, $password)) {
-            header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $email);
-        } elseif ($this->ownerDAO->LoginCheck($email, $password)) {
-            header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
-        } else {
-            Session::SetBadMessage("User o contraseña incorrectos");
+        try {
+            if ($this->guardianDAO->LoginCheck($email, $password)) {
+                header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $email);
+            } elseif ($this->ownerDAO->LoginCheck($email, $password)) {
+                header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
+            } else {
+                Session::SetBadMessage("User o contraseña incorrectos");
+                header("location: " . FRONT_ROOT . "Auth/showLogin");
+            }
+        }catch (\PDOException $ex) {
+            Session::SetBadMessage('Hubo un error al intentar iniciar sesión');
             header("location: " . FRONT_ROOT . "Auth/showLogin");
         }
+      
     }
 
     public function showGuardianProfile($email)
     {
+        try{
         $guardian = $this->guardianDAO->getByEmail($email);
         Session::CreateSession($guardian);
         ($this->guardianDAO->checkProfile($guardian)) ? Session::SetBadMessage("Por favor establesca su disponibilidad laboral") : '';
-        $owners = $this->ownerDAO->GetAll();
-        $allpets = $this->petDAO->GetAll();
-        $payments = $this->paymentDAO->GetAll();
-        $requests = $this->requestDAO->findByGuardianId($guardian->getId());
+            $owners = $this->ownerDAO->GetAll();
+            $allpets = $this->petDAO->GetAll();
+            $payments = $this->paymentDAO->GetAll();
+            $requests = $this->requestDAO->findByGuardianId($guardian->getId());
+        } catch (\PDOException $ex) {
+            Session::SetBadMessage("Error al cargar los datos");
+        }
         require_once(VIEWS_PATH . 'guardian/guardian-profile.php');
     }
 
     public function showOwnerProfile()
     {
         $user = Session::GetLoggedUser();
-        $sesion = $this->ownerDAO->getByEmail($user->getEmail());
-        Session::CreateSession($sesion);
-        $allPets = $this->petDAO->returnByOwner($sesion->getId());
-        $allGuardians = $this->guardianDAO->GetAll();
-        $guardians = $this->guardianDAO->GetAll();
-        $requests = $this->requestDAO->findByOwnerId($user->getId());
-        $payments = $this->paymentDAO->getAllByOwner($user->getId());
+        try{
+            $sesion = $this->ownerDAO->getByEmail($user->getEmail());
+            Session::CreateSession($sesion);
+            $allPets = $this->petDAO->returnByOwner($sesion->getId());
+            $allGuardians = $this->guardianDAO->GetAll();
+            $guardians = $this->guardianDAO->GetAll();
+            $requests = $this->requestDAO->findByOwnerId($user->getId());
+            $payments = $this->paymentDAO->getAllByOwner($user->getId());
+        }catch (\PDOException $ex) {
+            Session::SetBadMessage("Error al cargar los datos");
+        }
+
         require_once(VIEWS_PATH . 'owner/owner-profile.php');
     }
 
     public function showFilter($filtroInicio, $filtroFin)
     {
         $user = Session::GetLoggedUser();
+        try{
         if (!$this->requestDAO ->dateChecker($filtroInicio, $filtroFin)) {
             $allPets = $this->petDAO->returnByOwner($user->getId());
             $allGuardians = $this->guardianDAO->GetAll();
@@ -76,16 +92,25 @@ class AuthController
             Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
             header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
         }
+    }catch (\PDOException $ex) {
+        Session::SetBadMessage("Error al cargar los datos");
+    }
     }
 
     public function showPaymentForm($idPayment)
     {
-        $payment = $this->paymentDAO->findybyID($idPayment);
-        $request = $this->requestDAO->getAll();
-        $guardians = $this->guardianDAO->getAll();
-        $owners = $this->ownerDAO->getAll();
-        $pets = $this->petDAO->getAll();
-        require_once(VIEWS_PATH . "payment/payment-method.php");
+        try{
+            $payment = $this->paymentDAO->findybyID($idPayment);
+            $request = $this->requestDAO->getAll();
+            $guardians = $this->guardianDAO->getAll();
+            $owners = $this->ownerDAO->getAll();
+            $pets = $this->petDAO->getAll();
+            require_once(VIEWS_PATH . "payment/payment-method.php");
+        }
+        catch (\PDOException $ex) {
+            Session::SetBadMessage("Error al cargar los datos");
+        }
+       
     }
 
     public function showdisponibilityView()
@@ -106,6 +131,7 @@ class AuthController
     public function sendPass($email, $tipo)
     {
         $user = null;
+        try {
         if ($tipo == "guardian") {
             $user = $this->guardianDAO->getByEmail($email);
         } elseif ($tipo == "owner") {
@@ -118,6 +144,9 @@ class AuthController
             Session::SetBadMessage("El mail ingresado no existe");
         }
         header("location: " . FRONT_ROOT . "Auth/showLogin");
+    }catch (\PDOException $ex) {
+        Session::SetBadMessage("Error al enviar el mail");
+    }
     }
 }
 ?>

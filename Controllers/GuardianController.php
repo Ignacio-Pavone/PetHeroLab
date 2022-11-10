@@ -55,7 +55,6 @@ class GuardianController
     public function changePassword($userID, $oldPassword, $newPassword, $newPassword2)
     {
         $user = $this->guardianDAO->findbyID($userID);
-
         if ($oldPassword == $user->getPassword()) {
             if ($newPassword == $newPassword2) {
                 $this->guardianDAO->updatePassword($userID, $newPassword);

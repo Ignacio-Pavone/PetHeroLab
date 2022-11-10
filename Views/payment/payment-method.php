@@ -83,7 +83,7 @@ $user = Session::GetLoggedUser();
                     <hr>
                     <br>
                 </center>    
-                <div class="col-8 mb-5" style="margin-left:180px;">                
+                <div class="col-8 mb-5" style="margin-left:150px;">                
                 <div class="bg-light border rounded shadow-sm py-2 px-2">
                     <div class="row py-4 px-4">
                         <form id="cardform" action="<?php echo FRONT_ROOT ?>Payment/processPayment" method="POST">
@@ -111,7 +111,7 @@ $user = Session::GetLoggedUser();
                             </div>
                             </div>
                         </div>
-                        <div class="col-lg-1" style="text-align:center; margin-left: 465px;">
+                        <div class="col-lg-1" style="text-align:center; margin-left: 330px;">
                                     <button type="submit" onclick="return confirm('Are you sure?')"
                                     style="text-align:center" class="btn btn-login">CONFIRMAR
                                     </button>

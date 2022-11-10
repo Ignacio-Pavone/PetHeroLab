@@ -9,12 +9,12 @@ class GuardianDAO
     private $connection;
     private $tableName = "Guardians";
 
-    public function findByID($id)
+    public function findByID($id_guardian)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
             foreach ($result as $row) {
                 $guardian = new Guardian($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"], $row['pet_size'], $row['fee'], $row['init_date'], $row['finish_date']);
                 $guardian->setId($row["id_guardian"]);
@@ -28,15 +28,15 @@ class GuardianDAO
     public function getByEmail($email)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("email" => $email));
             foreach ($result as $row) {
                 $guardian = new Guardian($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"], $row['pet_size'], $row['fee'], $row['init_date'], $row['finish_date']);
                 $guardian->setId($row["id_guardian"]);
                 $guardian->setReputation($row["reputation"]);
-                return $guardian;
             }
+            return $guardian;
         } catch (\PDOException $ex) {
             throw $ex;
         }
@@ -120,8 +120,8 @@ class GuardianDAO
 
     public function dniExistboth($dni)
     {
-        $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = '" . $dni . "'";
-        $sql2 = "SELECT * FROM " . "Owners" . " WHERE dni = '" . $dni . "'";
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = :dni";
+        $sql2 = "SELECT * FROM " . "Owners" . " WHERE dni = :dni";
         $this->connection = Connection::GetInstance();
         $result = $this->connection->Execute($sql);
         $result2 = $this->connection->Execute($sql2);
@@ -134,18 +134,17 @@ class GuardianDAO
 
     public function emailExistBoth($email)
     {
-        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
-        $sql2 = "SELECT * FROM " . "Owners" . " WHERE email = '" . $email . "'";
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email";
+        $sql2 = "SELECT * FROM " . "Owners" . " WHERE email = :email";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
-        $result2 = $this->connection->Execute($sql2);
+        $result = $this->connection->Execute($sql, array("email" => $email));
+        $result2 = $this->connection->Execute($sql2, array("email" => $email));
         if ($result != null || $result2 != null) {
             return true;
         } else {
             return false;
         }
     }
-
 
     public function checkProfile($guardian)
     {

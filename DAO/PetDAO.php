@@ -26,12 +26,12 @@ class PetDAO
         }
     }
 
-    public function findByID($id)
+    public function findByID($id_pet)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_pet = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_pet = :id_pet";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_pet" => $id_pet));
             foreach ($result as $row) {
                 $pet = new Pet($row["id_owner"], $row['name'], $row["type"], $row["breed"], $row["pet_size"], $row["photo_url"], $row["vaccination_schedule"], $row["video_url"]);
                 $pet->setId($row["id_pet"]);
@@ -65,9 +65,9 @@ class PetDAO
     public function delete($id)
     {
         try {
-            $sql = "DELETE FROM " . $this->tableName . " WHERE id_pet = " . $id;
+            $sql = "DELETE FROM " . $this->tableName . " WHERE id_pet = :id";
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql);
+            $this->connection->ExecuteNonQuery($sql, array("id" => $id));
         } catch (\PDOException $ex) {
             throw $ex;
         }
@@ -99,9 +99,9 @@ class PetDAO
     {
         try {
             if ($id != null) {
-                $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = " . $id;
+                $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id";
                 $this->connection = Connection::GetInstance();
-                $result = $this->connection->Execute($sql);
+                $result = $this->connection->Execute($sql, array("id" => $id));
                 $pets = array();
                 foreach ($result as $row) {
                     $pet = new Pet($row["id_owner"], $row['name'], $row["type"], $row["breed"], $row["pet_size"], $row["photo_url"], $row["vaccination_schedule"], $row["video_url"]);

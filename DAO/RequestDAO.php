@@ -32,9 +32,9 @@ class RequestDAO
     public function findByRequestId($id_request)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_request = " . $id_request;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_request = :id_request";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_request" => $id_request));
             foreach ($result as $row) {
                 $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
                 $request->setReqstatus($row["req_status"]);
@@ -51,9 +51,9 @@ class RequestDAO
     public function findByOwnerId($id)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id_owner";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_owner" => $id));
             $requests = array();
             foreach ($result as $row) {
                 $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
@@ -69,12 +69,12 @@ class RequestDAO
         }
     }
 
-    public function findByGuardianId($id)
+    public function findByGuardianId($id_guardian)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
             $requests = array();
             foreach ($result as $row) {
                 $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
@@ -92,10 +92,10 @@ class RequestDAO
 
     public function countReviewsById($id_guardian)
     {
-        $sql = "SELECT count(score) FROM " . $this->tableName . " WHERE id_guardian = " . $id_guardian . " and score != 0;";
+        $sql = "SELECT count(score) FROM " . $this->tableName . " WHERE id_guardian = :id_guardian and score != 0;";
         $this->connection = Connection::GetInstance();
         $count = 0;
-        $result = $this->connection->Execute($sql);
+        $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
         foreach ($result as $row) {
             $count = $row["count(score)"];
         }
@@ -104,10 +104,10 @@ class RequestDAO
 
     public function sumReviewsById($id_guardian)
     {
-        $sql = "SELECT sum(score) FROM " . $this->tableName . " WHERE id_guardian = " . $id_guardian . ";";
+        $sql = "SELECT sum(score) FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
         $this->connection = Connection::GetInstance();
         $sum = 0;
-        $result = $this->connection->Execute($sql);
+        $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
         foreach ($result as $row) {
             $sum = $row["sum(score)"];
         }
@@ -131,9 +131,10 @@ class RequestDAO
 
     public function isPay($request)
     {
-        $sql = "SELECT * FROM payments WHERE id_request = " . $request->getIdRequest() . " AND paid = true;";
+        $id = $request->getIdRequest();
+        $sql = "SELECT * FROM payments WHERE id_request = :id AND paid = true;";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
+        $result = $this->connection->Execute($sql, array("id" => $id));
         if ($result) {
             return true;
         } else {
@@ -222,7 +223,8 @@ class RequestDAO
             if ($request->getIdRequest() == $id_request) {
                 $request->setReqStatus('Confirmado');
                 try {
-                    $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = " . $request->getIdRequest();
+                    $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id_request";
+                    $parameters["id_request"] = $request->getIdRequest();
                     $parameters["req_status"] = $request->getReqStatus();
                     $this->connection = Connection::GetInstance();
                     $this->connection->ExecuteNonQuery($sql, $parameters);
@@ -262,9 +264,9 @@ class RequestDAO
     public function deleteRequest($id_request)
     {
         try {
-            $sql = "DELETE FROM " . $this->tableName . " WHERE id_request =" . $id_request;
+            $sql = "DELETE FROM " . $this->tableName . " WHERE id_request = :id_request";
             $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql);
+            $this->connection->ExecuteNonQuery($sql, array("id_request" => $id_request));
         } catch (\PDOException $ex) {
             throw $ex;
         }
@@ -426,9 +428,9 @@ class RequestDAO
     }
 
     public function checkRequestsPet($idPet){
-        $sql = "SELECT id_pet FROM " . $this->tableName . " WHERE id_pet = ".$idPet;
+        $sql = "SELECT id_pet FROM " . $this->tableName . " WHERE id_pet = :id_pet";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql); 
+        $result = $this->connection->Execute($sql, array("id_pet" => $idPet));
         if ($result) return true;
         else return false;
     }

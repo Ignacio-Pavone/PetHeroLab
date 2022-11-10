@@ -57,12 +57,12 @@ class OwnerDAO
         }
     }
 
-    public function findbyID($id)
+    public function findbyID($id_owner)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id_owner";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("id_owner" => $id_owner));
             foreach ($result as $row) {
                 $owner = new Owner($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"]);
                 $owner->setId($row["id_owner"]);
@@ -75,11 +75,11 @@ class OwnerDAO
 
     public function emailExistBoth($email)
     {
-        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
-        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE email = '" . $email . "'";
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email";
+        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE email = :email";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
-        $result2 = $this->connection->Execute($sql2);
+        $result = $this->connection->Execute($sql, array("email" => $email));
+        $result2 = $this->connection->Execute($sql2, array("email" => $email));
         if (!empty($result) || !empty($result2)) {
             return true;
         } else {
@@ -89,11 +89,11 @@ class OwnerDAO
 
     public function dniExistBoth($dni)
     {
-        $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = '" . $dni . "'";
-        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE dni = '" . $dni . "'";
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = :dni";
+        $sql2 = "SELECT * FROM " . "Guardians" . " WHERE dni = :dni";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
-        $result2 = $this->connection->Execute($sql2);
+        $result = $this->connection->Execute($sql, array("dni" => $dni));
+        $result2 = $this->connection->Execute($sql2, array("dni" => $dni));
         if (!empty($result) || !empty($result2)) {
             return true;
         } else {
@@ -104,9 +104,9 @@ class OwnerDAO
     public function getByEmail($email)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "'";
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("email" => $email));
             foreach ($result as $row) {
                 $owner = new Owner($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"]);
                 $owner->setId($row["id_owner"]);
@@ -120,9 +120,9 @@ class OwnerDAO
     public function LoginCheck($email, $password)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = '" . $email . "' AND password = $password;";
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE email = :email AND password = :password";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array("email" => $email, "password" => $password));
             foreach ($result as $row) {
                 $owner = new Owner($row["email"], $row["fullname"], $row["dni"], $row["age"], $row["password"]);
                 $owner->setId($row["id_owner"]);

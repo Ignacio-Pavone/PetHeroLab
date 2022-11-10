@@ -47,9 +47,9 @@ class PaymentDAO
     {
         try {
             $array = array();
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id_owner";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array('id_owner' => $id));
             foreach ($result as $row) {
                 $payment = new Payment($row['id_owner'], $row['id_request'], $row['price']);
                 $payment->setPaid($row['paid']);
@@ -78,12 +78,12 @@ class PaymentDAO
         }
     }
 
-    public function findybyID($id)
+    public function findybyID($id_payment)
     {
         try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_payment = " . $id;
+            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_payment = :id_payment";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array('id_payment' => $id_payment));
             foreach ($result as $row) {
                 $payment = new Payment($row['id_owner'], $row['id_request'], $row['price']);
                 $payment->setPaid($row['paid']);
@@ -97,12 +97,12 @@ class PaymentDAO
         }
     }
 
-    public function getStatusByRequestId($id)
+    public function getStatusByRequestId($id_request)
     {
         try {
-            $sql = "SELECT paid FROM " . $this->tableName . " WHERE id_request = " . $id;
+            $sql = "SELECT paid FROM " . $this->tableName . " WHERE id_request = :id_request";
             $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
+            $result = $this->connection->Execute($sql, array('id_request' => $id_request));
             foreach ($result as $row) {
                 $flag = $row['paid'];
             }

@@ -271,10 +271,10 @@ require_once VIEWS_PATH . 'nav-bar.php';
                     <table style="text-align:center;">
                         <thead>
                         <tr>
-                            <th style="width: 15%;">Guardian</th>
+                            <th style="width: 10%;">Guardian</th>
                             <th style="width: 1%;">Mascota</th>
                             <th style="width: 14%;">Fecha Inicio</th>
-                            <th style="width: 14%;">Fecha Fin</th>
+                            <th style="width: 10%;">Fecha Fin</th>
                             <th style="width: 1%;">Dias</th>
                             <th style="width: 8%;">Costo Total</th>
                             <th style="width: 1%;">Estado</th>

@@ -5,7 +5,6 @@ use PHPMailer\Exception as Exception;
 
 class Email
 {
-
     public static function sendEmail($shippingAddress, $subject, $body, $attachment = null)
     {
         $mail = new PHPMailer(true);
@@ -39,9 +38,7 @@ class Email
             if ($attachment != null) {
                 $mail->addAttachment($attachment);
             }
-
             $mail->send();
-
         } catch (Exception $e) {
         }
     }
