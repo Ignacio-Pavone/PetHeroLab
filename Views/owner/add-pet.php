@@ -53,21 +53,21 @@ require_once VIEWS_PATH . 'navbars/nav-simple-bar.php';
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">URL</span>
                         </div>
-                        <input type="text" name="photo_url" placeholder="Foto" class="form-control"
+                        <input type="url" name="photo_url" placeholder="Foto" class="form-control"
                             id="basic-url" aria-describedby="basic-addon3" required>
                     </div>
                     <div class="col-lg-4 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">URL</span>
                         </div>
-                        <input type="text" name="vaccination_schedule" placeholder="Plan de Vacunacion"
+                        <input type="url" name="vaccination_schedule" placeholder="Plan de Vacunacion"
                             class="form-control" id="basic-url" aria-describedby="basic-addon3" required>
                     </div>
                     <div class="col-lg-12 input-group mb-3">
                         <div class="input-group-prepend">
                             <span class="btn btn-md btn-dark m-0 px-3" id="basic-addon3">URL</span>
                         </div>
-                        <input type="text" name="video_url" placeholder="Video" class="form-control"
+                        <input type="url" name="video_url" placeholder="Video" class="form-control"
                             id="basic-url" aria-describedby="basic-addon3" required>
                     </div>
                     <div class="row" id="buttonraro" style="margin-left: 460px; border: 1px solid">
