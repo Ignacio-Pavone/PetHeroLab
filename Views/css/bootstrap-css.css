@@ -296,6 +296,29 @@ input[type="checkbox"]:checked::before {
     margin-top: 10px;
 }
 
+.circulo-Pendiente {
+    background: orange;
+}
+
+.circulo-Confirmado {
+    background: green;
+}
+
+.circulo-Rechazado {
+    background: red;
+}
+
+.circulo-Completo {
+    background: blue;
+}
+
+.circulo-Calificado {
+    background: purple;
+}
+
+.circulo-EnCurso {
+    background: pink;
+}
 
 .divEstado {
     font-style: italic;

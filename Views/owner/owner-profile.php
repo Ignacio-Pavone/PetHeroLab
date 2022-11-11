@@ -304,19 +304,8 @@ require_once VIEWS_PATH . 'nav-bar.php';
                                 <td><?php echo Format::formatDate($request->getFinishDate()); ?></td>
                                 <td><?php echo $request->getDaysAmount(); ?></td>
                                 <td><?php echo $request->getFinalPrice() . ' $' ?></td>
-                                <td class=""><?php if ($request->getReqStatus() == 'Confirmado') {
-                                    ?> <label class="circulo" style="background:green;"> <?php
-                                        } elseif ($request->getReqStatus() == 'Pendiente') {
-                                        ?> <label class="circulo" style="background:orange;"> <?php
-                                            } elseif ($request->getReqStatus() == 'Rechazado') {
-                                            ?> <label class="circulo" style="background:red;"> <?php
-                                                } elseif ($request->getReqStatus() == 'Completo') {
-                                                ?> <label class="circulo" style="background:blue;"> <?php
-                                                    } elseif ($request->getReqStatus() == 'Calificado') {
-                                                    ?> <label class="circulo" style="background:purple;"> <?php
-                                                        } elseif ($request->getReqStatus() == 'En Curso') {
-                                                        ?> <label class="circulo" style="background:pink;"></td>
-                            <?php } ?>
+                                <td class=""><label class="circulo circulo-<?php echo $request->getReqStatus() ?>"></td>
+                                
                                 <td> <?php foreach ($payments as $payment) {
                                         if ($payment->getId_request() == $request->getIdRequest()) { ?>
                                             <?php if ($payment->getPaid() == 0 && $request->getReqStatus() != 'Rechazado') { ?>
@@ -385,19 +374,19 @@ require_once VIEWS_PATH . 'nav-bar.php';
                     </table>
                     <br>
                     <div class="divEstado">
-                        <p class="circulo" style="background:orange;"></p><label
+                        <p class="circulo circulo-Pendiente"></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">Pendiente</label>
-                        <p class="circulo" style="background:green;"></p><label
+                        <p class="circulo circulo-Confirmado"></p><label
                                 style="padding-left:5px; padding-right:15px;" for="">Confirmado</label>
-                        <p class="circulo" style="background:pink;"></p><label
+                        <p class="circulo circulo-EnCurso"></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">En Curso</label>
-                        <p class="circulo" style="background:blue;"></p><label
+                        <p class="circulo circulo-Completo" ></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">Completo</label>
-                        <p class="circulo" style="background:purple;"></p><label
+                        <p class="circulo circulo-Calificado" ></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">Calificado</label>
-                        <p class="circulo" style="background:red;"></p><label
+                        <p class="circulo circulo-Rechazado" ></p><label
                                 style="padding-left:5px;padding-right:15px;" for="">Rechazado</label>
-                    </div>
+                        </div> 
                     <br>
                 </div>
                 <br>

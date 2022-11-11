@@ -121,11 +121,11 @@ class RequestDAO
      */
     public function autoReqStatus($request)
     {
-        if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'En Curso' && $this->isPay($request)) {
+        if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'EnCurso' && $this->isPay($request)) {
             if (($request->getFinishDate() < date('Y-m-d'))) {
                 $this->updateStatusQuery($request->getIdRequest(), 'Completo');
             } elseif ($request->getInitDate() <= date('Y-m-d') && $request->getFinishDate() >= date('Y-m-d')) {
-                $this->updateStatusQuery($request->getIdRequest(), 'En Curso');
+                $this->updateStatusQuery($request->getIdRequest(), 'EnCurso');
             }
         } else {
             if ($request->getInitDate() <= date('Y-m-d') && !$this->isPay($request)) {
@@ -187,7 +187,7 @@ class RequestDAO
     public function checkGuardianRequests($requests, $requestToAccept)
     {
         foreach ($requests as $request) {
-            if ($request->getReqStatus() == 'En Curso' || $request->getReqStatus() == 'Confirmado') {
+            if ($request->getReqStatus() == 'EnCurso' || $request->getReqStatus() == 'Confirmado') {
                 if ($request->getType() == $requestToAccept->getType()) {
                     if ($request->getBreed() == $requestToAccept->getBreed()) {
                         return true;
@@ -311,7 +311,7 @@ class RequestDAO
         $array = array();
         foreach ($reservas as $reserva) {
             if ($reserva->getIdGuardian() == $idGuardian) {
-                if ($reserva->getReqStatus() == "En Curso") {
+                if ($reserva->getReqStatus() == "EnCurso") {
                     array_push($array, $reserva);
                 }
             }
@@ -334,7 +334,7 @@ class RequestDAO
         }
 
         foreach ($reservas as $reserva) {
-            if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "En Curso") {
+            if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "EnCurso") {
                 if ($type == $reserva->getType()) {
                     if ($breed == $reserva->getBreed()) {
                         return true;

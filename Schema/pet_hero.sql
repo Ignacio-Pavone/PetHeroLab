@@ -66,7 +66,7 @@ create table Requests
     id_guardian int,
     init_date   date,
     finish_date date,
-    req_status  ENUM('Pendiente','Confirmado',"En Curso",'Rechazado',"Completo","Calificado"),
+    req_status  ENUM('Pendiente','Confirmado',"EnCurso",'Rechazado',"Completo","Calificado"),
     score       float default null,
     final_price float,
     type        varchar(50),
