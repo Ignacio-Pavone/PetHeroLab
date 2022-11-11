@@ -34,25 +34,35 @@ class PaymentController
             Session::SetBadMessage("Datos de la tarjeta incorrectos intente nuevamente.");
             header("location: ".FRONT_ROOT . 'Payment/showPaymentForm/' . $idPayment);
         }else{
-            $owner = $this->ownerDAO->findbyID($idOwner);
-            $idGuardian = $this->findGuardianIdbyRequest($idRequest);
-            $guardian = $this->guardianDAO->findbyID($idGuardian);
-            $request = $this->requestDAO->findByRequestId($idRequest);
-            $idPet = $this->findPetIdbyRequest($idRequest);
-            $pet = $this->petDAO->findbyID($idPet);
-            $finalprice = $request->getfinalPrice() / 2;
-            $method = ucfirst($datos['type']);
-            $this->paymentDAO->setPayment($idPayment,$finalprice,$method);
-            $this->requestDAO->updateFinalPrice($idRequest, $finalprice);
-            Session::setOkMessage("Tu pago de $". $finalprice ." con tarjeta ".ucfirst($datos['type'])." fue procesada con éxito.");
-            Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner, ucfirst($datos['type']), $datos['number'],  $finalprice));
-            header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
+            try {
+                $owner = $this->ownerDAO->findbyID($idOwner);
+                $idGuardian = $this->findGuardianIdbyRequest($idRequest);
+                $guardian = $this->guardianDAO->findbyID($idGuardian);
+                $request = $this->requestDAO->findByRequestId($idRequest);
+                $idPet = $this->findPetIdbyRequest($idRequest);
+                $pet = $this->petDAO->findbyID($idPet);
+                $finalprice = $request->getfinalPrice() / 2;
+                $method = ucfirst($datos['type']);
+                $this->paymentDAO->setPayment($idPayment, $finalprice, $method);
+                $this->requestDAO->updateFinalPrice($idRequest, $finalprice);
+                Session::setOkMessage("Tu pago de $". $finalprice ." con tarjeta ".ucfirst($datos['type'])." fue procesada con éxito.");
+                Email::sendEmail($owner->getEmail(), 'Datos de tu reserva', Email::buyaMailBody($guardian, $request, $pet, $owner, ucfirst($datos['type']), $datos['number'],  $finalprice));
+                header("location: " . FRONT_ROOT . "Auth/showOwnerProfile");
+            } catch (\Exception $e) {
+                Session::SetBadMessage("Error al procesar el pago");
+                header("location: ".FRONT_ROOT . 'Payment/showPaymentForm/' . $idPayment);
+            }
+
         }
     }
 
     public function findPetIdbyRequest($idRequest)
     {
-        $requests = $this->requestDAO->getAll();
+        try {
+            $requests = $this->requestDAO->getAll();
+        } catch (\Exception $e) {
+            Session::SetBadMessage("Error al obtener datos de las solicitudes");
+        }
         foreach ($requests as $request) {
             if ($request->getIdRequest() == $idRequest) {
                 return $request->getIdPet();
@@ -62,7 +72,11 @@ class PaymentController
 
     public function findGuardianIdbyRequest($idRequest)
     {
-        $requests = $this->requestDAO->getAll();
+        try {
+            $requests = $this->requestDAO->getAll();
+        } catch (\Exception $e) {
+            Session::SetBadMessage("Error al obtener datos de las solicitudes");
+        }
         foreach ($requests as $request) {
             if ($request->getIdRequest() == $idRequest) {
                 return $request->getIdGuardian();

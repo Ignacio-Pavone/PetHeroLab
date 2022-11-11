@@ -8,88 +8,87 @@ class RequestDAO
     private $connection;
     private $tableName = "Requests";
 
+    /**
+     * @throws \Exception
+     */
     public function getAll()
     {
-        try {
-            $sql = "SELECT * FROM " . $this->tableName;
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql);
-            $requests = array();
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($requests, $request);
-            }
-            return $requests;
-        } catch (\PDOException $ex) {
-            throw $ex;
+        $sql = "SELECT * FROM " . $this->tableName;
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql);
+        $requests = array();
+        foreach ($result as $row) {
+            $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+            $request->setIdRequest($row["id_request"]);
+            $request->setReqstatus($row["req_status"]);
+            $request->setScore($row["score"]);
+            $this->autoReqStatus($request);
+            array_push($requests, $request);
         }
+        return $requests;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function findByRequestId($id_request)
     {
-        try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_request = :id_request";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql, array("id_request" => $id_request));
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                return $request;
-            }
-        } catch (\PDOException $ex) {
-            throw $ex;
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id_request = :id_request";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql, array("id_request" => $id_request));
+        foreach ($result as $row) {
+            $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+            $request->setReqstatus($row["req_status"]);
+            $request->setIdRequest($row["id_request"]);
+            $request->setScore($row["score"]);
+            $this->autoReqStatus($request);
+            return $request;
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function findByOwnerId($id)
     {
-        try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id_owner";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql, array("id_owner" => $id));
-            $requests = array();
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($requests, $request);
-            }
-            return $requests;
-        } catch (\PDOException $ex) {
-            throw $ex;
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id_owner = :id_owner";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql, array("id_owner" => $id));
+        $requests = array();
+        foreach ($result as $row) {
+            $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+            $request->setReqstatus($row["req_status"]);
+            $request->setIdRequest($row["id_request"]);
+            $request->setScore($row["score"]);
+            $this->autoReqStatus($request);
+            array_push($requests, $request);
         }
+        return $requests;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function findByGuardianId($id_guardian)
     {
-        try {
-            $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
-            $this->connection = Connection::GetInstance();
-            $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
-            $requests = array();
-            foreach ($result as $row) {
-                $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
-                $request->setIdRequest($row["id_request"]);
-                $request->setReqstatus($row["req_status"]);
-                $request->setScore($row["score"]);
-                $this->autoReqStatus($request);
-                array_push($requests, $request);
-            }
-            return $requests;
-        } catch (\PDOException $ex) {
-            throw $ex;
+        $sql = "SELECT * FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
+        $this->connection = Connection::GetInstance();
+        $result = $this->connection->Execute($sql, array("id_guardian" => $id_guardian));
+        $requests = array();
+        foreach ($result as $row) {
+            $request = new Request($row["id_pet"], $row["id_owner"], $row["id_guardian"], $row["init_date"], $row["finish_date"], $row["final_price"], $row['type'], $row['breed'], $row["days_amount"]);
+            $request->setIdRequest($row["id_request"]);
+            $request->setReqstatus($row["req_status"]);
+            $request->setScore($row["score"]);
+            $this->autoReqStatus($request);
+            array_push($requests, $request);
         }
+        return $requests;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function countReviewsById($id_guardian)
     {
         $sql = "SELECT count(score) FROM " . $this->tableName . " WHERE id_guardian = :id_guardian and score != 0;";
@@ -102,6 +101,9 @@ class RequestDAO
         return $count;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function sumReviewsById($id_guardian)
     {
         $sql = "SELECT sum(score) FROM " . $this->tableName . " WHERE id_guardian = :id_guardian";
@@ -114,6 +116,9 @@ class RequestDAO
         return $sum;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function autoReqStatus($request)
     {
         if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'En Curso' && $this->isPay($request)) {
@@ -129,6 +134,9 @@ class RequestDAO
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function isPay($request)
     {
         $id = $request->getIdRequest();
@@ -142,40 +150,38 @@ class RequestDAO
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function updateStatusQuery($id_request, $req_status)
     {
-        try {
-            $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id_request";
-            $parameters["id_request"] = $id_request;
-            $parameters["req_status"] = $req_status;
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql, $parameters);
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
+        $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id_request";
+        $parameters["id_request"] = $id_request;
+        $parameters["req_status"] = $req_status;
+        $this->connection = Connection::GetInstance();
+        $this->connection->ExecuteNonQuery($sql, $parameters);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function add($request)
     {
         var_dump($request);
-        try {
-            $sql = "INSERT INTO " . $this->tableName . " (id_pet, id_owner, id_guardian, init_date, finish_date, req_status, score, final_price, type, breed, days_amount) VALUES (:id_pet, :id_owner, :id_guardian, :init_date, :finish_date, :req_status, :score, :final_price, :type, :breed, :days_amount)";
-            $parameters["id_pet"] = $request->getIdPet();
-            $parameters["id_owner"] = $request->getIdOwner();
-            $parameters["id_guardian"] = $request->getIdGuardian();
-            $parameters["init_date"] = $request->getInitDate();
-            $parameters["finish_date"] = $request->getFinishDate();
-            $parameters["req_status"] = "Pendiente";
-            $parameters["score"] = $request->getScore();
-            $parameters["final_price"] = $request->getFinalPrice();
-            $parameters['type'] = $request->getType();
-            $parameters['breed'] = $request->getBreed();
-            $parameters["days_amount"] = $request->getDaysAmount();
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql, $parameters);
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
+        $sql = "INSERT INTO " . $this->tableName . " (id_pet, id_owner, id_guardian, init_date, finish_date, req_status, score, final_price, type, breed, days_amount) VALUES (:id_pet, :id_owner, :id_guardian, :init_date, :finish_date, :req_status, :score, :final_price, :type, :breed, :days_amount)";
+        $parameters["id_pet"] = $request->getIdPet();
+        $parameters["id_owner"] = $request->getIdOwner();
+        $parameters["id_guardian"] = $request->getIdGuardian();
+        $parameters["init_date"] = $request->getInitDate();
+        $parameters["finish_date"] = $request->getFinishDate();
+        $parameters["req_status"] = "Pendiente";
+        $parameters["score"] = $request->getScore();
+        $parameters["final_price"] = $request->getFinalPrice();
+        $parameters['type'] = $request->getType();
+        $parameters['breed'] = $request->getBreed();
+        $parameters["days_amount"] = $request->getDaysAmount();
+        $this->connection = Connection::GetInstance();
+        $this->connection->ExecuteNonQuery($sql, $parameters);
     }
 
     public function checkGuardianRequests($requests, $requestToAccept)
@@ -192,6 +198,9 @@ class RequestDAO
         return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function acceptRequestAsGuardian($id_request, $id_guardian)
     {
         $searchedRequest = $this->findByRequestId($id_request);
@@ -216,25 +225,27 @@ class RequestDAO
         return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function acceptRequest($id_request)
     {
         $requests = $this->getAll();
         foreach ($requests as $request) {
             if ($request->getIdRequest() == $id_request) {
                 $request->setReqStatus('Confirmado');
-                try {
-                    $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id_request";
-                    $parameters["id_request"] = $request->getIdRequest();
-                    $parameters["req_status"] = $request->getReqStatus();
-                    $this->connection = Connection::GetInstance();
-                    $this->connection->ExecuteNonQuery($sql, $parameters);
-                } catch (\PDOException $ex) {
-                    throw $ex;
-                }
+                $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id_request";
+                $parameters["id_request"] = $request->getIdRequest();
+                $parameters["req_status"] = $request->getReqStatus();
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($sql, $parameters);
             }
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function rejectRequestGuardian($id_request)
     {
         $reservas = $this->getAll();
@@ -245,6 +256,9 @@ class RequestDAO
         }
     }
 
+    /**
+     * @throws \Exception
+     */
     public function cancelAsOwner($id_request)
     {
         $reservas = $this->getAll();
@@ -261,17 +275,19 @@ class RequestDAO
         return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function deleteRequest($id_request)
     {
-        try {
-            $sql = "DELETE FROM " . $this->tableName . " WHERE id_request = :id_request";
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql, array("id_request" => $id_request));
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
+        $sql = "DELETE FROM " . $this->tableName . " WHERE id_request = :id_request";
+        $this->connection = Connection::GetInstance();
+        $this->connection->ExecuteNonQuery($sql, array("id_request" => $id_request));
     }
 
+    /**
+     * @throws \Exception
+     */
     public function filterConfirmed($idGuardian)
     {
         $reservas = $this->findByGuardianId($idGuardian);
@@ -286,6 +302,9 @@ class RequestDAO
         return $array;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function filterInCurse($idGuardian)
     {
         $reservas = $this->findByGuardianId($idGuardian);
@@ -300,6 +319,9 @@ class RequestDAO
         return $array;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function analyzeRequest($idGuardian, $type, $breed, $initDate)
     {
         $reservas = $this->findByGuardianId($idGuardian);
@@ -355,36 +377,32 @@ class RequestDAO
             return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function changeReqStatus($id_request, $req_status)
     {
-        try {
-            $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id";
-            $parameters["id"] = $id_request;
-            $parameters["req_status"] = $req_status;
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql, $parameters);
-            return true;
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-        return false;
+        $sql = "UPDATE " . $this->tableName . " SET req_status = :req_status WHERE id_request = :id";
+        $parameters["id"] = $id_request;
+        $parameters["req_status"] = $req_status;
+        $this->connection = Connection::GetInstance();
+        $this->connection->ExecuteNonQuery($sql, $parameters);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function setScore($id_request, $score)
     {
         $reservas = $this->getAll();
         foreach ($reservas as $reserva) {
             if ($reserva->getIdRequest() == $id_request) {
                 $reserva->setScore($score);
-                try {
-                    $sql = "UPDATE " . $this->tableName . " SET score = :score WHERE id_request = :id_request";
-                    $parameters["id_request"] = $id_request;
-                    $parameters["score"] = $score;
-                    $this->connection = Connection::GetInstance();
-                    $this->connection->ExecuteNonQuery($sql, $parameters);
-                } catch (\PDOException $ex) {
-                    throw $ex;
-                }
+                $sql = "UPDATE " . $this->tableName . " SET score = :score WHERE id_request = :id_request";
+                $parameters["id_request"] = $id_request;
+                $parameters["score"] = $score;
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($sql, $parameters);
                 return true;
             }
         }
@@ -399,6 +417,9 @@ class RequestDAO
         return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function Exists($requestCompared)
     {
         $reservas = $this->getAll();
@@ -412,21 +433,21 @@ class RequestDAO
         return false;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function updateFinalPrice ($id_request, $final_price)
     {
-        try {
-            $sql = "UPDATE " . $this->tableName . " SET final_price = :final_price WHERE id_request = :id_request";
-            $parameters["id_request"] = $id_request;
-            $parameters["final_price"] = $final_price;
-            $this->connection = Connection::GetInstance();
-            $this->connection->ExecuteNonQuery($sql, $parameters);
-            return true;
-        } catch (\PDOException $ex) {
-            throw $ex;
-        }
-        return false;
+        $sql = "UPDATE " . $this->tableName . " SET final_price = :final_price WHERE id_request = :id_request";
+        $parameters["id_request"] = $id_request;
+        $parameters["final_price"] = $final_price;
+        $this->connection = Connection::GetInstance();
+        $this->connection->ExecuteNonQuery($sql, $parameters);
     }
 
+    /**
+     * @throws \Exception
+     */
     public function checkRequestsPet($idPet){
         $sql = "SELECT id_pet FROM " . $this->tableName . " WHERE id_pet = :id_pet";
         $this->connection = Connection::GetInstance();

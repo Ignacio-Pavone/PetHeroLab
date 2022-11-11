@@ -16,29 +16,40 @@ class GuardianController
     public function register($fullname, $age, $dni, $email, $password, $tipoMascota, $fee)
     {
         $user = new Guardian($email, $fullname, $dni, $age, $password, $tipoMascota, $fee, $initDate = null, $finishDate = null);
-        if (!$this->guardianDAO->emailExistBoth($email) && !$this->guardianDAO->dniExistboth($dni)) {
-            $this->guardianDAO->add($user);
-            Session::SetOkMessage("Guardian registrado con exito");
-        } else {
-            Session::SetBadMessage("El email o dni ya esta en uso");
+        try {
+            if (!$this->guardianDAO->emailExistBoth($email) && !$this->guardianDAO->dniExistboth($dni)) {
+                $this->guardianDAO->add($user);
+                Session::SetOkMessage("Guardian registrado con exito");
+            } else {
+                Session::SetBadMessage("El email o dni ya esta en uso");
+            }
+        } catch (\Exception $e) {
+            Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
         }
         header("location: " . FRONT_ROOT . "Auth/showLogin");
     }
 
-
     public function showdisponibilityView($guardianEmail)
     {
-        $guardian = $this->guardianDAO->getByEmail($guardianEmail);
+        try {
+            $guardian = $this->guardianDAO->getByEmail($guardianEmail);
+        } catch (\Exception $e) {
+            Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
+        }
         header("location: " . FRONT_ROOT . "Auth/showGuardianProfile/" . $guardianEmail);
     }
 
     public function ModifyAvailability($guardianEmail, $initDate, $finishDate)
     {
         if ($initDate < $finishDate) {
-            if ($this->guardianDAO->updateDisponibility($guardianEmail, $initDate, $finishDate)) {
-                Session::SetOkMessage("Guardian modificado con exito");
-            } else {
-                Session::SetBadMessage("Hubo algun problema");
+            try {
+                if ($this->guardianDAO->updateDisponibility($guardianEmail, $initDate, $finishDate)) {
+                    Session::SetOkMessage("Guardian modificado con exito");
+                } else {
+                    Session::SetBadMessage("Hubo algun problema");
+                }
+            } catch (\Exception $e) {
+                Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
             }
         } else {
             Session::SetBadMessage("La fecha de inicio debe ser menor a la fecha de fin");
@@ -54,10 +65,18 @@ class GuardianController
 
     public function changePassword($userID, $oldPassword, $newPassword, $newPassword2)
     {
-        $user = $this->guardianDAO->findbyID($userID);
+        try {
+            $user = $this->guardianDAO->findbyID($userID);
+        } catch (\Exception $e) {
+            Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
+        }
         if ($oldPassword == $user->getPassword()) {
             if ($newPassword == $newPassword2) {
-                $this->guardianDAO->updatePassword($userID, $newPassword);
+                try {
+                    $this->guardianDAO->updatePassword($userID, $newPassword);
+                } catch (\Exception $e) {
+                    Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
+                }
                 Session::DeleteSession();
             } else {
                 Session::SetBadMessage("Contraseña nueva no concuerda.");
