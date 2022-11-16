@@ -36,7 +36,7 @@ class PetController
                     $this->mascotaDAO->delete($id);
                     Session::SetOkMessage("Mascota eliminada con exito");
                 } else {
-                    Session::SetBadMessage("Mascota posee reservas realizadas, cancelarlas antes de eliminarla.");
+                    Session::SetBadMessage("La mascota posee reservas realizadas, cancelela antes de eliminarla.");
                 }
             } catch (\Exception $e) {
                 Session::SetBadMessage("Error con la base de datos al eliminar mascota");

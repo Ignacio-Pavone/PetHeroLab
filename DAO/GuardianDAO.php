@@ -124,8 +124,9 @@ class GuardianDAO
         $sql = "SELECT * FROM " . $this->tableName . " WHERE dni = :dni";
         $sql2 = "SELECT * FROM " . "Owners" . " WHERE dni = :dni";
         $this->connection = Connection::GetInstance();
-        $result = $this->connection->Execute($sql);
-        $result2 = $this->connection->Execute($sql2);
+        $result = $this->connection->Execute($sql, array("dni" => $dni));
+        $result2 = $this->connection->Execute($sql2, array("dni" => $dni));
+
         if ($result != null || $result2 != null) {
             return true;
         } else {

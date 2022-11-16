@@ -24,7 +24,7 @@ class GuardianController
                 Session::SetBadMessage("El email o dni ya esta en uso");
             }
         } catch (\Exception $e) {
-            Session::SetBadMessage("Hubo algun problema con la conexion a la base de datos");
+            Session::SetBadMessage("Error en la base de datos.");
         }
         header("location: " . FRONT_ROOT . "Auth/showLogin");
     }
@@ -44,7 +44,7 @@ class GuardianController
         if ($initDate < $finishDate) {
             try {
                 if ($this->guardianDAO->updateDisponibility($guardianEmail, $initDate, $finishDate)) {
-                    Session::SetOkMessage("Guardian modificado con exito");
+                    Session::SetOkMessage("Disponibilidad actualizada con exito");
                 } else {
                     Session::SetBadMessage("Hubo algun problema");
                 }
