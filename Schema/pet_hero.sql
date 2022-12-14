@@ -77,3 +77,15 @@ create table Requests
     constraint fk_id_guardian_r foreign key (id_guardian) references guardians (id_guardian),
     constraint fk_id_pet_r foreign key (id_pet) references Pets (id_pet)
 );
+
+create table Chat(
+    id_chat int auto_increment,
+    id_owner int,
+    id_guardian int,
+    id_request int,
+    text varchar(250),
+    constraint pk_id_chat primary key (id_chat),
+    constraint fk_id_owner_c foreign key (id_owner) references owners (id_owner),
+    constraint fk_id_guardian_c foreign key (id_guardian) references guardians (id_guardian),
+    constraint fk_id_request_c foreign key (id_request) references requests (id_request)
+);

@@ -2,7 +2,7 @@
 namespace DAO;
 use Models\Owner;
 use Utils\Session;
-use DAo\Connection as Connection;
+use DAO\Connection as Connection;
 
 class OwnerDAO
 {

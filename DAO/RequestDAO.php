@@ -334,6 +334,8 @@ class RequestDAO
         }
 
         foreach ($reservas as $reserva) {
+            
+
             if ($reserva->getReqStatus() == "Confirmado" || $reserva->getReqStatus() == "EnCurso") {
                 if ($type == $reserva->getType()) {
                     if ($breed == $reserva->getBreed()) {
@@ -341,6 +343,7 @@ class RequestDAO
                     }
                 }
             }
+        
         }
         return false;
     }
