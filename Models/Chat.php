@@ -3,6 +3,7 @@ class Chat{
     private $id;
     private $senderId;
     private $receiverId;
+    private $sender_type;
     private $message;
     private $idRequest;
 
@@ -47,7 +48,7 @@ class Chat{
     }
 
 
-    public function setIdRequest($idRequest): void
+    public function setIdRequest($idRequest)
     {
         $this->idRequest = $idRequest;
     }
@@ -58,11 +59,19 @@ class Chat{
     }
 
 
-    public function setMessage($message): void
+    public function setMessage($message)
     {
         $this->message = $message;
     }
 
+    public function getSenderType()
+    {
+        return $this->sender_type;
+    }
 
+    public function setSenderType($sender_type)
+    {
+        $this->sender_type = $sender_type;
+    }
 } 
 ?>

@@ -250,5 +250,52 @@ require_once VIEWS_PATH . 'nav-bar.php';
                                 style="padding-left:5px;padding-right:15px;" for="">Rechazado</label>
             </div> 
             <br>
+            
         </div>
+        <br>
+        <div class="container" id="css-mine" style="overflow-y:scroll; height: 450px;">
+                <center>
+                    <h3 class="mb">Chats</h3>
+                    <table style="text-align:center;">
+                        <thead>
+                        <tr>
+                            <th style="width: 10%;">Dueño</th>
+                            <th style="width: 8%;">Mascota</th>
+                            <th style="width: 4%;">Chat</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($requests as $request) {
+
+                            if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'EnCurso' ) {?>
+                            <tr>
+                                <?php foreach ($owners as $owner) {
+                                    if ($request->getIdOwner() == $owner->getId()) {
+                                        ?>
+                                        <td><?php echo $owner->getFullName(); ?></td>
+                                    <?php }
+                                } ?>
+                                <?php foreach ($allpets as $mascota) {
+                                    if ($request->getIdPet() == $mascota->getId()) {
+                                        ?>
+                                        <td><?php echo $mascota->getName();
+                                            break; ?></td>
+                                    <?php }
+                                } ?>
+                                
+                                
+                                <td>
+                                    <form action="<?php echo FRONT_ROOT.'Chat/showChat' ?>" method="POST">
+                                    <input type="hidden" name="idRequest" value="<?php echo $request->getIdRequest(); ?>">
+                                    <input type="hidden" name="idReceiver" value="<?php echo $request->getIdOwner(); ?>">
+                                    <input type="hidden" name="senderType" value="guardian">
+                                    <button type="submit" class="btn btn-login">CHAT</button>
+                                    </form>
+                                </td>
+                            
+                            <tr>
+                    <?php } }?>
+                    
+                </center>
+            </div>
     </main>

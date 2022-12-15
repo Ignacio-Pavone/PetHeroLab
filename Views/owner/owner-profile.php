@@ -407,7 +407,7 @@ require_once VIEWS_PATH . 'nav-bar.php';
                         <tbody>
                         <?php foreach ($requests as $request) {
 
-                            if ($request->getReqStatus() == 'Confirmado') {?>
+                            if ($request->getReqStatus() == 'Confirmado' || $request->getReqStatus() == 'EnCurso' ) {?>
                             <tr>
                                 <?php foreach ($allGuardians as $guardian) {
                                     if ($request->getIdGuardian() == $guardian->getId()) {
@@ -422,15 +422,20 @@ require_once VIEWS_PATH . 'nav-bar.php';
                                             break; ?></td>
                                     <?php }
                                 } ?>
-
+                                
+                                
                                 <td>
-                                    <?php ?>
-                                    <a class="btn btn-info ml-auto"
-                                       href="<?php echo FRONT_ROOT . 'Chat/showChat/' ?>">CHAT</a>
+                                    <form action="<?php echo FRONT_ROOT.'Chat/showChat' ?>" method="POST">
+                                    <input type="hidden" name="idRequest" value="<?php echo $request->getIdRequest(); ?>">
+                                    <input type="hidden" name="idReceiver" value="<?php echo $request->getIdGuardian(); ?>">
+                                    <input type="hidden" name="senderType" value="owner">
+                                    <button type="submit" class="btn btn-login">CHAT</button>
+                                    </form>
                                 </td>
+                            
+                            <tr>
                     <?php } }?>
-                    <hr>
+                    
                 </center>
-
             </div>
 </section>

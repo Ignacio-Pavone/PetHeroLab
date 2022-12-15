@@ -80,9 +80,10 @@ create table Requests
 
 create table Chats(
     id_chat int auto_increment,
-    id_owner int,
-    id_guardian int,
+    senderId int,
+    receiverId int,
     id_request int,
+    sender_type varchar(1),
     text varchar(250),
     constraint pk_id_chat primary key (id_chat),
     constraint fk_id_owner_c foreign key (id_owner) references owners (id_owner),
