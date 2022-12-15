@@ -78,7 +78,7 @@ create table Requests
     constraint fk_id_pet_r foreign key (id_pet) references Pets (id_pet)
 );
 
-create table Chat(
+create table Chats(
     id_chat int auto_increment,
     id_owner int,
     id_guardian int,

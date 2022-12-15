@@ -389,8 +389,48 @@ require_once VIEWS_PATH . 'nav-bar.php';
                         </div> 
                     <br>
                 </div>
+
                 <br>
 
             </div>
-        
+            <div class="container" id="css-mine" style="overflow-y:scroll; height: 450px;">
+                <center>
+                    <h3 class="mb">Chats</h3>
+                    <table style="text-align:center;">
+                        <thead>
+                        <tr>
+                            <th style="width: 10%;">Guardian</th>
+                            <th style="width: 8%;">Mascota</th>
+                            <th style="width: 4%;">Chat</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach ($requests as $request) {
+
+                            if ($request->getReqStatus() == 'Confirmado') {?>
+                            <tr>
+                                <?php foreach ($allGuardians as $guardian) {
+                                    if ($request->getIdGuardian() == $guardian->getId()) {
+                                        ?>
+                                        <td><?php echo $guardian->getFullName(); ?></td>
+                                    <?php }
+                                } ?>
+                                <?php foreach ($allPets as $mascota) {
+                                    if ($request->getIdPet() == $mascota->getId()) {
+                                        ?>
+                                        <td><?php echo $mascota->getName();
+                                            break; ?></td>
+                                    <?php }
+                                } ?>
+
+                                <td>
+                                    <?php ?>
+                                    <a class="btn btn-info ml-auto"
+                                       href="<?php echo FRONT_ROOT . 'Chat/showChat/' ?>">CHAT</a>
+                                </td>
+                    <?php } }?>
+                    <hr>
+                </center>
+
+            </div>
 </section>

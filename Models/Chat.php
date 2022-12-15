@@ -1,55 +1,53 @@
 <?php namespace Models;
 class Chat{
     private $id;
-    private $idOwner;
-    private $idGuardian;
-    private $idRequest;
+    private $senderId;
+    private $receiverId;
     private $message;
+    private $idRequest;
 
-    public function __construct($id,$idOwner,$idGuardian,$idRequest,$message){
-        $this->id=$id;
-        $this->idOwner=$idOwner;
-        $this->idGuardian=$idGuardian;
-        $this->idRequest=$idRequest;
-        $this->message=$message;
-    }
 
     public function getId()
     {
         return $this->id;
     }
 
-    public function setId($id)
+
+    public function setId($id): void
     {
         $this->id = $id;
     }
 
-    public function getIdOwner()
+    public function getSenderId()
     {
-        return $this->idOwner;
+        return $this->senderId;
     }
 
-    public function setIdOwner($idOwner)
+
+    public function setSenderId($senderId): void
     {
-        $this->idOwner = $idOwner;
+        $this->senderId = $senderId;
     }
 
-    public function getIdGuardian()
+    public function getReceiverId()
     {
-        return $this->idGuardian;
+        return $this->receiverId;
     }
 
-    public function setIdGuardian($idGuardian)
+
+    public function setReceiverId($receiverId): void
     {
-        $this->idGuardian = $idGuardian;
+        $this->receiverId = $receiverId;
     }
+
 
     public function getIdRequest()
     {
         return $this->idRequest;
     }
 
-    public function setIdRequest($idRequest)
+
+    public function setIdRequest($idRequest): void
     {
         $this->idRequest = $idRequest;
     }
@@ -59,9 +57,12 @@ class Chat{
         return $this->message;
     }
 
-    public function setMessage($message)
+
+    public function setMessage($message): void
     {
-        return $this;
+        $this->message = $message;
     }
+
+
 } 
 ?>
