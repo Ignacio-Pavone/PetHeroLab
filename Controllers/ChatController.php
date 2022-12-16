@@ -38,8 +38,8 @@ class ChatController{
             $sender = $this->ownerDAO->findbyId($_SESSION["loggedUser"]->getId());
             $receiver = $this->guardianDAO->findbyId($idReceiver);
         }else{
-            $receiver = $this->guardianDAO->findbyId($_SESSION["loggedUser"]->getId());
-            $sender = $this->ownerDAO->findbyId($idReceiver);
+            $sender = $this->guardianDAO->findbyId($_SESSION["loggedUser"]->getId());
+            $receiver = $this->ownerDAO->findbyId($idReceiver);
         }
         $chats = $this->chatDAO->SearchChatByReqId($idRequest);
 
