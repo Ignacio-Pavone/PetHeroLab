@@ -31,20 +31,21 @@ require_once VIEWS_PATH . 'navbars/nav-simple-bar.php';
                 <?php } ?>
             </div>
             <br/>
-            <div class="container" style="display:inline-block">
+            <div style="display:inline-block">
                 <form action="<?php echo FRONT_ROOT.'Chat/Add' ?>" method="POST">
-                    <textarea name="message" rows="2" cols="148" style=" margin-right:4px;margin-top:15px"></textarea>
+                    <textarea name="message" rows="2" cols="148" style=" margin: right 4px;px;margin-top:15px"></textarea>
                     <input type="hidden" name="idReceiver" value="<?php echo $id_receiver ?>">
                     <input type="hidden" name="idRequest" value="<?php echo $id_request ?>">
                     <input type="hidden" name="senderType" value="<?php echo $sender_type ?>">
                     <button type="submit" class="btn btn-login" style="width:100px;margin-left:10px; margin-bottom:5px">Enviar</button>
-                </form>     
+                </form>
                 <form action="<?php echo FRONT_ROOT.'Chat/refreshChat'?>" method="POST">
                     <input type="hidden" name="id_receiver" value="<?php echo $id_receiver ?>">
                     <input type="hidden" name="id_request" value="<?php echo $id_request ?>">
                     <input type="hidden" name="sender_type" value="<?php echo $sender_type ?>">      
                     <button type="submit" class="btn btn-login" style=" width:100px;margin-left:10px; margin-bottom:5px">Refrescar</button>
                 </form>
+                
             </div> 
         <br>
     </main>
